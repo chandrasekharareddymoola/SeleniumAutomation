@@ -1,0 +1,44 @@
+package com.eagle.pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import com.eagle.Base.BasePage;
+
+public class LoginPage extends Page{
+	
+	//WebDriver driver;
+	  
+	@FindBy(name = "email")
+	public WebElement username;
+	
+	@FindBy(name = "password")
+	public WebElement password;
+	
+	@FindBy(name = "submit")
+	public WebElement submit;	
+		
+	 public LoginPage(){ 		 
+		 PageFactory.initElements(driver, this); 
+	 }
+
+    public void setCredentials(){    	
+    	Page.enterUserPass(username,password);    
+    }  
+    
+    public void clickLogin(){
+    	Page.click(submit);
+    }  
+    
+    public void loginTo() throws InterruptedException{
+        this.setCredentials();       
+        this.clickLogin();   
+        Thread.sleep(15000);
+    }
+
+}
