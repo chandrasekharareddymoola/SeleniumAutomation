@@ -35,6 +35,8 @@ import org.openqa.selenium.*;
   
   
   System.out.println( "Hello World!" );
+  System.out.println( "Hello World!" );
+  System.out.println( "Hello World!" );
   System.setProperty("webdriver.chrome.driver","./Resources/chromedriver.exe");
   
   WebDriver webdriver;
