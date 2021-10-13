@@ -101,28 +101,33 @@ public class M_Run {
 		WebElement expand = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@data-icon-name='MiniExpand']")));
 		customclick(expand);
 
-		Thread.sleep(2000);
-		
-		WebElement Settingsicon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-icon-name='Settings']")));
-		Thread.sleep(10000);
-
-//		WebElement SortColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+configObject.getProperty("SortColumn")+"']")));
-//		Thread.sleep(5000);
-		
+//		Thread.sleep(2000);
+//		
+//		WebElement Settingsicon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-icon-name='Settings']")));
+//		Thread.sleep(10000);
+//
+////		WebElement SortColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+configObject.getProperty("SortColumn")+"']")));
+////		Thread.sleep(5000);
+//		
 		WebElement SortColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+configObject.getProperty("SortColumn")+"']")));
 		Thread.sleep(5000);
-
-		WebElement NextColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+configObject.getProperty("SortColumn")+"']//parent::div//parent::div/following-sibling::div")));
-		scrollIntoView(NextColumnname);
-		Thread.sleep(5000);
-
-		customclick(SortColumnname);
-		Thread.sleep(5000);
-		
-		customclick(SortColumnname);
-		Thread.sleep(5000);
-
+//
+//		WebElement NextColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+configObject.getProperty("SortColumn")+"']//parent::div//parent::div/following-sibling::div")));
+//		scrollIntoView(NextColumnname);
+//		Thread.sleep(5000);
+//
+//		customclick(SortColumnname);
+//		Thread.sleep(5000);
+//		
+//		customclick(SortColumnname);
+//		Thread.sleep(5000);
+			
+		List <WebElement> NoofRows = webdriver.findElements(By.xpath("//*[@class='TableRowDefault__bodyRow___1_m1h']"));
+        System.out.println(NoofRows.size());
 		webdriver.close();
+		
+		List <WebElement> ColumnNumber = webdriver.findElements(By.xpath("//*[text()='"+SortColumnname+"']//parent::div/parent::div/preceding-sibling::div"));
+		System.out.println(ColumnNumber.size());
 	}
 
 	public static void customclick(WebElement element) {
