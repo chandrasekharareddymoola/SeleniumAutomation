@@ -1,5 +1,7 @@
 package com.eagle.TestCases;
 
+import java.awt.AWTException;
+
 import org.testng.annotations.Test;
 
 import com.eagle.pages.InvestigationPage;
@@ -12,15 +14,31 @@ public class SetTest extends BaseTest{
 	SetPage objSetPage; 
    
     @Test
-    public void test_Set_Correct() throws InterruptedException{
+    public void test_Set_Correct() throws InterruptedException, AWTException{
 	    objLogin = new LoginPage();
 	    objLogin.loginTo();
 	    
 	    objSetPage = new SetPage();
-	    //objSetPage.createSet();	    
-	   // objSetPage.RemoveItemsfromSet();
-	   // objSetPage.CreateSetFromFile();
+//	    //objSetPage.createSet();	    
+//	   // objSetPage.RemoveItemsfromSet();
+//	   // objSetPage.CreateSetFromFile();
+//	   // objSetPage.CreateSetFromSet();
+	  
+	    objSetPage.ExpandAddFromCatalog(null, null);
+	    objSetPage.close();
 	    
-	    objSetPage.CreateSetFromSet();
+	    objSetPage.ExpandAddFromCatalog(null, null);
+	    objSetPage.accept();
+	    
+	    objSetPage.ExpandAddFromSet(null, null);
+	    objSetPage.close();
+	    
+	    objSetPage.ExpandAddFromSet(null, null);
+	    objSetPage.accept();
+
+	    objSetPage.GridChanges(null, null, null, null);
+	    
+	    objSetPage.shareASet(null, null);
+	    
     }	   
 } 

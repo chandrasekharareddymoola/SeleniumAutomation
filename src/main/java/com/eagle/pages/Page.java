@@ -44,14 +44,14 @@ public class Page{
 		try {
 			element.click();
 		} catch (Exception e) {
-			//scrollIntoView(element);
+			scrollIntoView(element);
 			element.click();
 		}
 	}	
 	
-	public static void verifyPage(WebElement field) {		
+	public static void verifyPage(String setToVerify, WebElement field) {		
 			String getheadertext = field.getText().trim();
-			assertEquals("Uncategorized", getheadertext);
+			assertEquals(setToVerify, getheadertext);
 	}
 	
 	public static void scrollIntoView(WebElement element) {
