@@ -36,10 +36,9 @@ public class Page{
    
 	public static void click(WebElement element) {
 		
-		WebDriverWait wait = new WebDriverWait(driver, 5);
-		wait.until(ExpectedConditions.visibilityOf(element));
+		WebDriverWait wait = new WebDriverWait(driver, 10);
 	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		
+		wait.until(ExpectedConditions.visibilityOf(element));
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 		try {
 			element.click();

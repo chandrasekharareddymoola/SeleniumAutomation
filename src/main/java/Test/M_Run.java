@@ -66,7 +66,7 @@ public class M_Run {
 		WebElement Home = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@data-icon-name='Home']")));
 		WebElement myData = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@data-icon-name='DocumentSet']")));
 
-//		myData.click();
+		//		myData.click();
 		customclick(myData);
 
 		WebElement setAdd =	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div//span[contains(text(),'Set')]"))); setAdd.click();
@@ -85,7 +85,7 @@ public class M_Run {
 
 		setUncategorized.click(); 
 		//String entityName = configObject.getProperty("Entity"); 
-		WebElement entitySelection = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button//span[contains(text(),'Protein')]")));
+		WebElement entitySelection = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button//span[contains(text(),'Disease')]")));
 		customclick(entitySelection);
 
 		String searchTextTobeEntered = configObject.getProperty("SearchText");
@@ -94,40 +94,60 @@ public class M_Run {
 
 		Thread.sleep(4000);
 
-		WebElement addAll = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div//span[contains(text(),'Add all items')]"))); addAll.click();
+
+
+		WebElement addAll = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div//span[contains(text(),'Add all items')]"))); 
+		//		addAll.click();
 		WebElement accept =  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div//span[contains(text(),'Accept')]"))); 
-		customclick(accept);
+		//		customclick(accept);
+
+//		WebElement addallgrey = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='ms-Button-label label-177' and text()='Add all items']")));
+		WebElement addallblack = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='ms-Button-label label-124' and text()='Add all items']")));
+		
+//		while(addAll.isDisplayed()){		
+//			do{   
+//				Boolean s = addAll.isEnabled();
+//				System.out.println(s);
+//				customclick(addAll);	
+//				Thread.sleep(2000);
+//			}while(addallblack.isDisplayed());
+//			customclick(accept);
+//		}
+//		
+
+
+
 
 		WebElement expand = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@data-icon-name='MiniExpand']")));
 		customclick(expand);
 
-//		Thread.sleep(2000);
-//		
-//		WebElement Settingsicon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-icon-name='Settings']")));
-//		Thread.sleep(10000);
-//
-////		WebElement SortColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+configObject.getProperty("SortColumn")+"']")));
-////		Thread.sleep(5000);
-//		
-		WebElement SortColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+configObject.getProperty("SortColumn")+"']")));
-		Thread.sleep(5000);
-//
-//		WebElement NextColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+configObject.getProperty("SortColumn")+"']//parent::div//parent::div/following-sibling::div")));
-//		scrollIntoView(NextColumnname);
-//		Thread.sleep(5000);
-//
-//		customclick(SortColumnname);
-//		Thread.sleep(5000);
-//		
-//		customclick(SortColumnname);
-//		Thread.sleep(5000);
-			
-		List <WebElement> NoofRows = webdriver.findElements(By.xpath("//*[@class='TableRowDefault__bodyRow___1_m1h']"));
-        System.out.println(NoofRows.size());
-		webdriver.close();
-		
-		List <WebElement> ColumnNumber = webdriver.findElements(By.xpath("//*[text()='"+SortColumnname+"']//parent::div/parent::div/preceding-sibling::div"));
-		System.out.println(ColumnNumber.size());
+		//		Thread.sleep(2000);
+		//		
+		//		WebElement Settingsicon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-icon-name='Settings']")));
+		//		Thread.sleep(10000);
+		//
+		////		WebElement SortColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+configObject.getProperty("SortColumn")+"']")));
+		////		Thread.sleep(5000);
+		//		
+		//		WebElement SortColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+configObject.getProperty("SortColumn")+"']")));
+		//		Thread.sleep(5000);
+		//
+		//		WebElement NextColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+configObject.getProperty("SortColumn")+"']//parent::div//parent::div/following-sibling::div")));
+		//		scrollIntoView(NextColumnname);
+		//		Thread.sleep(5000);
+		//
+		//		customclick(SortColumnname);
+		//		Thread.sleep(5000);
+		//		
+		//		customclick(SortColumnname);
+		//		Thread.sleep(5000);
+
+		//		List <WebElement> NoofRows = webdriver.findElements(By.xpath("//*[@class='TableRowDefault__bodyRow___1_m1h']"));
+		//        System.out.println(NoofRows.size());
+		//		webdriver.close();
+		//		
+		//		List <WebElement> ColumnNumber = webdriver.findElements(By.xpath("//*[text()='"+SortColumnname+"']//parent::div/parent::div/preceding-sibling::div"));
+		//		System.out.println(ColumnNumber.size());
 	}
 
 	public static void customclick(WebElement element) {
@@ -144,7 +164,7 @@ public class M_Run {
 
 	public static void scrollIntoView(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) webdriver;
-//		js.executeScript("window.scrollTo(document.body.scrollHeight,0)");
+		//		js.executeScript("window.scrollTo(document.body.scrollHeight,0)");
 		js.executeScript("arguments[0].scrollIntoView(true);", element);
 	}
 }

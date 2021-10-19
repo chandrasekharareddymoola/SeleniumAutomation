@@ -24,21 +24,21 @@ public class SetTest extends BaseTest{
 //	   // objSetPage.CreateSetFromFile();
 //	   // objSetPage.CreateSetFromSet();
 	  
-	    objSetPage.ExpandAddFromCatalog(null, null);
+	    objSetPage.ExpandAddFromCatalog("Set Test Auto 1", "migraine");
 	    objSetPage.close();
 	    
-	    objSetPage.ExpandAddFromCatalog(null, null);
-	    objSetPage.accept();
-	    
-	    objSetPage.ExpandAddFromSet(null, null);
-	    objSetPage.close();
-	    
-	    objSetPage.ExpandAddFromSet(null, null);
-	    objSetPage.accept();
-
-	    objSetPage.GridChanges(null, null, null, null);
-	    
-	    objSetPage.shareASet(null, null);
+//	    objSetPage.ExpandAddFromCatalog(null, null);
+//	    objSetPage.accept();
+//	    
+//	    objSetPage.ExpandAddFromSet(null, null);
+//	    objSetPage.close();
+//	    
+//	    objSetPage.ExpandAddFromSet(null, null);
+//	    objSetPage.accept();
+//
+//	    objSetPage.GridChanges(null, null, null, null);
+//	    
+//	    objSetPage.shareASet(null, null);
 	    
     }	   
 } 

@@ -18,16 +18,22 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-public class SetPage extends Page{
+public class ExplorationPage extends Page{
 
 	//Page level objects
 
-	@FindBy(xpath = "//i[@data-icon-name='DocumentSet']")
-	public WebElement setIcon;
+	@FindBy(xpath = "//i[@data-icon-name='Relationship']")
+	public WebElement explorationIcon;
 
-	@FindBy(xpath = "//div//span[contains(text(),'Set')]")
-	public WebElement addSet;
-
+	@FindBy(xpath = "//div//span[contains(text(),'Exploration')]")
+	public WebElement addExploration;
+	
+	@FindBy(xpath = "//*[text()='Search for entities']")
+	public WebElement searchforentities;
+	
+	@FindBy(xpath = "//*[text()='Select a set']")
+	public WebElement selectaSet;
+	
 	@FindBy(xpath = "//div[@scraper-tag='CardHeader']//span")
 	public WebElement pageIdentifier;
 
@@ -35,22 +41,16 @@ public class SetPage extends Page{
 	public WebElement entitySelection;
 
 	@FindBy(xpath = "//div//input[@type='text']")
-	public WebElement titleSet;
+	public WebElement titleExploration;
 
-	@FindBy(xpath = "//button//span[contains(text(),'Disease')]")
-	public WebElement entitySelected;	
+//	@FindBy(xpath = "//button//span[contains(text(),'Disease')]")
+//	public WebElement entitySelected;	
 
 	@FindBy(xpath = "//div//input[@role='searchbox']")
 	public WebElement serachBox;	
 
 	@FindBy(xpath = "//button[@title='Add all items']")
-	public WebElement addAll;	
-
-	//	@FindBy(xpath = "//*[@title='Add all items' and @data-is-focusable='true']")
-	//	public WebElement addAllEnabled;	
-	//
-	//	@FindBy(xpath = "//*[@title='Add all items' and @data-is-focusable='false']")
-	//	public WebElement addAllDisabled;	
+	public WebElement addAll;		
 
 	@FindBy(xpath = "//div//span[contains(text(),'Accept')]")
 	public WebElement accept;	
@@ -90,16 +90,6 @@ public class SetPage extends Page{
 
 	@FindBy(xpath = "//*[@type='button']//*[text()='Share']")
 	public WebElement ShareButton;	
-
-	@FindBy(xpath = "//*[text()='Resource shared successfully']")
-	public WebElement ShareSuccess;	
-
-
-	//*[@placeholder='Select one or more users']
-
-	public WebElement openSet(String name) {
-		return this.driver.findElement(By.xpath("//div[@class='ms-List']//div[@role='rowheader' and @aria-colindex='1']//div[@title='"+ name +"']"));   		
-	}
 
 	@FindBy(xpath = "//i[@data-icon-name='MiniExpand']")
 	public WebElement expand;	
@@ -174,94 +164,96 @@ public class SetPage extends Page{
 	public List <WebElement> RowsintableExpand;
 
 
+	//*[@placeholder='Select one or more users']
+
+	public WebElement openExploration(String name) {
+		return driver.findElement(By.xpath("//div[@class='ms-List']//div[@role='rowheader' and @aria-colindex='1']//div[@title='"+ name +"']"));   		
+	}
+
 	//Page level functions on the objects
 	WebDriverWait wait = new WebDriverWait(driver, 5);
 
-	public SetPage(){ 		 
+	public ExplorationPage(){ 		 
 		PageFactory.initElements(driver, this); 
-		Page.click(setIcon);
+		Page.click(explorationIcon);
 	}
 
-	public void verifySetHomePage(String stringToVerify){    	
+	public void verifyExplorationHomePage(String stringToVerify){    	
 		Page.verifyPage(stringToVerify, pageIdentifier);
 	}
 
-	public void addSet(){ 
-		Page.click(addSet);
+	public void addExploration(){ 
+		Page.click(addExploration);
+	}
+	
+	public void createExplorationFromSearch(){ 
+		Page.click(searchforentities);
+	}
+	
+	public void createExplorationFromSet(){ 
+		Page.click(selectaSet);
 	}
 
-	public void setTitle(String textTitle){    	
-		Page.enterText(titleSet, textTitle);
+	public void ExplorationTitle(String textTitle){    	
+		Page.enterText(titleExploration, textTitle);
 	}   
 
-	public void selectEntity(){    	
+	public void selectEntity(String entityToSelect){    	
 		Page.click(pageIdentifier);
-		Page.click(entitySelected);
+		WebElement entitytoSelect = driver.findElement(By.xpath("//button//span[contains(text(),'"+entityToSelect+"')]"));
+		Page.click(entitytoSelect);
 	}
 
-	public void searchItems(){
+	public void searchItems(String ItemtoSearch){
 		Page.click(serachBox);
-		Page.enterText(serachBox, "x");
+		Page.enterText(serachBox, ItemtoSearch);
+	}
+
+	public void AddandAccept(){
+		while(addAll.isDisplayed()){
+			try
+			{   
+				Page.click(addAll);	 
+			}
+			catch(Exception c){
+				Page.click(accept);
+			}	
+		}
 	}
 
 
-	//	DD method
 	//	public void AddandAccept(){
-	//
 	//		//wait.until(ExpectedConditions.elementToBeClickable(addAll));
 	//		while(addAll.isDisplayed()){
 	//			try
-	//			{   Page.click(addAll);	 
-	//			wait.until(ExpectedConditions.elementToBeClickable(addAll));
-	//			}
-	//			catch(Exception ex){Page.click(accept);}	    		
-	//		}
-	//
-	//		Page.click(accept);
-	//	}
-
-
-	//My method
-	//	public void AddandAccept() throws InterruptedException{
-	//		//wait.until(ExpectedConditions.elementToBeClickable(addAll));
-	//		{
-	//			do
 	//			{   
-	//				Page.click(addAllEnabled);	
-	//				try {
-	//					wait.until(ExpectedConditions.elementToBeClickable(addAllEnabled));
-	//				}
-	//				catch(Exception c){
-	//					Page.click(accept);
-	//				}
-	//
-	//			}while(addAllEnabled.isDisplayed());
-	//			Page.click(accept);
-	//		}	
+	//				Page.click(addAll);	 
+	//			}
+	//			catch(Exception c){
+	//				Page.click(accept);
+	//			}	
+	//		}
 	//	}
 
-
-	//Temporary method
-	public void AddandAccept() throws InterruptedException{
-		//wait.until(ExpectedConditions.elementToBeClickable(addAll));
-		{
-			for(int i=0; i<2; i++)
-			{   
-				Page.click(addAll);	
-			}
-			Page.click(accept);
-		}	
-	}
-
-	public void createSet() throws InterruptedException{	    	
-		this.addSet();
-		this.verifySetHomePage("Uncategorized");
-		this.setTitle("SetName 1");
-		this.selectEntity();
-		this.searchItems(); 
-		this.AddandAccept(); 	
-		System.out.println("Set Created successfully");
-	}   	  	    
+	public void createExplorationSearch(String ExplorationName, String EntitytoSelect, String ItemtoSearch) throws InterruptedException{	    	
+		this.addExploration();
+		this.createExplorationFromSearch();
+		this.verifyExplorationHomePage("Uncategorized");
+		this.ExplorationTitle(ExplorationName);
+		this.selectEntity(EntitytoSelect);
+		this.searchItems(ItemtoSearch); 
+		this.AddandAccept(); 	        
+	}   	
+	
+	public void createExplorationSet(String ExplorationName, String EntitytoSelect, String ItemtoSearch) throws InterruptedException{	    	
+		this.addExploration();
+		this.createExplorationFromSet();
+		this.verifyExplorationHomePage("Uncategorized");
+		this.ExplorationTitle(ExplorationName);
+		this.selectEntity(EntitytoSelect);
+		this.searchItems(ItemtoSearch); 
+		this.AddandAccept(); 	        
+	}  
 
 	public void expandSet(){
 		Page.click(expand);
@@ -308,7 +300,7 @@ public class SetPage extends Page{
 
 	public void RemoveItemsfromSet()
 	{
-		WebElement opn = this.openSet("MASI Set");
+		WebElement opn = this.openExploration("MASI Set");
 		Page.click(opn);
 		this.expandSet();
 		this.editSet();	  
@@ -319,8 +311,7 @@ public class SetPage extends Page{
 		myAlist.add("DIS2");
 		myAlist.add("DIS1");
 		this.selectItems(myAlist);	  
-		this.removeItems();	 
-		System.out.println("Items removed successfully");
+		this.removeItems();	    	
 	}
 
 	public void addItemsFromFile(String filePath) {	    
@@ -333,28 +324,26 @@ public class SetPage extends Page{
 
 	public void addItemsFromSet(String existingSetName) {	    
 		Page.click(addFromSet);	    	
-		WebElement opn = this.openSet("MASI Set");
+		WebElement opn = this.openExploration("MASI Set");
 		Page.click(opn);  
 	}
 
-	public void CreateSetFromFile() throws InterruptedException { 
-		this.addSet();
-		this.verifySetHomePage("Uncategorized");
-		this.setTitle("SetName 1");
-		this.selectEntity();
+	public void CreateSetFromFile(String EntitytoSelect) throws InterruptedException { 
+		this.addExploration();
+		this.verifyExplorationHomePage("Uncategorized");
+		this.ExplorationTitle("SetName 1");
+		this.selectEntity(EntitytoSelect);
 		this.addItemsFromFile("C:\\Users\\DivyaDevanathan\\Downloads\\up_genes_symbol.txt"); 
-		this.AddandAccept(); 
-		System.out.println("Set Created from file successfully");
+		this.AddandAccept(); 	  	
 	}
 
-	public void CreateSetFromSet() { 
-		this.addSet();
-		this.verifySetHomePage("Uncategorized");
-		this.setTitle("SetName 1");
-		this.selectEntity();
+	public void CreateSetFromSet(String EntitytoSelect) { 
+		this.addExploration();
+		this.verifyExplorationHomePage("Uncategorized");
+		this.ExplorationTitle("SetName 1");
+		this.selectEntity(EntitytoSelect);
 		this.addItemsFromSet("MASI Set"); 
-		this.accept();
-		System.out.println("Set Created from Set successfully");
+		this.accept(); 	  	
 	}
 
 	public void close(){	
@@ -384,19 +373,18 @@ public class SetPage extends Page{
 	}	
 
 
-	public void ExpandAddFromSet(String setToCreate, String setToAdd) throws InterruptedException {    // Add from a set
-		this.addSet();
-		this.verifySetHomePage("Uncategorized");
-		this.setTitle(setToCreate); //Create a set
-		this.selectEntity();
-		this.searchItems();
+	public void ExpandAddFromSet(String setToCreate, String EntitytoSelect, String ItemtoSearch, String setToAdd) throws InterruptedException {    // Add from a set
+		this.addExploration();
+		this.verifyExplorationHomePage("Uncategorized");
+		this.ExplorationTitle(setToCreate); //Create a set
+		this.selectEntity(EntitytoSelect);
+		this.searchItems(ItemtoSearch);
 		this.AddandAccept();
 		this.expandSet();
 		this.editSet();
 		this.addItemsExpand();
 		this.addFromSetExpand(setToAdd); // Set to be added
 		Page.verifyPage(setToCreate,setNameInExpand); //verifying the set name
-		System.out.println("Set - Set added in expand successfully");
 	}
 
 	public void searchCatalog(String SearchInCatalog) throws InterruptedException{	    
@@ -418,12 +406,12 @@ public class SetPage extends Page{
 		Page.click(Add);
 	}
 
-	public void ExpandAddFromCatalog(String setToCreate, String TextToSearch) throws InterruptedException { 
-		this.addSet();
-		this.verifySetHomePage("Uncategorized");
-		this.setTitle(setToCreate); //Create a set
-		this.selectEntity();
-		this.searchItems();
+	public void ExpandAddFromCatalog(String setToCreate, String EntitytoSelect, String ItemtoSearch, String TextToSearch) throws InterruptedException { 
+		this.addExploration();
+		this.verifyExplorationHomePage("Uncategorized");
+		this.ExplorationTitle(setToCreate); //Create a set
+		this.selectEntity(EntitytoSelect);
+		this.searchItems(ItemtoSearch);
 		this.AddandAccept();
 		this.expandSet();
 		this.editSet();
@@ -431,7 +419,6 @@ public class SetPage extends Page{
 		this.addFromSetCatalog(TextToSearch); // Text to be added 
 		this.add();
 		Page.verifyPage(setToCreate,setNameInExpand); //verifying the set name
-		System.out.println("Set - Added from catalog in expand successfully");
 	}
 
 	public void fileSelectDropdown(){	    
@@ -480,19 +467,18 @@ public class SetPage extends Page{
 		Page.click(AddToGrid);
 	}
 
-	public void ExpandAddFromFile(String setToCreate, String CategoryName, String Filelocation, String FileName) throws InterruptedException, AWTException { 
-		this.addSet();
-		this.verifySetHomePage("Uncategorized");
-		this.setTitle(setToCreate); //Create a set
-		this.selectEntity();
-		this.searchItems();
+	public void ExpandAddFromFile(String setToCreate, String EntitytoSelect, String ItemtoSearch , String CategoryName, String Filelocation, String FileName) throws InterruptedException, AWTException { 
+		this.addExploration();
+		this.verifyExplorationHomePage("Uncategorized");
+		this.ExplorationTitle(setToCreate); //Create a set
+		this.selectEntity(EntitytoSelect);
+		this.searchItems(ItemtoSearch);
 		this.AddandAccept();
 		this.expandSet();
 		this.editSet();
 		this.addItemsExpand();
 		this.addFromFile(CategoryName, Filelocation, FileName); 
 		this.addToGrid();
-		System.out.println("Set - Added from file in expand successfully");
 	}
 
 
@@ -504,18 +490,17 @@ public class SetPage extends Page{
 		Page.click(Delete);
 	}
 
-	public void DeleteCardInExpand(String setToCreate) throws InterruptedException, AWTException { 
-		this.addSet();
-		this.verifySetHomePage("Uncategorized");
-		this.setTitle(setToCreate); //Create a set
-		this.selectEntity();
-		this.searchItems();
+	public void DeleteCardInExpand(String setToCreate, String EntitytoSelect, String ItemtoSearch) throws InterruptedException, AWTException { 
+		this.addExploration();
+		this.verifyExplorationHomePage("Uncategorized");
+		this.ExplorationTitle(setToCreate); //Create a set
+		this.selectEntity(EntitytoSelect);
+		this.searchItems(ItemtoSearch);
 		this.AddandAccept();
 		this.expandSet();
 		this.DeleteCardExpand();
 		this.Delete();
 		Page.verifyPage("MY DATA", MyDataTitle); //My Data page
-		System.out.println("Card deleted from expand successfully");
 	}
 
 	public int NoOfPagesInSetPage() throws InterruptedException, AWTException { 
@@ -576,16 +561,15 @@ public class SetPage extends Page{
 		Thread.sleep(2000);
 	}
 
-	public void searchInSetExpand(String setToCreate, String SearchInSet) throws InterruptedException, AWTException { 
-		this.addSet();
-		this.verifySetHomePage("Uncategorized");
-		this.setTitle(setToCreate); //Create a set
-		this.selectEntity();
-		this.searchItems();
+	public void searchInSetExpand(String setToCreate, String EntitytoSelect, String ItemtoSearch, String SearchInSet) throws InterruptedException, AWTException { 
+		this.addExploration();
+		this.verifyExplorationHomePage("Uncategorized");
+		this.ExplorationTitle(setToCreate); //Create a set
+		this.selectEntity(EntitytoSelect);
+		this.searchItems(ItemtoSearch);
 		this.AddandAccept();
 		this.expandSet();
 		this.searchInExpand(SearchInSet);
-		System.out.println("Search in expand completed successfully");
 	}
 
 	public void GridSettings() { 
@@ -621,12 +605,12 @@ public class SetPage extends Page{
 		Assert.assertEquals(RN, NoofRows);
 	}
 
-	public void GridChanges(String setToCreate, String NoofRows, String PrimaryColumn, String SecondaryColumn) throws InterruptedException { 
-		this.addSet();
-		this.verifySetHomePage("Uncategorized");
-		this.setTitle(setToCreate); //Create a set
-		this.selectEntity();
-		this.searchItems();
+	public void GridChanges(String setToCreate,String EntitytoSelect, String ItemtoSearch, String NoofRows, String PrimaryColumn, String SecondaryColumn) throws InterruptedException { 
+		this.addExploration();
+		this.verifyExplorationHomePage("Uncategorized");
+		this.ExplorationTitle(setToCreate); //Create a set
+		this.selectEntity(EntitytoSelect);
+		this.searchItems(ItemtoSearch);
 		this.AddandAccept();
 		this.expandSet();
 		this.GridSettings();
@@ -636,7 +620,6 @@ public class SetPage extends Page{
 		Page.click(Apply);
 		Page.verifyPage(setToCreate,setNameInExpand); //verifying the set name
 		this.VerifyGrid(NoofRows,PrimaryColumn,SecondaryColumn);
-		System.out.println("Grid Changes done successfully");
 	}
 
 	public void SharetLoop(String SetToShare, String SharedUser) throws InterruptedException, AWTException { 
@@ -690,13 +673,6 @@ public class SetPage extends Page{
 	public void shareASet(String SetToShare, String SharedUser) throws InterruptedException, AWTException { 
 		Page.verifyPage("MY DATA", MyDataTitle); //My Data page
 		this.shareASet(SetToShare, SharedUser);
-		Boolean a = ShareSuccess.isDisplayed();
-		if (a=true) {
-			System.out.println("Set shared successfully");
-		}
-		else{
-			System.out.println("Set shared failed");
-		}
 	}
 
 
