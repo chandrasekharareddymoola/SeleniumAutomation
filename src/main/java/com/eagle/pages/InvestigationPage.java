@@ -164,14 +164,8 @@ public class InvestigationPage extends Page{
 	    	Page.click(linkSet);
 	    	Page.click(selectASet);
 	    	this.openInvestigation(setTobeLinked);	
-	    }
-	    
-	    /* Link exploration to an Investigation */
-	    objInvestigationPage.linkExplorationtoInvestigation();	
-	    
-	    /* Link Comparison to an Investigation */
-	    objInvestigationPage.linkComparisontoInvestigation();	
-
+	    }  
+	   
 	    public void linkExplorationtoInvestigation(String invName, String explorationTobeLinked)
 	    {
 	    	this.clickInvestigationIcon();
