@@ -36,22 +36,21 @@ public class Page{
    
 	public static void click(WebElement element) {
 		
-		WebDriverWait wait = new WebDriverWait(driver, 5);
-		wait.until(ExpectedConditions.visibilityOf(element));
+		WebDriverWait wait = new WebDriverWait(driver, 10);
 	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		
+		wait.until(ExpectedConditions.visibilityOf(element));
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 		try {
 			element.click();
 		} catch (Exception e) {
-			//scrollIntoView(element);
+			scrollIntoView(element);
 			element.click();
 		}
 	}	
 	
-	public static void verifyPage(WebElement field) {		
+	public static void verifyPage(String setToVerify, WebElement field) {		
 			String getheadertext = field.getText().trim();
-			assertEquals("Uncategorized", getheadertext);
+			assertEquals(setToVerify, getheadertext);
 	}
 	
 	public static void scrollIntoView(WebElement element) {
