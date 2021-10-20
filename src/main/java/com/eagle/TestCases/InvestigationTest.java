@@ -22,6 +22,31 @@ public class InvestigationTest extends BaseTest{
 		    objLogin.loginTo();	
 		    
 		    objInvestigationPage = new InvestigationPage();
-		    objInvestigationPage.createInvestigation();	
+		    
+			/* To initiate the creation of Investigation */   	
+		    //objInvestigationPage.createInvestigation("Investigation 1","Investigation 1");
+		    
+		    /* To view the Investigation */
+		    //objInvestigationPage.viewInvestigation("q");	
+		    
+		    /* To edit the Investigation */
+		    //objInvestigationPage.editInvestigation("cc","Modified title","modified description");	
+		    
+		    /* Link set to an Investigation */
+		    objInvestigationPage.linkSettoInvestigation("Modified title","UntitledSet-20 Oct 2021");	
+		    
+		    /* Link exploration to an Investigation */
+		  //  objInvestigationPage.linkExplorationtoInvestigation("Modified title","");	
+		    
+		    /* Link Comparison to an Investigation */
+		//    objInvestigationPage.linkComparisontoInvestigation("Modified title","");	
+		    
+		     
+		    /* To delete the Investigation */
+		    //objInvestigationPage.deleteInvestigation("Investigation 1");	
+		    
+		    /* To share the Investigation */
+		    //objInvestigationPage.shareInvestigation("Investigation 1");	
+		   
 	    }	    
 }

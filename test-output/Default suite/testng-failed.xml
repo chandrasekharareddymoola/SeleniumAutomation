@@ -3,12 +3,12 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.eagle.TestCases.SetTest">
+      <class name="com.eagle.TestCases.InvestigationTest">
         <methods>
           <include name="launchApplication"/>
-          <include name="test_Set_Correct"/>
+          <include name="test_CreateInvestigation_Correct"/>
         </methods>
-      </class> <!-- com.eagle.TestCases.SetTest -->
+      </class> <!-- com.eagle.TestCases.InvestigationTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

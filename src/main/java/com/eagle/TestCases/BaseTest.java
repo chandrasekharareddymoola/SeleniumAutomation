@@ -31,7 +31,9 @@ public class BaseTest {
         option.addArguments("diable-extensions");
         option.setExperimentalOption("useAutomationExtension",false);
         option.addArguments("--start-maximized");   
-        webdriver = new ChromeDriver(option);
+        webdriver = new ChromeDriver();
+		
+	  // WebDriver webdriver=new ChromeDriver();
         
 		 ReadObject object = new ReadObject();
 	     Properties configObject = object.getObjectRepositoty();	     

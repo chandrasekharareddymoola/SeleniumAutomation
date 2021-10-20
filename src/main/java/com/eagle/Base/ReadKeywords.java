@@ -116,7 +116,8 @@ public class ReadKeywords {
 			}
 
 		}
-		String totalresult = testResult.stream().map(n -> String.valueOf(n)).collect(Collectors.joining(""));
+		//String totalresult = testResult.stream().map(n -> String.valueOf(n)).collect(Collectors.joining(""));
+		String totalresult = null;
 		System.out.println(totalresult);
 		String[] tcresult = totalresult.split(" ");
 		System.out.println(tcresult.length);
