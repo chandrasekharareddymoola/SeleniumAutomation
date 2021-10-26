@@ -2,43 +2,33 @@
 <testng-results ignored="0" total="1" passed="0" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-<<<<<<< HEAD
-  <suite started-at="2021-10-19T14:37:09 IST" name="Default suite" finished-at="2021-10-19T14:37:41 IST" duration-ms="31946">
+  <suite started-at="2021-10-21T12:06:59 IST" name="Default suite" finished-at="2021-10-21T12:08:02 IST" duration-ms="62919">
     <groups>
     </groups>
-    <test started-at="2021-10-19T14:37:09 IST" name="Default test" finished-at="2021-10-19T14:37:41 IST" duration-ms="31946">
+    <test started-at="2021-10-21T12:06:59 IST" name="Default test" finished-at="2021-10-21T12:08:02 IST" duration-ms="62919">
       <class name="com.eagle.TestCases.InvestigationTest">
-        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.InvestigationTest@3232a28a]" started-at="2021-10-19T14:37:09 IST" name="launchApplication" finished-at="2021-10-19T14:37:16 IST" duration-ms="6378" status="PASS">
+        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.InvestigationTest@3232a28a]" started-at="2021-10-21T12:06:59 IST" name="launchApplication" finished-at="2021-10-21T12:07:07 IST" duration-ms="7364" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchApplication -->
-        <test-method signature="test_CreateInvestigation_Correct()[pri:0, instance:com.eagle.TestCases.InvestigationTest@3232a28a]" started-at="2021-10-19T14:37:16 IST" name="test_CreateInvestigation_Correct" finished-at="2021-10-19T14:37:41 IST" duration-ms="25521" status="PASS">
-=======
-  <suite started-at="2021-10-19T13:41:58 IST" name="Default suite" finished-at="2021-10-19T13:43:38 IST" duration-ms="99290">
-    <groups>
-    </groups>
-    <test started-at="2021-10-19T13:41:58 IST" name="Default test" finished-at="2021-10-19T13:43:38 IST" duration-ms="99290">
-      <class name="com.eagle.TestCases.SetTest">
-        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.SetTest@3b6ddd1d]" started-at="2021-10-19T13:41:58 IST" name="launchApplication" finished-at="2021-10-19T13:42:06 IST" duration-ms="7369" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- launchApplication -->
-        <test-method signature="test_Set_Correct()[pri:0, instance:com.eagle.TestCases.SetTest@3b6ddd1d]" started-at="2021-10-19T13:42:06 IST" name="test_Set_Correct" finished-at="2021-10-19T13:43:38 IST" duration-ms="91869" status="FAIL">
-          <exception class="java.lang.AssertionError">
+        <test-method signature="test_CreateInvestigation_Correct()[pri:0, instance:com.eagle.TestCases.InvestigationTest@3232a28a]" started-at="2021-10-21T12:07:07 IST" name="test_CreateInvestigation_Correct" finished-at="2021-10-21T12:08:02 IST" duration-ms="55502" status="FAIL">
+          <exception class="java.lang.NullPointerException">
             <message>
-              <![CDATA[expected [Disease] but found [Set Test Auto 1]]]>
+              <![CDATA[Cannot invoke "Object.getClass()" because "obj" is null]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: expected [Disease] but found [Set Test Auto 1]
-at org.testng.Assert.fail(Assert.java:99)
-at org.testng.Assert.failNotEquals(Assert.java:1037)
-at org.testng.Assert.assertEqualsImpl(Assert.java:140)
-at org.testng.Assert.assertEquals(Assert.java:122)
-at org.testng.Assert.assertEquals(Assert.java:629)
-at org.testng.Assert.assertEquals(Assert.java:639)
-at com.eagle.pages.Page.verifyPage(Page.java:53)
-at com.eagle.pages.SetPage.ExpandAddFromCatalog(SetPage.java:426)
-at com.eagle.TestCases.SetTest.test_Set_Correct(SetTest.java:27)
+              <![CDATA[java.lang.NullPointerException: Cannot invoke "Object.getClass()" because "obj" is null
+at java.base/java.lang.reflect.Method.invoke(Method.java:557)
+at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:51)
+at com.sun.proxy.$Proxy11.isDisplayed(Unknown Source)
+at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:315)
+at org.openqa.selenium.support.ui.ExpectedConditions.access$100(ExpectedConditions.java:44)
+at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:301)
+at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:298)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:260)
+at com.eagle.pages.Page.click(Page.java:41)
+at com.eagle.pages.InvestigationPage.deleteInvestigation(InvestigationPage.java:237)
+at com.eagle.TestCases.InvestigationTest.test_CreateInvestigation_Correct(InvestigationTest.java:56)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -69,8 +59,7 @@ at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 ]]>
             </full-stacktrace>
-          </exception> <!-- java.lang.AssertionError -->
->>>>>>> 19e074445253508a5d7731108039f72c37045659
+          </exception> <!-- java.lang.NullPointerException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- test_CreateInvestigation_Correct -->

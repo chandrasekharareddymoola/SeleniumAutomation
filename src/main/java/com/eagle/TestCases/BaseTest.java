@@ -52,4 +52,9 @@ public class BaseTest {
 	private static void setChromeDriverProperty(){
 		System.setProperty("webdriver.chrome.driver", "./Resources/chromedriver.exe");
 	}
+	
+	@AfterClass
+	public void tearDown() {
+		webdriver.quit();
+	}
 }

@@ -37,6 +37,9 @@ public class InvestigationPage extends Page{
 		@FindBy(xpath = "//div[@class='ms-List']//div[@role='rowheader' and @aria-colindex='1']")
 		public List<WebElement> invGridItems;
 		
+		@FindBy(xpath = "//div[@class='ms-List']//div[@role='row']")
+		public List<WebElement> invGridRows;
+		
 		@FindBy(xpath = "//i[@data-icon-name='Forward']")
 		public WebElement forward;
 		
@@ -59,7 +62,7 @@ public class InvestigationPage extends Page{
 		public WebElement addAction;
 		
 		@FindBy(xpath = "//button//span[contains(text(),'Exploration')]")
-		public WebElement lnkExploration;
+		public WebElement linkExploration;
 		
 		@FindBy(xpath = "//button//span[contains(text(),'Comparison')]")
 		public WebElement linkComparison;
@@ -78,6 +81,22 @@ public class InvestigationPage extends Page{
 		
 		@FindBy(xpath = "//button//div[contains(text(),'Select a set')]")
 		public WebElement selectASet;
+		
+		@FindBy(xpath = "//button//span[contains(text(),'Delete')]")
+		public WebElement deleteIcon;
+		
+		@FindBy(xpath = "//button//span[contains(text(),'Share')]")
+		public WebElement shareIcon;
+		
+		@FindBy(xpath = "//input[@role='textbox']")
+		public WebElement selectPersonToShare;
+		
+		@FindBy(xpath = "//div[contains(@class,'ms-PeoplePicker')]")
+		public WebElement suggestedUsers;
+		
+		@FindBy(xpath = "//i[@data-icon-name='Share']")
+		public WebElement share;
+		
 			
 		public InvestigationPage(){ 		 
 			 PageFactory.initElements(driver, this); 
@@ -86,13 +105,17 @@ public class InvestigationPage extends Page{
 		public void clickInvestigationIcon(){    	
 	    	Page.click(investigationIcon);
 	    	Actions action = new Actions(driver);
-	    	//Performing the mouse hover action on the target element.
+	    	//Performing the mouse hover action on the target element.	    	
 	    	action.moveToElement(copyRightIdentifier).perform();
 	    	
 	    }
 		
 		public void addInvestigation(){    	
 	    	Page.click(addInvestigation);
+	    }
+		
+		public void addAction(){    	
+	    	Page.click(addAction);
 	    }
 		
 	    public void setTitle(String textTitle){    	
@@ -117,7 +140,7 @@ public class InvestigationPage extends Page{
 	    	Page.click(saveInvestigation);
 	    }  
 	    
-	    public void openInvestigation(String inv)
+	    public void openItemFromList(String inv)
 	    {
 	    	try {	    		
 	    		do{ 
@@ -125,12 +148,32 @@ public class InvestigationPage extends Page{
 	    				if(element.isDisplayed() == false)  {scrollIntoView(element);}	    				
 	    				String textFromGrid = element.getText();	    				
 		    				if(inv.equals(textFromGrid)) {		    					
-			    				Page.click(element);	    				
+		    					Page.click(element);	
 		    				}		    				
 	    			}
 	    			Page.click(forward); 
 	    		}
 	    		while(forward.isEnabled());  
+	    	}	    	
+	    	catch(Exception ex) {}
+	    }
+	    
+	    public void selectItemForDeletion(String inv)
+	    {
+	    	try {	    		
+	    		do{ 
+    			for (WebElement element : invGridRows) { 
+    				if(element.isDisplayed() == false)  {scrollIntoView(element);}	    				
+    				String textFromGrid = element.getText();	    				
+	    				if(textFromGrid.contains(inv)) {	
+	    					WebElement deleteOption = element.findElement(By.xpath(".//button"));	    					
+	    					deleteOption.click();
+	    					break;
+	    			}
+    			}
+	    			Page.click(forward); 
+    			}    			
+    			while(forward.isEnabled());
 	    	}	    	
 	    	catch(Exception ex) {}
 	    }
@@ -145,58 +188,64 @@ public class InvestigationPage extends Page{
 	    
 	    public void editInvestigation(String inv, String invTitle, String invDescription){
 	    	this.clickInvestigationIcon();	  
-	    	this.openInvestigation(inv);	    	
+	    	this.openItemFromList(inv);	    	
 	    	modifyTitle(invTitle);	    	
 	    	modifyDescription(invDescription);	    	
 	    }	
 	    
 	    public void viewInvestigation(String inv){
 	    	this.clickInvestigationIcon();	  
-	    	this.openInvestigation(inv);	    	
+	    	this.openItemFromList(inv);	    	
 	    }
-	    
 	    
 	    public void linkSettoInvestigation(String invName, String setTobeLinked)
 	    {
 	    	this.clickInvestigationIcon();
-	    	this.openInvestigation(invName);	
+	    	this.openItemFromList(invName);	
 	    	Page.click(tabSets);
+	    	this.addAction();
 	    	Page.click(linkSet);
 	    	Page.click(selectASet);
-	    	this.openInvestigation(setTobeLinked);	
+	    	this.openItemFromList(setTobeLinked);	
 	    }  
 	   
 	    public void linkExplorationtoInvestigation(String invName, String explorationTobeLinked)
 	    {
 	    	this.clickInvestigationIcon();
-	    	this.openInvestigation(invName);	
+	    	this.openItemFromList(invName);		    	
+	    	Page.click(tabExplorations);
+	    	this.addAction();
+	    	Page.click(linkExploration);
+	    	Page.click(selectAnExploration);
+	    	this.openItemFromList(explorationTobeLinked);	
 	    }
 	    
 	    public void linkComparisontoInvestigation(String invName, String comparisonTobeLinked)
 	    {
 	    	this.clickInvestigationIcon();
-	    	this.openInvestigation(invName);	
-	    	
+	    	this.openItemFromList(invName);	
+	    	Page.click(tabComparisons);
+	    	this.addAction();
+	    	Page.click(linkComparison);
+	    	Page.click(selectAComparison);
+	    	this.openItemFromList(comparisonTobeLinked);		    	
+	    }	    
+	    
+	    public void deleteInvestigation(String invToBeDeleted){
+	    	this.clickInvestigationIcon();	 
+	    	selectItemForDeletion(invToBeDeleted);
+	    	Page.click(deleteIcon);
+	    	Page.click(deleteIcon);	 
+	    	//Add code to confirm deletion is happened or not	    	
 	    }
 	    
-	    
-	    public void deleteInvestigation(String inv){
-	    	this.clickInvestigationIcon();	  
-	    	    	
+	    public void shareInvestigation(String invToBeShared, String personToBeShared){
+	    	this.clickInvestigationIcon();	 
+	    	selectItemForDeletion(invToBeShared);
+	    	Page.click(shareIcon);
+	    	Page.enterText(selectPersonToShare,personToBeShared);	
+	    	Page.click(suggestedUsers);
+	    	Page.click(share);	
 	    }
 	    
-	    public void shareInvestigation(String inv){
-	    	this.clickInvestigationIcon();	  
-	    	
-	    }
-	    
-	    
-	  
-		/*
-		 * this.expandSet(); this.editSet(); List<String> myAlist = new
-		 * ArrayList<String>(); myAlist.add("DIS28"); myAlist.add("DIS53");
-		 * myAlist.add("DIS3"); myAlist.add("DIS2"); myAlist.add("DIS1");
-		 * this.selectItems(myAlist); this.removeItems();
-		 */
-	
 }

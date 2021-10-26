@@ -9,6 +9,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.Status;
+import com.eagle.Base.ExtentTestManager;
 import com.eagle.pages.HomePage;
 import com.eagle.pages.LoginPage;
 
@@ -19,9 +21,17 @@ public class LoginTest extends BaseTest{
 
     
 	    @Test
-	    public void test_Login_Correct() throws InterruptedException{	    	
-	    	objLogin = new LoginPage();
-		    objLogin.loginTo(); 		    
+	    public void VerifyLoginPage() throws InterruptedException{
+	      try 
+	      	{
+	    	    ExtentTestManager.getTest().log(Status.INFO, "Login check started");
+		    	objLogin = new LoginPage();
+			    objLogin.loginTo(); 	
+	    	}
+	    	catch(Exception ex)
+	    	{
+	    		
+	    	}
 	    }
 
 }
