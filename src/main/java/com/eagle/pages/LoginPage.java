@@ -1,5 +1,7 @@
 package com.eagle.pages;
 
+import java.io.IOException;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,6 +24,9 @@ public class LoginPage extends Page{
 	
 	@FindBy(name = "submit")
 	public WebElement submit;	
+	
+	@FindBy(xpath = "//div//label[contains(text(),'Copyright')]")
+	public WebElement copyRightIdentifier;
 		
 	 public LoginPage(){ 		 
 		 PageFactory.initElements(driver, this); 
@@ -35,10 +40,35 @@ public class LoginPage extends Page{
     	Page.click(submit);
     }  
     
-    public void loginTo() throws InterruptedException{
-        this.setCredentials();       
-        this.clickLogin();   
-        Thread.sleep(15000);
-    }
+//    public void loginTo() throws InterruptedException{
+//        this.setCredentials();       
+//        this.clickLogin();   
+//        Thread.sleep(15000);
+//    }
 
+    public void loginTo() throws InterruptedException, IOException{
+    	try {
+	        this.setCredentials();
+	        this.clickLogin();
+	     
+	       boolean iden = true;
+	       do
+	       {
+	    	   try {	    		  
+	    		   copyRightIdentifier.click();
+	    		   iden = false;	  
+	    	   }
+	    	   catch(Exception ex) {System.out.println("fail");}	    		
+	    	  
+	       }
+	       while(iden);
+	        //String error = loginErrorMessage.getText();
+	       // Assert.assertEquals(error, ""); 	       
+    	}
+        catch(Exception | AssertionError ex)
+    	{
+//    		BasePage.capture();
+    		throw ex;
+    	}
+    }
 }

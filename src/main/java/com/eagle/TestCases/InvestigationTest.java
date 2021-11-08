@@ -1,5 +1,6 @@
 package com.eagle.TestCases;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -17,7 +18,7 @@ public class InvestigationTest extends BaseTest{
 	    InvestigationPage objInvestigationPage; 
 	   
 	    @Test
-	    public void test_CreateInvestigation_Correct() throws InterruptedException{
+	    public void test_CreateInvestigation_Correct() throws InterruptedException, IOException{
 		    objLogin = new LoginPage();
 		    objLogin.loginTo();	
 		    

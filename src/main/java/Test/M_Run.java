@@ -69,85 +69,136 @@ public class M_Run {
 		//		myData.click();
 		customclick(myData);
 
-		WebElement setAdd =	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div//span[contains(text(),'Set')]"))); setAdd.click();
-		WebElement setUncategorized = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div//span[contains(text(),'Uncategorized')]")));
-		WebElement setName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div//input[@type='text']")));
-
-		customclick(setName); 
-		Thread.sleep(2000); 
-		setName.sendKeys(Keys.CONTROL + "a");
-		setName.sendKeys(Keys.DELETE); 
-		String createSet =	configObject.getProperty("SetName"); 
-		setName.sendKeys(createSet);
-
-
-		Thread.sleep(2000);
-
-		setUncategorized.click(); 
-		//String entityName = configObject.getProperty("Entity"); 
-		WebElement entitySelection = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button//span[contains(text(),'Disease')]")));
-		customclick(entitySelection);
-
-		String searchTextTobeEntered = configObject.getProperty("SearchText");
-		WebElement searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div//input[@role='searchbox']"))); searchBox.click();
-		searchBox.sendKeys(searchTextTobeEntered);
+//		WebElement setAdd =	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div//span[contains(text(),'Set')]"))); setAdd.click();
+//		WebElement setUncategorized = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div//span[contains(text(),'Uncategorized')]")));
+//		WebElement setName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div//input[@type='text']")));
+//
+//		customclick(setName); 
+//		Thread.sleep(2000); 
+//		setName.sendKeys(Keys.CONTROL + "a");
+//		setName.sendKeys(Keys.DELETE); 
+//		String createSet =	configObject.getProperty("SetName"); 
+//		setName.sendKeys(createSet);
+//
+//
+//		Thread.sleep(2000);
+//
+//		setUncategorized.click(); 
+//		//String entityName = configObject.getProperty("Entity"); 
+//		WebElement entitySelection = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button//span[contains(text(),'Disease')]")));
+//		customclick(entitySelection);
+//
+//		String searchTextTobeEntered = configObject.getProperty("SearchText");
+//		WebElement searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div//input[@role='searchbox']"))); searchBox.click();
+//		searchBox.sendKeys(searchTextTobeEntered);
+		
 
 		Thread.sleep(4000);
 
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='NAME']")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(("(//*[@class='PaginationControls__message___Zodph'])[2]//b[2]"))));
 
-
-		WebElement addAll = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div//span[contains(text(),'Add all items')]"))); 
-		//		addAll.click();
-		WebElement accept =  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div//span[contains(text(),'Accept')]"))); 
-		//		customclick(accept);
-
-//		WebElement addallgrey = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='ms-Button-label label-177' and text()='Add all items']")));
-		WebElement addallblack = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='ms-Button-label label-124' and text()='Add all items']")));
+		String noOfPages = webdriver.findElement(By.xpath( ("(//*[@class='PaginationControls__message___Zodph'])[2]//b[2]"))).getText();
+		System.out.println(noOfPages);
 		
-//		while(addAll.isDisplayed()){		
-//			do{   
-//				Boolean s = addAll.isEnabled();
-//				System.out.println(s);
-//				customclick(addAll);	
-//				Thread.sleep(2000);
-//			}while(addallblack.isDisplayed());
-//			customclick(accept);
-//		}
+
+		if (webdriver.findElements(By.xpath("//*[text()='"+ configObject.getProperty("setToDelete")+"']")).size() != 0) {
+		WebElement a = webdriver.findElement(By.xpath("//*[text()='"+ configObject.getProperty("setToDelete")+"']"));
+		((JavascriptExecutor)webdriver).executeScript("arguments[0].scrollIntoView();", a);
+		System.out.println(noOfPages);
+		WebElement threeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+ configObject.getProperty("setToDelete")+"']//parent::div//parent::div//child::button")));
+		threeButton.click();
+		System.out.println(noOfPages);
+		WebElement clickDelete = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Delete']")));
+		clickDelete.click();
+		System.out.println(noOfPages);
+		WebElement cancelDelete = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Cancel']")));
+		WebElement confirmDelete = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Delete']")));
+		confirmDelete.click();
+		}
+
+		else if (webdriver.findElements(By.xpath("//*[text()='"+ configObject.getProperty("setToDelete")+"']")).size()== 0) {
+
+		for (int i=0; i<Integer.valueOf(noOfPages);i++) {
+
+		if (webdriver.findElements(By.xpath("//*[text()='"+ configObject.getProperty("setToDelete")+"']")).size() != 0) {
+			
+			WebElement a = webdriver.findElement(By.xpath("//*[text()='"+ configObject.getProperty("setToDelete")+"']"));
+			((JavascriptExecutor)webdriver).executeScript("arguments[0].scrollIntoView();", a);
+			
+			WebElement threeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+ configObject.getProperty("setToDelete")+"']//parent::div//parent::div//child::button")));
+			threeButton.click();
+			WebElement clickDelete = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Delete']")));
+			clickDelete.click();
+			WebElement cancelDelete = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Cancel']")));
+			WebElement confirmDelete = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Delete']")));
+			confirmDelete.click();
+			break;
+		}
+		else {
+			webdriver.findElement(By.xpath("//*[@data-icon-name='Forward']")).click();
+			Thread.sleep(2000);
+		}
+		}
+		}
+		else  {
+
+		System.out.print("The set to be deleted is not found");
+		}
+
+
+//		WebElement addAll = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div//span[contains(text(),'Add all items')]"))); 
+//		//		addAll.click();
+//		WebElement accept =  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div//span[contains(text(),'Accept')]"))); 
+//		//		customclick(accept);
+//
+////		WebElement addallgrey = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='ms-Button-label label-177' and text()='Add all items']")));
+//		WebElement addallblack = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='ms-Button-label label-124' and text()='Add all items']")));
 //		
-
-
-
-
-		WebElement expand = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@data-icon-name='MiniExpand']")));
-		customclick(expand);
-
-		//		Thread.sleep(2000);
-		//		
-		//		WebElement Settingsicon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-icon-name='Settings']")));
-		//		Thread.sleep(10000);
-		//
-		////		WebElement SortColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+configObject.getProperty("SortColumn")+"']")));
-		////		Thread.sleep(5000);
-		//		
-		//		WebElement SortColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+configObject.getProperty("SortColumn")+"']")));
-		//		Thread.sleep(5000);
-		//
-		//		WebElement NextColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+configObject.getProperty("SortColumn")+"']//parent::div//parent::div/following-sibling::div")));
-		//		scrollIntoView(NextColumnname);
-		//		Thread.sleep(5000);
-		//
-		//		customclick(SortColumnname);
-		//		Thread.sleep(5000);
-		//		
-		//		customclick(SortColumnname);
-		//		Thread.sleep(5000);
-
-		//		List <WebElement> NoofRows = webdriver.findElements(By.xpath("//*[@class='TableRowDefault__bodyRow___1_m1h']"));
-		//        System.out.println(NoofRows.size());
-		//		webdriver.close();
-		//		
-		//		List <WebElement> ColumnNumber = webdriver.findElements(By.xpath("//*[text()='"+SortColumnname+"']//parent::div/parent::div/preceding-sibling::div"));
-		//		System.out.println(ColumnNumber.size());
+////		while(addAll.isDisplayed()){		
+////			do{   
+////				Boolean s = addAll.isEnabled();
+////				System.out.println(s);
+////				customclick(addAll);	
+////				Thread.sleep(2000);
+////			}while(addallblack.isDisplayed());
+////			customclick(accept);
+////		}
+////		
+//
+//
+//
+//
+//		WebElement expand = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@data-icon-name='MiniExpand']")));
+//		customclick(expand);
+//
+//		//		Thread.sleep(2000);
+//		//		
+//		//		WebElement Settingsicon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-icon-name='Settings']")));
+//		//		Thread.sleep(10000);
+//		//
+//		////		WebElement SortColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+configObject.getProperty("SortColumn")+"']")));
+//		////		Thread.sleep(5000);
+//		//		
+//		//		WebElement SortColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+configObject.getProperty("SortColumn")+"']")));
+//		//		Thread.sleep(5000);
+//		//
+//		//		WebElement NextColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+configObject.getProperty("SortColumn")+"']//parent::div//parent::div/following-sibling::div")));
+//		//		scrollIntoView(NextColumnname);
+//		//		Thread.sleep(5000);
+//		//
+//		//		customclick(SortColumnname);
+//		//		Thread.sleep(5000);
+//		//		
+//		//		customclick(SortColumnname);
+//		//		Thread.sleep(5000);
+//
+//		//		List <WebElement> NoofRows = webdriver.findElements(By.xpath("//*[@class='TableRowDefault__bodyRow___1_m1h']"));
+//		//        System.out.println(NoofRows.size());
+//		//		webdriver.close();
+//		//		
+//		//		List <WebElement> ColumnNumber = webdriver.findElements(By.xpath("//*[text()='"+SortColumnname+"']//parent::div/parent::div/preceding-sibling::div"));
+//		//		System.out.println(ColumnNumber.size());
 	}
 
 	public static void customclick(WebElement element) {

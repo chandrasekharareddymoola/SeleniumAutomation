@@ -12,6 +12,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
 
 public class Page{
 
@@ -59,13 +61,28 @@ public class Page{
 		js.executeScript("arguments[0].scrollIntoView(true);", element);
 	}
 	
-	public static void enterText(WebElement field, String value) {
+	public static void enterText(WebElement field, String value) throws InterruptedException {
 		if (!value.equalsIgnoreCase("nil")) {
-			click(field);
+			waitforAnElement(field);
+			Page.click(field);
 			field.sendKeys(Keys.CONTROL + "a");		
 			field.sendKeys(Keys.DELETE);
 			field.sendKeys(value);
 		}
 	}
+	
+	public static void waitforAnElement(WebElement Element) throws InterruptedException{
+		WebDriverWait wait = new WebDriverWait(driver, 30);
+		wait.until(ExpectedConditions.visibilityOf(Element));	
+	}
+	
+	public static void waitforAnElementClickable(WebElement Element) throws InterruptedException{
+		WebDriverWait wait = new WebDriverWait(driver, 30);
+		wait.until(ExpectedConditions.elementToBeClickable(Element));	
+	}
 
+	public static void CompareAttributeText(String attribute, String s, WebElement Element) { 
+		String t = Element.getAttribute(attribute);
+		Assert.assertEquals(s, t);
+	}
 }

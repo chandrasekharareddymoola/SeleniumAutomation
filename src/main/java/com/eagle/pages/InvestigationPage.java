@@ -39,11 +39,11 @@ public class InvestigationPage extends Page{
 	    	Page.click(addInvestigation);
 	    }
 		
-	    public void setTitle(String textTitle){    	
+	    public void setTitle(String textTitle) throws InterruptedException{    	
 	    	Page.enterText(title, textTitle);
 	    }   
 
-	    public void setDescription(String textDesc){    	
+	    public void setDescription(String textDesc) throws InterruptedException{    	
 	    	Page.enterText(description, textDesc);
 	    }   
 
@@ -51,7 +51,7 @@ public class InvestigationPage extends Page{
 	    	Page.click(saveInvestigation);
 	    }  
 	    
-	    public void createInvestigation(){
+	    public void createInvestigation() throws InterruptedException{
 	    	this.clickInvestigationIcon();
 	    	this.addInvestigation();
 	        this.setTitle("Inv 1");
