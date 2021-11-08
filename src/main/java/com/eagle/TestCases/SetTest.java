@@ -13,7 +13,6 @@ import com.eagle.pages.LoginPage;
 import com.eagle.pages.SetPage;
 
 public class SetTest extends BaseTest{
-<<<<<<< Updated upstream
 
 	LoginPage objLogin;
 	SetPage objSetPage; 
@@ -59,9 +58,6 @@ public class SetTest extends BaseTest{
 		//	    objSetPage.shareASet(null, null);
 
 	}	   
-=======
-		LoginPage objLogin;
-		SetPage objSetPage; 
    
    
     	@BeforeClass
@@ -79,7 +75,7 @@ public class SetTest extends BaseTest{
     		
     		try {
     			/* To initiate the creation of Investigation */		 
-    			objSetPage.createSet();	  
+    			//objSetPage.createSet();	  
     			ExtentTestManager.getTest().log(Status.PASS, "Test passed");
     		}
     		catch(Exception ex)
@@ -124,5 +120,5 @@ public class SetTest extends BaseTest{
 //	    objSetPage.shareASet(null, null);
 	    
     	   
->>>>>>> Stashed changes
-} 
+}
+

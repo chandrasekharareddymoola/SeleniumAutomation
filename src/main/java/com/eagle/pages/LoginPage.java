@@ -23,22 +23,14 @@ public class LoginPage extends BasePage{
 	public WebElement password;
 	
 	@FindBy(name = "submit")
-	public WebElement submit;	
-	
-<<<<<<< Updated upstream
+	public WebElement submit;		
+
 	@FindBy(xpath = "//div//label[contains(text(),'Copyright')]")
-	public WebElement copyRightIdentifier;
-		
-=======
+	public WebElement copyRightIdentifier;		
+
 	@FindBy(name = "//div[@class='auth0-global-message auth0-global-message-error']")
-	public WebElement loginErrorMessage;	
+	public WebElement loginErrorMessage;
 	
-	@FindBy(xpath = "//div//label[contains(text(),'Copyright')]")
-	public WebElement copyRightIdentifier;
-	
-	
-	
->>>>>>> Stashed changes
 	 public LoginPage(){ 		 
 		 PageFactory.initElements(driver, this); 
 	 }
@@ -51,40 +43,7 @@ public class LoginPage extends BasePage{
     	BasePage.click(submit);
     }  
     
-<<<<<<< Updated upstream
-//    public void loginTo() throws InterruptedException{
-//        this.setCredentials();       
-//        this.clickLogin();   
-//        Thread.sleep(15000);
-//    }
-=======
-    public void loginTo() throws InterruptedException, IOException{
-    	try {
-	        this.setCredentials();       
-	        this.clickLogin();   
-	      
-	       boolean iden = true;
-	       do
-	       {
-	    	   try {	    		   
-	    		   copyRightIdentifier.click();
-	    		   iden = false;	   
-	    	   }
-	    	   catch(Exception ex) {System.out.println("fail");}	    		
-	    	   
-	       }
-	       while(iden);       
-	        //String error = loginErrorMessage.getText();
-	       // Assert.assertEquals(error, ""); 	        
-    	}
-        catch(Exception | AssertionError ex)
-    	{
-    		BasePage.capture();
-    		throw ex;
-    	}
-    }
->>>>>>> Stashed changes
-
+   
     public void loginTo() throws InterruptedException, IOException{
     	try {
 	        this.setCredentials();

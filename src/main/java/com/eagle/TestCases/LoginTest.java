@@ -17,34 +17,8 @@ import com.eagle.pages.LoginPage;
 import com.eagle.Reports.ExtentTestManager;
 import com.eagle.pages.BasePage;
 
-public class LoginTest extends BaseTest{	    
-<<<<<<< Updated upstream
+public class LoginTest extends BaseTest{    
 
-	LoginPage objLogin;
-	HomePage objHomePage; 
-
-
-	@Test
-
-	public void test_Login_Correct() throws InterruptedException, IOException{	    	
-		objLogin = new LoginPage();
-		objLogin.loginTo(); 	
-	}
-		public void VerifyLoginPage() throws InterruptedException{
-			try 
-			{
-//				ExtentTestManager.getTest().log(Status.INFO, "Login check started");
-				objLogin = new LoginPage();
-				objLogin.loginTo(); 	
-			}
-			catch(Exception ex)
-			{
-
-			}
-		}
-
-	}
-=======
 	   	   
 		LoginPage objLogin;
 	    HomePage objHomePage; 
@@ -71,4 +45,4 @@ public class LoginTest extends BaseTest{
 		    	}
 		    }
 }
->>>>>>> Stashed changes
+

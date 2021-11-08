@@ -124,41 +124,23 @@ public class InvestigationPage extends BasePage{
 	    	BasePage.click(addAction);
 	    }
 		
-<<<<<<< Updated upstream
-	    public void setTitle(String textTitle) throws InterruptedException{    	
-	    	Page.enterText(title, textTitle);
-	    }   
 
-	    public void setDescription(String textDesc) throws InterruptedException{    	
-	    	Page.enterText(description, textDesc);
-	    }  
-	    
-	    public void modifyTitle(String textTitle) throws InterruptedException{  
-	    	Page.click(investigationTitle);
-	    	Page.enterText(investigationTitle, textTitle);
-	    }
-	    
-	    public void modifyDescription(String textDesc) throws InterruptedException{    
-	    	Page.click(investigationDesc);
-	    	Page.enterText(investigationDesc, textDesc);
-=======
-	    public void setTitle(String textTitle){    	
+	    public void setTitle(String textTitle) throws InterruptedException {    	
 	    	BasePage.enterText(title, textTitle);
 	    }   
 
-	    public void setDescription(String textDesc){    	
+	    public void setDescription(String textDesc) throws InterruptedException{    	
 	    	BasePage.enterText(description, textDesc);
 	    }  
 	    
-	    public void modifyTitle(String textTitle){  
+	    public void modifyTitle(String textTitle) throws InterruptedException{  
 	    	BasePage.click(investigationTitle);
 	    	BasePage.enterText(investigationTitle, textTitle);
 	    }
 	    
-	    public void modifyDescription(String textDesc){    
+	    public void modifyDescription(String textDesc) throws InterruptedException{    
 	    	BasePage.click(investigationDesc);
 	    	BasePage.enterText(investigationDesc, textDesc);
->>>>>>> Stashed changes
 	    } 
 
 	    public void clickSave(){
@@ -205,26 +187,17 @@ public class InvestigationPage extends BasePage{
     			while(forward.isEnabled());
 	    	}	    	
 	    	catch(Exception ex) {}
-	    }
-	    
-<<<<<<< Updated upstream
-	    public void createInvestigation(String invTitle, String invDesc) throws InterruptedException{
+	    }	    
+
+	    public void createInvestigation(String invTitle, String invDesc){
+    	try {
 	    	this.clickInvestigationIcon();
 	    	this.addInvestigation();
 	        this.setTitle(invTitle);
 	        this.setDescription(invDesc);
 	        this.clickSave();   
-=======
-	    public void createInvestigation(String invTitle, String invDesc){
-	    	try {
-		    	this.clickInvestigationIcon();
-		    	this.addInvestigation();
-		        this.setTitle(invTitle);
-		        this.setDescription(invDesc);
-		        this.clickSave();   
-	    	}
-	    	catch(Exception ex) {}
->>>>>>> Stashed changes
+    	}
+    	catch(Exception ex) {}
 	    }	
 	    
 	    public void editInvestigation(String inv, String invTitle, String invDescription) throws InterruptedException{
@@ -286,11 +259,8 @@ public class InvestigationPage extends BasePage{
 	    	//Add code to confirm deletion is happened or not	    	
 	    }
 	    
-<<<<<<< Updated upstream
-	    public void shareInvestigation(String invToBeShared, String personToBeShared) throws InterruptedException{
-=======
+
 	    public void shareInvestigation(String invToBeShared, String personToBeShared) throws Exception{
->>>>>>> Stashed changes
 	    	this.clickInvestigationIcon();	 
 	    	selectItemForDeletion(invToBeShared);
 	    	BasePage.click(shareIcon);

@@ -1,12 +1,7 @@
 package com.eagle.TestCases;
-
-<<<<<<< Updated upstream
-=======
 import java.io.File;
->>>>>>> Stashed changes
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -22,54 +17,7 @@ import com.eagle.Reports.ExtentTestManager;
 import com.eagle.pages.InvestigationPage;
 import com.eagle.pages.LoginPage;
 
-<<<<<<< Updated upstream
-
-public class InvestigationTest extends BaseTest{
-
-	LoginPage objLogin;
-	InvestigationPage objInvestigationPage; 
-		@Test
-		public void test_CreateInvestigation_Correct() throws InterruptedException, IOException {
-			objLogin = new LoginPage();
-			objLogin.loginTo();
-
-			objInvestigationPage = new InvestigationPage();
-
-			/* To initiate the creation of Investigation */
-			objInvestigationPage.createInvestigation("Investigation 1","Investigation 1");
-
-			Thread.sleep(5000); 
-			/* To view the Investigation */
-			objInvestigationPage.viewInvestigation("Investigation 1");
-
-			Thread.sleep(5000); 
-			/* To edit the Investigation */
-			objInvestigationPage.editInvestigation("Investigation 1","Modified title","modified description");
-
-			Thread.sleep(5000); 
-			/* To Link set to an Investigation */
-			objInvestigationPage.linkSettoInvestigation("Modified title" ,"UntitledSet-20 Oct 2021");
-
-			/* To Link exploration to an Investigation */
-			//ERROR //		  
-			//objInvestigationPage.linkExplorationtoInvestigation("Modified title","");
-
-			Thread.sleep(5000); 
-			/* To Link Comparison to an Investigation */
-			//objInvestigationPage.linkComparisontoInvestigation("Modified title","Unique");  
-
-			//Thread.sleep(5000);
-			/* To share the Investigation */
-			objInvestigationPage.shareInvestigation("Investigation 2", "divya.devanathan@eaglegenomics.com");
-
-			Thread.sleep(5000);
-			/* To delete the Investigation */
-			objInvestigationPage.deleteInvestigation("Investigation 2");
-=======
-
 public class InvestigationTest extends BaseTest {
-	
-	
 	
 	InvestigationPage objInvestigationPage;
 	
@@ -186,13 +134,9 @@ public class InvestigationTest extends BaseTest {
 			objInvestigationPage.captureScreenshot("shareInvFail");
 			onFailreMeassage(ex.getMessage(),"shareInvFail");			
 		}
->>>>>>> Stashed changes
 
-		}
-	}
-<<<<<<< Updated upstream
-=======
-	
+	}	
+
 	
 	@Test(priority = 7, description = "Delete Investigation")
 	public void DeleteInvestigation_Test() throws InterruptedException, IOException  {
@@ -225,4 +169,4 @@ public class InvestigationTest extends BaseTest {
 	
 		 
 }
->>>>>>> Stashed changes
+

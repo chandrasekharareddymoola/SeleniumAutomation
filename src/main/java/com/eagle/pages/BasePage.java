@@ -67,16 +67,14 @@ public class BasePage{
 	}
 	
 	public static void enterText(WebElement field, String value) throws InterruptedException {
-		if (!value.equalsIgnoreCase("nil")) {
-			waitforAnElement(field);
-			Page.click(field);
+		if (!value.equalsIgnoreCase("nil")) {			
+			BasePage.click(field);
 			field.sendKeys(Keys.CONTROL + "a");		
 			field.sendKeys(Keys.DELETE);
 			field.sendKeys(value);
 		}
-	}
-	
-<<<<<<< Updated upstream:src/main/java/com/eagle/pages/Page.java
+	}	
+
 	public static void waitforAnElement(WebElement Element) throws InterruptedException{
 		WebDriverWait wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.visibilityOf(Element));	
@@ -86,7 +84,7 @@ public class BasePage{
 		WebDriverWait wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.elementToBeClickable(Element));	
 	}
-=======
+
 	public static String capture() throws IOException
     {
         TakesScreenshot ts = (TakesScreenshot)driver;
@@ -97,7 +95,7 @@ public class BasePage{
                      
         return dest;
     }
->>>>>>> Stashed changes:src/main/java/com/eagle/pages/BasePage.java
+
 
 	public static void CompareAttributeText(String attribute, String s, WebElement Element) { 
 		String t = Element.getAttribute(attribute);
