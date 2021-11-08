@@ -3,7 +3,8 @@ package Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import com.eagle.pages.Page;
+import com.eagle.ConfigUtils.ReadObject;
+import com.eagle.pages.BasePage;
 import com.eagle.selenium.data_scientist.ReadObject111;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
@@ -44,7 +45,7 @@ public class M_Run {
 
 		webdriver.manage().window().maximize();
 
-		ReadObject111 object = new ReadObject111(); 
+		ReadObject object = new ReadObject(); 
 		Properties configObject =  object.getObjectRepositoty();
 
 

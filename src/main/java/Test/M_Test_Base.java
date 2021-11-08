@@ -5,7 +5,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebElement;
 
-import com.eagle.pages.Page;
+import com.eagle.pages.BasePage;
 import com.eagle.selenium.data_scientist.ReadObject111;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;

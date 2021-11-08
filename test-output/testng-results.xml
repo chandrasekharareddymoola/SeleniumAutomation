@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="0" failed="1" skipped="0">
+<testng-results ignored="0" total="8" passed="8" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
+<<<<<<< Updated upstream
 <<<<<<< HEAD
   <suite started-at="2021-11-02T17:04:08 IST" name="Default suite" finished-at="2021-11-02T17:04:25 IST" duration-ms="16769">
     <groups>
@@ -52,14 +53,18 @@ at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(Def
 at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
 =======
   <suite started-at="2021-10-21T12:06:59 IST" name="Default suite" finished-at="2021-10-21T12:08:02 IST" duration-ms="62919">
+=======
+  <suite started-at="2021-11-08T11:51:54 IST" name="SmokeTestingSuite" finished-at="2021-11-08T11:55:14 IST" duration-ms="199985">
+>>>>>>> Stashed changes
     <groups>
     </groups>
-    <test started-at="2021-10-21T12:06:59 IST" name="Default test" finished-at="2021-10-21T12:08:02 IST" duration-ms="62919">
+    <test started-at="2021-11-08T11:51:54 IST" name="Smoke Test cases" finished-at="2021-11-08T11:55:14 IST" duration-ms="199985">
       <class name="com.eagle.TestCases.InvestigationTest">
-        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.InvestigationTest@3232a28a]" started-at="2021-10-21T12:06:59 IST" name="launchApplication" finished-at="2021-10-21T12:07:07 IST" duration-ms="7364" status="PASS">
+        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.InvestigationTest@209da20d]" started-at="2021-11-08T11:51:54 IST" name="launchApplication" finished-at="2021-11-08T11:52:00 IST" duration-ms="6394" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchApplication -->
+<<<<<<< Updated upstream
         <test-method signature="test_CreateInvestigation_Correct()[pri:0, instance:com.eagle.TestCases.InvestigationTest@3232a28a]" started-at="2021-10-21T12:07:07 IST" name="test_CreateInvestigation_Correct" finished-at="2021-10-21T12:08:02 IST" duration-ms="55502" status="FAIL">
           <exception class="java.lang.NullPointerException">
             <message>
@@ -125,11 +130,55 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
       </class> <!-- com.eagle.TestCases.ExplorationTest -->
 =======
           </exception> <!-- java.lang.NullPointerException -->
+=======
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.eagle.TestCases.InvestigationTest@209da20d]" started-at="2021-11-08T11:52:00 IST" name="beforeMethod" finished-at="2021-11-08T11:52:31 IST" duration-ms="30522" status="PASS">
+>>>>>>> Stashed changes
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- test_CreateInvestigation_Correct -->
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="CreateInvestigation_Test()[pri:0, instance:com.eagle.TestCases.InvestigationTest@209da20d]" started-at="2021-11-08T11:52:31 IST" name="CreateInvestigation_Test" description="Create Investigation" finished-at="2021-11-08T11:52:33 IST" duration-ms="2323" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CreateInvestigation_Test -->
+        <test-method signature="ViewInvestigation_Test()[pri:1, instance:com.eagle.TestCases.InvestigationTest@209da20d]" started-at="2021-11-08T11:52:33 IST" name="ViewInvestigation_Test" description="View Investigation" finished-at="2021-11-08T11:52:37 IST" duration-ms="3321" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ViewInvestigation_Test -->
+        <test-method signature="EditInvestigation_Test()[pri:2, instance:com.eagle.TestCases.InvestigationTest@209da20d]" started-at="2021-11-08T11:52:37 IST" name="EditInvestigation_Test" description="Edit Investigation" finished-at="2021-11-08T11:52:44 IST" duration-ms="6938" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- EditInvestigation_Test -->
+        <test-method signature="LinkSetWithInvestigation_Test()[pri:3, instance:com.eagle.TestCases.InvestigationTest@209da20d]" started-at="2021-11-08T11:52:44 IST" name="LinkSetWithInvestigation_Test" description="Link Set With Investigation" finished-at="2021-11-08T11:52:58 IST" duration-ms="14264" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- LinkSetWithInvestigation_Test -->
+        <test-method signature="LinkExplorationWithInvestigation_Test()[pri:4, instance:com.eagle.TestCases.InvestigationTest@209da20d]" started-at="2021-11-08T11:52:58 IST" name="LinkExplorationWithInvestigation_Test" description="Link Exploration With Investigation" finished-at="2021-11-08T11:52:58 IST" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- LinkExplorationWithInvestigation_Test -->
+        <test-method signature="LinkComparisonWithInvestigation_Test()[pri:5, instance:com.eagle.TestCases.InvestigationTest@209da20d]" started-at="2021-11-08T11:52:58 IST" name="LinkComparisonWithInvestigation_Test" description="Link Comparison With Investigation" finished-at="2021-11-08T11:52:58 IST" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- LinkComparisonWithInvestigation_Test -->
+        <test-method signature="ShareInvestigation_Test()[pri:6, instance:com.eagle.TestCases.InvestigationTest@209da20d]" started-at="2021-11-08T11:52:58 IST" name="ShareInvestigation_Test" description="Share Investigation" finished-at="2021-11-08T11:54:05 IST" duration-ms="67468" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ShareInvestigation_Test -->
+        <test-method signature="DeleteInvestigation_Test()[pri:7, instance:com.eagle.TestCases.InvestigationTest@209da20d]" started-at="2021-11-08T11:54:05 IST" name="DeleteInvestigation_Test" description="Delete Investigation" finished-at="2021-11-08T11:55:13 IST" duration-ms="68067" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- DeleteInvestigation_Test -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.eagle.TestCases.InvestigationTest@209da20d]" started-at="2021-11-08T11:55:13 IST" name="tearDown" finished-at="2021-11-08T11:55:14 IST" duration-ms="637" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
       </class> <!-- com.eagle.TestCases.InvestigationTest -->
+<<<<<<< Updated upstream
 >>>>>>> 25196e871b9570c956aec9ab998bcbea2dd9df90
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
+=======
+    </test> <!-- Smoke Test cases -->
+  </suite> <!-- SmokeTestingSuite -->
+>>>>>>> Stashed changes
 </testng-results>

@@ -3,13 +3,17 @@ package com.eagle.TestCases;
 import java.awt.AWTException;
 import java.io.IOException;
 
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.Status;
+import com.eagle.Reports.ExtentTestManager;
 import com.eagle.pages.InvestigationPage;
 import com.eagle.pages.LoginPage;
 import com.eagle.pages.SetPage;
 
 public class SetTest extends BaseTest{
+<<<<<<< Updated upstream
 
 	LoginPage objLogin;
 	SetPage objSetPage; 
@@ -55,4 +59,70 @@ public class SetTest extends BaseTest{
 		//	    objSetPage.shareASet(null, null);
 
 	}	   
+=======
+		LoginPage objLogin;
+		SetPage objSetPage; 
+   
+   
+    	@BeforeClass
+    	public void beforeMethod() throws InterruptedException, IOException {
+    		//Login to application
+    		LoginPage objLogin;
+    		objLogin = new LoginPage();
+    		objLogin.loginTo();
+    		objSetPage = new SetPage();		
+    	}
+	   
+    	
+    	@Test(priority = 0, description = "Create Investigation")
+    	public void CreateSet_Test() throws InterruptedException {
+    		
+    		try {
+    			/* To initiate the creation of Investigation */		 
+    			objSetPage.createSet();	  
+    			ExtentTestManager.getTest().log(Status.PASS, "Test passed");
+    		}
+    		catch(Exception ex)
+    		{
+    			
+    		}
+    	}
+    	
+    	@Test(priority = 1, description = "View Investigation")
+    	public void ViewInvestigation_Test() throws InterruptedException {
+    		try {
+    			 /* To view the Investigation */
+    			objSetPage.RemoveItemsfromSet();
+    			 ExtentTestManager.getTest().log(Status.PASS, "Test passed");
+    		}
+    		catch(Exception ex)
+    		{
+    			
+    		}
+    	}
+    		
+    	
+//	    //  
+//	   // 
+//	   // objSetPage.CreateSetFromFile();
+//	   // objSetPage.CreateSetFromSet();
+	  
+	   // objSetPage.ExpandAddFromCatalog("Set Test Auto 1", "migraine");
+	   // objSetPage.close();
+	    
+//	    objSetPage.ExpandAddFromCatalog(null, null);
+//	    objSetPage.accept();
+//	    
+//	    objSetPage.ExpandAddFromSet(null, null);
+//	    objSetPage.close();
+//	    
+//	    objSetPage.ExpandAddFromSet(null, null);
+//	    objSetPage.accept();
+//
+//	    objSetPage.GridChanges(null, null, null, null);
+//	    
+//	    objSetPage.shareASet(null, null);
+	    
+    	   
+>>>>>>> Stashed changes
 } 

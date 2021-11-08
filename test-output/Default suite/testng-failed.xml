@@ -13,8 +13,17 @@
 =======
       <class name="com.eagle.TestCases.InvestigationTest">
         <methods>
+          <include name="EditInvestigation_Test"/>
           <include name="launchApplication"/>
-          <include name="test_CreateInvestigation_Correct"/>
+          <include name="ViewInvestigation_Test"/>
+          <include name="beforeMethod"/>
+          <include name="LinkExplorationWithInvestigation_Test"/>
+          <include name="CreateInvestigation_Test"/>
+          <include name="tearDown"/>
+          <include name="LinkSetWithInvestigation_Test"/>
+          <include name="DeleteInvestigation_Test"/>
+          <include name="LinkComparisonWithInvestigation_Test"/>
+          <include name="ShareInvestigation_Test"/>
         </methods>
       </class> <!-- com.eagle.TestCases.InvestigationTest -->
 >>>>>>> 25196e871b9570c956aec9ab998bcbea2dd9df90

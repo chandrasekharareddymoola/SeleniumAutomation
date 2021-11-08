@@ -1,9 +1,15 @@
 package com.eagle.pages;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -11,7 +17,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 
-public class InvestigationPage extends Page{
+public class InvestigationPage extends BasePage{
 
 		//WebDriver driver;	
 	  
@@ -102,7 +108,7 @@ public class InvestigationPage extends Page{
 		 }
 
 		public void clickInvestigationIcon(){    	
-	    	Page.click(investigationIcon);
+	    	BasePage.click(investigationIcon);
 	    	Actions action = new Actions(driver);
 	    	//Performing the mouse hover action on the target element.	    	
 	    	action.moveToElement(copyRightIdentifier).perform();
@@ -110,14 +116,15 @@ public class InvestigationPage extends Page{
 	    }
 		
 		public void addInvestigation(){    	
-	    	Page.click(addInvestigation);
+	    	BasePage.click(addInvestigation);
 	    }
 		
 
 		public void addAction(){    	
-	    	Page.click(addAction);
+	    	BasePage.click(addAction);
 	    }
 		
+<<<<<<< Updated upstream
 	    public void setTitle(String textTitle) throws InterruptedException{    	
 	    	Page.enterText(title, textTitle);
 	    }   
@@ -134,10 +141,28 @@ public class InvestigationPage extends Page{
 	    public void modifyDescription(String textDesc) throws InterruptedException{    
 	    	Page.click(investigationDesc);
 	    	Page.enterText(investigationDesc, textDesc);
+=======
+	    public void setTitle(String textTitle){    	
+	    	BasePage.enterText(title, textTitle);
+	    }   
+
+	    public void setDescription(String textDesc){    	
+	    	BasePage.enterText(description, textDesc);
+	    }  
+	    
+	    public void modifyTitle(String textTitle){  
+	    	BasePage.click(investigationTitle);
+	    	BasePage.enterText(investigationTitle, textTitle);
+	    }
+	    
+	    public void modifyDescription(String textDesc){    
+	    	BasePage.click(investigationDesc);
+	    	BasePage.enterText(investigationDesc, textDesc);
+>>>>>>> Stashed changes
 	    } 
 
 	    public void clickSave(){
-	    	Page.click(saveInvestigation);
+	    	BasePage.click(saveInvestigation);
 	    }  
 	    
 
@@ -149,10 +174,10 @@ public class InvestigationPage extends Page{
 	    				if(element.isDisplayed() == false)  {scrollIntoView(element);}	    				
 	    				String textFromGrid = element.getText();	    				
 		    				if(inv.equals(textFromGrid)) {		    					
-		    					Page.click(element);	
+		    					BasePage.click(element);	
 		    				}		    				
 	    			}
-	    			Page.click(forward); 
+	    			BasePage.click(forward); 
 	    		}
 	    		while(forward.isEnabled());  
 	    	}	    	
@@ -161,30 +186,45 @@ public class InvestigationPage extends Page{
 	    
 	    public void selectItemForDeletion(String inv)
 	    {
-	    	try {	    		
+	    	try {	
+	    		outerloop:
 	    		do{ 
     			for (WebElement element : invGridRows) { 
     				if(element.isDisplayed() == false)  {scrollIntoView(element);}	    				
     				String textFromGrid = element.getText();	    				
-	    				if(textFromGrid.contains(inv)) {	
-	    					WebElement deleteOption = element.findElement(By.xpath(".//button"));	    					
+	    				if(textFromGrid.contains(inv)) {
+	    					//WebElement parent = (WebElement) ((JavascriptExecutor) driver).executeScript(
+	                                   //"return arguments[0].parentNode;", element);
+	    					WebElement deleteOption = element.findElement(By.tagName("button"));	    					
 	    					deleteOption.click();
-	    					break;
+	    					 break outerloop;
 	    			}
     			}
-	    			Page.click(forward); 
+	    			BasePage.click(forward); 
     			}    			
     			while(forward.isEnabled());
 	    	}	    	
 	    	catch(Exception ex) {}
 	    }
 	    
+<<<<<<< Updated upstream
 	    public void createInvestigation(String invTitle, String invDesc) throws InterruptedException{
 	    	this.clickInvestigationIcon();
 	    	this.addInvestigation();
 	        this.setTitle(invTitle);
 	        this.setDescription(invDesc);
 	        this.clickSave();   
+=======
+	    public void createInvestigation(String invTitle, String invDesc){
+	    	try {
+		    	this.clickInvestigationIcon();
+		    	this.addInvestigation();
+		        this.setTitle(invTitle);
+		        this.setDescription(invDesc);
+		        this.clickSave();   
+	    	}
+	    	catch(Exception ex) {}
+>>>>>>> Stashed changes
 	    }	
 	    
 	    public void editInvestigation(String inv, String invTitle, String invDescription) throws InterruptedException{
@@ -199,25 +239,31 @@ public class InvestigationPage extends Page{
 	    	this.openItemFromList(inv);	    	
 	    }
 	    
-	    public void linkSettoInvestigation(String invName, String setTobeLinked)
+	    public void linkSettoInvestigation(String invName, String setTobeLinked) throws IOException
 	    {
-	    	this.clickInvestigationIcon();
-	    	this.openItemFromList(invName);	
-	    	Page.click(tabSets);
-	    	this.addAction();
-	    	Page.click(linkSet);
-	    	Page.click(selectASet);
-	    	this.openItemFromList(setTobeLinked);	
+	    	try {  
+		    	this.clickInvestigationIcon();
+		    	this.openItemFromList(invName);	
+		    	BasePage.click(tabSets);
+		    	this.addAction();
+		    	BasePage.click(linkSet);
+		    	BasePage.click(selectASet);
+		    	this.openItemFromList(setTobeLinked);
+	    	}
+	    	catch(Exception ex)
+	    	{
+	    		BasePage.capture();
+	    	}
 	    }  
 	   
 	    public void linkExplorationtoInvestigation(String invName, String explorationTobeLinked)
 	    {
 	    	this.clickInvestigationIcon();
 	    	this.openItemFromList(invName);		    	
-	    	Page.click(tabExplorations);
+	    	BasePage.click(tabExplorations);
 	    	this.addAction();
-	    	Page.click(linkExploration);
-	    	Page.click(selectAnExploration);
+	    	BasePage.click(linkExploration);
+	    	BasePage.click(selectAnExploration);
 	    	this.openItemFromList(explorationTobeLinked);	
 	    }
 	    
@@ -225,28 +271,46 @@ public class InvestigationPage extends Page{
 	    {
 	    	this.clickInvestigationIcon();
 	    	this.openItemFromList(invName);	
-	    	Page.click(tabComparisons);
+	    	BasePage.click(tabComparisons);
 	    	this.addAction();
-	    	Page.click(linkComparison);
-	    	Page.click(selectAComparison);
+	    	BasePage.click(linkComparison);
+	    	BasePage.click(selectAComparison);
 	    	this.openItemFromList(comparisonTobeLinked);		    	
 	    }	    
 	    
-	    public void deleteInvestigation(String invToBeDeleted){
+	    public void deleteInvestigation(String invToBeDeleted) throws Exception {
 	    	this.clickInvestigationIcon();	 
 	    	selectItemForDeletion(invToBeDeleted);
-	    	Page.click(deleteIcon);
-	    	Page.click(deleteIcon);	 
+	    	BasePage.click(deleteIcon);
+	    	BasePage.click(deleteIcon);	 
 	    	//Add code to confirm deletion is happened or not	    	
 	    }
 	    
+<<<<<<< Updated upstream
 	    public void shareInvestigation(String invToBeShared, String personToBeShared) throws InterruptedException{
+=======
+	    public void shareInvestigation(String invToBeShared, String personToBeShared) throws Exception{
+>>>>>>> Stashed changes
 	    	this.clickInvestigationIcon();	 
 	    	selectItemForDeletion(invToBeShared);
-	    	Page.click(shareIcon);
-	    	Page.enterText(selectPersonToShare,personToBeShared);	
-	    	Page.click(suggestedUsers);
-	    	Page.click(share);	
+	    	BasePage.click(shareIcon);
+	    	BasePage.enterText(selectPersonToShare,personToBeShared);	
+	    	BasePage.click(suggestedUsers);
+	    	BasePage.click(share);		    	
 	    }
 	    
+	    public String captureScreenshot(String screenShotName) throws IOException
+	    {
+	        TakesScreenshot ts = (TakesScreenshot)driver;
+	        File source = ts.getScreenshotAs(OutputType.FILE);
+	        String dest = "./Resources/ErrorScreenshots/"+screenShotName+".png";
+	        File destination = new File(dest);
+	        try {
+	            FileUtils.copyFile(source, destination);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }     
+	                     
+	        return dest;
+	    }
 }

@@ -17,13 +17,17 @@ import org.testng.annotations.BeforeClass;
 
 import com.eagle.ConfigUtils.ReadObject;
 import com.eagle.pages.LoginPage;
-import com.eagle.pages.Page;
+import com.eagle.pages.BasePage;
 
 public class BaseTest {
 
 	private static WebDriver webdriver;
-	protected static Page basePage;
+	protected static BasePage basePage;
  
+	public WebDriver getDriver() {
+        return webdriver;
+    }
+	
 	@BeforeClass
 	public static void launchApplication() throws IOException, InterruptedException, AWTException{
 		setChromeDriverProperty();
@@ -42,7 +46,7 @@ public class BaseTest {
 	     String emailPass = configObject.getProperty("Password");	
 	        
 		webdriver.get(url);	
-		basePage = new Page();
+		basePage = new BasePage();
 		basePage.setWebDriver(webdriver);	
 		basePage.setUserName(email);
 		basePage.setPassword(emailPass);
