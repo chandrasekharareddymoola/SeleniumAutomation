@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="SmokeTestingSuite">
-  <test thread-count="5" name="Test">
-    <classes>   
-      <class name="com.eagle.TestCases.SetTest"/>      
-    </classes>
-  </test> <!-- Test -->
+	<listeners>
+		<listener class-name="com.eagle.Base.TestListener" />
+	</listeners>
+  	<test thread-count="5" name="Smoke Test cases">
+	    <classes>   
+	      <class name="com.eagle.TestCases.LoginTest"/>   
+	      <class name="com.eagle.TestCases.InvestigationTest" />
+		  <class name="com.eagle.TestCases.SetTest" />		 
+	    </classes>
+  	</test> <!-- Test -->
 </suite> <!-- Suite -->

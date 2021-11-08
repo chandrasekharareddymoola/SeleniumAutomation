@@ -2,6 +2,7 @@
 <testng-results ignored="0" total="1" passed="0" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
+<<<<<<< HEAD
   <suite started-at="2021-11-02T17:04:08 IST" name="Default suite" finished-at="2021-11-02T17:04:25 IST" duration-ms="16769">
     <groups>
     </groups>
@@ -49,17 +50,43 @@ at org.openqa.selenium.By$ByName.findElement(By.java:284)
 at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:314)
 at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)
 at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+=======
+  <suite started-at="2021-10-21T12:06:59 IST" name="Default suite" finished-at="2021-10-21T12:08:02 IST" duration-ms="62919">
+    <groups>
+    </groups>
+    <test started-at="2021-10-21T12:06:59 IST" name="Default test" finished-at="2021-10-21T12:08:02 IST" duration-ms="62919">
+      <class name="com.eagle.TestCases.InvestigationTest">
+        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.InvestigationTest@3232a28a]" started-at="2021-10-21T12:06:59 IST" name="launchApplication" finished-at="2021-10-21T12:07:07 IST" duration-ms="7364" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- launchApplication -->
+        <test-method signature="test_CreateInvestigation_Correct()[pri:0, instance:com.eagle.TestCases.InvestigationTest@3232a28a]" started-at="2021-10-21T12:07:07 IST" name="test_CreateInvestigation_Correct" finished-at="2021-10-21T12:08:02 IST" duration-ms="55502" status="FAIL">
+          <exception class="java.lang.NullPointerException">
+            <message>
+              <![CDATA[Cannot invoke "Object.getClass()" because "obj" is null]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException: Cannot invoke "Object.getClass()" because "obj" is null
+at java.base/java.lang.reflect.Method.invoke(Method.java:557)
+at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:51)
+>>>>>>> 25196e871b9570c956aec9ab998bcbea2dd9df90
 at com.sun.proxy.$Proxy11.isDisplayed(Unknown Source)
 at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:315)
 at org.openqa.selenium.support.ui.ExpectedConditions.access$100(ExpectedConditions.java:44)
 at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:301)
 at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:298)
 at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:260)
+<<<<<<< HEAD
 at com.eagle.pages.Page.click(Page.java:43)
 at com.eagle.pages.Page.enterUserPass(Page.java:35)
 at com.eagle.pages.LoginPage.setCredentials(LoginPage.java:36)
 at com.eagle.pages.LoginPage.loginTo(LoginPage.java:51)
 at com.eagle.TestCases.ExplorationTest.test_Exploration_Correct(ExplorationTest.java:21)
+=======
+at com.eagle.pages.Page.click(Page.java:41)
+at com.eagle.pages.InvestigationPage.deleteInvestigation(InvestigationPage.java:237)
+at com.eagle.TestCases.InvestigationTest.test_CreateInvestigation_Correct(InvestigationTest.java:56)
+>>>>>>> 25196e871b9570c956aec9ab998bcbea2dd9df90
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -90,11 +117,19 @@ at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 ]]>
             </full-stacktrace>
+<<<<<<< HEAD
           </exception> <!-- org.openqa.selenium.WebDriverException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- test_Exploration_Correct -->
       </class> <!-- com.eagle.TestCases.ExplorationTest -->
+=======
+          </exception> <!-- java.lang.NullPointerException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- test_CreateInvestigation_Correct -->
+      </class> <!-- com.eagle.TestCases.InvestigationTest -->
+>>>>>>> 25196e871b9570c956aec9ab998bcbea2dd9df90
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
