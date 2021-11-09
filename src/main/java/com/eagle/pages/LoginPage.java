@@ -47,8 +47,7 @@ public class LoginPage extends BasePage{
     public void loginTo() throws InterruptedException, IOException{
     	try {
 	        this.setCredentials();
-	        this.clickLogin();
-	     
+	        this.clickLogin();	     
 	       boolean iden = true;
 	       do
 	       {
@@ -56,16 +55,12 @@ public class LoginPage extends BasePage{
 	    		   copyRightIdentifier.click();
 	    		   iden = false;	  
 	    	   }
-	    	   catch(Exception ex) {System.out.println("fail");}	    		
-	    	  
+	    	   catch(Exception ex) {System.out.println("fail");}	 
 	       }
-	       while(iden);
-	        //String error = loginErrorMessage.getText();
-	       // Assert.assertEquals(error, ""); 	       
+	       while(iden);	         
     	}
         catch(Exception | AssertionError ex)
     	{
-//    		BasePage.capture();
     		throw ex;
     	}
     }

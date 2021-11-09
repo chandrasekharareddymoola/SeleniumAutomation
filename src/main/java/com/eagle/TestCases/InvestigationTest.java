@@ -163,7 +163,7 @@ public class InvestigationTest extends BaseTest {
 	public void onFailreMeassage(String failureMessage,String screenShotName) throws IOException
 	{
 		ExtentTestManager.getTest().log(Status.FAIL, failureMessage);
-		ExtentTestManager.getTest().addScreenCaptureFromPath("./Resources/ErrorScreenshots/" + screenShotName + ".png");		
+		ExtentTestManager.getTest().addScreenCaptureFromPath("./Resources/ErrorScreenshots/" + screenShotName + ".jpeg");		
 	}
 	
 	

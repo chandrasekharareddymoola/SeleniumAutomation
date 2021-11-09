@@ -8,10 +8,16 @@
     <classes>
       <class name="com.eagle.TestCases.InvestigationTest">
         <methods>
+          <include name="EditInvestigation_Test"/>
           <include name="launchApplication"/>
+          <include name="ViewInvestigation_Test"/>
           <include name="beforeMethod"/>
+          <include name="LinkExplorationWithInvestigation_Test"/>
+          <include name="CreateInvestigation_Test"/>
           <include name="tearDown"/>
+          <include name="LinkSetWithInvestigation_Test"/>
           <include name="DeleteInvestigation_Test"/>
+          <include name="LinkComparisonWithInvestigation_Test"/>
           <include name="ShareInvestigation_Test"/>
         </methods>
       </class> <!-- com.eagle.TestCases.InvestigationTest -->

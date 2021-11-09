@@ -34,7 +34,7 @@ public class ExtentManager {
         String fileName = getReportPath(reportFilepath);
        
         ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(fileName);
-        htmlReporter.config().setTestViewChartLocation(ChartLocation.BOTTOM);
+        htmlReporter.config().setTestViewChartLocation(ChartLocation.BOTTOM);        
         htmlReporter.config().setChartVisibilityOnOpen(true);        
         htmlReporter.config().setTheme(Theme.STANDARD);     
         htmlReporter.config().setDocumentTitle(reportFileName);
