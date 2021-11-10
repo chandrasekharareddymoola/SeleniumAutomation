@@ -93,7 +93,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">8 methods,   8 passed</span>
+                    <span class="method-stats">9 methods,   9 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -135,6 +135,11 @@
                       <span>
                         <img src="passed.png" width="3%"/>
                         <a href="#" panel-name="suite-SmokeTestingSuite" title="com.eagle.TestCases.InvestigationTest" class="method navigator-link" hash-for-method="ShareInvestigation_Test">ShareInvestigation_Test</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-SmokeTestingSuite" title="com.eagle.TestCases.LoginTest" class="method navigator-link" hash-for-method="VerifyLoginPage_Test">VerifyLoginPage_Test</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
@@ -234,6 +239,23 @@
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
           </div> <!-- suite-SmokeTestingSuite-class-passed -->
+          <div class="suite-SmokeTestingSuite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.eagle.TestCases.LoginTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="VerifyLoginPage_Test">
+                  </a> <!-- VerifyLoginPage_Test -->
+                  <span class="method-name">VerifyLoginPage_Test</span>
+                  <em>
+(Login functionality verification)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-SmokeTestingSuite-class-passed -->
         </div> <!-- panel SmokeTestingSuite -->
         <div panel-name="test-xml-SmokeTestingSuite" class="panel">
           <div class="main-panel-header rounded-window-top">
@@ -249,6 +271,7 @@
   &lt;/listeners&gt;
   &lt;test thread-count=&quot;5&quot; name=&quot;Smoke Test cases&quot;&gt;
     &lt;classes&gt;
+      &lt;class name=&quot;com.eagle.TestCases.LoginTest&quot;/&gt;
       &lt;class name=&quot;com.eagle.TestCases.InvestigationTest&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Smoke Test cases --&gt;
@@ -263,7 +286,7 @@
           <div class="main-panel-content rounded-window-bottom">
             <ul>
               <li>
-                <span class="test-name">Smoke Test cases (1 class)</span>
+                <span class="test-name">Smoke Test cases (2 classes)</span>
               </li>
             </ul>
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -289,44 +312,48 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(8);
+data.addRows(9);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'ShareInvestigation_Test')
+data.setCell(0, 1, 'DeleteInvestigation_Test')
 data.setCell(0, 2, 'com.eagle.TestCases.InvestigationTest')
-data.setCell(0, 3, 68308);
+data.setCell(0, 3, 69699);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'DeleteInvestigation_Test')
+data.setCell(1, 1, 'ShareInvestigation_Test')
 data.setCell(1, 2, 'com.eagle.TestCases.InvestigationTest')
-data.setCell(1, 3, 68094);
+data.setCell(1, 3, 68770);
 data.setCell(2, 0, 2)
-data.setCell(2, 1, 'LinkSetWithInvestigation_Test')
-data.setCell(2, 2, 'com.eagle.TestCases.InvestigationTest')
-data.setCell(2, 3, 11713);
+data.setCell(2, 1, 'VerifyLoginPage_Test')
+data.setCell(2, 2, 'com.eagle.TestCases.LoginTest')
+data.setCell(2, 3, 31740);
 data.setCell(3, 0, 3)
-data.setCell(3, 1, 'EditInvestigation_Test')
+data.setCell(3, 1, 'LinkSetWithInvestigation_Test')
 data.setCell(3, 2, 'com.eagle.TestCases.InvestigationTest')
-data.setCell(3, 3, 6759);
+data.setCell(3, 3, 11214);
 data.setCell(4, 0, 4)
-data.setCell(4, 1, 'ViewInvestigation_Test')
+data.setCell(4, 1, 'EditInvestigation_Test')
 data.setCell(4, 2, 'com.eagle.TestCases.InvestigationTest')
-data.setCell(4, 3, 4009);
+data.setCell(4, 3, 8907);
 data.setCell(5, 0, 5)
-data.setCell(5, 1, 'CreateInvestigation_Test')
+data.setCell(5, 1, 'ViewInvestigation_Test')
 data.setCell(5, 2, 'com.eagle.TestCases.InvestigationTest')
-data.setCell(5, 3, 1483);
+data.setCell(5, 3, 2513);
 data.setCell(6, 0, 6)
-data.setCell(6, 1, 'LinkComparisonWithInvestigation_Test')
+data.setCell(6, 1, 'CreateInvestigation_Test')
 data.setCell(6, 2, 'com.eagle.TestCases.InvestigationTest')
-data.setCell(6, 3, 1);
+data.setCell(6, 3, 1504);
 data.setCell(7, 0, 7)
-data.setCell(7, 1, 'LinkExplorationWithInvestigation_Test')
+data.setCell(7, 1, 'LinkComparisonWithInvestigation_Test')
 data.setCell(7, 2, 'com.eagle.TestCases.InvestigationTest')
-data.setCell(7, 3, 0);
+data.setCell(7, 3, 1);
+data.setCell(8, 0, 8)
+data.setCell(8, 1, 'LinkExplorationWithInvestigation_Test')
+data.setCell(8, 2, 'com.eagle.TestCases.InvestigationTest')
+data.setCell(8, 3, 1);
 window.suiteTableData['SmokeTestingSuite']= { tableData: data, tableDiv: 'times-div-SmokeTestingSuite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 2 minutes</span>
+              <span class="suite-total-time">Total running time: 3 minutes</span>
               <div id="times-div-SmokeTestingSuite">
               </div> <!-- times-div-SmokeTestingSuite -->
             </div> <!-- times-div -->
@@ -352,51 +379,62 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">com.eagle.TestCases.InvestigationTest</div> <!-- chronological-class-name -->
+              <div class="chronological-class-name">com.eagle.TestCases.LoginTest</div> <!-- chronological-class-name -->
               <div class="configuration-class before">
                 <span class="method-name">launchApplication</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-class before -->
               <div class="configuration-class before">
-                <span class="method-name">beforeMethod</span>
-                <span class="method-start">6619 ms</span>
+                <span class="method-name">beforeClass</span>
+                <span class="method-start">7611 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="test-method">
+                <span class="method-name">VerifyLoginPage_Test</span>
+                <span class="method-start">7637 ms</span>
+              </div> <!-- test-method -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.eagle.TestCases.InvestigationTest</div> <!-- chronological-class-name -->
+              <div class="configuration-class before">
+                <span class="method-name">launchApplication</span>
+                <span class="method-start">39382 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="configuration-class before">
+                <span class="method-name">beforeClass</span>
+                <span class="method-start">39382 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
                 <span class="method-name">CreateInvestigation_Test</span>
-                <span class="method-start">38363 ms</span>
+                <span class="method-start">39400 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">ViewInvestigation_Test</span>
-                <span class="method-start">39852 ms</span>
+                <span class="method-start">40905 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">EditInvestigation_Test</span>
-                <span class="method-start">43862 ms</span>
+                <span class="method-start">43419 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">LinkSetWithInvestigation_Test</span>
-                <span class="method-start">50622 ms</span>
+                <span class="method-start">52327 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">LinkExplorationWithInvestigation_Test</span>
-                <span class="method-start">62336 ms</span>
+                <span class="method-start">63542 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">LinkComparisonWithInvestigation_Test</span>
-                <span class="method-start">62337 ms</span>
+                <span class="method-start">63544 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">ShareInvestigation_Test</span>
-                <span class="method-start">62339 ms</span>
+                <span class="method-start">63546 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">DeleteInvestigation_Test</span>
-                <span class="method-start">130649 ms</span>
+                <span class="method-start">132317 ms</span>
               </div> <!-- test-method -->
-              <div class="configuration-class after">
-                <span class="method-name">tearDown</span>
-                <span class="method-start">198745 ms</span>
-              </div> <!-- configuration-class after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
       </div> <!-- main-panel-root -->

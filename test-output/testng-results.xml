@@ -1,56 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="8" passed="8" failed="0" skipped="0">
+<testng-results ignored="0" total="9" passed="9" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2021-11-08T23:51:32 IST" name="SmokeTestingSuite" finished-at="2021-11-08T23:54:51 IST" duration-ms="199381">
+  <suite started-at="2021-11-09T18:58:31 IST" name="SmokeTestingSuite" finished-at="2021-11-09T19:01:53 IST" duration-ms="202029">
     <groups>
     </groups>
-    <test started-at="2021-11-08T23:51:32 IST" name="Smoke Test cases" finished-at="2021-11-08T23:54:51 IST" duration-ms="199381">
-      <class name="com.eagle.TestCases.InvestigationTest">
-        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.InvestigationTest@209da20d]" started-at="2021-11-08T23:51:32 IST" name="launchApplication" finished-at="2021-11-08T23:51:39 IST" duration-ms="6618" status="PASS">
+    <test started-at="2021-11-09T18:58:31 IST" name="Smoke Test cases" finished-at="2021-11-09T19:01:53 IST" duration-ms="202029">
+      <class name="com.eagle.TestCases.LoginTest">
+        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.LoginTest@32502377]" started-at="2021-11-09T18:58:31 IST" name="launchApplication" finished-at="2021-11-09T18:58:38 IST" duration-ms="7611" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchApplication -->
-        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.eagle.TestCases.InvestigationTest@209da20d]" started-at="2021-11-08T23:51:39 IST" name="beforeMethod" finished-at="2021-11-08T23:52:10 IST" duration-ms="31736" status="PASS">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.LoginTest@32502377]" started-at="2021-11-09T18:58:38 IST" name="beforeClass" finished-at="2021-11-09T18:58:38 IST" duration-ms="20" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- beforeMethod -->
-        <test-method signature="CreateInvestigation_Test()[pri:0, instance:com.eagle.TestCases.InvestigationTest@209da20d]" started-at="2021-11-08T23:52:10 IST" name="CreateInvestigation_Test" description="Create Investigation" finished-at="2021-11-08T23:52:12 IST" duration-ms="1483" status="PASS">
+        </test-method> <!-- beforeClass -->
+        <test-method signature="VerifyLoginPage_Test()[pri:0, instance:com.eagle.TestCases.LoginTest@32502377]" started-at="2021-11-09T18:58:38 IST" name="VerifyLoginPage_Test" description="Login functionality verification" finished-at="2021-11-09T18:59:10 IST" duration-ms="31740" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- VerifyLoginPage_Test -->
+      </class> <!-- com.eagle.TestCases.LoginTest -->
+      <class name="com.eagle.TestCases.InvestigationTest">
+        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.InvestigationTest@3cebbb30]" started-at="2021-11-09T18:59:10 IST" name="launchApplication" finished-at="2021-11-09T18:59:10 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- launchApplication -->
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.InvestigationTest@3cebbb30]" started-at="2021-11-09T18:59:10 IST" name="beforeClass" finished-at="2021-11-09T18:59:10 IST" duration-ms="18" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method signature="CreateInvestigation_Test()[pri:0, instance:com.eagle.TestCases.InvestigationTest@3cebbb30]" started-at="2021-11-09T18:59:10 IST" name="CreateInvestigation_Test" description="Create Investigation" finished-at="2021-11-09T18:59:11 IST" duration-ms="1504" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CreateInvestigation_Test -->
-        <test-method signature="ViewInvestigation_Test()[pri:1, instance:com.eagle.TestCases.InvestigationTest@209da20d]" started-at="2021-11-08T23:52:12 IST" name="ViewInvestigation_Test" description="View Investigation" finished-at="2021-11-08T23:52:16 IST" duration-ms="4009" status="PASS">
+        <test-method signature="ViewInvestigation_Test()[pri:1, instance:com.eagle.TestCases.InvestigationTest@3cebbb30]" started-at="2021-11-09T18:59:11 IST" name="ViewInvestigation_Test" description="View Investigation" finished-at="2021-11-09T18:59:14 IST" duration-ms="2513" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- ViewInvestigation_Test -->
-        <test-method signature="EditInvestigation_Test()[pri:2, instance:com.eagle.TestCases.InvestigationTest@209da20d]" started-at="2021-11-08T23:52:16 IST" name="EditInvestigation_Test" description="Edit Investigation" finished-at="2021-11-08T23:52:23 IST" duration-ms="6759" status="PASS">
+        <test-method signature="EditInvestigation_Test()[pri:2, instance:com.eagle.TestCases.InvestigationTest@3cebbb30]" started-at="2021-11-09T18:59:14 IST" name="EditInvestigation_Test" description="Edit Investigation" finished-at="2021-11-09T18:59:23 IST" duration-ms="8907" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- EditInvestigation_Test -->
-        <test-method signature="LinkSetWithInvestigation_Test()[pri:3, instance:com.eagle.TestCases.InvestigationTest@209da20d]" started-at="2021-11-08T23:52:23 IST" name="LinkSetWithInvestigation_Test" description="Link Set With Investigation" finished-at="2021-11-08T23:52:34 IST" duration-ms="11713" status="PASS">
+        <test-method signature="LinkSetWithInvestigation_Test()[pri:3, instance:com.eagle.TestCases.InvestigationTest@3cebbb30]" started-at="2021-11-09T18:59:23 IST" name="LinkSetWithInvestigation_Test" description="Link Set With Investigation" finished-at="2021-11-09T18:59:34 IST" duration-ms="11214" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- LinkSetWithInvestigation_Test -->
-        <test-method signature="LinkExplorationWithInvestigation_Test()[pri:4, instance:com.eagle.TestCases.InvestigationTest@209da20d]" started-at="2021-11-08T23:52:34 IST" name="LinkExplorationWithInvestigation_Test" description="Link Exploration With Investigation" finished-at="2021-11-08T23:52:34 IST" duration-ms="0" status="PASS">
+        <test-method signature="LinkExplorationWithInvestigation_Test()[pri:4, instance:com.eagle.TestCases.InvestigationTest@3cebbb30]" started-at="2021-11-09T18:59:34 IST" name="LinkExplorationWithInvestigation_Test" description="Link Exploration With Investigation" finished-at="2021-11-09T18:59:34 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- LinkExplorationWithInvestigation_Test -->
-        <test-method signature="LinkComparisonWithInvestigation_Test()[pri:5, instance:com.eagle.TestCases.InvestigationTest@209da20d]" started-at="2021-11-08T23:52:34 IST" name="LinkComparisonWithInvestigation_Test" description="Link Comparison With Investigation" finished-at="2021-11-08T23:52:34 IST" duration-ms="1" status="PASS">
+        <test-method signature="LinkComparisonWithInvestigation_Test()[pri:5, instance:com.eagle.TestCases.InvestigationTest@3cebbb30]" started-at="2021-11-09T18:59:34 IST" name="LinkComparisonWithInvestigation_Test" description="Link Comparison With Investigation" finished-at="2021-11-09T18:59:34 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- LinkComparisonWithInvestigation_Test -->
-        <test-method signature="ShareInvestigation_Test()[pri:6, instance:com.eagle.TestCases.InvestigationTest@209da20d]" started-at="2021-11-08T23:52:34 IST" name="ShareInvestigation_Test" description="Share Investigation" finished-at="2021-11-08T23:53:43 IST" duration-ms="68308" status="PASS">
+        <test-method signature="ShareInvestigation_Test()[pri:6, instance:com.eagle.TestCases.InvestigationTest@3cebbb30]" started-at="2021-11-09T18:59:34 IST" name="ShareInvestigation_Test" description="Share Investigation" finished-at="2021-11-09T19:00:43 IST" duration-ms="68770" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- ShareInvestigation_Test -->
-        <test-method signature="DeleteInvestigation_Test()[pri:7, instance:com.eagle.TestCases.InvestigationTest@209da20d]" started-at="2021-11-08T23:53:43 IST" name="DeleteInvestigation_Test" description="Delete Investigation" finished-at="2021-11-08T23:54:51 IST" duration-ms="68094" status="PASS">
+        <test-method signature="DeleteInvestigation_Test()[pri:7, instance:com.eagle.TestCases.InvestigationTest@3cebbb30]" started-at="2021-11-09T19:00:43 IST" name="DeleteInvestigation_Test" description="Delete Investigation" finished-at="2021-11-09T19:01:53 IST" duration-ms="69699" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- DeleteInvestigation_Test -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.eagle.TestCases.InvestigationTest@209da20d]" started-at="2021-11-08T23:54:51 IST" name="tearDown" finished-at="2021-11-08T23:54:51 IST" duration-ms="622" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
       </class> <!-- com.eagle.TestCases.InvestigationTest -->
     </test> <!-- Smoke Test cases -->
   </suite> <!-- SmokeTestingSuite -->

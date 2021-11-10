@@ -85,18 +85,6 @@ public class BasePage{
 		wait.until(ExpectedConditions.elementToBeClickable(Element));	
 	}
 
-	public static String capture() throws IOException
-    {
-        TakesScreenshot ts = (TakesScreenshot)driver;
-        File source = ts.getScreenshotAs(OutputType.FILE);
-        String dest = "./Resources/TestReport/screenShotName.png";
-        File destination = new File(dest);
-        FileUtils.copyFile(source, destination);        
-                     
-        return dest;
-    }
-
-
 	public static void CompareAttributeText(String attribute, String s, WebElement Element) { 
 		String t = Element.getAttribute(attribute);
 		Assert.assertEquals(s, t);

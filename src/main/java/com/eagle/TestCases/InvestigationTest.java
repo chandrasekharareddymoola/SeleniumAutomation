@@ -1,34 +1,18 @@
 package com.eagle.TestCases;
-import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
 import com.aventstack.extentreports.Status;
 import com.eagle.Reports.ExtentTestManager;
 import com.eagle.pages.InvestigationPage;
-import com.eagle.pages.LoginPage;
 
 public class InvestigationTest extends BaseTest {
 	
-	InvestigationPage objInvestigationPage;
-	
+	InvestigationPage objInvestigationPage;	
 	
 	@BeforeClass
-	public void beforeMethod() throws InterruptedException, IOException {
-		//Login to application
-		LoginPage objLogin;
-		objLogin = new LoginPage();
-		objLogin.loginTo();
-		objInvestigationPage = new InvestigationPage();		
+	public void beforeClass()  {	
+			objInvestigationPage = new InvestigationPage();		
 	}
 	
 	@Test(priority = 0, description = "Create Investigation")
@@ -71,8 +55,8 @@ public class InvestigationTest extends BaseTest {
 		}
 		catch(Exception ex)
 		{
-			objInvestigationPage.captureScreenshot("editInvFail");
-			onFailreMeassage(ex.getMessage(),"editInvFail");
+			String path = objInvestigationPage.captureScreenshot("editInvFail");
+			onFailreMeassage(ex.getMessage(),path);
 		}
 	}
 	
@@ -97,7 +81,7 @@ public class InvestigationTest extends BaseTest {
 			/* To Link exploration to an Investigation */
 			   //ERROR //		  
 			  //objInvestigationPage.linkExplorationtoInvestigation("Modified title","");
-			  //onSuccessMeassage("Investigation is successfully linked with Exploration");
+			  onSuccessMeassage("Investigation is successfully linked with Exploration");
 			}
 		catch(Exception ex)
 		{
@@ -111,12 +95,12 @@ public class InvestigationTest extends BaseTest {
 		try {
 		   /* To Link Comparison to an Investigation */
 		  //objInvestigationPage.linkComparisontoInvestigation("Modified title","Unique");  
-			 //onSuccessMeassage("Investigation is successfully linked with Comparison");
+			 onSuccessMeassage("Investigation is successfully linked with Comparison");
 		}
 		catch(Exception ex)
 		{
-			objInvestigationPage.captureScreenshot("linkExpInvFail");
-			onFailreMeassage(ex.getMessage(),"linkExpInvFail");
+			objInvestigationPage.captureScreenshot("linkCompInvFail");
+			onFailreMeassage(ex.getMessage(),"linkCompInvFail");
 		}
 
 	}
@@ -157,13 +141,15 @@ public class InvestigationTest extends BaseTest {
 	
 	public void onSuccessMeassage(String successMessage)
 	{
+		ExtentTestManager.getTest().log(Status.PASS, "Test Passed");
 		ExtentTestManager.getTest().log(Status.PASS, successMessage);
 	}
 	
 	public void onFailreMeassage(String failureMessage,String screenShotName) throws IOException
 	{
+		ExtentTestManager.getTest().log(Status.FAIL, "Test Failed");
 		ExtentTestManager.getTest().log(Status.FAIL, failureMessage);
-		ExtentTestManager.getTest().addScreenCaptureFromPath("./Resources/ErrorScreenshots/" + screenShotName + ".jpeg");		
+		ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir") + "./Resources/ErrorScreenshots/"+screenShotName+".jpeg");		
 	}
 	
 	

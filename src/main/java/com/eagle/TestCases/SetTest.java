@@ -18,9 +18,7 @@ public class SetTest extends BaseTest{
 	SetPage objSetPage; 
 
 	@Test
-	public void test_Set_Correct() throws InterruptedException, AWTException, IOException{
-		objLogin = new LoginPage();
-		objLogin.loginTo();
+	public void test_Set_Correct() throws InterruptedException, AWTException, IOException{		
 		objSetPage = new SetPage();
 
 //				objSetPage.createSet("Create Set1","Disease","kera");	 
