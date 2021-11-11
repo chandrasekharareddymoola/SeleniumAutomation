@@ -29,7 +29,7 @@ public class SetTest extends BaseTest{
 		objSetPage = new SetPage();	
 		objLogin = new LoginPage();
 		objLogin.loginTo();
-		objSetPage.RemoveItemsfromSet();
+		objSetPage.RemoveItemsfromSet("Remove Item Set","Disease","Kera");
 	}
 	
 //	@Test(priority = 0, description = "Create Set")
@@ -165,7 +165,7 @@ public class SetTest extends BaseTest{
 	public void RemoveItemsfromSet_Test() throws InterruptedException, IOException  {
 		try {
 			/* Remove items in Expanded Set */
-			objSetPage.RemoveItemsfromSet();
+			objSetPage.RemoveItemsfromSet("Remove Item Set","Disease","Kera");
 			onSuccessMeassage("Items removed successfully in Set Expand");
 		}
 		catch(Exception ex)

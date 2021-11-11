@@ -264,6 +264,20 @@ public class ExplorationTest extends BaseTest{
 			onFailreMeassage(ex.getMessage(),"ShareExplorationFail");
 		}
 	}
+	
+	@Test(priority = 16, description = "Remove items from Exploration Expand")
+	public void RemoveItemsfromExploration_Test() throws InterruptedException, IOException  {
+		try {
+			/* Remove items in Expanded Set */
+			objExplorationPage.RemoveItemsfromExploration("Remove Item Exploration","Disease","Kera");
+			onSuccessMeassage("Items removed successfully in Exploration Expand");
+		}
+		catch(Exception ex)
+		{
+			objExplorationPage.captureScreenshot("ExplorationItemsRemoveFail");
+			onFailreMeassage(ex.getMessage(),"ExplorationItemsRemoveFail");
+		}
+	}
 
 	public void onSuccessMeassage(String successMessage)
 	{

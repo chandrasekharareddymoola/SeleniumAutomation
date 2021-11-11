@@ -405,9 +405,11 @@ public class SetPage extends BasePage{
 		BasePage.click(saveChanges);
 	}
 
-	public void RemoveItemsfromSet()
+	public void RemoveItemsfromSet(String SetToCreate, String entityToSelect, String textToSearch) throws InterruptedException
 	{
-		WebElement opn = this.openSet("Share Set1");
+		this.createSet(SetToCreate, entityToSelect, textToSearch);	 
+		this.Set();
+		WebElement opn = this.openSet(SetToCreate);
 		BasePage.click(opn);
 		this.expandSet();
 		this.editSet();	  
