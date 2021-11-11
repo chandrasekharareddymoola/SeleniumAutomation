@@ -5,12 +5,17 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -228,7 +233,6 @@ public class SetPage extends BasePage{
 	public void Set(){ 	
 		BasePage.click(setIcon);
 		action.moveToElement(TermsOfUse).perform();
-		BasePage.click(setIcon);
 	}
 
 	public void verifySetHomePage(String stringToVerify){    	
@@ -348,10 +352,15 @@ public class SetPage extends BasePage{
 		this.searchItems(textToSearch); 
 		this.AddandAccept(); 	
 		BasePage.waitforAnElement(editCardIcon);
-		System.out.println("Set Created successfully");
+//		System.out.println("Set Created successfully");
 		this.createCheck(SetName);
 		this.Home();
 	}   	  	    
+	
+    public void viewSet(String SetName){
+    	this.Set();	  
+    	this.openItemFromList(SetName);	    	
+    }
 
 	public void expandSet(){
 		BasePage.click(expand);
@@ -398,16 +407,16 @@ public class SetPage extends BasePage{
 
 	public void RemoveItemsfromSet()
 	{
-		WebElement opn = this.openSet("MASI Set");
+		WebElement opn = this.openSet("Share Set1");
 		BasePage.click(opn);
 		this.expandSet();
 		this.editSet();	  
 		List<String>  myAlist = new ArrayList<String>();
-		myAlist.add("DIS28");
-		myAlist.add("DIS53");
-		myAlist.add("DIS3");
-		myAlist.add("DIS2");
-		myAlist.add("DIS1");
+		myAlist.add("EFO_1000779");
+		myAlist.add("EFO_1000778");
+		myAlist.add("seborrheic keratosis");
+		myAlist.add("EFO_1000758");
+		myAlist.add("EFO_1000745");
 		this.selectItems(myAlist);	  
 		this.removeItems();	 
 		System.out.println("Items removed successfully");
@@ -741,6 +750,23 @@ public class SetPage extends BasePage{
 	 * } catch(Exception ex) {} }
 	 */
 
+    public void openItemFromList(String inv)
+    {
+    	try {	    		
+    		do{ 
+    			for (WebElement element : SetGridItems) {
+    				if(element.isDisplayed() == false)  {scrollIntoView(element);}	    				
+    				String textFromGrid = element.getText();	    				
+	    				if(inv.equals(textFromGrid)) {		    					
+	    					BasePage.click(element);	
+	    				}		    				
+    			}
+    			BasePage.click(forward); 
+    		}
+    		while(forward.isEnabled());  
+    	}	    	
+    	catch(Exception ex) {}
+    }
 
 	public void selectMenuOptionInList(String SetName)
     {
@@ -821,7 +847,7 @@ public class SetPage extends BasePage{
 		BasePage.verifyPage(PrimaryColumn, FirstColumn);
 		BasePage.verifyPage(SecondaryColumn, LastColumn);
 		String RN =Integer.toString(RowsintableExpand.size());
-		//Assert.assertEquals(RN, NoofRows);
+		Assert.assertEquals(RN, NoofRows);
 	}
 
 	public void GridChanges(String setToCreate, String entityToSelect, String textToSearch, String NoofRows, String PrimaryColumn, String SecondaryColumn) throws InterruptedException { 
@@ -999,6 +1025,21 @@ public class SetPage extends BasePage{
 			System.out.println("Set shared failed");
 		}
 	}
+	
+    public String captureScreenshot(String screenShotName) throws IOException
+    {
+        TakesScreenshot ts = (TakesScreenshot)driver;
+        File source = ts.getScreenshotAs(OutputType.FILE);
+        String dest = System.getProperty("user.dir") + "./Resources/ErrorScreenshots/"+screenShotName+".jpeg";
+        File destination = new File(dest);
+        try {
+            FileUtils.copyFile(source, destination);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }     
+                     
+        return dest;
+    }
 
 
 }

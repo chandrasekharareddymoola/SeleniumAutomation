@@ -2,13 +2,13 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="SmokeTestingSuite" verbose="1">
 	<listeners>
-		 <listener class-name="com.eagle.Reports.TestListener"/>          
+		<listener class-name="com.eagle.Reports.TestListener" />
 	</listeners>
-  	<test name="Smoke Test cases" preserve-order="true">
-	    <classes>   
-		      <class name="com.eagle.TestCases.LoginTest"/>  	
-		      <class name="com.eagle.TestCases.InvestigationTest"/>  		      
-		   
-	    </classes>
-  	</test> <!-- Test -->
+	<test name="Smoke Test cases" preserve-order="true">
+		<classes>
+			<class name="com.eagle.TestCases.LoginTest" />
+			<class name="com.eagle.TestCases.InvestigationTest" />
+			<class name="com.eagle.TestCases.SetTest" />
+		</classes>
+	</test> <!-- Test -->
 </suite> <!-- Suite -->

@@ -34,8 +34,8 @@ public class LoginTest extends BaseTest{
 			    onSuccessMeassage("Login is successfull");
 	    	}
 	      	catch(Exception ex){
-	      		String path = objLogin.captureScreenshot("createInvFail");
-				onFailreMeassage(ex.getMessage(),path);					
+	      		objLogin.captureScreenshot("createInvFail");
+				onFailreMeassage(ex.getMessage(),"createInvFail");					
 			}
 	    }
 		
@@ -47,11 +47,11 @@ public class LoginTest extends BaseTest{
 			ExtentTestManager.getTest().log(Status.PASS, successMessage);
 		}
 		
-		public void onFailreMeassage(String failureMessage,String screenShotPath) throws IOException
+		public void onFailreMeassage(String failureMessage,String screenShotName) throws IOException
 		{
 			ExtentTestManager.getTest().log(Status.FAIL, "Test Failed");
 			ExtentTestManager.getTest().log(Status.FAIL, failureMessage);
-			ExtentTestManager.getTest().addScreenCaptureFromPath(screenShotPath);		
+			ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir") + "./Resources/ErrorScreenshots/"+screenShotName+".jpeg");
 		}
 		
 }

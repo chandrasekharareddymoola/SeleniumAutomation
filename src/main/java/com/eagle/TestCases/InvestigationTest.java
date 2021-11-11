@@ -56,7 +56,7 @@ public class InvestigationTest extends BaseTest {
 		catch(Exception ex)
 		{
 			String path = objInvestigationPage.captureScreenshot("editInvFail");
-			onFailreMeassage(ex.getMessage(),path);
+			onFailreMeassage(ex.getMessage(),"editInvFail");
 		}
 	}
 	

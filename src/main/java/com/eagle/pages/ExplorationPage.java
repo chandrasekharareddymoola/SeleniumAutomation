@@ -5,12 +5,17 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -645,8 +650,7 @@ public class ExplorationPage extends BasePage{
 		BasePage.click(Delete);
 	}
 
-	//Adding items from File from expand into exploration
-	public void DeleteExploraionInExpand(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch) throws InterruptedException, AWTException { 
+		public void DeleteExploraionInExpand(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch) throws InterruptedException, AWTException { 
 		this.createExploration(ExplorationToCreate, EntitytoSelect, ItemtoSearch);
 		this.expandExploration();
 		this.DeleteCardExpand();
@@ -1030,6 +1034,22 @@ public class ExplorationPage extends BasePage{
 		this.createRelationLater(RelationCardType2);
 		this.CheckRelationCreated(RelationCardType2);
 	}
+	
+    public String captureScreenshot(String screenShotName) throws IOException
+    {
+        TakesScreenshot ts = (TakesScreenshot)driver;
+        File source = ts.getScreenshotAs(OutputType.FILE);
+        String dest = System.getProperty("user.dir") + "./Resources/ErrorScreenshots/"+screenShotName+".jpeg";
+        File destination = new File(dest);
+        try {
+            FileUtils.copyFile(source, destination);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }     
+                     
+        return dest;
+    }
+
 
 }
 
