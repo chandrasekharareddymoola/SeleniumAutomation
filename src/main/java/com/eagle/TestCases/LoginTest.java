@@ -19,7 +19,7 @@ import com.eagle.pages.BasePage;
 
 public class LoginTest extends BaseTest{  
 	   	 
-	LoginPage objLogin;
+		LoginPage objLogin;
 	
 		@BeforeClass
 		public void beforeClass()  {	
@@ -27,19 +27,17 @@ public class LoginTest extends BaseTest{
 		}
 	
 		
-		@Test(priority = 0, description = "Login functionality verification")
-		public void VerifyLoginPage_Test() throws InterruptedException, IOException{
+		@Test(priority = 0, description = "Login with valid credentials")
+		public void VerifyLogin_Test() throws InterruptedException, IOException{
 	      try{
 			    objLogin.loginTo(); 	
-			    onSuccessMeassage("Login is successfull");
+			    onSuccessMeassage("Login is successfully verified");
 	    	}
 	      	catch(Exception ex){
-	      		String path = objLogin.captureScreenshot("createInvFail");
-				onFailreMeassage(ex.getMessage(),path);					
+	      		objLogin.captureScreenshot("loginFail");
+				onFailreMeassage(ex.getMessage(),"loginFail");					
 			}
 	    }
-		
-		
 		
 		public void onSuccessMeassage(String successMessage)
 		{
@@ -47,11 +45,11 @@ public class LoginTest extends BaseTest{
 			ExtentTestManager.getTest().log(Status.PASS, successMessage);
 		}
 		
-		public void onFailreMeassage(String failureMessage,String screenShotPath) throws IOException
+		public void onFailreMeassage(String failureMessage,String screenShotName) throws IOException
 		{
 			ExtentTestManager.getTest().log(Status.FAIL, "Test Failed");
 			ExtentTestManager.getTest().log(Status.FAIL, failureMessage);
-			ExtentTestManager.getTest().addScreenCaptureFromPath(screenShotPath);		
+			ExtentTestManager.getTest().addScreenCaptureFromPath(screenShotName);		
 		}
 		
 }
