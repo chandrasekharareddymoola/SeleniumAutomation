@@ -2,6 +2,7 @@ package com.eagle.pages;
 
 import static org.testng.Assert.assertEquals;
 
+import java.awt.AWTException;
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -36,14 +37,14 @@ public class BasePage{
 		BasePage.passWord = emailPass;		
 	}
 	
-    public static void enterUserPass(WebElement user, WebElement pass) {		
+    public static void enterUserPass(WebElement user, WebElement pass) throws InterruptedException, AWTException {		
 			click(user);	user.sendKeys(userName);	
 			click(pass);	pass.sendKeys(passWord);	
 	}
    
-	public static void click(WebElement element) {
+	public static void click(WebElement element) throws InterruptedException, AWTException {
 		
-		WebDriverWait wait = new WebDriverWait(driver, 10);
+		WebDriverWait wait = new WebDriverWait(driver, 60);
 	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		wait.until(ExpectedConditions.visibilityOf(element));
 		wait.until(ExpectedConditions.elementToBeClickable(element));
@@ -55,9 +56,14 @@ public class BasePage{
 		}
 	}	
 	
-	public static void verifyPage(String setToVerify, WebElement field) {		
-			String getheadertext = field.getText().trim();
-			assertEquals(setToVerify, getheadertext);
+	public static void verifyPage(String setToVerify, WebElement field) throws InterruptedException, AWTException, AssertionError {		
+		try {
+		String getheadertext = field.getText().trim();
+		assertEquals(setToVerify, getheadertext);
+		}
+		catch (Exception ex) {
+			throw ex;
+		}
 	}
 	
 	public static void scrollIntoView(WebElement element) {
@@ -66,7 +72,7 @@ public class BasePage{
 		js.executeScript("arguments[0].scrollIntoView(true);", element);
 	}
 	
-	public static void enterText(WebElement field, String value) throws InterruptedException {
+	public static void enterText(WebElement field, String value) throws InterruptedException, AWTException {
 		if (!value.equalsIgnoreCase("nil")) {			
 			BasePage.click(field);
 			field.sendKeys(Keys.CONTROL + "a");		
@@ -75,12 +81,12 @@ public class BasePage{
 		}
 	}	
 
-	public static void waitforAnElement(WebElement Element) throws InterruptedException{
-		WebDriverWait wait = new WebDriverWait(driver, 30);
+	public static void waitforAnElement(WebElement Element) throws InterruptedException, AWTException{
+		WebDriverWait wait = new WebDriverWait(driver, 60);
 		wait.until(ExpectedConditions.visibilityOf(Element));	
 	}
 	
-	public static void waitforAnElementClickable(WebElement Element) throws InterruptedException{
+	public static void waitforAnElementClickable(WebElement Element) throws InterruptedException, AWTException{
 		WebDriverWait wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.elementToBeClickable(Element));	
 	}

@@ -7,7 +7,6 @@
         <methods>
           <include name="launchApplication"/>
           <include name="RemoveItemsfromSet_Test"/>
-          <include name="beforeClass"/>
         </methods>
       </class> <!-- com.eagle.TestCases.SetTest -->
     </classes>

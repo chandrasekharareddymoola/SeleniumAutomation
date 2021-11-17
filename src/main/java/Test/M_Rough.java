@@ -29,6 +29,11 @@ import org.openqa.selenium.*;
 
 
 public class M_Rough extends SetPage { 
+	public M_Rough() throws InterruptedException, AWTException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	static SetPage objSetPage; 
 
 	public static void main(String[]args) throws InterruptedException,
@@ -82,7 +87,7 @@ public class M_Rough extends SetPage {
 		Thread.sleep(10000);
 		WebElement expand = webdriver.findElement(By.xpath("//i[@data-icon-name='MiniExpand']")); 
 		expand.click();
-		Thread.sleep(60000);
+		Thread.sleep(120000);
 		//		BasePage.click(expand);
 		try {
 			WebElement Forward = webdriver.findElement(By.xpath("//i[@data-icon-name='Forward']"));

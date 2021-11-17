@@ -14,14 +14,11 @@ import com.eagle.pages.SetPage;
 
 public class ExplorationTest extends BaseTest{
 
-	LoginPage objLogin;
 	ExplorationPage objExplorationPage; 
 
 	@BeforeClass
-	public void beforeClass() throws InterruptedException, IOException  {	
+	public void beforeClass()  {	
 		objExplorationPage = new ExplorationPage();		
-		objLogin = new LoginPage();
-		objLogin.loginTo();
 	}
 
 	@Test(priority = 0, description = "Create Exploration From Search")
@@ -34,7 +31,7 @@ public class ExplorationTest extends BaseTest{
 		catch(Exception ex)
 		{
 			objExplorationPage.captureScreenshot("createExplorationFromSearchFail");
-			onFailreMeassage(ex.getMessage(),"createExplorationFromSearchFail");
+			onFailureMeassage(ex.getMessage(),"createExplorationFromSearchFail");
 		}
 	}	
 
@@ -48,7 +45,7 @@ public class ExplorationTest extends BaseTest{
 		catch(Exception ex)
 		{
 			objExplorationPage.captureScreenshot("createExplorationFromSetInitalFail");
-			onFailreMeassage(ex.getMessage(),"createExplorationFromSetInitalFail");
+			onFailureMeassage(ex.getMessage(),"createExplorationFromSetInitalFail");
 		}
 	}
 
@@ -62,7 +59,7 @@ public class ExplorationTest extends BaseTest{
 		catch(Exception ex)
 		{
 			objExplorationPage.captureScreenshot("createExplorationFromSetFail");
-			onFailreMeassage(ex.getMessage(),"createExplorationFromSetFail");
+			onFailureMeassage(ex.getMessage(),"createExplorationFromSetFail");
 		}
 	}
 
@@ -76,7 +73,7 @@ public class ExplorationTest extends BaseTest{
 		catch(Exception ex)
 		{
 			objExplorationPage.captureScreenshot("createExplorationFromFileFail");
-			onFailreMeassage(ex.getMessage(),"createExplorationFromFileFail");
+			onFailureMeassage(ex.getMessage(),"createExplorationFromFileFail");
 		}
 	}
 
@@ -90,7 +87,7 @@ public class ExplorationTest extends BaseTest{
 		catch(Exception ex)
 		{
 			objExplorationPage.captureScreenshot("SearchInSetExpandFail");
-			onFailreMeassage(ex.getMessage(),"SearchInSetExpandFail");
+			onFailureMeassage(ex.getMessage(),"SearchInSetExpandFail");
 		}
 	}
 
@@ -104,7 +101,7 @@ public class ExplorationTest extends BaseTest{
 		catch(Exception ex)
 		{
 			objExplorationPage.captureScreenshot("DeleteExplorationInExpandFail");
-			onFailreMeassage(ex.getMessage(),"DeleteExplorationInExpandFail");
+			onFailureMeassage(ex.getMessage(),"DeleteExplorationInExpandFail");
 		}
 	}
 
@@ -118,7 +115,7 @@ public class ExplorationTest extends BaseTest{
 		catch(Exception ex)
 		{
 			objExplorationPage.captureScreenshot("ExplorationFirstCardDeleteFail");
-			onFailreMeassage(ex.getMessage(),"ExplorationFirstCardDeleteFail");
+			onFailureMeassage(ex.getMessage(),"ExplorationFirstCardDeleteFail");
 		}
 	}
 
@@ -132,7 +129,7 @@ public class ExplorationTest extends BaseTest{
 		catch(Exception ex)
 		{
 			objExplorationPage.captureScreenshot("ExplorationSecondCardDeleteFail");
-			onFailreMeassage(ex.getMessage(),"ExplorationSecondCardDeleteFail");
+			onFailureMeassage(ex.getMessage(),"ExplorationSecondCardDeleteFail");
 		}
 	}
 
@@ -147,7 +144,7 @@ public class ExplorationTest extends BaseTest{
 		catch(Exception ex)
 		{
 			objExplorationPage.captureScreenshot("ExplorationExpandAddFromCatalogFail");
-			onFailreMeassage(ex.getMessage(),"ExplorationExpandAddFromCatalogFail");
+			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromCatalogFail");
 		}
 	}
 
@@ -162,7 +159,7 @@ public class ExplorationTest extends BaseTest{
 		catch(Exception ex)
 		{
 			objExplorationPage.captureScreenshot("ExplorationExpandAddFromSetFail");
-			onFailreMeassage(ex.getMessage(),"ExplorationExpandAddFromSetFail");
+			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromSetFail");
 		}
 	}
 
@@ -177,7 +174,7 @@ public class ExplorationTest extends BaseTest{
 		catch(Exception ex)
 		{
 			objExplorationPage.captureScreenshot("ExplorationExpandAddFromFileFail");
-			onFailreMeassage(ex.getMessage(),"ExplorationExpandAddFromFileFail");
+			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromFileFail");
 		}
 	}
 		
@@ -191,7 +188,7 @@ public class ExplorationTest extends BaseTest{
 		catch(Exception ex)
 		{
 			objExplorationPage.captureScreenshot("ExplorationAddARelationFail");
-			onFailreMeassage(ex.getMessage(),"ExplorationAddARelationFail");
+			onFailureMeassage(ex.getMessage(),"ExplorationAddARelationFail");
 		}
 	}
 	
@@ -205,7 +202,7 @@ public class ExplorationTest extends BaseTest{
 		catch(Exception ex)
 		{
 			objExplorationPage.captureScreenshot("ExplorationAdd2RelationFail");
-			onFailreMeassage(ex.getMessage(),"ExplorationAdd2RelationFail");
+			onFailureMeassage(ex.getMessage(),"ExplorationAdd2RelationFail");
 		}
 	}
 	
@@ -219,7 +216,7 @@ public class ExplorationTest extends BaseTest{
 		catch(Exception ex)
 		{
 			objExplorationPage.captureScreenshot("CreateAndDeleteExplorationFail");
-			onFailreMeassage(ex.getMessage(),"CreateAndDeleteExplorationFail");
+			onFailureMeassage(ex.getMessage(),"CreateAndDeleteExplorationFail");
 		}
 	}
 
@@ -233,7 +230,7 @@ public class ExplorationTest extends BaseTest{
 		catch(Exception ex)
 		{
 			objExplorationPage.captureScreenshot("CreateAndShareExplorationFail");
-			onFailreMeassage(ex.getMessage(),"CreateAndShareExplorationFail");
+			onFailureMeassage(ex.getMessage(),"CreateAndShareExplorationFail");
 		}
 	}
 	
@@ -247,7 +244,7 @@ public class ExplorationTest extends BaseTest{
 		catch(Exception ex)
 		{
 			objExplorationPage.captureScreenshot("DeleteExplorationFail");
-			onFailreMeassage(ex.getMessage(),"DeleteExplorationFail");
+			onFailureMeassage(ex.getMessage(),"DeleteExplorationFail");
 		}
 	}
 
@@ -261,7 +258,7 @@ public class ExplorationTest extends BaseTest{
 		catch(Exception ex)
 		{
 			objExplorationPage.captureScreenshot("ShareExplorationFail");
-			onFailreMeassage(ex.getMessage(),"ShareExplorationFail");
+			onFailureMeassage(ex.getMessage(),"ShareExplorationFail");
 		}
 	}
 	
@@ -275,7 +272,7 @@ public class ExplorationTest extends BaseTest{
 		catch(Exception ex)
 		{
 			objExplorationPage.captureScreenshot("ExplorationItemsRemoveFail");
-			onFailreMeassage(ex.getMessage(),"ExplorationItemsRemoveFail");
+			onFailureMeassage(ex.getMessage(),"ExplorationItemsRemoveFail");
 		}
 	}
 
@@ -285,7 +282,7 @@ public class ExplorationTest extends BaseTest{
 		ExtentTestManager.getTest().log(Status.PASS, successMessage);
 	}
 
-	public void onFailreMeassage(String failureMessage,String screenShotName) throws IOException
+	public void onFailureMeassage(String failureMessage,String screenShotName) throws IOException
 	{
 		ExtentTestManager.getTest().log(Status.FAIL, "Test Failed");
 		ExtentTestManager.getTest().log(Status.FAIL, failureMessage);

@@ -1,5 +1,6 @@
 package com.eagle.pages;
 
+import java.awt.AWTException;
 import java.io.File;
 import java.io.IOException;
 
@@ -39,11 +40,11 @@ public class LoginPage extends BasePage{
 		 PageFactory.initElements(driver, this); 
 	 }
 
-    public void setCredentials(){    	
+    public void setCredentials() throws InterruptedException, AWTException{    	
     	BasePage.enterUserPass(username,password);    
     }  
     
-    public void clickLogin(){
+    public void clickLogin() throws InterruptedException, AWTException{
     	BasePage.click(submit);
     }  
     
@@ -62,7 +63,7 @@ public class LoginPage extends BasePage{
         return dest;
     }
    
-    public void loginTo() throws InterruptedException, IOException{
+    public void loginTo() throws Throwable{
     	try {
 	        this.setCredentials();
 	        this.clickLogin();	     

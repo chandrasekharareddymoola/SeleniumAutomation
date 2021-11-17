@@ -1,5 +1,7 @@
 package com.eagle.pages;
 
+import static org.testng.Assert.assertEquals;
+
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.Toolkit;
@@ -24,6 +26,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+import com.aventstack.extentreports.Status;
+import com.eagle.Reports.ExtentTestManager;
 
 public class SetPage extends BasePage{
 
@@ -199,18 +204,20 @@ public class SetPage extends BasePage{
 
 	@FindBy(xpath = "//i[@data-icon-name='Share']")
 	public WebElement share;
-	
+
 	@FindBy(xpath = "(//*[@class='ExpandedCardViewHeader__listCount___yQb2n']/span)[1]")
 	public WebElement ItemCountInExpand;
 
 	@FindBy(xpath = "(//span[@class='NameAndDescription__description___zAZrs'])[1]")
 	public WebElement setNameInShare;
-	
+
 	@FindBy(xpath = "//*[@role='columnheader']")
 	public WebElement columnHeaderFirstPage;
-	
-	
-	
+
+	@FindBy(xpath = "//*[@data-icon-name='Cancel']")
+	public WebElement dialogBoxClose;
+
+
 	//Page level functions on the objects
 	WebDriverWait wait = new WebDriverWait(driver, 5);
 	Actions action = new Actions(driver);
@@ -219,51 +226,51 @@ public class SetPage extends BasePage{
 		return this.driver.findElement(By.xpath("//div[@class='ms-List']//div[@role='rowheader' and @aria-colindex='1']//div[@title='"+ name +"']"));   		
 	}
 
-	public void Home(){    	
+	public void Home() throws InterruptedException, AWTException{    	
 		BasePage.click(homeIcon);
 		action.moveToElement(TermsOfUse).perform();
 	}   
 
-	public SetPage(){ 		 
+	public SetPage() throws InterruptedException, AWTException{ 		 
 		PageFactory.initElements(driver, this); 
 		BasePage.click(setIcon);
 		action.moveToElement(TermsOfUse).perform();
 	}
 
-	public void Set(){ 	
+	public void Set() throws InterruptedException, AWTException{ 	
 		BasePage.click(setIcon);
 		action.moveToElement(TermsOfUse).perform();
 	}
 
-	public void verifySetHomePage(String stringToVerify){    	
+	public void verifySetHomePage(String stringToVerify) throws InterruptedException, AWTException{    	
 		BasePage.verifyPage(stringToVerify, pageIdentifier);
 	}
 
-	public void addSet(){ 
+	public void addSet() throws InterruptedException, AWTException{ 
 		BasePage.click(addSet);
 	}
 
-	public void setTitle(String textTitle) throws InterruptedException{    	
+	public void setTitle(String textTitle) throws InterruptedException, AWTException{    	
 		BasePage.enterText(titleSet, textTitle);
 	}   
 
-	public void selectEntity(String entityToSelect){    	
+	public void selectEntity(String entityToSelect) throws InterruptedException, AWTException{    	
 		BasePage.click(pageIdentifier);
 		WebElement entity = driver.findElement(By.xpath("//button//span[contains(text(),'"+entityToSelect+"')]"));
 		BasePage.click(entity);
 	}
 
-	public void searchItems(String textToSearch) throws InterruptedException{
+	public void searchItems(String textToSearch) throws InterruptedException, AWTException{
 		BasePage.click(serachBox);
 		BasePage.enterText(serachBox, textToSearch);
 	} 
 
-	public void selectEntity(){    	
+	public void selectEntity() throws InterruptedException, AWTException{    	
 		BasePage.click(pageIdentifier);
 		BasePage.click(entitySelected);
 	}
 
-	public void searchItems() throws InterruptedException{
+	public void searchItems() throws InterruptedException, AWTException{
 		BasePage.click(serachBox);
 		BasePage.enterText(serachBox, "x");
 	}
@@ -308,7 +315,7 @@ public class SetPage extends BasePage{
 	//}
 
 	//	editCardIcon
-	public void AddandAccept(){
+	public void AddandAccept() throws InterruptedException, AWTException{
 		//wait.until(ExpectedConditions.elementToBeClickable(addAll));
 		while(addAll.isDisplayed()){
 			try
@@ -320,22 +327,15 @@ public class SetPage extends BasePage{
 			}	    		
 		}
 		BasePage.click(accept);
-		{
-			for(int i=0; i<2; i++)
-			{   
-				BasePage.click(addAll);	
-			}
-			BasePage.click(accept);
-		}
-
 	}
 
-	public void createCheck(String SetToCheck) throws InterruptedException{	    	
+	public void createCheck(String SetToCheck) throws InterruptedException, AWTException{	    	
 		this.Set();
 		//BasePage.waitforAnElement(columnHeaderFirstPage);
 		try {
 			Assert.assertEquals(SetToCheck, FirstItem.getText());
 			System.out.println("Set is present in the list");
+			ExtentTestManager.getTest().log(Status.PASS, "Set is present in the list and verified");
 			Thread.sleep(5000);
 		}
 		catch (Exception setNotPresent){
@@ -343,38 +343,48 @@ public class SetPage extends BasePage{
 		}
 	}   	
 
-	public void createSet(String SetName,String entityToSelect, String textToSearch) throws InterruptedException{	    	
-		this.Set();
-		this.addSet();
-		this.verifySetHomePage("Uncategorized");
-		this.setTitle(SetName);
-		this.selectEntity(entityToSelect);
-		this.searchItems(textToSearch); 
-		this.AddandAccept(); 	
-		BasePage.waitforAnElement(editCardIcon);
-//		System.out.println("Set Created successfully");
-		this.createCheck(SetName);
-		this.Home();
-	}   	  	    
-	
-    public void viewSet(String SetName){
-    	this.Set();	  
-    	this.openItemFromList(SetName);	    	
-    }
+	public void createSet(String SetName,String entityToSelect, String textToSearch) throws InterruptedException, AWTException{	    	
+		try {
+			this.Set();
+			this.addSet();
+			this.verifySetHomePage("Uncategorized");
 
-	public void expandSet(){
+			this.addSet();
+			this.setTitle(SetName);
+			this.selectEntity(entityToSelect);
+			this.searchItems(textToSearch); 
+			this.AddandAccept(); 	
+			BasePage.waitforAnElement(editCardIcon);
+			ExtentTestManager.getTest().log(Status.PASS, "Set "+ SetName +" is Created");
+			this.createCheck(SetName);
+			this.Home();
+
+			this.addSet();
+		}
+		catch (Exception createSetFail){
+			throw createSetFail;
+		}
+	}   	  	     	
+
+	public void viewSet(String SetName) throws InterruptedException, AWTException{
+		this.Set();	  
+		this.openItemFromList(SetName);	    
+		ExtentTestManager.getTest().log(Status.PASS, "Set "+ SetName +" is opened");
+	}
+
+	public void expandSet() throws InterruptedException, AWTException{
 		BasePage.click(expand);
 	}
 
-	public void editSet(){
+	public void editSet() throws InterruptedException, AWTException{
 		BasePage.click(edit);
 	}
 
-	public void accept(){
+	public void accept() throws InterruptedException, AWTException{
 		BasePage.click(accept);
 	}
 
-	public void addFromSetExpand(){
+	public void addFromSetExpand() throws InterruptedException, AWTException{
 		BasePage.click(accept);
 	}
 
@@ -400,12 +410,12 @@ public class SetPage extends BasePage{
 		catch(Exception ex) {}
 	}
 
-	public void removeItems(){	
+	public void removeItems() throws InterruptedException, AWTException{	
 		BasePage.click(remove);
 		BasePage.click(saveChanges);
 	}
 
-	public void RemoveItemsfromSet(String SetToCreate, String entityToSelect, String textToSearch) throws InterruptedException
+	public void RemoveItemsfromSet(String SetToCreate, String entityToSelect, String textToSearch) throws InterruptedException, AWTException
 	{
 		this.createSet(SetToCreate, entityToSelect, textToSearch);	 
 		this.Set();
@@ -425,76 +435,90 @@ public class SetPage extends BasePage{
 	}
 
 	public void addItemsFromFile(String filePath) {	    
-		fileUpload.sendKeys(filePath);				
+		fileUpload.sendKeys(filePath);	
+		ExtentTestManager.getTest().log(Status.PASS, "File uploaded successfully");
 	}
 
-	public void addItemsExpand() {	    
+	public void addItemsExpand() throws InterruptedException, AWTException {	    
 		BasePage.click(addItemsExpand);	 				
 	}
 
-	public void addItemsFromSet(String existingSetName) {	    
+	public void addItemsFromSet(String existingSetName) throws InterruptedException, AWTException{	    
 		BasePage.click(addFromSet);	    	
 		WebElement opn = this.openSet(existingSetName);
 		BasePage.click(opn); 
+		ExtentTestManager.getTest().log(Status.PASS, existingSetName + " Set is Added to this Set");
 	}
 
-	public void CreateSetFromFile(String setToCreate, String entityToSelect, String FileName) throws InterruptedException { 
-		this.Set();
-		this.addSet();
-		this.verifySetHomePage("Uncategorized");
-		this.setTitle(setToCreate);
-		this.selectEntity(entityToSelect);
-		//this.addItemsFromFile("C:\\Users\\DivyaDevanathan\\Downloads\\up_genes_symbol.txt"); 
-		this.addItemsFromFile(FileName); 
-		this.AddandAccept();
-		BasePage.waitforAnElement(editCardIcon);
-		System.out.println("Set Created from file successfully");
-		this.createCheck(setToCreate);
-		this.Home();
+	public void CreateSetFromFile(String setToCreate, String entityToSelect, String FileName) throws InterruptedException, AWTException { 
+		try {
+			this.Set();
+			this.addSet();
+			this.verifySetHomePage("Uncategorized");
+			this.setTitle(setToCreate);
+			this.selectEntity(entityToSelect);
+			this.addItemsFromFile(FileName); 
+			this.AddandAccept();
+			BasePage.waitforAnElement(editCardIcon);
+			ExtentTestManager.getTest().log(Status.PASS, "Set Created from file located in :" + FileName );
+			this.createCheck(setToCreate);
+			this.Home();
+		}
+		catch (Exception ecf){
+			throw ecf;
+		}
+
 	}
 
-	public void CreateSetFromSet(String existingSetName, String entityToSelect, String textToSearch, String setToCreate) throws InterruptedException { 
-		this.createSet(existingSetName, entityToSelect, textToSearch);
-		this.addSet();
-		this.verifySetHomePage("Uncategorized");
-		this.setTitle(setToCreate);
-		this.selectEntity(entityToSelect);
-		this.addItemsFromSet(existingSetName); 
-		this.accept();
-		BasePage.waitforAnElement(editCardIcon);
-		System.out.println("Set Created from Set successfully");
-		this.createCheck(setToCreate);
-		this.Home();
+	public void CreateSetFromSet(String existingSetName, String entityToSelect, String textToSearch, String setToCreate) throws Exception { 
+		try {
+			this.createSet(existingSetName, entityToSelect, textToSearch);
+			this.addSet();
+			this.verifySetHomePage("Uncategorized");
+			this.setTitle(setToCreate);
+			this.selectEntity(entityToSelect);
+			this.addItemsFromSet(existingSetName); 
+			this.accept();
+			BasePage.waitforAnElement(editCardIcon);
+			ExtentTestManager.getTest().log(Status.PASS, "Set "+ setToCreate +" Created from Set " + existingSetName);
+			this.createCheck(setToCreate);
+			this.Home();
+		}
+		catch (Exception createSetFromSetfail) {
+			throw createSetFromSetfail;
+		}
 	}
 
-	public void close(){	
+	public void close() throws InterruptedException, AWTException{	
 		BasePage.click(close);
 	}
 
-	public void saveChanges(){
+	public void saveChanges() throws InterruptedException, AWTException{
 		BasePage.click(saveChanges);
+		ExtentTestManager.getTest().log(Status.PASS, "Changes are Saved");
 		this.Home();
 	}
 
-	public void searchExpandEnterName(String SetNameToAddFrom){ 		 
+	public void searchExpandEnterName(String SetNameToAddFrom) throws InterruptedException, AWTException{ 		 
 		BasePage.click(searchSetToAddExpand);
 		searchSetToAddExpand.sendKeys(SetNameToAddFrom);
 	}
 
-	public void clickSetInExpand(String SelectaSet) throws InterruptedException{ 		 
+	public void clickSetInExpand(String SelectaSet) throws InterruptedException, AWTException{ 		 
 		WebElement SelectaSetfromExpand = driver.findElement(By.xpath("//*[@title='"+SelectaSet+"']"));
 		BasePage.click(SelectaSetfromExpand);
 		Thread.sleep(3000);
 	}
 
-	public void addFromSetExpand(String SetNameToAddFrom) throws InterruptedException {	    
+	public void addFromSetExpand(String SetNameToAddFrom) throws InterruptedException, AWTException {	    
 		BasePage.click(addFromSetExpand);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Select a Set']")));
 		this.searchExpandEnterName(SetNameToAddFrom);
 		this.clickSetInExpand(SetNameToAddFrom);
+		ExtentTestManager.getTest().log(Status.PASS, SetNameToAddFrom + " is selected to be added ");
 	}	
-	
-	public void CompareTwovalues(String Value1, String Value2) throws InterruptedException {	    
+
+	public void CompareTwovalues(String Value1, String Value2) throws InterruptedException, AWTException {	    
 		if(Integer.parseInt(Value1)<Integer.parseInt(Value2)){
 			System.out.println("Number of records have increased");
 		}
@@ -504,76 +528,90 @@ public class SetPage extends BasePage{
 	}	
 
 	//Adding items from Set from expand into Set
-	public void ExpandAddFromSet(String setToAdd, String entityToSelect,String textToSearchSet1, String setToCreate, String textToSearchSet2) throws InterruptedException {    // Add from a set
-		this.createSet(setToAdd, entityToSelect, textToSearchSet1);
-		this.addSet();
-		this.verifySetHomePage("Uncategorized");
-		this.setTitle(setToCreate); //Create a set
-		this.selectEntity(entityToSelect);
-		this.searchItems(textToSearchSet2);
-		this.AddandAccept();
-		System.out.println("Set created successfully");
-		this.expandSet();
-		this.editSet();
-		String NoOfRecordsInitial = ItemCountInExpand.getText();
-		this.addItemsExpand();
-		this.addFromSetExpand(setToAdd); // Set to be added
-		Thread.sleep(5000);
-		String NoOfRecordsFinal = ItemCountInExpand.getText();
-		this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);		
-		BasePage.verifyPage(setToCreate,setNameInExpand); //verifying the set name
-		System.out.println("Set - Set added in expand successfully");
-
+	public void ExpandAddFromSet(String setToAdd, String entityToSelect,String textToSearchSet1, String setToCreate, String textToSearchSet2) throws InterruptedException, AWTException {    // Add from a set
+		try {
+			this.createSet(setToAdd, entityToSelect, textToSearchSet1);
+			this.addSet();
+			this.verifySetHomePage("Uncategorized");
+			this.setTitle(setToCreate); //Create a set
+			this.selectEntity(entityToSelect);
+			this.searchItems(textToSearchSet2);
+			this.AddandAccept();
+			ExtentTestManager.getTest().log(Status.PASS, setToCreate + " is created ");
+			this.expandSet();
+			this.editSet();
+			String NoOfRecordsInitial = ItemCountInExpand.getText();
+			this.addItemsExpand();
+			this.addFromSetExpand(setToAdd); // Set to be added
+			Thread.sleep(5000);
+			waitforAnElement(ItemCountInExpand);
+			String NoOfRecordsFinal = ItemCountInExpand.getText();
+			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);		
+			BasePage.verifyPage(setToCreate,setNameInExpand); //verifying the set name
+			ExtentTestManager.getTest().log(Status.PASS, "Set - Set added in expand");
+		}
+		catch (Exception ExpandAddFromSetFail) {
+			throw ExpandAddFromSetFail;
+		}
 	}
 
-	public void searchCatalog(String SearchInCatalog) throws InterruptedException{	    
+	public void searchCatalog(String SearchInCatalog) throws InterruptedException, AWTException{	    
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from the Catalog']")));
 		BasePage.click(searchCatalog);
 		searchCatalog.sendKeys(SearchInCatalog);
 		Thread.sleep(2000);
 	}
 
-	public void addFromSetCatalog(String TextToSearch) throws InterruptedException {	    
+	public void addFromSetCatalog(String TextToSearch) throws InterruptedException, AWTException {	    
 		BasePage.click(addFromExpandCatalog);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from the Catalog']")));
 		this.searchCatalog(TextToSearch);
 		Thread.sleep(3000);
 		BasePage.click(addAll);
+		ExtentTestManager.getTest().log(Status.PASS, "Added From Catalog");
 	}
 
-	public void add(){	    
+	public void add() throws InterruptedException, AWTException{	    
 		BasePage.click(Add);
 	}
 
 	//Adding items from Catalog from expand into Set
-	public void ExpandAddFromCatalog(String setToCreate, String entityToSelect, String textToSearch, String TextToSearch) throws InterruptedException { 
-		this.addSet();
-		this.verifySetHomePage("Uncategorized");
-		this.setTitle(setToCreate); //Create a set
-		this.selectEntity(entityToSelect);
-		this.searchItems(textToSearch);
-		this.AddandAccept();
-		System.out.println("Set created successfully");
-		this.expandSet();
-		this.editSet();
-		String NoOfRecordsInitial = ItemCountInExpand.getText();
-		this.addItemsExpand();
-		this.addFromSetCatalog(TextToSearch); // Text to be added 
-		this.add();
-		Thread.sleep(5000);
-		String NoOfRecordsFinal = ItemCountInExpand.getText();
-		this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
-		BasePage.verifyPage(setToCreate,setNameInExpand); //verifying the set name
-		System.out.println("Set - Added from catalog in expand successfully");
+	public void ExpandAddFromCatalog(String setToCreate, String entityToSelect, String textToSearch, String TextToSearch) throws InterruptedException, AWTException, AssertionError  { 
+		try {
+			this.Set();
+			this.addSet();
+			this.verifySetHomePage("Uncategorized");
+			this.setTitle(setToCreate); //Create a set
+			this.selectEntity(entityToSelect);
+			this.searchItems(textToSearch);
+			this.AddandAccept();
+			ExtentTestManager.getTest().log(Status.PASS, setToCreate + " is created ");
+			this.expandSet();
+			this.editSet();
+			String NoOfRecordsInitial = ItemCountInExpand.getText();
+			this.addItemsExpand();
+			this.addFromSetCatalog(TextToSearch); // Text to be added 
+			ExtentTestManager.getTest().log(Status.PASS, TextToSearch + " is searched");
+			this.add();
+			Thread.sleep(5000);
+			waitforAnElement(ItemCountInExpand);
+			String NoOfRecordsFinal = ItemCountInExpand.getText();
+			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
+			BasePage.verifyPage(setToCreate,setNameInExpand); //verifying the set name
+			ExtentTestManager.getTest().log(Status.PASS, "Set - Added from catalog and count increase verified");
+		}
+		catch(Exception addfromCatalogFail) {
+			throw addfromCatalogFail;
+		}
 	}
 
-	public void fileSelectDropdown(){	    
+
+	public void fileSelectDropdown() throws InterruptedException, AWTException{	    
 		BasePage.click(fileSelectDropdown);
 	}
 
 
-	public void FileuploadCategory(String CategoryName) {	    
-		BasePage.click(addFromFile);	 
+	public void FileuploadCategory(String CategoryName) throws InterruptedException, AWTException {	     
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Drag files here']")));
 		this.fileSelectDropdown();
 		BasePage.click(driver.findElement(By.xpath("//*[@title='"+CategoryName+"']")));
@@ -602,58 +640,82 @@ public class SetPage extends BasePage{
 
 
 	public void addFromFile(String CategoryName, String Filelocation, String FileName) throws AWTException, InterruptedException {	    
-		BasePage.click(addFromFile);	 
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from a File']")));
-		this.FileuploadCategory(CategoryName);
-		this.FileUploadFormExplorer(Filelocation);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Searching in ']")));
-		BasePage.verifyPage(FileName, uploadedFileName);
-		BasePage.click(addAll);
+		try {
+			BasePage.click(addFromFile);	
+			Thread.sleep(5000);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from a File']")));
+			this.FileuploadCategory(CategoryName);
+			this.FileUploadFormExplorer(Filelocation);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Searching in ']")));
+			BasePage.verifyPage(FileName, uploadedFileName);
+			BasePage.click(addAll);
+			ExtentTestManager.getTest().log(Status.PASS, "Added from file");
+		}
+		catch (Exception addFromFileFail) {
+			throw addFromFileFail;
+		}
 	}	
 
-	public void addToGrid(){	    
+	public void addToGrid() throws InterruptedException, AWTException{	    
 		BasePage.click(AddToGrid);
 	}
 
 	//Adding items from File from expand into Set
 	public void ExpandAddFromFile(String setToCreate, String entityToSelect, String textToSearch, String CategoryName, String Filelocation, String FileName) throws InterruptedException, AWTException { 
-		this.addSet();
-		this.verifySetHomePage("Uncategorized");
-		this.setTitle(setToCreate); //Create a set
-		this.selectEntity(entityToSelect);
-		this.searchItems(textToSearch);
-		this.AddandAccept();
-		System.out.println("Set created successfully");
-		this.expandSet();
-		this.editSet();
-		this.addItemsExpand();
-		this.addFromFile(CategoryName, Filelocation, FileName); 
-		this.addToGrid();
-		BasePage.verifyPage(setToCreate,setNameInExpand); //verifying the set name
-		System.out.println("Set - Added from file in expand successfully");
+		try {
+			this.Set();
+			this.addSet();
+			this.verifySetHomePage("Uncategorized");
+			this.setTitle(setToCreate); //Create a set
+			this.selectEntity(entityToSelect);
+			this.searchItems(textToSearch);
+			this.AddandAccept();
+			ExtentTestManager.getTest().log(Status.PASS, setToCreate + " is created ");
+			this.expandSet();
+			this.editSet();
+			this.addItemsExpand();
+			Thread.sleep(3000);
+			this.addFromFile(CategoryName, Filelocation, FileName); 
+			this.addToGrid();
+			BasePage.verifyPage(setToCreate,setNameInExpand); //verifying the set name
+			ExtentTestManager.getTest().log(Status.PASS, "Set - Added from file in expand");
+		}
+		catch (Exception ExpandAddFromFileFail) {
+			if(dialogBoxClose.isDisplayed()) {
+				BasePage.click(dialogBoxClose);
+			}
+			throw ExpandAddFromFileFail;
+		}
 	}
 
 
-	public void DeleteCardExpand() { 
+	public void DeleteCardExpand()throws InterruptedException, AWTException{ 
 		BasePage.click(deleteCardExpand);
 	}
 
-	public void Delete() { 
+	public void Delete() throws InterruptedException, AWTException { 
 		BasePage.click(Delete);
 	}
 
 	public void DeleteCardInExpand(String setToCreate, String entityToSelect, String textToSearch) throws InterruptedException, AWTException { 
-		this.addSet();
-		this.verifySetHomePage("Uncategorized");
-		this.setTitle(setToCreate); //Create a set
-		this.selectEntity(entityToSelect);
-		this.searchItems(textToSearch);
-		this.AddandAccept();
-		this.expandSet();
-		this.DeleteCardExpand();
-		this.Delete();
-		BasePage.verifyPage("MY DATA", MyDataTitle); //My Data page
-		System.out.println("Card deleted from expand successfully");
+		try {
+			this.Set();
+			this.addSet();
+			this.verifySetHomePage("Uncategorized");
+			this.setTitle(setToCreate); //Create a set
+			this.selectEntity(entityToSelect);
+			this.searchItems(textToSearch);
+			this.AddandAccept();
+			ExtentTestManager.getTest().log(Status.PASS, setToCreate + " is created");
+			this.expandSet();
+			this.DeleteCardExpand();
+			this.Delete();
+			BasePage.verifyPage("MY DATA", MyDataTitle); //My Data page
+			ExtentTestManager.getTest().log(Status.PASS, setToCreate + " is deleted");
+		}
+		catch (Exception DeleteCardInExpandFail) {
+			throw DeleteCardInExpandFail;
+		}
 	}
 
 	public int NoOfPagesInSetPage() throws InterruptedException, AWTException { 
@@ -717,7 +779,7 @@ public class SetPage extends BasePage{
 				Integer NoofPages = this.NoOfPagesInSetPage();
 				WebElement SD = driver.findElement(By.xpath("//*[text()='"+SetToDelete+"']"));
 				WebElement threeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+SetToDelete+"']//parent::div//parent::div//child::button")));
-		
+
 				List<WebElement> SDs = driver.findElements(By.xpath("//*[text()='"+SetToDelete+"']"));
 				if (SDs.size() != 0) {
 					BasePage.scrollIntoView(SD);
@@ -729,11 +791,11 @@ public class SetPage extends BasePage{
 				else {
 					BasePage.click(NextPage);
 					Thread.sleep(2000);
-		
+
 				}
-					BasePage.click(forward); 
-					BasePage.click(forward); 
-				}
+				BasePage.click(forward); 
+				BasePage.click(forward); 
+			}
 			while(forward.isEnabled());  
 		}	    	
 		catch(Exception ex) {}
@@ -752,46 +814,46 @@ public class SetPage extends BasePage{
 	 * } catch(Exception ex) {} }
 	 */
 
-    public void openItemFromList(String inv)
-    {
-    	try {	    		
-    		do{ 
-    			for (WebElement element : SetGridItems) {
-    				if(element.isDisplayed() == false)  {scrollIntoView(element);}	    				
-    				String textFromGrid = element.getText();	    				
-	    				if(inv.equals(textFromGrid)) {		    					
-	    					BasePage.click(element);	
-	    				}		    				
-    			}
-    			BasePage.click(forward); 
-    		}
-    		while(forward.isEnabled());  
-    	}	    	
-    	catch(Exception ex) {}
-    }
+	public void openItemFromList(String inv)
+	{
+		try {	    		
+			do{ 
+				for (WebElement element : SetGridItems) {
+					if(element.isDisplayed() == false)  {scrollIntoView(element);}	    				
+					String textFromGrid = element.getText();	    				
+					if(inv.equals(textFromGrid)) {		    					
+						BasePage.click(element);	
+					}		    				
+				}
+				BasePage.click(forward); 
+			}
+			while(forward.isEnabled());  
+		}	    	
+		catch(Exception ex) {}
+	}
 
 	public void selectMenuOptionInList(String SetName)
-    {
-    	try {	
-    		outerloop:
-    		do{
-			for (WebElement element : SetGridItems) {
-				if(element.isDisplayed() == false)  {scrollIntoView(element);}	    				
-				String textFromGrid = element.getText();	    				
-    				if(textFromGrid.contains(SetName)) {
-    					WebElement parent = (WebElement) ((JavascriptExecutor) driver).executeScript(
-                                   "return arguments[0].parentNode;", element);
-    					WebElement deleteOption = parent.findElement(By.tagName("button"));	    					
-    					deleteOption.click();
-    					 break outerloop;
-    			}
-			}
-    			BasePage.click(forward);
-			}    			
-			while(forward.isEnabled());
-    	}	    	
-    	catch(Exception ex) {}
-    }
+	{
+		try {	
+			outerloop:
+				do{
+					for (WebElement element : SetGridItems) {
+						if(element.isDisplayed() == false)  {scrollIntoView(element);}	    				
+						String textFromGrid = element.getText();	    				
+						if(textFromGrid.contains(SetName)) {
+							WebElement parent = (WebElement) ((JavascriptExecutor) driver).executeScript(
+									"return arguments[0].parentNode;", element);
+							WebElement deleteOption = parent.findElement(By.tagName("button"));	    					
+							deleteOption.click();
+							break outerloop;
+						}
+					}
+					BasePage.click(forward);
+				}    			
+				while(forward.isEnabled());
+		}	    	
+		catch(Exception ex) {}
+	}
 
 
 	public void DeleteASet(String setToDelete) throws InterruptedException, AWTException { 
@@ -807,40 +869,49 @@ public class SetPage extends BasePage{
 	}
 
 	public void searchInSetExpand(String setToCreate, String entityToSelect, String textToSearch, String SearchInSet) throws InterruptedException, AWTException { 
-		this.addSet();
-		this.verifySetHomePage("Uncategorized");
-		this.setTitle(setToCreate); //Create a set
-		this.selectEntity(entityToSelect);
-		this.searchItems(textToSearch);
-		this.AddandAccept();
-		this.expandSet();
-		this.searchInExpand(SearchInSet);
-		System.out.println("Search in expand completed successfully");
+		try {
+			this.addSet();
+			this.verifySetHomePage("Uncategorized");
+			this.setTitle(setToCreate); //Create a set
+			this.selectEntity(entityToSelect);
+			this.searchItems(textToSearch);
+			this.AddandAccept();
+			this.expandSet();
+			this.searchInExpand(SearchInSet);
+			ExtentTestManager.getTest().log(Status.PASS, "Search in done using text - "+ SearchInSet);
+		}
+		catch(Exception es) {
+			throw es;
+		}
 	}
 
-	public void GridSettings() { 
+	public void GridSettings() throws InterruptedException, AWTException { 
 		BasePage.click(GridSettingsIcon);
 	}
 
-	public void GridRows(String RowCount) { 
+	public void GridRows(String RowCount) throws InterruptedException, AWTException{ 
 		BasePage.click(RowsPerPage);
 		WebElement NoofRows = driver.findElement(By.xpath("//*[@title='"+RowCount+"']"));
 		BasePage.click(NoofRows);
+		ExtentTestManager.getTest().log(Status.PASS, "No. of rows have been set to " + RowCount);
 	}
 
-	public void GridPrimaryColumn(String PrimaryColumn) { 
+	public void GridPrimaryColumn(String PrimaryColumn) throws InterruptedException, AWTException { 
 		BasePage.click(PrimaryColumnDropdown);
 		WebElement PrimarySelect = driver.findElement(By.xpath("//*[@role='option' and @title='"+PrimaryColumn+"']"));
 		BasePage.click(PrimarySelect);
+		ExtentTestManager.getTest().log(Status.PASS, "Primary column is set to " + PrimaryColumn);
 	}
 
-	public void GridSecondaryColumn(String SecondaryColumn) { 
+	public void GridSecondaryColumn(String SecondaryColumn) throws InterruptedException, AWTException { 
 		BasePage.click(SecondaryColumnDropdown);
 		WebElement SecondarySelect = driver.findElement(By.xpath("//*[@role='option' and @title='"+SecondaryColumn+"']"));
 		BasePage.click(SecondarySelect);
+		ExtentTestManager.getTest().log(Status.PASS, "Secondary column is set to " + SecondaryColumn);
 	}
 
-	public void VerifyGrid(String NoofRows, String PrimaryColumn, String SecondaryColumn) { 
+	public void VerifyGrid(String NoofRows, String PrimaryColumn, String SecondaryColumn) throws InterruptedException, AWTException { 
+		Thread.sleep(5000);
 		List <WebElement> Columns = driver.findElements(By.xpath("//*[@tabindex='0']"));
 		WebElement FirstColumn = driver.findElement(By.xpath("(//*[@tabindex='0'])[1]")); 
 		int NoOfColumns = Columns.size();
@@ -852,22 +923,31 @@ public class SetPage extends BasePage{
 		Assert.assertEquals(RN, NoofRows);
 	}
 
-	public void GridChanges(String setToCreate, String entityToSelect, String textToSearch, String NoofRows, String PrimaryColumn, String SecondaryColumn) throws InterruptedException { 
-		this.addSet();
-		this.verifySetHomePage("Uncategorized");
-		this.setTitle(setToCreate); //Create a set
-		this.selectEntity(entityToSelect);
-		this.searchItems(textToSearch);
-		this.AddandAccept();
-		this.expandSet();
-		this.GridSettings();
-		this.GridRows(NoofRows);
-		this.GridPrimaryColumn(PrimaryColumn);
-		this.GridSecondaryColumn(SecondaryColumn);
-		BasePage.click(Apply);
-		BasePage.verifyPage(setToCreate,setNameInExpand); //verifying the set name
-		this.VerifyGrid(NoofRows,PrimaryColumn,SecondaryColumn);
-		System.out.println("Grid Changes done successfully");
+	public void GridChanges(String setToCreate, String entityToSelect, String textToSearch, String NoofRows, String PrimaryColumn, String SecondaryColumn) throws InterruptedException, AWTException { 
+		try {
+			this.Set();
+			this.addSet();
+			this.verifySetHomePage("Uncategorized");
+
+			this.addSet();
+			this.setTitle(setToCreate); //Create a set
+			this.selectEntity(entityToSelect);
+			this.searchItems(textToSearch);
+			this.AddandAccept();
+			this.expandSet();
+			this.GridSettings();
+			this.GridRows(NoofRows);
+			this.GridPrimaryColumn(PrimaryColumn);
+			this.GridSecondaryColumn(SecondaryColumn);
+			BasePage.click(Apply);
+			waitforAnElement(setNameInExpand);
+			BasePage.verifyPage(setToCreate,setNameInExpand); //verifying the set name
+			this.VerifyGrid(NoofRows,PrimaryColumn,SecondaryColumn);
+			ExtentTestManager.getTest().log(Status.PASS, "Grid Changes in all - No.of Rows, Primary Column and Secondary Column are done and verified");
+		}
+		catch(Exception GridChangesFail){
+			throw GridChangesFail;
+		}
 	}
 
 
@@ -931,41 +1011,61 @@ public class SetPage extends BasePage{
 	//		}
 	//	}
 
-	
-	public void DeleteSet(String SettoDelete) throws InterruptedException{
-		this.Set();	
-		selectMenuOptionInList(SettoDelete);
-		Thread.sleep(3000);
-		BasePage.click(deleteIcon);
-		String DeleteConfirm =  driver.findElement(By.xpath("//*[@role='heading']")).getText();
-		Assert.assertEquals(DeleteConfirm, "Delete Set?");
-		BasePage.click(deleteIcon);	    	    	
-	}
-	
-	
-	
-	public void createAndDeleteSet(String SetName, String entityToSelect, String textToSearch) throws InterruptedException{
-		this.createSet(SetName, entityToSelect, textToSearch);	 
-		this.DeleteSet(SetName);   	    	
+
+	public void DeleteSet(String SettoDelete) throws InterruptedException, AWTException{
+		try {
+			this.Set();	
+			waitforAnElement(columnHeaderFirstPage);
+			selectMenuOptionInList(SettoDelete);
+			Thread.sleep(3000);
+			BasePage.click(deleteIcon);
+			String DeleteConfirm =  driver.findElement(By.xpath("//*[@role='heading']")).getText();
+			Assert.assertEquals(DeleteConfirm, "Delete Set?");
+			BasePage.click(deleteIcon);	
+		}
+		catch (Exception DeleteSetFail){
+			throw DeleteSetFail;
+		}
 	}
 
-	public void ShareSet(String SetToShare, String personToBeShared) throws InterruptedException{
-		this.Set();
-		BasePage.waitforAnElement(columnHeaderFirstPage);
-		selectMenuOptionInList(SetToShare);
-		Thread.sleep(3000);
-		BasePage.click(shareIcon);
-		String SetNameInShare = setNameInShare.getText();
-		Assert.assertEquals(SetNameInShare, SetToShare);
-		BasePage.enterText(selectPersonToShare,personToBeShared);	
-		BasePage.click(suggestedUsers);
-		BasePage.click(share);	
-		BasePage.waitforAnElement(ShareSuccess);
+
+	public void createAndDeleteSet(String SetName, String entityToSelect, String textToSearch) throws InterruptedException, AWTException{
+		try {
+			this.createSet(SetName, entityToSelect, textToSearch);	
+			ExtentTestManager.getTest().log(Status.PASS, SetName + " is Created");
+			this.DeleteSet(SetName); 
+			ExtentTestManager.getTest().log(Status.PASS, SetName + " is Deleted");
+		}
+		catch (Exception createAndDeleteSetFail) {
+			throw createAndDeleteSetFail;
+		}
 	}
-	
-	public void createAndShareSet(String SetName, String entityToSelect, String textToSearch, String personToBeShared) throws InterruptedException{
-		this.createSet(SetName, entityToSelect, textToSearch);	 
+
+	public void ShareSet(String SetToShare, String personToBeShared) throws InterruptedException, AWTException{
+		try {
+			this.Set();
+			BasePage.waitforAnElement(columnHeaderFirstPage);
+			selectMenuOptionInList(SetToShare);
+			Thread.sleep(3000);
+			BasePage.click(shareIcon);
+			String SetNameInShare = setNameInShare.getText();
+			Assert.assertEquals(SetNameInShare, SetToShare);
+			BasePage.enterText(selectPersonToShare,personToBeShared);	
+			BasePage.click(suggestedUsers);
+			BasePage.click(share);	
+			ExtentTestManager.getTest().log(Status.PASS, SetToShare + " is shared to user "+personToBeShared );
+			BasePage.waitforAnElement(ShareSuccess);
+		}
+		catch (Exception ShareSetFail){
+			throw ShareSetFail;
+		}
+	}
+
+	public void createAndShareSet(String SetName, String entityToSelect, String textToSearch, String personToBeShared) throws InterruptedException, AWTException{
+		this.createSet(SetName, entityToSelect, textToSearch);	
+		ExtentTestManager.getTest().log(Status.PASS, SetName + " is Created");
 		this.ShareSet(SetName, personToBeShared);
+		ExtentTestManager.getTest().log(Status.PASS, SetName + " is Shared");
 	}
 
 	public void SharetLoop(String SetToShare, String SharedUser) throws InterruptedException, AWTException { 
@@ -1027,22 +1127,31 @@ public class SetPage extends BasePage{
 			System.out.println("Set shared failed");
 		}
 	}
-	
-    public String captureScreenshot(String screenShotName) throws IOException
-    {
-        TakesScreenshot ts = (TakesScreenshot)driver;
-        File source = ts.getScreenshotAs(OutputType.FILE);
-        String dest = System.getProperty("user.dir") + "./Resources/ErrorScreenshots/"+screenShotName+".jpeg";
-        File destination = new File(dest);
-        try {
-            FileUtils.copyFile(source, destination);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }     
-                     
-        return dest;
-    }
 
+	//    public void captureScreenshot(String screenShotName) throws IOException
+	//    {
+	//        TakesScreenshot ts = (TakesScreenshot)driver;
+	//        File source = ts.getScreenshotAs(OutputType.FILE);
+	//        String dest = System.getProperty("user.dir") + "./Resources/ErrorScreenshots/"+screenShotName+".jpeg";
+	//        File destination = new File(dest);
+	//        try {
+	//            FileUtils.copyFile(source, destination);
+	//        } catch (IOException e) {
+	//            e.printStackTrace();
+	//        }     
+	//                     
+	////        return dest;
+	//    }
+
+
+	public void captureScreenshot(String screenShotName) throws IOException
+	{
+		TakesScreenshot scrShot =((TakesScreenshot)driver);
+		File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
+		String fileWithPath = "./Resources/ErrorScreenshots/"+screenShotName+".png";
+		File DestFile=new File(fileWithPath);
+		FileUtils.copyFile(SrcFile, DestFile);
+	}
 
 }
 

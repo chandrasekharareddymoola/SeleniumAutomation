@@ -26,7 +26,7 @@ public class InvestigationTest extends BaseTest {
 		catch(Exception ex)
 		{
 			objInvestigationPage.captureScreenshot("createInvFail");
-			onFailreMeassage(ex.getMessage(),"createInvFail");
+			onFailureMeassage(ex.getMessage(),"createInvFail");
 			
 		}
 	}
@@ -41,7 +41,7 @@ public class InvestigationTest extends BaseTest {
 		catch(Exception ex)
 		{
 			objInvestigationPage.captureScreenshot("viewInvFail");
-			onFailreMeassage(ex.getMessage(),"viewInvFail");
+			onFailureMeassage(ex.getMessage(),"viewInvFail");
 		}
 	}
 		
@@ -56,7 +56,7 @@ public class InvestigationTest extends BaseTest {
 		catch(Exception ex)
 		{
 			String path = objInvestigationPage.captureScreenshot("editInvFail");
-			onFailreMeassage(ex.getMessage(),"editInvFail");
+			onFailureMeassage(ex.getMessage(),"editInvFail");
 		}
 	}
 	
@@ -70,7 +70,7 @@ public class InvestigationTest extends BaseTest {
 		catch(Exception ex)
 		{
 			objInvestigationPage.captureScreenshot("linkSetInvFail");
-			onFailreMeassage(ex.getMessage(),"linkSetInvFail");
+			onFailureMeassage(ex.getMessage(),"linkSetInvFail");
 		}
 	}
 	
@@ -86,7 +86,7 @@ public class InvestigationTest extends BaseTest {
 		catch(Exception ex)
 		{
 			objInvestigationPage.captureScreenshot("linkExpInvFail");
-			onFailreMeassage(ex.getMessage(),"linkExpInvFail");
+			onFailureMeassage(ex.getMessage(),"linkExpInvFail");
 		}
 	}
 	
@@ -100,7 +100,7 @@ public class InvestigationTest extends BaseTest {
 		catch(Exception ex)
 		{
 			objInvestigationPage.captureScreenshot("linkCompInvFail");
-			onFailreMeassage(ex.getMessage(),"linkCompInvFail");
+			onFailureMeassage(ex.getMessage(),"linkCompInvFail");
 		}
 
 	}
@@ -116,7 +116,7 @@ public class InvestigationTest extends BaseTest {
 		catch(Exception ex)
 		{
 			objInvestigationPage.captureScreenshot("shareInvFail");
-			onFailreMeassage(ex.getMessage(),"shareInvFail");			
+			onFailureMeassage(ex.getMessage(),"shareInvFail");			
 		}
 
 	}	
@@ -134,7 +134,7 @@ public class InvestigationTest extends BaseTest {
 		catch(Exception ex)
 		{
 			objInvestigationPage.captureScreenshot("deleteInvFail");
-			onFailreMeassage(ex.getMessage(),"deleteInvFail");			
+			onFailureMeassage(ex.getMessage(),"deleteInvFail");			
 		}
 	}  
 	
@@ -145,7 +145,7 @@ public class InvestigationTest extends BaseTest {
 		ExtentTestManager.getTest().log(Status.PASS, successMessage);
 	}
 	
-	public void onFailreMeassage(String failureMessage,String screenShotName) throws IOException
+	public void onFailureMeassage(String failureMessage,String screenShotName) throws IOException
 	{
 		ExtentTestManager.getTest().log(Status.FAIL, "Test Failed");
 		ExtentTestManager.getTest().log(Status.FAIL, failureMessage);

@@ -373,7 +373,7 @@ public class ExplorationPage extends BasePage{
 		System.out.println("Exploration Created successfully");
 	}   	
 
-	public void createExplorationInitallyFromSet(String SetName,String entityToSelect, String textToSearch , String ExplorationName) throws InterruptedException{	    	
+	public void createExplorationInitallyFromSet(String SetName,String entityToSelect, String textToSearch , String ExplorationName) throws InterruptedException, AWTException{	    	
 		objSetPage = new SetPage();  
 		objSetPage.createSet(SetName, entityToSelect, textToSearch);
 		this.Home();
@@ -479,7 +479,7 @@ public class ExplorationPage extends BasePage{
 		this.Home();
 	}
 
-	public void CreateExplorationFromSet(String SetName, String entityToSelect, String textToSearch, String ExplorationName) throws InterruptedException { 
+	public void CreateExplorationFromSet(String SetName, String entityToSelect, String textToSearch, String ExplorationName) throws InterruptedException, AWTException { 
 		objSetPage = new SetPage();  
 		objSetPage.createSet(SetName, entityToSelect, textToSearch);
 		this.Home();

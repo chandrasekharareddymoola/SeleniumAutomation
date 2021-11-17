@@ -13,25 +13,25 @@ import com.eagle.pages.SetPage;
 
 public class SetTest extends BaseTest{
 
-	LoginPage objLogin;
+//	LoginPage objLogin;
 	SetPage objSetPage; 
 	
 	
 
-//	@BeforeClass
-//	public void beforeClass() throws InterruptedException, IOException  {	
+	@BeforeClass
+	public void beforeClass() throws InterruptedException, IOException, AWTException  {	
+		objSetPage = new SetPage();	
+//		objLogin = new LoginPage();
+//		objLogin.loginTo();
+	}
+	
+//	public void main() throws InterruptedException, IOException  {	
 //		objSetPage = new SetPage();	
 //		objLogin = new LoginPage();
 //		objLogin.loginTo();
+//		objSetPage.RemoveItemsfromSet("Remove Item Set","Disease","Kera");
 //	}
-	
-	public void main() throws InterruptedException, IOException  {	
-		objSetPage = new SetPage();	
-		objLogin = new LoginPage();
-		objLogin.loginTo();
-		objSetPage.RemoveItemsfromSet("Remove Item Set","Disease","Kera");
-	}
-	
+//	
 //	@Test(priority = 0, description = "Create Set")
 //	public void CreateSet_Test() throws InterruptedException, IOException {
 //		try {
@@ -42,21 +42,21 @@ public class SetTest extends BaseTest{
 //		catch(Exception ex)
 //		{
 //			objSetPage.captureScreenshot("createSetFail");
-//			onFailreMeassage(ex.getMessage(),"createSetFail");
+//			onFailureMeassage(ex.getMessage(),"createSetFail","createSetFail");
 //		}
 //	}
 //	
 //	@Test(priority = 1, description = "View Set")
-//	public void ViewInvestigation_Test() throws InterruptedException, IOException  {
+//	public void ViewSet_Test() throws InterruptedException, IOException  {
 //		try {
 //			 /* To view the Investigation */
-//			objSetPage.viewSet("Set1");
+//			objSetPage.viewSet("Share Set1");
 //			onSuccessMeassage("Set is successfully opened");
 //		}
 //		catch(Exception ex)
 //		{
 //			objSetPage.captureScreenshot("viewSetFail");
-//			onFailreMeassage(ex.getMessage(),"viewSetFail");
+//			onFailureMeassage(ex.getMessage(),"viewSetFail","viewSetFail");
 //		}
 //	}
 //	
@@ -67,10 +67,10 @@ public class SetTest extends BaseTest{
 //			objSetPage.CreateSetFromFile("Set From File 1","Disease", "C:\\Users\\MugunthRaman\\git\\EagleAutomation\\Resources\\Q4 - Upload file - 1 (2).xlsx");
 //			onSuccessMeassage("Set is successfully Created from File");
 //		}
-//		catch(Exception ex)
+//		catch(Exception ecf)
 //		{
 //			objSetPage.captureScreenshot("createSetFromFileFail");
-//			onFailreMeassage(ex.getMessage(),"createSetFromFileFail");
+//			onFailureMeassage(ecf.getMessage(),"createSetFromFileFail","createSetFromFileFail");
 //		}
 //	}
 //	
@@ -84,7 +84,7 @@ public class SetTest extends BaseTest{
 //		catch(Exception ex)
 //		{
 //			objSetPage.captureScreenshot("createSetFromSetFail");
-//			onFailreMeassage(ex.getMessage(),"createSetFromSetFail");
+//			onFailureMeassage(ex.getMessage(),"createSetFromSetFail","createSetFromSetFail");
 //		}
 //	}
 //	
@@ -95,29 +95,29 @@ public class SetTest extends BaseTest{
 //			objSetPage.searchInSetExpand("Search Set 1","Disease","Kera","le");
 //			onSuccessMeassage("Search successful in Set Expand");
 //		}
-//		catch(Exception ex)
+//		catch(Exception es)
 //		{
 //			objSetPage.captureScreenshot("SearchInSetExpandFail");
-//			onFailreMeassage(ex.getMessage(),"SearchInSetExpandFail");
+//			onFailureMeassage(es.getMessage(),"SearchInSetExpandFail","SearchInSetExpandFail");
 //		}
 //	}
-//	
-//	@Test(priority = 6, description = "Set - Expand and add items from Catalog")
-//	public void SetExpandAddFromCatalog_Test() throws InterruptedException, IOException  {
-//		try {
-//			/* Set - Expand and add items from Catalog */
-//			objSetPage.ExpandAddFromCatalog("Set From Catalog 1","Disease","Kera","migraine");
-//			objSetPage.saveChanges();
-//			onSuccessMeassage("Items Added from Catalog into Set successfully");
-//		}
-//		catch(Exception ex)
-//		{
-//			objSetPage.captureScreenshot("SetExpandAddFromCatalogFail");
-//			onFailreMeassage(ex.getMessage(),"SetExpandAddFromCatalogFail");
-//		}
-//	}
-//	
-//	@Test(priority = 7, description = "Set - Expand and add items from Set")
+	
+	@Test(priority = 5, description = "Set - Expand and add items from Catalog")
+	public void SetExpandAddFromCatalog_Test() throws InterruptedException, IOException  {
+		try {
+			/* Set - Expand and add items from Catalog */
+			objSetPage.ExpandAddFromCatalog("Set From Catalog 1","Disease","Kera","migraine");
+			objSetPage.saveChanges();
+			onSuccessMeassage("Items Added from Catalog into Set successfully");
+		}
+		catch(Exception ex)
+		{
+			objSetPage.captureScreenshot("SetExpandAddFromCatalogFail");
+			onFailureMeassage(ex.getMessage(),"SetExpandAddFromCatalogFail","SetExpandAddFromCatalogFail");
+		}
+	}
+	
+//	@Test(priority = 6, description = "Set - Expand and add items from Set")
 //	public void SetExpandAddFromSet_Test() throws InterruptedException, IOException  {
 //		try {
 //			/* Set - Expand and add items from Set */
@@ -128,11 +128,11 @@ public class SetTest extends BaseTest{
 //		catch(Exception ex)
 //		{
 //			objSetPage.captureScreenshot("SetExpandAddFromSetFail");
-//			onFailreMeassage(ex.getMessage(),"SetExpandAddFromSetFail");
+//			onFailureMeassage(ex.getMessage(),"SetExpandAddFromSetFail","SetExpandAddFromSetFail");
 //		}
 //	}
 //	
-//	@Test(priority = 8, description = "Set - Expand and add items from File")
+//	@Test(priority = 7, description = "Set - Expand and add items from File")
 //	public void SetExpandAddFromFile_Test() throws InterruptedException, IOException  {
 //		try {
 //			/* Set - Expand and add items from File */
@@ -143,11 +143,11 @@ public class SetTest extends BaseTest{
 //		catch(Exception ex)
 //		{
 //			objSetPage.captureScreenshot("SetExpandAddFromFileFail");
-//			onFailreMeassage(ex.getMessage(),"SetExpandAddFromFileFail");
+//			onFailureMeassage(ex.getMessage(),"SetExpandAddFromFileFail","SetExpandAddFromFileFail");
 //		}
 //	}
 //	
-//	@Test(priority = 9, description = "Delete Card in Set Expand")
+//	@Test(priority = 8, description = "Delete Card in Set Expand")
 //	public void DeleteCardInSetExpand_Test() throws InterruptedException, IOException  {
 //		try {
 //			/* Delete Set from Expanded Set */
@@ -157,25 +157,25 @@ public class SetTest extends BaseTest{
 //		catch(Exception ex)
 //		{
 //			objSetPage.captureScreenshot("DeleteSetInExpandFail");
-//			onFailreMeassage(ex.getMessage(),"DeleteSetInExpandFail");
+//			onFailureMeassage(ex.getMessage(),"DeleteSetInExpandFail","DeleteSetInExpandFail");
 //		}
 //	}
-	
-	@Test(priority = 10, description = "Remove items from Set Expand")
-	public void RemoveItemsfromSet_Test() throws InterruptedException, IOException  {
-		try {
-			/* Remove items in Expanded Set */
-			objSetPage.RemoveItemsfromSet("Remove Item Set","Disease","Kera");
-			onSuccessMeassage("Items removed successfully in Set Expand");
-		}
-		catch(Exception ex)
-		{
-			objSetPage.captureScreenshot("SetItemsRemoveFail");
-			onFailreMeassage(ex.getMessage(),"SetItemsRemoveFail");
-		}
-	}
-
-//	@Test(priority = 11, description = "Modify Grid Settings in Set Expand")
+//	
+//	@Test(priority = 9, description = "Remove items from Set Expand")
+//	public void RemoveItemsfromSet_Test() throws InterruptedException, IOException  {
+//		try {
+//			/* Remove items in Expanded Set */
+//			objSetPage.RemoveItemsfromSet("Remove Item Set","Disease","Kera");
+//			onSuccessMeassage("Items removed successfully in Set Expand");
+//		}
+//		catch(Exception ex)
+//		{
+//			objSetPage.captureScreenshot("SetItemsRemoveFail");
+//			onFailureMeassage(ex.getMessage(),"SetItemsRemoveFail", "SetItemsRemoveFail");
+//		}
+//	}
+//
+//	@Test(priority = 10, description = "Modify Grid Settings in Set Expand")
 //	public void GridChangesInSet_Test() throws InterruptedException, IOException  {
 //		try {
 //			/* Modify Grid Settings in Set Expand */
@@ -185,11 +185,11 @@ public class SetTest extends BaseTest{
 //		catch(Exception ex)
 //		{
 //			objSetPage.captureScreenshot("GridChangesInSetFail");
-//			onFailreMeassage(ex.getMessage(),"GridChangesInSetFail");
+//			onFailureMeassage(ex.getMessage(),"GridChangesInSetFail","GridChangesInSetFail");
 //		}
 //	}
 //
-//	@Test(priority = 12, description = "Create And Delete A Set")
+//	@Test(priority = 11, description = "Create And Delete A Set")
 //	public void CreateAndDeleteSet_Test() throws InterruptedException, IOException  {
 //		try {
 //			/* Create And Delete A Set */
@@ -199,11 +199,11 @@ public class SetTest extends BaseTest{
 //		catch(Exception ex)
 //		{
 //			objSetPage.captureScreenshot("CreateAndDeleteSetFail");
-//			onFailreMeassage(ex.getMessage(),"CreateAndDeleteSetFail");
+//			onFailureMeassage(ex.getMessage(),"CreateAndDeleteSetFail","CreateAndDeleteSetFail");
 //		}
 //	}
 //
-//	@Test(priority = 13, description = "Create And Share A Set")
+//	@Test(priority = 12, description = "Create And Share A Set")
 //	public void CreateAndShareSet_Test() throws InterruptedException, IOException  {
 //		try {
 //			/* Create And Share A Set */
@@ -213,11 +213,11 @@ public class SetTest extends BaseTest{
 //		catch(Exception ex)
 //		{
 //			objSetPage.captureScreenshot("CreateAndShareSetFail");
-//			onFailreMeassage(ex.getMessage(),"CreateAndShareSetFail");
+//			onFailureMeassage(ex.getMessage(),"CreateAndShareSetFail","CreateAndShareSetFail");
 //		}
 //	}
 //	
-//	@Test(priority = 14, description = "Deleting A Set")
+//	@Test(priority = 13, description = "Deleting A Set")
 //	public void DeleteSet_Test() throws InterruptedException, IOException  {
 //		try {
 //			/* Delete An Existing Set */
@@ -227,11 +227,11 @@ public class SetTest extends BaseTest{
 //		catch(Exception ex)
 //		{
 //			objSetPage.captureScreenshot("DeleteSetFail");
-//			onFailreMeassage(ex.getMessage(),"DeleteSetFail");
+//			onFailureMeassage(ex.getMessage(),"DeleteSetFail","DeleteSetFail");
 //		}
 //	}
 //
-//	@Test(priority = 15, description = "Sharing A Set")
+//	@Test(priority = 14, description = "Sharing A Set")
 //	public void ShareSet_Test() throws InterruptedException, IOException  {
 //		try {
 //			/* Sharing An Existing Set */
@@ -241,7 +241,7 @@ public class SetTest extends BaseTest{
 //		catch(Exception ex)
 //		{
 //			objSetPage.captureScreenshot("ShareSetFail");
-//			onFailreMeassage(ex.getMessage(),"ShareSetFail");
+//			onFailureMeassage(ex.getMessage(),"ShareSetFail","ShareSetFail");
 //		}
 //	}
 	
@@ -252,11 +252,14 @@ public class SetTest extends BaseTest{
 		ExtentTestManager.getTest().log(Status.PASS, successMessage);
 	}
 	
-	public void onFailreMeassage(String failureMessage,String screenShotName) throws IOException
+	public void onFailureMeassage(String ReasonForFail, String failureMessage,String screenShotName) throws IOException, InterruptedException
 	{
 		ExtentTestManager.getTest().log(Status.FAIL, "Test Failed");
-		ExtentTestManager.getTest().log(Status.FAIL, failureMessage);
-		ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir") + "./Resources/ErrorScreenshots/"+screenShotName+".jpeg");		
+		ExtentTestManager.getTest().log(Status.FAIL, failureMessage+" : "+ReasonForFail);
+//		ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir") + "./Resources/ErrorScreenshots/"+screenShotName+".png");
+		Thread.sleep(3000);
+//		ExtentTestManager.getTest().addScreenCaptureFromPath("./Resources/ErrorScreenshots/"+screenShotName+".png");
+		ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/"+screenShotName+".png");
 	}
 
 }

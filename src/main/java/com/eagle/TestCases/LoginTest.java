@@ -28,7 +28,7 @@ public class LoginTest extends BaseTest{
 	
 		
 		@Test(priority = 0, description = "Login functionality verification")
-		public void VerifyLoginPage_Test() throws InterruptedException, IOException{
+		public void VerifyLoginPage_Test() throws Throwable{
 	      try{
 			    objLogin.loginTo(); 	
 			    onSuccessMeassage("Login is successfull");
@@ -38,8 +38,6 @@ public class LoginTest extends BaseTest{
 				onFailreMeassage(ex.getMessage(),"createInvFail");					
 			}
 	    }
-		
-		
 		
 		public void onSuccessMeassage(String successMessage)
 		{
