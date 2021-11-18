@@ -23,29 +23,29 @@ import org.testng.Assert;
 
 public class BasePage{
 
-    public static WebDriver driver;
-    public static String userName;
-    public static String passWord;
-   
-    public void setWebDriver(WebDriver driver) {
+	public static WebDriver driver;
+	public static String userName;
+	public static String passWord;
+
+	public void setWebDriver(WebDriver driver) {
 		BasePage.driver = driver;		
 	}
-    public void setUserName(String email) {
+	public void setUserName(String email) {
 		BasePage.userName = email;		
 	}
-    public void setPassword(String emailPass) {
+	public void setPassword(String emailPass) {
 		BasePage.passWord = emailPass;		
 	}
-	
-    public static void enterUserPass(WebElement user, WebElement pass) throws InterruptedException, AWTException {		
-			click(user);	user.sendKeys(userName);	
-			click(pass);	pass.sendKeys(passWord);	
+
+	public static void enterUserPass(WebElement user, WebElement pass) throws InterruptedException, AWTException {		
+		click(user);	user.sendKeys(userName);	
+		click(pass);	pass.sendKeys(passWord);	
 	}
-   
+
 	public static void click(WebElement element) throws InterruptedException, AWTException {
-		
+
 		WebDriverWait wait = new WebDriverWait(driver, 60);
-	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		wait.until(ExpectedConditions.visibilityOf(element));
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 		try {
@@ -55,23 +55,23 @@ public class BasePage{
 			element.click();
 		}
 	}	
-	
+
 	public static void verifyPage(String setToVerify, WebElement field) throws InterruptedException, AWTException, AssertionError {		
 		try {
-		String getheadertext = field.getText().trim();
-		assertEquals(setToVerify, getheadertext);
+			String getheadertext = field.getText().trim();
+			Assert.assertEquals(setToVerify, getheadertext);
 		}
-		catch (Exception ex) {
+		catch (AssertionError ex) {
 			throw ex;
 		}
 	}
-	
+
 	public static void scrollIntoView(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollTo(document.body.scrollHeight,0)");
 		js.executeScript("arguments[0].scrollIntoView(true);", element);
 	}
-	
+
 	public static void enterText(WebElement field, String value) throws InterruptedException, AWTException {
 		if (!value.equalsIgnoreCase("nil")) {			
 			BasePage.click(field);
@@ -85,14 +85,19 @@ public class BasePage{
 		WebDriverWait wait = new WebDriverWait(driver, 60);
 		wait.until(ExpectedConditions.visibilityOf(Element));	
 	}
-	
+
 	public static void waitforAnElementClickable(WebElement Element) throws InterruptedException, AWTException{
 		WebDriverWait wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.elementToBeClickable(Element));	
 	}
 
-	public static void CompareAttributeText(String attribute, String s, WebElement Element) { 
-		String t = Element.getAttribute(attribute);
-		Assert.assertEquals(s, t);
+	public static void CompareAttributeText(String attribute, String s, WebElement Element) throws InterruptedException, AWTException, AssertionError { 
+		try {
+			String t = Element.getAttribute(attribute);
+			Assert.assertEquals(s, t);
+		}		
+		catch (AssertionError ex) {
+			throw ex;
+		}
 	}
 }

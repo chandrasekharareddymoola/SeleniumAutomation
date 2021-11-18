@@ -26,7 +26,7 @@
       <span class="top-banner-title-font">Test results</span>
       <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
       <br/>
-      <span class="top-banner-font-1">1 suite, 1 failed test</span>
+      <span class="top-banner-font-1">1 suite</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -40,7 +40,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" panel-name="suite-SmokeTestingSuite" class="navigator-link">
-              <span class="suite-name border-failed">SmokeTestingSuite</span>
+              <span class="suite-name border-passed">SmokeTestingSuite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -93,21 +93,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">2 methods, 1 failed,   1 passed</span>
-                  </li>
-                  <li>
-                    <span class="method-list-title failed">Failed methods</span>
-                    <span class="show-or-hide-methods failed">
-                      <a href="#" panel-name="suite-SmokeTestingSuite" class="hide-methods failed suite-SmokeTestingSuite"> (hide)</a> <!-- hide-methods failed suite-SmokeTestingSuite -->
-                      <a href="#" panel-name="suite-SmokeTestingSuite" class="show-methods failed suite-SmokeTestingSuite"> (show)</a> <!-- show-methods failed suite-SmokeTestingSuite -->
-                    </span>
-                    <div class="method-list-content failed suite-SmokeTestingSuite">
-                      <span>
-                        <img src="failed.png" width="3%"/>
-                        <a href="#" panel-name="suite-SmokeTestingSuite" title="com.eagle.TestCases.SetTest" class="method navigator-link" hash-for-method="SetExpandAddFromCatalog_Test">SetExpandAddFromCatalog_Test</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                    </div> <!-- method-list-content failed suite-SmokeTestingSuite -->
+                    <span class="method-stats">2 methods,   2 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -116,6 +102,11 @@
                       <a href="#" panel-name="suite-SmokeTestingSuite" class="show-methods passed suite-SmokeTestingSuite"> (show)</a> <!-- show-methods passed suite-SmokeTestingSuite -->
                     </span>
                     <div class="method-list-content passed suite-SmokeTestingSuite">
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-SmokeTestingSuite" title="com.eagle.TestCases.ExplorationTest" class="method navigator-link" hash-for-method="ExplorationExpandAddFromSet_Test">ExplorationExpandAddFromSet_Test</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
                         <a href="#" panel-name="suite-SmokeTestingSuite" title="com.eagle.TestCases.LoginTest" class="method navigator-link" hash-for-method="VerifyLoginPage_Test">VerifyLoginPage_Test</a> <!-- method navigator-link -->
@@ -133,44 +124,6 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-SmokeTestingSuite" class="panel SmokeTestingSuite">
-          <div class="suite-SmokeTestingSuite-class-failed">
-            <div class="main-panel-header rounded-window-top">
-              <img src="failed.png"/>
-              <span class="class-name">com.eagle.TestCases.SetTest</span>
-            </div> <!-- main-panel-header rounded-window-top -->
-            <div class="main-panel-content rounded-window-bottom">
-              <div class="method">
-                <div class="method-content">
-                  <a name="SetExpandAddFromCatalog_Test">
-                  </a> <!-- SetExpandAddFromCatalog_Test -->
-                  <span class="method-name">SetExpandAddFromCatalog_Test</span>
-                  <div class="stack-trace">org.openqa.selenium.NoSuchWindowException: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=95.0.4638.69)
-Build info: version: &apos;3.14.0&apos;, revision: &apos;aacccce0&apos;, time: &apos;2018-08-02T20:19:58.91Z&apos;
-System info: host: &apos;MUGUNTH-DESKTOP&apos;, ip: &apos;172.17.200.17&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;15.0.2&apos;
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 95.0.4638.69, chrome: {chromedriverVersion: 95.0.4638.69 (6a1600ed572fe..., userDataDir: C:\Users\MUGUNT~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:62619}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
-Session ID: 4ccd935fddfa07ea461ec49dc026dc51
-	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
-	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
-	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:548)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:605)
-	at org.openqa.selenium.remote.RemoteWebDriver.getScreenshotAs(RemoteWebDriver.java:294)
-	at com.eagle.pages.SetPage.captureScreenshot(SetPage.java:1150)
-	at com.eagle.TestCases.SetTest.SetExpandAddFromCatalog_Test(SetTest.java:115)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-... Removed 32 stack frames
-</div> <!-- stack-trace -->
-                  <em>
-(Set - Expand and add items from Catalog)                  </em>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-            </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-SmokeTestingSuite-class-failed -->
           <div class="suite-SmokeTestingSuite-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
@@ -184,6 +137,23 @@ Session ID: 4ccd935fddfa07ea461ec49dc026dc51
                   <span class="method-name">VerifyLoginPage_Test</span>
                   <em>
 (Login functionality verification)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-SmokeTestingSuite-class-passed -->
+          <div class="suite-SmokeTestingSuite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.eagle.TestCases.ExplorationTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="ExplorationExpandAddFromSet_Test">
+                  </a> <!-- ExplorationExpandAddFromSet_Test -->
+                  <span class="method-name">ExplorationExpandAddFromSet_Test</span>
+                  <em>
+(Exploration - Expand and add items from Set)                  </em>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -204,7 +174,7 @@ Session ID: 4ccd935fddfa07ea461ec49dc026dc51
   &lt;test thread-count=&quot;5&quot; name=&quot;Smoke Test cases&quot;&gt;
     &lt;classes&gt;
       &lt;class name=&quot;com.eagle.TestCases.LoginTest&quot;/&gt;
-      &lt;class name=&quot;com.eagle.TestCases.SetTest&quot;/&gt;
+      &lt;class name=&quot;com.eagle.TestCases.ExplorationTest&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Smoke Test cases --&gt;
 &lt;/suite&gt; &lt;!-- SmokeTestingSuite --&gt;
@@ -246,18 +216,18 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(2);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'VerifyLoginPage_Test')
-data.setCell(0, 2, 'com.eagle.TestCases.LoginTest')
-data.setCell(0, 3, 43794);
+data.setCell(0, 1, 'ExplorationExpandAddFromSet_Test')
+data.setCell(0, 2, 'com.eagle.TestCases.ExplorationTest')
+data.setCell(0, 3, 101614);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'SetExpandAddFromCatalog_Test')
-data.setCell(1, 2, 'com.eagle.TestCases.SetTest')
-data.setCell(1, 3, 33114);
+data.setCell(1, 1, 'VerifyLoginPage_Test')
+data.setCell(1, 2, 'com.eagle.TestCases.LoginTest')
+data.setCell(1, 3, 37882);
 window.suiteTableData['SmokeTestingSuite']= { tableData: data, tableDiv: 'times-div-SmokeTestingSuite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 1 minutes</span>
+              <span class="suite-total-time">Total running time: 2 minutes</span>
               <div id="times-div-SmokeTestingSuite">
               </div> <!-- times-div-SmokeTestingSuite -->
             </div> <!-- times-div -->
@@ -290,28 +260,26 @@ return data;
               </div> <!-- configuration-class before -->
               <div class="configuration-class before">
                 <span class="method-name">beforeClass</span>
-                <span class="method-start">7189 ms</span>
+                <span class="method-start">6776 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
                 <span class="method-name">VerifyLoginPage_Test</span>
-                <span class="method-start">7216 ms</span>
+                <span class="method-start">6801 ms</span>
               </div> <!-- test-method -->
             </div> <!-- chronological-class -->
             <div class="chronological-class">
-              <div class="chronological-class-name">com.eagle.TestCases.SetTest</div> <!-- chronological-class-name -->
-              <div class="configuration-class before">
-                <span class="method-name">beforeClass</span>
-                <span class="method-start">51016 ms</span>
-              </div> <!-- configuration-class before -->
+              <div class="chronological-class-name">com.eagle.TestCases.ExplorationTest</div> <!-- chronological-class-name -->
               <div class="configuration-class before">
                 <span class="method-name">launchApplication</span>
-                <span class="method-start">51016 ms</span>
+                <span class="method-start">44687 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="configuration-class before">
+                <span class="method-name">beforeClass</span>
+                <span class="method-start">44687 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
-                <img src="failed.png">
-                </img>
-                <span class="method-name">SetExpandAddFromCatalog_Test</span>
-                <span class="method-start">51471 ms</span>
+                <span class="method-name">ExplorationExpandAddFromSet_Test</span>
+                <span class="method-start">45093 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

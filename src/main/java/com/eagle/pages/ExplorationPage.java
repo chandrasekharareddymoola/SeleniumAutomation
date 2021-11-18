@@ -24,6 +24,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+import com.aventstack.extentreports.Status;
+import com.eagle.Reports.ExtentTestManager;
 import com.eagle.pages.SetPage;
 
 public class ExplorationPage extends BasePage{
@@ -91,9 +94,6 @@ public class ExplorationPage extends BasePage{
 
 	@FindBy(xpath = "//*[@data-icon-name='Delete']//parent::span")
 	public WebElement deleteCardExpand;	
-
-	@FindBy(xpath = "//*[@class='ListExplorations__title___1KG1C']")
-	public WebElement ExplorationTitle;	
 
 	@FindBy(xpath = "(//*[@class='PaginationControls__message___Zodph'])[2]//b[2]")
 	public WebElement NoOfPagesInExploration;	
@@ -250,6 +250,9 @@ public class ExplorationPage extends BasePage{
 
 	@FindBy(xpath = "//*[@role='columnheader']")
 	public WebElement columnHeaderFirstPage;
+	
+	@FindBy(xpath = "//*[@data-icon-name='Cancel']")
+	public WebElement dialogBoxClose;
 
 
 
@@ -261,39 +264,39 @@ public class ExplorationPage extends BasePage{
 	WebDriverWait wait = new WebDriverWait(driver, 5);
 	Actions action = new Actions(driver);
 
-	public void Home(){    	
+	public void Home() throws AWTException, InterruptedException{    	
 		BasePage.click(homeIcon);
 		action.moveToElement(TermsOfUse).perform();
 	}  
 
-	public ExplorationPage(){ 	
+	public ExplorationPage() throws AWTException, InterruptedException{ 	
 		PageFactory.initElements(driver, this); 
 		BasePage.click(explorationIcon);
 		action.moveToElement(TermsOfUse).perform();
 	}
 
-	public void Exploration(){ 	
+	public void Exploration() throws AWTException, InterruptedException{ 	
 		BasePage.click(explorationIcon);
 		action.moveToElement(TermsOfUse).perform();
 	}
 
-	public void verifyExplorationHomePage(String stringToVerify){    	
+	public void verifyExplorationHomePage(String stringToVerify) throws AWTException, InterruptedException, AssertionError{    	
 		BasePage.verifyPage(stringToVerify, pageIdentifier);
 	}
 
-	public void addExploration(){ 
+	public void addExploration() throws AWTException, InterruptedException{ 
 		BasePage.click(addExploration);
 	}
 
-	public void createExplorationSearch(){ 
+	public void createExplorationSearch() throws AWTException, InterruptedException{ 
 		BasePage.click(searchforentities);
 	}
 
-	public void clickStart() {	    	
+	public void clickStart()throws AWTException, InterruptedException {	    	
 		BasePage.click(startButton);        
 	}   
 
-	public void createExplorationSet(String setToAdd) throws InterruptedException{ 
+	public void createExplorationSet(String setToAdd) throws AWTException, InterruptedException{ 
 		BasePage.click(selectaSet);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Select a Set']")));
 		this.searchExpandEnterName(setToAdd);
@@ -301,22 +304,22 @@ public class ExplorationPage extends BasePage{
 		Thread.sleep(10000);
 	}
 
-	public void ExplorationTitle(String textTitle) throws InterruptedException{    	
+	public void ExplorationTitle(String textTitle) throws AWTException, InterruptedException{    	
 		BasePage.enterText(titleExploration, textTitle);
 	}   
 
-	public void selectEntity(String entityToSelect){    	
+	public void selectEntity(String entityToSelect) throws AWTException, InterruptedException{    	
 		BasePage.click(pageIdentifier);
 		WebElement entitytoSelect = driver.findElement(By.xpath("//button//span[contains(text(),'"+entityToSelect+"')]"));
 		BasePage.click(entitytoSelect);
 	}
 
-	public void searchItems(String ItemtoSearch) throws InterruptedException{
+	public void searchItems(String ItemtoSearch) throws AWTException, InterruptedException{
 		BasePage.click(serachBox);
 		BasePage.enterText(serachBox, ItemtoSearch);
 	}
 
-	public void createCheck(String ExplorationToCheck) throws InterruptedException{	    	
+	public void createCheck(String ExplorationToCheck) throws AWTException, InterruptedException,AssertionError{	    	
 		this.Exploration();
 		Thread.sleep(20000);
 		BasePage.waitforAnElement(columnHeaderFirstPage);
@@ -328,9 +331,12 @@ public class ExplorationPage extends BasePage{
 		catch (Exception ExplorationNotPresent){
 			System.out.println("Exploration is not present in the list");
 		}
+		catch (AssertionError ExplorationNotPresent){
+			System.out.println("Exploration is not present in the list");
+		}
 	}   
 
-	public void AddandStart(){
+	public void AddandStart() throws AWTException, InterruptedException{
 		//wait.until(ExpectedConditions.elementToBeClickable(addAll));
 		while(addAll.isDisplayed()){
 			try
@@ -345,22 +351,91 @@ public class ExplorationPage extends BasePage{
 		BasePage.click(startButton);
 	}
 
-	public void createExplorationFromSearch(String ExplorationName, String EntitytoSelect, String ItemtoSearch) throws InterruptedException{	    	
-		this.Exploration();
-		this.addExploration();
-		this.createExplorationSearch();
-		this.verifyExplorationHomePage("Uncategorized");
-		this.ExplorationTitle(ExplorationName);
-		this.selectEntity(EntitytoSelect);
-		this.searchItems(ItemtoSearch); 
-		this.AddandStart();   
-		BasePage.waitforAnElement(ExplorationList);
-		System.out.println("Exploration Created successfully from search");
-		this.createCheck(ExplorationName);
+
+	public void waitForExploration() throws Throwable{
+		try {  
+			boolean iden = true;
+			do
+			{
+				try {	    	
+					columnHeaderFirstPage.isDisplayed();
+					iden = false;	  
+				}
+				catch(Exception ex) {Thread.sleep(5000);}	 
+			}
+			while(iden);	         
+		}
+		catch(Exception | AssertionError ex)
+		{
+			throw ex;
+		}
+	}
+	
+	public void waitForExplorationTitle() throws Throwable{
+		try {  
+			boolean iden = true;
+			do
+			{
+				try {	    	
+					titleExploration.isDisplayed();
+					iden = false;	  
+				}
+				catch(Exception ex) {Thread.sleep(5000);}	 
+			}
+			while(iden);	         
+		}
+		catch(Exception | AssertionError ex)
+		{
+			throw ex;
+		}
+	}
+	
+	public void waitForEditAndDelete() throws Throwable{
+		try {  
+			boolean iden = true;
+			do
+			{
+				try {	    	
+					edit.isDisplayed();
+					iden = false;	  
+				}
+				catch(Exception ex) {Thread.sleep(5000);}	 
+			}
+			while(iden);	         
+		}
+		catch(Exception | AssertionError ex)
+		{
+			throw ex;
+		}
+	}
+
+	public void createExplorationFromSearch(String ExplorationName, String EntitytoSelect, String ItemtoSearch) throws Throwable{	    	
+		try {
+			this.Exploration();
+			this.waitForExploration();
+			this.addExploration();
+			this.createExplorationSearch();
+			this.verifyExplorationHomePage("Uncategorized");
+			this.ExplorationTitle(ExplorationName);
+			this.selectEntity(EntitytoSelect);
+			this.searchItems(ItemtoSearch); 
+			this.AddandStart();   
+			BasePage.waitforAnElement(ExplorationList);
+			ExtentTestManager.getTest().log(Status.PASS, ExplorationName + " Exploration is created from search");
+			this.createCheck(ExplorationName);
+			ExtentTestManager.getTest().log(Status.PASS, "Created Exploration is verified");
+		}
+		catch(Exception ex){
+			throw ex;
+		}
+		catch(AssertionError ex){
+			throw ex;
+		}
 	}   	
 
-	public void createExploration(String ExplorationName, String EntitytoSelect, String ItemtoSearch) throws InterruptedException{	    	
+	public void createExploration(String ExplorationName, String EntitytoSelect, String ItemtoSearch) throws Throwable{	    	
 		this.Exploration();
+		this.waitForExploration();
 		this.addExploration();
 		this.createExplorationSearch();
 		this.verifyExplorationHomePage("Uncategorized");
@@ -370,41 +445,54 @@ public class ExplorationPage extends BasePage{
 		this.searchItems(ItemtoSearch); 
 		this.AddandStart();   
 		BasePage.waitforAnElement(ExplorationList);
-		System.out.println("Exploration Created successfully");
+		ExtentTestManager.getTest().log(Status.PASS, ExplorationName + " is created");
 	}   	
 
-	public void createExplorationInitallyFromSet(String SetName,String entityToSelect, String textToSearch , String ExplorationName) throws InterruptedException, AWTException{	    	
-		objSetPage = new SetPage();  
-		objSetPage.createSet(SetName, entityToSelect, textToSearch);
-		this.Home();
+	public void createExplorationInitallyFromSet(String SetName,String entityToSelect, String textToSearch , String ExplorationName) throws Throwable{	    	
+		try {
+			objSetPage = new SetPage();  
+			objSetPage.createSet(SetName, entityToSelect, textToSearch);
+			this.Home();
 
-		this.Exploration();
-		this.addExploration();
-		this.createExplorationSet(SetName);
-		this.ExplorationTitle(ExplorationName);
-		BasePage.waitforAnElement(ExplorationList);
-		System.out.println("Exploration Created successfully Initially from Set");
-		this.createCheck(ExplorationName);
-		this.Home();
+			this.Exploration();
+			this.waitForExploration();
+			this.addExploration();
+			this.createExplorationSet(SetName);
+			ExtentTestManager.getTest().log(Status.PASS, SetName + " Set is added as base to create Exploration " + ExplorationName);
+			this.waitForExplorationTitle();
+			this.ExplorationTitle(ExplorationName);
+			BasePage.waitforAnElement(ExplorationList);
+			ExtentTestManager.getTest().log(Status.PASS, ExplorationName + " Exploration is created from Set intially");
+			this.createCheck(ExplorationName);
+			ExtentTestManager.getTest().log(Status.PASS, "Created Exploration is verified");
+			this.Home();
+		}
+		catch(Exception ex){
+			throw ex;
+		}
+		catch(AssertionError ex){
+			throw ex;
+		}
 	}  
 
-	public void expandExploration(){
+	public void expandExploration() throws Throwable{
 		BasePage.click(expand);
+		this.waitForEditAndDelete();
 	}
 
-	public void editCard(){
+	public void editCard() throws AWTException, InterruptedException{
 		BasePage.click(edit);
 	}
 
-	public void accept(){
+	public void accept()throws AWTException, InterruptedException{
 		BasePage.click(accept);
 	}
 
-	public void addFromSetExpand(){
+	public void addFromSetExpand()throws AWTException, InterruptedException{
 		BasePage.click(accept);
 	}
 
-	public void selectItems(List<String> myAlist){  
+	public void selectItems(List<String> myAlist)throws AWTException, InterruptedException{  
 		try {
 
 			do{ 
@@ -426,15 +514,16 @@ public class ExplorationPage extends BasePage{
 		catch(Exception ex) {}
 	}
 
-	public void removeItems(){	
+	public void removeItems()throws AWTException, InterruptedException{	
 		BasePage.click(remove);
 		BasePage.click(saveChanges);
 	}
 
-	public void RemoveItemsfromExploration(String ExplorationToCreate, String entityToSelect, String textToSearch) throws InterruptedException
+	public void RemoveItemsfromExploration(String ExplorationToCreate, String entityToSelect, String textToSearch) throws Throwable
 	{
 		this.createExploration(ExplorationToCreate, entityToSelect, textToSearch);	 
 		this.Exploration();
+		this.waitForExploration();
 		WebElement opn = this.openExploration(ExplorationToCreate);
 		BasePage.click(opn);
 		this.expandExploration();
@@ -455,75 +544,97 @@ public class ExplorationPage extends BasePage{
 		this.FileUploadFormExplorer(filePath);
 	}
 
-	public void addItemsExpand() {	    
+	public void addItemsExpand() throws AWTException, InterruptedException{	    
 		BasePage.click(addItemsExpand);	 				
 	}
 
-	public void addItemsFromSet(String existingSetName) {	    
+	public void addItemsFromSet(String existingSetName) throws AWTException, InterruptedException{	    
 		BasePage.click(addFromSet);	    	
 		WebElement opn = this.openExploration(existingSetName);
 		BasePage.click(opn);  
 	}
 
-	public void CreateExplorationFromFile(String ExplorationName,String EntitytoSelect, String FileLocation) throws InterruptedException, AWTException { 
-		this.addExploration();
-		this.createExplorationSearch();
-		this.verifyExplorationHomePage("Uncategorized");
-		this.ExplorationTitle(ExplorationName);
-		this.selectEntity(EntitytoSelect);
-		this.addItemsFromFile(FileLocation); 
-		this.AddandStart(); 
-		BasePage.waitforAnElement(ExplorationList);
-		System.out.println("Exploration Created successfully from search and file within");
-		this.createCheck(ExplorationName);
-		this.Home();
+	public void CreateExplorationFromFile(String ExplorationName,String EntitytoSelect, String FileLocation) throws Throwable { 
+		try {
+			this.Exploration();
+			this.waitForExploration();
+			this.addExploration();
+			this.createExplorationSearch();
+			this.verifyExplorationHomePage("Uncategorized");
+			this.ExplorationTitle(ExplorationName);
+			this.selectEntity(EntitytoSelect);
+			this.addItemsFromFile(FileLocation); 
+			this.AddandStart(); 
+			BasePage.waitforAnElement(ExplorationList);
+			ExtentTestManager.getTest().log(Status.PASS, ExplorationName +" Exploration is created using a file after Search");
+			this.createCheck(ExplorationName);
+			ExtentTestManager.getTest().log(Status.PASS, "Created Exploration is verified");
+			this.Home();
+		}
+		catch(Exception ex){
+			throw ex;
+		}
+		catch(AssertionError ex){
+			throw ex;
+		}
 	}
 
-	public void CreateExplorationFromSet(String SetName, String entityToSelect, String textToSearch, String ExplorationName) throws InterruptedException, AWTException { 
-		objSetPage = new SetPage();  
-		objSetPage.createSet(SetName, entityToSelect, textToSearch);
-		this.Home();
+	public void CreateExplorationFromSet(String SetName, String entityToSelect, String textToSearch, String ExplorationName) throws Throwable { 
+		try {
+			objSetPage = new SetPage();  
+			objSetPage.createSet(SetName, entityToSelect, textToSearch);
+			this.Home();
 
-		this.addExploration();
-		this.createExplorationSearch();
-		this.verifyExplorationHomePage("Uncategorized");
-		this.ExplorationTitle(ExplorationName);
-		this.selectEntity(entityToSelect);
-		this.addItemsFromSet(SetName); 
-		this.clickStart();  
-		BasePage.waitforAnElement(ExplorationList);
-		System.out.println("Exploration Created successfully from search and then from a set within");
-		this.createCheck(ExplorationName);
-		this.Home();
+			this.Exploration();
+			this.waitForExploration();
+			this.addExploration();
+			this.createExplorationSearch();
+			this.verifyExplorationHomePage("Uncategorized");
+			this.ExplorationTitle(ExplorationName);
+			this.selectEntity(entityToSelect);
+			this.addItemsFromSet(SetName); 
+			this.clickStart();  
+			BasePage.waitforAnElement(ExplorationList);
+			ExtentTestManager.getTest().log(Status.PASS, ExplorationName +" Exploration is created using a set after Search");
+			this.createCheck(ExplorationName);
+			ExtentTestManager.getTest().log(Status.PASS, "Created Exploration is verified");
+			this.Home();
+		}
+		catch(Exception ex){
+			throw ex;
+		}
+		catch(AssertionError ex){
+			throw ex;
+		}
 	}
 
-	public void close(){	
+	public void close()throws AWTException, InterruptedException{	
 		BasePage.click(close);
 	}
 
-	public void saveChanges(){	
+	public void saveChanges() throws AWTException, InterruptedException{	
 		BasePage.click(saveChanges);
 	}
 
-	public void searchExpandEnterName(String SetNameToAddFrom){ 		 
+	public void searchExpandEnterName(String SetNameToAddFrom) throws AWTException, InterruptedException{ 		 
 		BasePage.click(searchSetToAddExpand);
 		searchSetToAddExpand.sendKeys(SetNameToAddFrom);
 	}
 
-	public void clickSetInExpand(String SelectaSet) throws InterruptedException{ 		 
+	public void clickSetInExpand(String SelectaSet) throws AWTException, InterruptedException{ 		 
 		WebElement SelectaSetfromExpand = driver.findElement(By.xpath("//*[@title='"+SelectaSet+"']"));
 		BasePage.click(SelectaSetfromExpand);
 		Thread.sleep(3000);
 	}
 
-	public void addFromSetExpand(String SetNameToAddFrom) throws InterruptedException {	    
+	public void addFromSetExpand(String SetNameToAddFrom) throws AWTException, InterruptedException {	    
 		BasePage.click(addFromSetExpand);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Select a Set']")));
 		this.searchExpandEnterName(SetNameToAddFrom);
 		this.clickSetInExpand(SetNameToAddFrom);
 	}	
 
-	public void CompareTwovalues(String Value1, String Value2) throws InterruptedException {	    
+	public void CompareTwovalues(String Value1, String Value2) throws AWTException, InterruptedException, AssertionError {	    
 		if(Integer.parseInt(Value1)<Integer.parseInt(Value2)){
 			System.out.println("Number of records have increased");
 		}
@@ -534,27 +645,40 @@ public class ExplorationPage extends BasePage{
 
 
 	//Adding a set from expand into exploration
-	public void ExpandAddFromSet(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch, String setToAdd) throws InterruptedException {    // Add from a set
-		this.createExploration(ExplorationToCreate, EntitytoSelect, ItemtoSearch);
-		this.expandExploration();
-		this.editCard();
-		String NoOfRecordsInitial = ItemCountInExpand.getText();
-		this.addItemsExpand();
-		this.addFromSetExpand(setToAdd); // Set to be added
-		Thread.sleep(5000);
-		String NoOfRecordsFinal = ItemCountInExpand.getText();
-		this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
-		System.out.println("Exploration - Set added in expand successfully");
+	public void ExpandAddFromSet(String setToAdd, String entityToSelect, String textToSearchInSet, String ExplorationName, String textToSearchInExploration) throws Throwable {    // Add from a set
+		try {
+			objSetPage = new SetPage();  
+			objSetPage.createSet(setToAdd, entityToSelect, textToSearchInSet);
+			this.Home();
+
+			
+			this.createExploration(ExplorationName, entityToSelect, textToSearchInExploration);
+			this.expandExploration();
+			this.editCard();
+			String NoOfRecordsInitial = ItemCountInExpand.getText();
+			this.addItemsExpand();
+			this.addFromSetExpand(setToAdd); // Set to be added
+			Thread.sleep(5000);
+			String NoOfRecordsFinal = ItemCountInExpand.getText();
+			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
+			ExtentTestManager.getTest().log(Status.PASS, "Exploration - Set added in expand");
+		}
+		catch(Exception ex) {
+			throw ex;
+		}
+		catch(AssertionError ex) {
+			throw ex;
+		}
 	}
 
-	public void searchCatalog(String SearchInCatalog) throws InterruptedException{	    
+	public void searchCatalog(String SearchInCatalog) throws AWTException, InterruptedException{	    
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from the Catalog']")));
 		BasePage.click(searchCatalog);
 		searchCatalog.sendKeys(SearchInCatalog);
 		Thread.sleep(2000);
 	}
 
-	public void addFromSetCatalog(String TextToSearch) throws InterruptedException {	    
+	public void addFromSetCatalog(String TextToSearch) throws AWTException, InterruptedException {	    
 		BasePage.click(addFromExpandCatalog);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from the Catalog']")));
 		this.searchCatalog(TextToSearch);
@@ -562,30 +686,40 @@ public class ExplorationPage extends BasePage{
 		BasePage.click(addAll);
 	}
 
-	public void add(){	    
+	public void add() throws AWTException, InterruptedException{	    
 		BasePage.click(Add);
 	}
 
 	//Adding items from catalog from expand into exploration
-	public void ExpandAddFromCatalog(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch, String TextToSearch) throws InterruptedException { 
-		this.createExploration(ExplorationToCreate, EntitytoSelect, ItemtoSearch);
-		this.expandExploration();
-		this.editCard();
-		String NoOfRecordsInitial = ItemCountInExpand.getText();
-		this.addItemsExpand();
-		this.addFromSetCatalog(TextToSearch); // Text to be added 
-		this.add();
-		Thread.sleep(5000);
-		String NoOfRecordsFinal = ItemCountInExpand.getText();
-		this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
-		System.out.println("Exploration - Items added from Catalog in expand successfully");
+	public void ExpandAddFromCatalog(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch, String TextToSearch) throws Throwable{ 
+		try {
+			this.createExploration(ExplorationToCreate, EntitytoSelect, ItemtoSearch);
+			this.expandExploration();
+			
+			this.editCard();
+			String NoOfRecordsInitial = ItemCountInExpand.getText();
+			this.addItemsExpand();
+			this.addFromSetCatalog(TextToSearch); // Text to be added 
+			ExtentTestManager.getTest().log(Status.PASS, TextToSearch + " is searched");
+			this.add();
+			Thread.sleep(5000);
+			String NoOfRecordsFinal = ItemCountInExpand.getText();
+			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
+			ExtentTestManager.getTest().log(Status.PASS, "Exploration - Items added from Catalog in expand");
+		}
+		catch(Exception ex) {
+			throw ex;
+		}
+		catch(AssertionError ex) {
+			throw ex;
+		}
 	}
 
-	public void fileSelectDropdown(){	    
+	public void fileSelectDropdown()throws AWTException, InterruptedException{	    
 		BasePage.click(fileSelectDropdown);
 	}
 
-	public void FileuploadCategory(String CategoryName) {	    
+	public void FileuploadCategory(String CategoryName) throws AWTException, InterruptedException{	    
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Drag files here']")));
 		this.fileSelectDropdown();
 		BasePage.click(driver.findElement(By.xpath("//*[@title='"+CategoryName+"']")));
@@ -593,7 +727,7 @@ public class ExplorationPage extends BasePage{
 	}	
 
 
-	public void FileUploadFormExplorer(String FileLocation) throws AWTException, InterruptedException {	    
+	public void FileUploadFormExplorer(String FileLocation) throws AWTException, InterruptedException{	    
 		StringSelection ss = new StringSelection(FileLocation);
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
 
@@ -613,7 +747,7 @@ public class ExplorationPage extends BasePage{
 	}	
 
 
-	public void addFromFile(String CategoryName, String Filelocation, String FileName) throws AWTException, InterruptedException {	    
+	public void addFromFile(String CategoryName, String Filelocation, String FileName) throws AWTException, InterruptedException, AssertionError {	    
 		BasePage.click(addFromFile);	 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from a File']")));
 		this.FileuploadCategory(CategoryName);
@@ -623,33 +757,47 @@ public class ExplorationPage extends BasePage{
 		BasePage.click(addAll);
 	}	
 
-	public void addToGrid(){	    
+	public void addToGrid() throws AWTException, InterruptedException{	    
 		BasePage.click(AddToGrid);
 	}
 
 	//Adding items from File from expand into Exploration
-	public void ExpandAddFromFile(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch , String CategoryName, String Filelocation, String FileName) throws InterruptedException, AWTException { 
-		this.createExploration(ExplorationToCreate, EntitytoSelect, ItemtoSearch);
-		this.expandExploration();
-		Thread.sleep(30000);
-		this.editCard();
-		String NoOfRecordsInitial = ItemCountInExpand.getText();
-		this.addItemsExpand();
-		this.addFromFile(CategoryName, Filelocation, FileName); 
-		this.addToGrid();
-		Thread.sleep(5000);
-		String NoOfRecordsFinal = ItemCountInExpand.getText();
-		this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
-		System.out.println("Exploration - Items added from File in expand successfully");
+	public void ExpandAddFromFile(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch , String CategoryName, String Filelocation, String FileName) throws Throwable { 
+		try {
+			this.createExploration(ExplorationToCreate, EntitytoSelect, ItemtoSearch);
+			this.expandExploration();
+			waitforAnElement(edit);
+			this.editCard();
+			String NoOfRecordsInitial = ItemCountInExpand.getText();
+			this.addItemsExpand();
+			this.addFromFile(CategoryName, Filelocation, FileName); 
+			this.addToGrid();
+			waitforAnElement(ItemCountInExpand);
+			String NoOfRecordsFinal = ItemCountInExpand.getText();
+			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
+			ExtentTestManager.getTest().log(Status.PASS, "Exploration - Items added from File in expand");
+		}
+		catch(Exception ex) {
+			if(dialogBoxClose.isDisplayed()) {
+				BasePage.click(dialogBoxClose);
+			}
+			throw ex;
+		}
+		catch(AssertionError ex) {
+			if(dialogBoxClose.isDisplayed()) {
+				BasePage.click(dialogBoxClose);
+			}
+			throw ex;
+		}
 	}
 
 
-	public void DeleteCardExpand() throws InterruptedException { 
-		Thread.sleep(5000);
+	public void DeleteCardExpand() throws AWTException, InterruptedException { 
+		Thread.sleep(10000);
 		BasePage.click(deleteCardExpand);
 	}
 
-	public void RemoveItemsfromExploration()
+	public void RemoveItemsfromExploration() throws Throwable
 	{
 		WebElement opn = this.openExploration("Share Set1");
 		BasePage.click(opn);
@@ -666,21 +814,30 @@ public class ExplorationPage extends BasePage{
 		System.out.println("Items removed successfully");
 	}
 
-	public void Delete() { 
+	public void Delete() throws AWTException, InterruptedException{ 
 		BasePage.click(Delete);
 	}
 
-	public void DeleteExploraionInExpand(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch) throws InterruptedException, AWTException { 
-		this.createExploration(ExplorationToCreate, EntitytoSelect, ItemtoSearch);
-		this.expandExploration();
-		this.DeleteCardExpand();
-		WebElement DeleteConfirm =  driver.findElement(By.xpath("//*[@role='heading' and text()='Remove "+EntitytoSelect+"?']"));
-		BasePage.waitforAnElement(DeleteConfirm);
-		this.Remove();
-		BasePage.waitforAnElement(startButton);
-		this.verifyExplorationHomePage("Uncategorized");
-		BasePage.CompareAttributeText("Value", ExplorationToCreate, titleExploration); //Exploration page
-		System.out.println("First Card deleted from  expanded view");
+	public void DeleteExploraionInExpand(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch) throws Throwable { 
+		try {
+			this.createExploration(ExplorationToCreate, EntitytoSelect, ItemtoSearch);
+			this.expandExploration();
+			this.DeleteCardExpand();
+			WebElement DeleteConfirm =  driver.findElement(By.xpath("//*[@role='heading' and text()='Remove "+EntitytoSelect+"?']"));
+			BasePage.waitforAnElement(DeleteConfirm);
+			this.Remove();
+			ExtentTestManager.getTest().log(Status.PASS, "First Card is deleted via  expanded view and hence the exploration is deleted");
+			BasePage.waitforAnElement(startButton);
+			this.verifyExplorationHomePage("Uncategorized");
+			BasePage.CompareAttributeText("Value", ExplorationToCreate, titleExploration); //Exploration page
+			ExtentTestManager.getTest().log(Status.PASS, "Removal verified");
+		}
+		catch(Exception ex) {
+			throw ex;
+		}
+		catch(AssertionError ex){
+			throw ex;
+		}
 	}
 
 	public int NoOfPagesInExplorationPage() throws InterruptedException, AWTException { 
@@ -758,141 +915,200 @@ public class ExplorationPage extends BasePage{
 		catch(Exception ex) {}
 	}
 
-	public void DeleteExploration(String SettoDelete) throws InterruptedException{
-		this.Exploration();
-		Thread.sleep(10000);
-		BasePage.waitforAnElement(columnHeaderFirstPage);
-		selectMenuOptionInList(SettoDelete);
-		Thread.sleep(3000);
-		BasePage.click(deleteIcon);
-		String DeleteConfirm =  driver.findElement(By.xpath("//*[@role='heading']")).getText();
-		Assert.assertEquals(DeleteConfirm, "Delete Exploration?");
-		BasePage.click(deleteIcon);	    	    	
+	public void DeleteExploration(String ExplorationtoDelete) throws Throwable{
+		try {
+			this.Exploration();
+			this.waitForExploration();
+			selectMenuOptionInList(ExplorationtoDelete);
+			Thread.sleep(3000);
+			BasePage.click(deleteIcon);
+			String DeleteConfirm =  driver.findElement(By.xpath("//*[@role='heading']")).getText();
+			Assert.assertEquals(DeleteConfirm, "Delete Exploration?");
+			BasePage.click(deleteIcon);	 
+			ExtentTestManager.getTest().log(Status.PASS, ExplorationtoDelete + " Exploration is Deleted");
+		}
+		catch(Exception ex) {
+			throw ex;
+		}
+		catch (AssertionError ex) {
+			throw ex;
+		}
 	}
 
-	public void createAndDeleteExploration(String ExplorationToCreate, String entityToSelect, String textToSearch) throws InterruptedException{
+	public void createAndDeleteExploration(String ExplorationToCreate, String entityToSelect, String textToSearch) throws Throwable{
 		this.createExploration(ExplorationToCreate, entityToSelect, textToSearch);	 
 		this.DeleteExploration(ExplorationToCreate);   	    	
 	}
 
-	public void ShareExploration(String ExplorationToShare, String personToBeShared) throws InterruptedException{
-		this.Exploration();
-		Thread.sleep(10000);
-		BasePage.waitforAnElement(columnHeaderFirstPage);
-		selectMenuOptionInList(ExplorationToShare);
-		Thread.sleep(3000);
-		BasePage.click(shareIcon);
-		String SetNameInShare = ExplorationNameInShare.getText();
-		Assert.assertEquals(SetNameInShare, ExplorationToShare);
-		BasePage.enterText(selectPersonToShare,personToBeShared);	
-		BasePage.click(suggestedUsers);
-		BasePage.click(share);	
-		BasePage.waitforAnElement(ShareSuccess);
+	public void ShareExploration(String ExplorationToShare, String personToBeShared) throws Throwable{
+		try {
+			this.Exploration();
+			this.waitForExploration();
+			selectMenuOptionInList(ExplorationToShare);
+			Thread.sleep(3000);
+			BasePage.click(shareIcon);
+			String SetNameInShare = ExplorationNameInShare.getText();
+			Assert.assertEquals(SetNameInShare, ExplorationToShare);
+			BasePage.enterText(selectPersonToShare,personToBeShared);	
+			BasePage.click(suggestedUsers);
+			BasePage.click(share);	
+			BasePage.waitforAnElement(ShareSuccess);
+			ExtentTestManager.getTest().log(Status.PASS, ExplorationToShare + " Exploration is Shared");
+		}
+		catch(Exception ex) {
+			throw ex;
+		}
+		catch (AssertionError ex) {
+			throw ex;
+		}
+
 	}
 
-	public void createAndShareExploration(String ExplorationToCreate, String entityToSelect, String textToSearch, String personToBeShared) throws InterruptedException{
+	public void createAndShareExploration(String ExplorationToCreate, String entityToSelect, String textToSearch, String personToBeShared) throws Throwable{
 		this.createExploration(ExplorationToCreate, entityToSelect, textToSearch);	  
 		this.ShareExploration(ExplorationToCreate, personToBeShared);
 	}
 
 
-	public void searchInExpand(String SearchInExploration) throws InterruptedException, AWTException { 
-		Thread.sleep(20000);
-		BasePage.click(serachBoxExpand);
-		serachBoxExpand.sendKeys(SearchInExploration);
-		Thread.sleep(2000);
-		BasePage.CompareAttributeText("value",SearchInExploration,serachBoxExpand);
+	public void searchInExpand(String SearchInExploration) throws InterruptedException, AWTException, AssertionError { 
+		try {
+			Thread.sleep(20000);
+			BasePage.click(serachBoxExpand);
+			serachBoxExpand.sendKeys(SearchInExploration);
+			Thread.sleep(2000);
+			BasePage.CompareAttributeText("value",SearchInExploration,serachBoxExpand);
+		}
+		catch(Exception ex){
+			throw ex;
+		}
+		catch (AssertionError ex){
+			throw ex;
+		}
 	}
 
-	public void searchInExplorationExpand(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch, String SearchInExploration) throws InterruptedException, AWTException { 
+	public void searchInExplorationExpand(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch, String SearchInExploration) throws Throwable { 
 		this.createExploration(ExplorationToCreate, EntitytoSelect, ItemtoSearch);
 		this.expandExploration();
 		this.searchInExpand(SearchInExploration);
-		System.out.println("Search performed");
+		ExtentTestManager.getTest().log(Status.PASS, "Search in done using text - "+ SearchInExploration);
 	}
 
-	public void DeleteclickinCard() { 
+	public void DeleteclickinCard() throws AWTException, InterruptedException { 
 		BasePage.click(DeleteinCard);
 	}
 
-	public void Remove() { 
+	public void Remove() throws AWTException, InterruptedException { 
 		BasePage.click(Remove);
 	}
 
 
-	public void deleteExplorationInFirstCard(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch) throws InterruptedException, AWTException { 
-		this.createExploration(ExplorationToCreate, EntitytoSelect, ItemtoSearch);
-		this.DeleteclickinCard();
-		WebElement DeleteConfirm =  driver.findElement(By.xpath("//*[@role='heading' and text()='Remove "+EntitytoSelect+"?']"));
-		BasePage.waitforAnElement(DeleteConfirm);
-		this.Remove();
-		BasePage.waitforAnElement(startButton);
-		this.verifyExplorationHomePage("Uncategorized");
-		BasePage.CompareAttributeText("Value", ExplorationToCreate, titleExploration);
-		System.out.println("First card deleted");
+	public void deleteExplorationInFirstCard(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch) throws Throwable { 
+		try {
+			this.createExploration(ExplorationToCreate, EntitytoSelect, ItemtoSearch);
+			this.DeleteclickinCard();
+			WebElement DeleteConfirm =  driver.findElement(By.xpath("//*[@role='heading' and text()='Remove "+EntitytoSelect+"?']"));
+			BasePage.waitforAnElement(DeleteConfirm);
+			this.Remove();
+			ExtentTestManager.getTest().log(Status.PASS, "First Card is deleted in Exploration in non-expanded view");
+			BasePage.waitforAnElement(startButton);
+			this.verifyExplorationHomePage("Uncategorized");
+			BasePage.CompareAttributeText("Value", ExplorationToCreate, titleExploration);
+			ExtentTestManager.getTest().log(Status.PASS, "Removal verified");
+		}
+		catch (Exception ex) {
+			throw ex;	
+		}
+		catch (AssertionError ex) {
+			throw ex;	
+		}
 	}
 
-	public void deleteExplorationInLaterCard(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch, String RelationCardType) throws InterruptedException, AWTException { 
-		this.createRelationCardFirst(ExplorationToCreate, EntitytoSelect, ItemtoSearch, RelationCardType);
-		BasePage.click(DeleteinCard2);
-		WebElement DeleteConfirm =  driver.findElement(By.xpath("//*[@role='heading' and text()='Remove "+RelationCardType+"?']"));
-		BasePage.waitforAnElement(DeleteConfirm);
-		this.Remove();
-		Thread.sleep(3000);
-		int NoOfCards = setCards.size();
-		Assert.assertEquals(NoOfCards, 1);
-		BasePage.CompareAttributeText("Value", ExplorationToCreate, titleExploration);
-		System.out.println("Second card deleted");
+	public void deleteExplorationInLaterCard(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch, String RelationCardType) throws Throwable { 
+		try {
+			this.createRelationCardFirst(ExplorationToCreate, EntitytoSelect, ItemtoSearch, RelationCardType);
+			BasePage.click(DeleteinCard2);
+			WebElement DeleteConfirm =  driver.findElement(By.xpath("//*[@role='heading' and text()='Remove "+RelationCardType+"?']"));
+			BasePage.waitforAnElement(DeleteConfirm);
+			this.Remove();
+			ExtentTestManager.getTest().log(Status.PASS, "Second Card is deleted in Exploration in non-expanded view");
+			Thread.sleep(3000);
+			int NoOfCards = setCards.size();
+			Assert.assertEquals(NoOfCards, 1);
+			BasePage.CompareAttributeText("Value", ExplorationToCreate, titleExploration);
+			ExtentTestManager.getTest().log(Status.PASS, "Removal verified");
+		}
+		catch (Exception ex) {
+			throw ex;	
+		}
+		catch (AssertionError ex) {
+			throw ex;	
+		}
 	}
 
-	public void GridSettings() { 
+	public void GridSettings() throws AWTException, InterruptedException { 
 		BasePage.click(GridSettingsIcon);
 	}
 
-	public void GridRows(String RowCount) { 
+	public void GridRows(String RowCount) throws AWTException, InterruptedException{ 
 		BasePage.click(RowsPerPage);
 		WebElement NoofRows = driver.findElement(By.xpath("//*[@title='"+RowCount+"']"));
 		BasePage.click(NoofRows);
 	}
 
-	public void GridPrimaryColumn(String PrimaryColumn) { 
+	public void GridPrimaryColumn(String PrimaryColumn) throws AWTException, InterruptedException{ 
 		BasePage.click(PrimaryColumnDropdown);
 		WebElement PrimarySelect = driver.findElement(By.xpath("//*[@role='option' and @title='"+PrimaryColumn+"']"));
 		BasePage.click(PrimarySelect);
 	}
 
-	public void GridSecondaryColumn(String SecondaryColumn) { 
+	public void GridSecondaryColumn(String SecondaryColumn) throws AWTException, InterruptedException{ 
 		BasePage.click(SecondaryColumnDropdown);
 		WebElement SecondarySelect = driver.findElement(By.xpath("//*[@role='option' and @title='"+SecondaryColumn+"']"));
 		BasePage.click(SecondarySelect);
 	}
 
-	public void VerifyGrid(String NoofRows, String PrimaryColumn, String SecondaryColumn) { 
-		List <WebElement> Columns = driver.findElements(By.xpath("//*[@tabindex='0']"));
-		WebElement FirstColumn = driver.findElement(By.xpath("(//*[@tabindex='0'])[1]")); 
-		int NoOfColumns = Columns.size();
-		WebElement LastColumn = driver.findElement(By.xpath("(//*[@tabindex='0'])["+NoOfColumns+"]"));
-		BasePage.verifyPage(PrimaryColumn, FirstColumn);
-		BasePage.verifyPage(SecondaryColumn, LastColumn);
-		String RN =Integer.toString(RowsintableExpand.size());
-		Assert.assertEquals(RN, NoofRows);
+	public void VerifyGrid(String NoofRows, String PrimaryColumn, String SecondaryColumn)throws AWTException, InterruptedException, AssertionError { 
+		try {
+			List <WebElement> Columns = driver.findElements(By.xpath("//*[@tabindex='0']"));
+			WebElement FirstColumn = driver.findElement(By.xpath("(//*[@tabindex='0'])[1]")); 
+			int NoOfColumns = Columns.size();
+			WebElement LastColumn = driver.findElement(By.xpath("(//*[@tabindex='0'])["+NoOfColumns+"]"));
+			BasePage.verifyPage(PrimaryColumn, FirstColumn);
+			BasePage.verifyPage(SecondaryColumn, LastColumn);
+			String RN =Integer.toString(RowsintableExpand.size());
+			Assert.assertEquals(RN, NoofRows);
+		}
+		catch (Exception ex) {
+			throw ex;
+		}
+		catch (AssertionError ex) {
+			throw ex;
+		}
 	}
 
-	public void GridChanges(String setToCreate,String EntitytoSelect, String ItemtoSearch, String NoofRows, String PrimaryColumn, String SecondaryColumn) throws InterruptedException { 
-		this.addExploration();
-		this.verifyExplorationHomePage("Uncategorized");
-		this.ExplorationTitle(setToCreate); //Create a set
-		this.selectEntity(EntitytoSelect);
-		this.searchItems(ItemtoSearch);
-		this.AddandStart();
-		this.expandExploration();
-		this.GridSettings();
-		this.GridRows(NoofRows);
-		this.GridPrimaryColumn(PrimaryColumn);
-		this.GridSecondaryColumn(SecondaryColumn);
-		BasePage.click(Apply);
-		BasePage.verifyPage(setToCreate,setNameInExpand); //verifying the set name
-		this.VerifyGrid(NoofRows,PrimaryColumn,SecondaryColumn);
+	public void GridChanges(String setToCreate,String EntitytoSelect, String ItemtoSearch, String NoofRows, String PrimaryColumn, String SecondaryColumn) throws Throwable { 
+		try {	
+			this.addExploration();
+			this.verifyExplorationHomePage("Uncategorized");
+			this.ExplorationTitle(setToCreate); //Create a set
+			this.selectEntity(EntitytoSelect);
+			this.searchItems(ItemtoSearch);
+			this.AddandStart();
+			this.expandExploration();
+			this.GridSettings();
+			this.GridRows(NoofRows);
+			this.GridPrimaryColumn(PrimaryColumn);
+			this.GridSecondaryColumn(SecondaryColumn);
+			BasePage.click(Apply);
+			BasePage.verifyPage(setToCreate,setNameInExpand); //verifying the set name
+			this.VerifyGrid(NoofRows,PrimaryColumn,SecondaryColumn);
+		}
+		catch (Exception ex) {
+			throw ex;
+		}
+		catch (AssertionError ex) {
+			throw ex;
+		}
 	}
 
 	//	public void SharetLoop(String SetToShare, String SharedUser) throws InterruptedException, AWTException { 
@@ -948,7 +1164,7 @@ public class ExplorationPage extends BasePage{
 	//		this.shareASet(SetToShare, SharedUser);
 	//	}
 
-	public void addRelation() { 
+	public void addRelation() throws AWTException, InterruptedException { 
 		BasePage.click(addRelation);
 	}
 
@@ -960,11 +1176,11 @@ public class ExplorationPage extends BasePage{
 		return driver.findElement(By.xpath("//*[@role='presentation']//*[text()='"+RelationCardType+"']"));   		
 	}
 
-	public void Relationclick(String RelationCardType) { 
+	public void Relationclick(String RelationCardType) throws AWTException, InterruptedException { 
 		BasePage.click(this.RelationEntity(RelationCardType));
 	}
 
-	public void RelationdropdownClick(String RelationCardType) { 
+	public void RelationdropdownClick(String RelationCardType) throws AWTException, InterruptedException { 
 		BasePage.click(this.RelationEntityinDropdown(RelationCardType));
 	}
 
@@ -983,6 +1199,7 @@ public class ExplorationPage extends BasePage{
 			}
 			catch (Exception NoSuchElementindropdown) {
 				System.out.println("The entity is not present");
+				throw NoSuchElement;
 			}
 		}
 	}
@@ -1009,7 +1226,7 @@ public class ExplorationPage extends BasePage{
 	}
 
 
-	public void CheckRelationCreated(String RelationCardType) throws InterruptedException {
+	public void CheckRelationCreated(String RelationCardType) throws AWTException, InterruptedException {
 		Thread.sleep(5000);
 		int NoOfCards = setCards.size();
 		WebElement LastCard = driver.findElement(By.xpath("(//*[@scraper-tag='SetCardContent'])["+NoOfCards+"]"));
@@ -1020,63 +1237,57 @@ public class ExplorationPage extends BasePage{
 		Assert.assertEquals(ActualElementName, RelationCardType);
 	}
 
-	public void createRelationCardFirst(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch, String RelationCardType) throws InterruptedException, AWTException { 
+	public void createRelationCardFirst(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch, String RelationCardType) throws Throwable { 
 		this.createExploration(ExplorationToCreate, EntitytoSelect, ItemtoSearch);
 		this.createRelationFirst(RelationCardType);
+		ExtentTestManager.getTest().log(Status.PASS, "First Relation card created of type : "+ RelationCardType);
 		this.CheckRelationCreated(RelationCardType);
+		ExtentTestManager.getTest().log(Status.PASS, "Created first relation card verified");
 	}
 
 	// Need to update
 	public void SelectItemsInExplorationCard(String NumberOfItemsToSelect) throws InterruptedException, AWTException { 
 		for (int i=1; i == Integer.parseInt(NumberOfItemsToSelect);i++)	{
-			//			try
-			//			{
-			//				
-			//			}
-			//			catch(Exception e)
-			//			{
-			//				
-			//			}
-			WebElement SelectItem = driver.findElement(By.xpath("(//div[@role='checkbox']["+i+"]"));
-			wait.until(ExpectedConditions.elementToBeClickable(SelectItem));
-			Thread.sleep(5000);
-			BasePage.click(SelectItem);
+			try {
+				WebElement SelectItem = driver.findElement(By.xpath("(//div[@role='checkbox']["+i+"]"));
+				wait.until(ExpectedConditions.elementToBeClickable(SelectItem));
+				Thread.sleep(5000);
+				BasePage.click(SelectItem);
+			}
+			catch(Exception ex) {
+				throw ex;
+			}
+
 		}
 	}
 
-	public void createRelationCardMulti(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch, String RelationCardType, String RelationCardType2, String NumberOfItemsToSelect) throws InterruptedException, AWTException { 
+	public void createRelationCardMulti(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch, String RelationCardType, String RelationCardType2, String NumberOfItemsToSelect) throws Throwable { 
 		this.createExploration(ExplorationToCreate, EntitytoSelect, ItemtoSearch);
 		this.createRelationFirst(RelationCardType);
+		ExtentTestManager.getTest().log(Status.PASS, "First Relation card created of type : "+ RelationCardType);
 		this.CheckRelationCreated(RelationCardType);
+		ExtentTestManager.getTest().log(Status.PASS, "Created first relation card verified");
 		BasePage.waitforAnElement(ExplorationList2);
 		//		Thread.sleep(60000);
 		this.SelectItemsInExplorationCard(NumberOfItemsToSelect);
 		this.createRelationLater(RelationCardType2);
+		ExtentTestManager.getTest().log(Status.PASS, "Second Relation card created of type : "+ RelationCardType2);
 		this.CheckRelationCreated(RelationCardType2);
+		ExtentTestManager.getTest().log(Status.PASS, "Created second relation card verified");
 	}
 
-	public String captureScreenshot(String screenShotName) throws IOException
+	public void captureScreenshot(String screenShotName) throws IOException
 	{
-		TakesScreenshot ts = (TakesScreenshot)driver;
-		File source = ts.getScreenshotAs(OutputType.FILE);
-		String dest = System.getProperty("user.dir") + "./Resources/ErrorScreenshots/"+screenShotName+".jpeg";
-		File destination = new File(dest);
-		try {
-			FileUtils.copyFile(source, destination);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}     
-
-		return dest;
+		TakesScreenshot scrShot =((TakesScreenshot)driver);
+		File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
+		String fileWithPath = "./Resources/ErrorScreenshots/"+screenShotName+".png";
+		File DestFile=new File(fileWithPath);
+		FileUtils.copyFile(SrcFile, DestFile);
 	}
 
 
 }
 
-
-//List <WebElement> Columns = webdriver.findElements(By.xpath("//*[@tabindex='0']"));
-//int NoOfColumns = Columns.size();
-//System.out.println(NoOfColumns);        //getting the number of columns
 
 
 

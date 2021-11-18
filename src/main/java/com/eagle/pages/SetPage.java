@@ -242,7 +242,7 @@ public class SetPage extends BasePage{
 		action.moveToElement(TermsOfUse).perform();
 	}
 
-	public void verifySetHomePage(String stringToVerify) throws InterruptedException, AWTException{    	
+	public void verifySetHomePage(String stringToVerify) throws InterruptedException, AWTException, AssertionError{    	
 		BasePage.verifyPage(stringToVerify, pageIdentifier);
 	}
 
@@ -331,10 +331,9 @@ public class SetPage extends BasePage{
 
 	public void createCheck(String SetToCheck) throws InterruptedException, AWTException{	    	
 		this.Set();
-		//BasePage.waitforAnElement(columnHeaderFirstPage);
+		BasePage.waitforAnElement(columnHeaderFirstPage);
 		try {
 			Assert.assertEquals(SetToCheck, FirstItem.getText());
-			System.out.println("Set is present in the list");
 			ExtentTestManager.getTest().log(Status.PASS, "Set is present in the list and verified");
 			Thread.sleep(5000);
 		}
@@ -343,13 +342,11 @@ public class SetPage extends BasePage{
 		}
 	}   	
 
-	public void createSet(String SetName,String entityToSelect, String textToSearch) throws InterruptedException, AWTException{	    	
+	public void createSet(String SetName,String entityToSelect, String textToSearch) throws InterruptedException, AWTException, AssertionError{	    	
 		try {
 			this.Set();
 			this.addSet();
 			this.verifySetHomePage("Uncategorized");
-
-			this.addSet();
 			this.setTitle(SetName);
 			this.selectEntity(entityToSelect);
 			this.searchItems(textToSearch); 
@@ -358,8 +355,9 @@ public class SetPage extends BasePage{
 			ExtentTestManager.getTest().log(Status.PASS, "Set "+ SetName +" is Created");
 			this.createCheck(SetName);
 			this.Home();
-
-			this.addSet();
+		}
+		catch (AssertionError createSetFail){
+			throw createSetFail;
 		}
 		catch (Exception createSetFail){
 			throw createSetFail;
@@ -450,7 +448,7 @@ public class SetPage extends BasePage{
 		ExtentTestManager.getTest().log(Status.PASS, existingSetName + " Set is Added to this Set");
 	}
 
-	public void CreateSetFromFile(String setToCreate, String entityToSelect, String FileName) throws InterruptedException, AWTException { 
+	public void CreateSetFromFile(String setToCreate, String entityToSelect, String FileName) throws InterruptedException, AWTException, AssertionError { 
 		try {
 			this.Set();
 			this.addSet();
@@ -467,10 +465,13 @@ public class SetPage extends BasePage{
 		catch (Exception ecf){
 			throw ecf;
 		}
+		catch (AssertionError ecf){
+			throw ecf;
+		}
 
 	}
 
-	public void CreateSetFromSet(String existingSetName, String entityToSelect, String textToSearch, String setToCreate) throws Exception { 
+	public void CreateSetFromSet(String existingSetName, String entityToSelect, String textToSearch, String setToCreate) throws Exception, AssertionError { 
 		try {
 			this.createSet(existingSetName, entityToSelect, textToSearch);
 			this.addSet();
@@ -485,6 +486,9 @@ public class SetPage extends BasePage{
 			this.Home();
 		}
 		catch (Exception createSetFromSetfail) {
+			throw createSetFromSetfail;
+		}
+		catch (AssertionError createSetFromSetfail){
 			throw createSetFromSetfail;
 		}
 	}
@@ -528,7 +532,7 @@ public class SetPage extends BasePage{
 	}	
 
 	//Adding items from Set from expand into Set
-	public void ExpandAddFromSet(String setToAdd, String entityToSelect,String textToSearchSet1, String setToCreate, String textToSearchSet2) throws InterruptedException, AWTException {    // Add from a set
+	public void ExpandAddFromSet(String setToAdd, String entityToSelect,String textToSearchSet1, String setToCreate, String textToSearchSet2) throws InterruptedException, AWTException, AssertionError {    // Add from a set
 		try {
 			this.createSet(setToAdd, entityToSelect, textToSearchSet1);
 			this.addSet();
@@ -551,6 +555,9 @@ public class SetPage extends BasePage{
 			ExtentTestManager.getTest().log(Status.PASS, "Set - Set added in expand");
 		}
 		catch (Exception ExpandAddFromSetFail) {
+			throw ExpandAddFromSetFail;
+		}
+		catch (AssertionError ExpandAddFromSetFail) {
 			throw ExpandAddFromSetFail;
 		}
 	}
@@ -600,6 +607,9 @@ public class SetPage extends BasePage{
 			BasePage.verifyPage(setToCreate,setNameInExpand); //verifying the set name
 			ExtentTestManager.getTest().log(Status.PASS, "Set - Added from catalog and count increase verified");
 		}
+		catch(AssertionError addfromCatalogFail) {
+			throw addfromCatalogFail;
+		}
 		catch(Exception addfromCatalogFail) {
 			throw addfromCatalogFail;
 		}
@@ -639,7 +649,7 @@ public class SetPage extends BasePage{
 	}	
 
 
-	public void addFromFile(String CategoryName, String Filelocation, String FileName) throws AWTException, InterruptedException {	    
+	public void addFromFile(String CategoryName, String Filelocation, String FileName) throws AWTException, InterruptedException, AssertionError {	    
 		try {
 			BasePage.click(addFromFile);	
 			Thread.sleep(5000);
@@ -654,6 +664,9 @@ public class SetPage extends BasePage{
 		catch (Exception addFromFileFail) {
 			throw addFromFileFail;
 		}
+		catch (AssertionError addFromFileFail) {
+			throw addFromFileFail;
+		}
 	}	
 
 	public void addToGrid() throws InterruptedException, AWTException{	    
@@ -661,7 +674,7 @@ public class SetPage extends BasePage{
 	}
 
 	//Adding items from File from expand into Set
-	public void ExpandAddFromFile(String setToCreate, String entityToSelect, String textToSearch, String CategoryName, String Filelocation, String FileName) throws InterruptedException, AWTException { 
+	public void ExpandAddFromFile(String setToCreate, String entityToSelect, String textToSearch, String CategoryName, String Filelocation, String FileName) throws InterruptedException, AWTException, AssertionError { 
 		try {
 			this.Set();
 			this.addSet();
@@ -686,6 +699,12 @@ public class SetPage extends BasePage{
 			}
 			throw ExpandAddFromFileFail;
 		}
+		catch (AssertionError ExpandAddFromFileFail) {
+			if(dialogBoxClose.isDisplayed()) {
+				BasePage.click(dialogBoxClose);
+			}
+			throw ExpandAddFromFileFail;
+		}
 	}
 
 
@@ -697,7 +716,7 @@ public class SetPage extends BasePage{
 		BasePage.click(Delete);
 	}
 
-	public void DeleteCardInExpand(String setToCreate, String entityToSelect, String textToSearch) throws InterruptedException, AWTException { 
+	public void DeleteCardInExpand(String setToCreate, String entityToSelect, String textToSearch) throws InterruptedException, AWTException, AssertionError { 
 		try {
 			this.Set();
 			this.addSet();
@@ -714,6 +733,9 @@ public class SetPage extends BasePage{
 			ExtentTestManager.getTest().log(Status.PASS, setToCreate + " is deleted");
 		}
 		catch (Exception DeleteCardInExpandFail) {
+			throw DeleteCardInExpandFail;
+		}
+		catch (AssertionError DeleteCardInExpandFail) {
 			throw DeleteCardInExpandFail;
 		}
 	}
@@ -1127,22 +1149,6 @@ public class SetPage extends BasePage{
 			System.out.println("Set shared failed");
 		}
 	}
-
-	//    public void captureScreenshot(String screenShotName) throws IOException
-	//    {
-	//        TakesScreenshot ts = (TakesScreenshot)driver;
-	//        File source = ts.getScreenshotAs(OutputType.FILE);
-	//        String dest = System.getProperty("user.dir") + "./Resources/ErrorScreenshots/"+screenShotName+".jpeg";
-	//        File destination = new File(dest);
-	//        try {
-	//            FileUtils.copyFile(source, destination);
-	//        } catch (IOException e) {
-	//            e.printStackTrace();
-	//        }     
-	//                     
-	////        return dest;
-	//    }
-
 
 	public void captureScreenshot(String screenShotName) throws IOException
 	{
