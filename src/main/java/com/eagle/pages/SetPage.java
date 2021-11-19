@@ -728,6 +728,8 @@ public class SetPage extends BasePage{
 			ExtentTestManager.getTest().log(Status.PASS, setToCreate + " is created");
 			this.expandSet();
 			this.DeleteCardExpand();
+			String DeleteConfirm =  driver.findElement(By.xpath("//*[@role='heading']")).getText();
+			Assert.assertEquals(DeleteConfirm, "Delete Set");
 			this.Delete();
 			BasePage.verifyPage("MY DATA", MyDataTitle); //My Data page
 			ExtentTestManager.getTest().log(Status.PASS, setToCreate + " is deleted");
@@ -836,14 +838,14 @@ public class SetPage extends BasePage{
 	 * } catch(Exception ex) {} }
 	 */
 
-	public void openItemFromList(String inv)
+	public void openItemFromList(String Item)
 	{
 		try {	    		
 			do{ 
 				for (WebElement element : SetGridItems) {
 					if(element.isDisplayed() == false)  {scrollIntoView(element);}	    				
 					String textFromGrid = element.getText();	    				
-					if(inv.equals(textFromGrid)) {		    					
+					if(Item.equals(textFromGrid)) {		    					
 						BasePage.click(element);	
 					}		    				
 				}

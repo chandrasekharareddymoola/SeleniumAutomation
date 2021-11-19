@@ -56,10 +56,10 @@ public class BasePage{
 		}
 	}	
 
-	public static void verifyPage(String setToVerify, WebElement field) throws InterruptedException, AWTException, AssertionError {		
+	public static void verifyPage(String ItemToVerify, WebElement field) throws InterruptedException, AWTException, AssertionError {		
 		try {
 			String getheadertext = field.getText().trim();
-			Assert.assertEquals(setToVerify, getheadertext);
+			Assert.assertEquals(ItemToVerify, getheadertext);
 		}
 		catch (AssertionError ex) {
 			throw ex;
@@ -84,6 +84,11 @@ public class BasePage{
 	public static void waitforAnElement(WebElement Element) throws InterruptedException, AWTException{
 		WebDriverWait wait = new WebDriverWait(driver, 60);
 		wait.until(ExpectedConditions.visibilityOf(Element));	
+	}
+	
+	public static void waitforAnElementtoBeClicked(WebElement Element) throws InterruptedException, AWTException{
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		wait.until(ExpectedConditions.elementToBeClickable(Element));	
 	}
 
 	public static void waitforAnElementClickable(WebElement Element) throws InterruptedException, AWTException{

@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.Status;
 import com.eagle.Reports.ExtentTestManager;
-import com.eagle.pages.LoginPage;
 import com.eagle.pages.SetPage;
 
 public class SetTest extends BaseTest{

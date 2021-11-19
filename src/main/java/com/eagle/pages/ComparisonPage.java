@@ -29,7 +29,7 @@ import com.aventstack.extentreports.Status;
 import com.eagle.Reports.ExtentTestManager;
 import com.eagle.pages.SetPage;
 
-public class ExplorationPage extends BasePage{
+public class ComparisonPage extends BasePage{
 
 	SetPage objSetPage; 
 
@@ -38,15 +38,21 @@ public class ExplorationPage extends BasePage{
 	@FindBy(xpath = "//i[@data-icon-name='Home']")
 	public WebElement homeIcon;
 
-	@FindBy(xpath = "//i[@data-icon-name='Relationship']")
-	public WebElement explorationIcon;
+	@FindBy(xpath = "//i[@data-icon-name='BranchCompare']") 
+	public WebElement ComparisonIcon;
 
 	@FindBy(xpath = "//*[text()='Terms of Use']")
 	public WebElement TermsOfUse;
 
-	@FindBy(xpath = "//*[text()='Exploration']")
-	public WebElement addExploration;
+	@FindBy(xpath = "//*[text()='Comparison']")
+	public WebElement addComparison;
 
+	@FindBy(xpath = "//*[text()='Run Comparison']/ancestor::button")
+	public WebElement runComparison;
+	
+	@FindBy(xpath = "//*[@type='button' and @title='Close']")
+	public WebElement closeRunComparison;
+	
 	@FindBy(xpath = "//*[text()='Search for entities']")
 	public WebElement searchforentities;
 
@@ -56,19 +62,22 @@ public class ExplorationPage extends BasePage{
 	@FindBy(xpath = "//div[@scraper-tag='CardHeader']//span")
 	public WebElement pageIdentifier;
 
+	@FindBy(xpath = "//div[@class='EditableInputSet__setCardHeader___28Qqv SetCardHeader__header___295mH SetCardHeader__isExpanded___1qrzR']//label")
+	public WebElement caseCardEntity;
+
 	@FindBy(xpath = "//div//span[contains(text(),'Uncategorized')]")
 	public WebElement entitySelection;
 
 	@FindBy(xpath = "//div//input[@type='text']")
-	public WebElement titleExploration;
+	public WebElement titleComparison;
 
-	//	@FindBy(xpath = "//button//span[contains(text(),'Disease')]")
-	//	public WebElement entitySelected;	
+	@FindBy(xpath = "//input[@placeholder='Choose a name for this set...']")
+	public WebElement ChooseNameOfSet;
 
 	@FindBy(xpath = "//*[text()='Start']")
 	public WebElement startButton;
 
-	@FindBy(xpath = "//div//input[@role='searchbox']")
+	@FindBy(xpath = "//div//input[@placeholder='Search for items to add' and @role='searchbox']")
 	public WebElement serachBox;
 
 	@FindBy(xpath = "//div//input[@role='searchbox' and @placeholder='Search in this list...']")
@@ -96,7 +105,7 @@ public class ExplorationPage extends BasePage{
 	public WebElement deleteCardExpand;	
 
 	@FindBy(xpath = "(//*[@class='PaginationControls__message___Zodph'])[2]//b[2]")
-	public WebElement NoOfPagesInExploration;	
+	public WebElement NoOfPagesInComparison;	
 
 	@FindBy(xpath = "//*[@data-icon-name='Forward']")
 	public WebElement NextPage;	
@@ -195,10 +204,10 @@ public class ExplorationPage extends BasePage{
 	public WebElement ExportCard;
 
 	@FindBy(xpath = "//*[@class='ms-List' and @role='presentation']")
-	public WebElement ExplorationList;
+	public WebElement ComparisonList;
 
 	@FindBy(xpath = "(//*[@class='ms-List' and @role='presentation'])[2]")
-	public WebElement ExplorationList2;
+	public WebElement ComparisonList2;
 
 	@FindBy(xpath = "//*[@data-icon-name='Trash']")
 	public WebElement DeleteinCard;
@@ -209,8 +218,8 @@ public class ExplorationPage extends BasePage{
 	@FindBy(xpath = "//*[text()='Remove']")
 	public WebElement Remove;
 
-	@FindBy(xpath = "//*[@data-icon-name='CircleAdditionSolid']")
-	public WebElement addRelation;
+	@FindBy(xpath = "//*[@data-icon-name='CircleAdditionSolid']/ancestor::button")
+	public WebElement addCard;
 
 	@FindBy(xpath = "//*[@type='button']//*[text()='Select a category']")
 	public WebElement addRelationCategory;
@@ -225,13 +234,13 @@ public class ExplorationPage extends BasePage{
 	public WebElement ItemCountInExpand;
 
 	@FindBy(xpath = "//div[@class='ms-List']//div[@role='rowheader' and @aria-colindex='1']")
-	public List<WebElement> ExplorationGridItems;
+	public List<WebElement> ComparisonGridItems;
 
 	@FindBy(xpath = "//button//span[contains(text(),'Delete')]")
 	public WebElement deleteIcon;
 
 	@FindBy(xpath = "(//span[@class='NameAndDescription__description___zAZrs'])[1]")
-	public WebElement ExplorationNameInShare;
+	public WebElement ComparisonNameInShare;
 
 	@FindBy(xpath = "//button//span[contains(text(),'Share')]")
 	public WebElement shareIcon;
@@ -250,13 +259,18 @@ public class ExplorationPage extends BasePage{
 
 	@FindBy(xpath = "//*[@role='columnheader']")
 	public WebElement columnHeaderFirstPage;
-	
+
 	@FindBy(xpath = "//*[@data-icon-name='Cancel']")
 	public WebElement dialogBoxClose;
 
+	@FindBy(xpath = "//div[text()='Comparison Results']")
+	public WebElement comparisonsResultsHeader;
+
+	@FindBy(xpath = "//div[@class='ms-List']//div[@role='rowheader' and @aria-colindex='1']")
+	public List<WebElement> GridItems;
 
 
-	public WebElement openExploration(String name) {
+	public WebElement openComparison(String name) {
 		return driver.findElement(By.xpath("//div[@class='ms-List']//div[@role='rowheader' and @aria-colindex='1']//div[@title='"+ name +"']"));   		
 	}
 
@@ -269,34 +283,36 @@ public class ExplorationPage extends BasePage{
 		action.moveToElement(TermsOfUse).perform();
 	}  
 
-	public ExplorationPage() throws AWTException, InterruptedException{ 	
+	public ComparisonPage() throws AWTException, InterruptedException{ 	
 		PageFactory.initElements(driver, this); 
-		BasePage.click(explorationIcon);
+		BasePage.click(ComparisonIcon);
 		action.moveToElement(TermsOfUse).perform();
 	}
 
-	public void Exploration() throws AWTException, InterruptedException{ 	
-		BasePage.click(explorationIcon);
+	public void Comparison() throws AWTException, InterruptedException{ 	
+		BasePage.click(ComparisonIcon);
 		action.moveToElement(TermsOfUse).perform();
 	}
 
-	public void verifyExplorationHomePage(String stringToVerify) throws AWTException, InterruptedException, AssertionError{    	
+	public void verifyComparisonHomePage(String stringToVerify) throws AWTException, InterruptedException, AssertionError{    	
 		BasePage.verifyPage(stringToVerify, pageIdentifier);
 	}
 
-	public void addExploration() throws AWTException, InterruptedException{ 
-		BasePage.click(addExploration);
-	}
-
-	public void createExplorationSearch() throws AWTException, InterruptedException{ 
-		BasePage.click(searchforentities);
+	public void addComparison() throws AWTException, InterruptedException{ 
+		BasePage.click(addComparison);
 	}
 
 	public void clickStart()throws AWTException, InterruptedException {	    	
 		BasePage.click(startButton);        
 	}   
 
-	public void createExplorationSet(String setToAdd) throws AWTException, InterruptedException{ 
+	public void runComparison() throws AWTException, InterruptedException{ 
+		BasePage.click(runComparison);
+		ExtentTestManager.getTest().log(Status.PASS, "Run Comparison performed");
+
+	}
+
+	public void createComparisonSet(String setToAdd) throws AWTException, InterruptedException{ 
 		BasePage.click(selectaSet);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Select a Set']")));
 		this.searchExpandEnterName(setToAdd);
@@ -304,8 +320,12 @@ public class ExplorationPage extends BasePage{
 		Thread.sleep(10000);
 	}
 
-	public void ExplorationTitle(String textTitle) throws AWTException, InterruptedException{    	
-		BasePage.enterText(titleExploration, textTitle);
+	public void ComparisonTitle(String textTitle) throws AWTException, InterruptedException{    	
+		BasePage.enterText(titleComparison, textTitle);
+	}   
+
+	public void NameforCard(String textTitle) throws AWTException, InterruptedException{    	
+		BasePage.enterText(ChooseNameOfSet, textTitle);
 	}   
 
 	public void selectEntity(String entityToSelect) throws AWTException, InterruptedException{    	
@@ -314,29 +334,50 @@ public class ExplorationPage extends BasePage{
 		BasePage.click(entitytoSelect);
 	}
 
+	public void viewComparison(String ComparisonName) throws InterruptedException, AWTException{
+		this.Comparison();	  
+		this.openItemFromList(ComparisonName);	    
+		ExtentTestManager.getTest().log(Status.PASS, ComparisonName +" is opened");
+	}
+
+	public void openItemFromList(String Item)
+	{
+		try {	    		
+			do{ 
+				for (WebElement element : GridItems) {
+					if(element.isDisplayed() == false)  {scrollIntoView(element);}	    				
+					String textFromGrid = element.getText();	    				
+					if(Item.equals(textFromGrid)) {		    					
+						BasePage.click(element);	
+					}		    				
+				}
+				BasePage.click(forward); 
+			}
+			while(forward.isEnabled());  
+		}	    	
+		catch(Exception ex) {}
+	}
+
 	public void searchItems(String ItemtoSearch) throws AWTException, InterruptedException{
 		BasePage.click(serachBox);
 		BasePage.enterText(serachBox, ItemtoSearch);
 	}
 
-	public void createCheck(String ExplorationToCheck) throws AWTException, InterruptedException,AssertionError{	    	
-		this.Exploration();
+	public void createCheck(String ComparisonToCheck) throws AWTException, InterruptedException,AssertionError{	    	
+		this.Comparison();
 		Thread.sleep(20000);
 		BasePage.waitforAnElement(columnHeaderFirstPage);
 		try {
-			Assert.assertEquals(ExplorationToCheck, FirstItem.getText());
-			System.out.println("Exploration is present in the list");
+			Assert.assertEquals(ComparisonToCheck, FirstItem.getText());
+			ExtentTestManager.getTest().log(Status.PASS, ComparisonToCheck + " Comparison is present in the list");
 			Thread.sleep(5000);
 		}
-		catch (Exception ExplorationNotPresent){
-			System.out.println("Exploration is not present in the list");
-		}
-		catch (AssertionError ExplorationNotPresent){
-			System.out.println("Exploration is not present in the list");
+		catch (Exception | AssertionError ComparisonNotPresent){
+			throw ComparisonNotPresent;
 		}
 	}   
 
-	public void AddandStart() throws AWTException, InterruptedException{
+	public void AddandAccept() throws AWTException, InterruptedException{
 		//wait.until(ExpectedConditions.elementToBeClickable(addAll));
 		while(addAll.isDisplayed()){
 			try
@@ -348,11 +389,11 @@ public class ExplorationPage extends BasePage{
 			}	    		
 
 		}
-		BasePage.click(startButton);
+		BasePage.click(accept);
 	}
 
 
-	public void waitForExploration() throws Throwable{
+	public void waitForComparison() throws Throwable{
 		try {  
 			boolean iden = true;
 			do
@@ -370,14 +411,14 @@ public class ExplorationPage extends BasePage{
 			throw ex;
 		}
 	}
-	
-	public void waitForExplorationTitle() throws Throwable{
+
+	public void waitForComparisonTitle() throws Throwable{
 		try {  
 			boolean iden = true;
 			do
 			{
 				try {	    	
-					titleExploration.isDisplayed();
+					titleComparison.isDisplayed();
 					iden = false;	  
 				}
 				catch(Exception ex) {Thread.sleep(5000);}	 
@@ -389,7 +430,7 @@ public class ExplorationPage extends BasePage{
 			throw ex;
 		}
 	}
-	
+
 	public void waitForEditAndDelete() throws Throwable{
 		try {  
 			boolean iden = true;
@@ -409,62 +450,180 @@ public class ExplorationPage extends BasePage{
 		}
 	}
 
-	public void createExplorationFromSearch(String ExplorationName, String EntitytoSelect, String ItemtoSearch) throws Throwable{	    	
+	public void waitForaddCard() throws Throwable{
+		try {  
+			boolean iden = true;
+			do
+			{
+				try {	    	
+					BasePage.CompareAttributeText("data-is-focusable", "true", addCard);
+					iden = false;	  
+				}
+				catch(Exception | AssertionError ex) {Thread.sleep(5000);}	 
+			}
+			while(iden);	         
+		}
+		catch(Exception | AssertionError ex)
+		{
+			throw ex;
+		}
+	}
+
+	public void createComparisonWithControl(String ComparisonName,String ControlSetName, String EntitytoSelect, String ItemtoSearch) throws Throwable{	    	
 		try {
-			this.Exploration();
-			this.waitForExploration();
-			this.addExploration();
-			this.createExplorationSearch();
-			this.verifyExplorationHomePage("Uncategorized");
-			this.ExplorationTitle(ExplorationName);
+			this.Comparison();
+			this.waitForComparison();
+			this.addComparison();
+			this.ComparisonTitle(ComparisonName);
+			this.NameforCard(ControlSetName);
+			Thread.sleep(3000);
+			this.verifyComparisonHomePage("Uncategorized");
 			this.selectEntity(EntitytoSelect);
 			this.searchItems(ItemtoSearch); 
-			this.AddandStart();   
-			BasePage.waitforAnElement(ExplorationList);
-			ExtentTestManager.getTest().log(Status.PASS, ExplorationName + " Exploration is created from search");
-			this.createCheck(ExplorationName);
-			ExtentTestManager.getTest().log(Status.PASS, "Created Exploration is verified");
+			this.AddandAccept();   
+			BasePage.waitforAnElement(ComparisonList);
+			ExtentTestManager.getTest().log(Status.PASS, ComparisonName + " Comparison is created with a control Set");
+			this.createCheck(ComparisonName);
+			ExtentTestManager.getTest().log(Status.PASS, "Created Comparison is verified");
 		}
-		catch(Exception ex){
-			throw ex;
-		}
-		catch(AssertionError ex){
+		catch(Exception | AssertionError ex){
 			throw ex;
 		}
 	}   	
 
-	public void createExploration(String ExplorationName, String EntitytoSelect, String ItemtoSearch) throws Throwable{	    	
-		this.Exploration();
-		this.waitForExploration();
-		this.addExploration();
-		this.createExplorationSearch();
-		this.verifyExplorationHomePage("Uncategorized");
-		Thread.sleep(10000);
-		this.ExplorationTitle(ExplorationName);
-		this.selectEntity(EntitytoSelect);
-		this.searchItems(ItemtoSearch); 
-		this.AddandStart();   
-		BasePage.waitforAnElement(ExplorationList);
-		ExtentTestManager.getTest().log(Status.PASS, ExplorationName + " is created");
-	}   	
 
-	public void createExplorationInitallyFromSet(String SetName,String entityToSelect, String textToSearch , String ExplorationName) throws Throwable{	    	
+	public void createComparisonControl(String ComparisonName,String ControlSetName, String EntitytoSelect, String ItemtoSearch) throws Throwable{	    	
+		try {
+			this.Comparison();
+			this.waitForComparison();
+			this.addComparison();
+			this.ComparisonTitle(ComparisonName);
+			this.NameforCard(ControlSetName);
+			Thread.sleep(3000);
+			this.verifyComparisonHomePage("Uncategorized");
+			this.selectEntity(EntitytoSelect);
+			this.searchItems(ItemtoSearch); 
+			this.AddandAccept();   
+			BasePage.waitforAnElement(ComparisonList);
+			ExtentTestManager.getTest().log(Status.PASS, ComparisonName + " Comparison is created with a control Set");
+		}
+		catch(Exception | AssertionError ex){
+			throw ex;
+		}
+	}   
+
+	public void createComparisonWithControlandCase(String ComparisonName,String ControlSetName, String CaseSetName, String EntitytoSelect, String ItemtoSearchControl, String ItemtoSearchCase) throws Throwable{	    	
+		try {
+			this.createComparisonControl(ComparisonName,ControlSetName, EntitytoSelect, ItemtoSearchControl);
+			this.waitForaddCard();
+			this.addCard();
+			Thread.sleep(3000);
+			this.NameforCard(CaseSetName);
+			Thread.sleep(3000);
+			BasePage.verifyPage(EntitytoSelect, caseCardEntity);	
+			this.searchItems(ItemtoSearchCase); 
+			this.AddandAccept();  
+			BasePage.waitforAnElement(ComparisonList2);
+			ExtentTestManager.getTest().log(Status.PASS, ComparisonName + " Comparison is created with control and case Set");
+			this.createCheck(ComparisonName);
+			ExtentTestManager.getTest().log(Status.PASS, "Created Comparison is verified");
+		}
+		catch(Exception | AssertionError ex){
+			throw ex;
+		}
+	}   
+
+	public void createComparisonControlandCase(String ComparisonName,String ControlSetName, String CaseSetName, String EntitytoSelect, String ItemtoSearchControl, String ItemtoSearchCase) throws Throwable{	    	
+		try {
+			this.createComparisonControl(ComparisonName,ControlSetName, EntitytoSelect, ItemtoSearchControl);
+			this.waitForaddCard();
+			this.addCard();
+			Thread.sleep(3000);
+			this.NameforCard(CaseSetName);
+			Thread.sleep(3000);
+			BasePage.verifyPage(EntitytoSelect, caseCardEntity);	
+			this.searchItems(ItemtoSearchCase); 
+			this.AddandAccept();  
+			BasePage.waitforAnElement(ComparisonList2);
+			ExtentTestManager.getTest().log(Status.PASS, ComparisonName + " Comparison is created with a control and case Set");
+		}
+		catch(Exception | AssertionError ex){
+			throw ex;
+		}
+	}   
+	
+	public void createComparisonWithcontrolandCaseRunComparison(String ComparisonName,String ControlSetName, String CaseSetName, String EntitytoSelect, String ItemtoSearchControl, String ItemtoSearchCase) throws Throwable{	    	
+		try {
+			this.createComparisonControlandCase(ComparisonName,ControlSetName,CaseSetName,EntitytoSelect,ItemtoSearchControl,ItemtoSearchCase);
+			this.runComparison();
+			waitforAnElement(comparisonsResultsHeader);
+			ExtentTestManager.getTest().log(Status.PASS, ComparisonName + " Comparison Results Page is displayed");
+			BasePage.click(closeRunComparison);
+		}
+		catch(Exception | AssertionError ex){
+			throw ex;
+		}
+	}  
+
+	public void updateComparisonWithCaseCard(String ComparisonName,String EntitytoSelect,String CaseSetName,String ItemtoSearchCase) throws Throwable{	    	
+		try {
+			this.viewComparison(ComparisonName);
+			this.waitForaddCard();
+			this.addCard();
+			Thread.sleep(3000);
+			this.NameforCard(CaseSetName);
+			Thread.sleep(3000);
+			BasePage.verifyPage(EntitytoSelect, caseCardEntity);	
+			this.searchItems(ItemtoSearchCase); 
+			this.AddandAccept();  
+			waitForaddCard();
+			ExtentTestManager.getTest().log(Status.PASS, ComparisonName + " Comparison Results Page is displayed");
+			this.createCheck(ComparisonName);
+			ExtentTestManager.getTest().log(Status.PASS, ComparisonName + " Comparison is present in the list and verified");
+		}
+		catch(Exception | AssertionError ex){
+			throw ex;
+		}
+	}  
+
+	public void createComparisonControlCase(String ComparisonName,String ControlSetName, String CaseSetName, String EntitytoSelect, String ItemtoSearchControl, String ItemtoSearchCase) throws Throwable{	    	
+		try {
+			this.createComparisonControl(ComparisonName,ControlSetName, EntitytoSelect, ItemtoSearchControl);
+			this.waitForaddCard();
+			this.addCard();
+			Thread.sleep(3000);
+			this.NameforCard(CaseSetName);
+			Thread.sleep(3000);
+			BasePage.verifyPage(EntitytoSelect, caseCardEntity);	
+			this.searchItems(ItemtoSearchCase); 
+			this.AddandAccept();  
+			BasePage.waitforAnElement(ComparisonList2);
+			ExtentTestManager.getTest().log(Status.PASS, ComparisonName + " is upgraded with Case Set");
+			this.createCheck(ComparisonName);
+			ExtentTestManager.getTest().log(Status.PASS, "Created Comparison is verified");
+		}
+		catch(Exception | AssertionError ex){
+			throw ex;
+		}
+	}   
+
+	public void createComparisonInitallyFromSet(String SetName,String entityToSelect, String textToSearch , String ComparisonName) throws Throwable{	    	
 		try {
 			objSetPage = new SetPage();  
 			objSetPage.createSet(SetName, entityToSelect, textToSearch);
 			this.Home();
 
-			this.Exploration();
-			this.waitForExploration();
-			this.addExploration();
-			this.createExplorationSet(SetName);
-			ExtentTestManager.getTest().log(Status.PASS, SetName + " Set is added as base to create Exploration " + ExplorationName);
-			this.waitForExplorationTitle();
-			this.ExplorationTitle(ExplorationName);
-			BasePage.waitforAnElement(ExplorationList);
-			ExtentTestManager.getTest().log(Status.PASS, ExplorationName + " Exploration is created from Set intially");
-			this.createCheck(ExplorationName);
-			ExtentTestManager.getTest().log(Status.PASS, "Created Exploration is verified");
+			this.Comparison();
+			this.waitForComparison();
+			this.addComparison();
+			this.createComparisonSet(SetName);
+			ExtentTestManager.getTest().log(Status.PASS, SetName + " Set is added as base to create Comparison " + ComparisonName);
+			this.waitForComparisonTitle();
+			this.ComparisonTitle(ComparisonName);
+			BasePage.waitforAnElement(ComparisonList);
+			ExtentTestManager.getTest().log(Status.PASS, ComparisonName + " Comparison is created from Set intially");
+			this.createCheck(ComparisonName);
+			ExtentTestManager.getTest().log(Status.PASS, "Created Comparison is verified");
 			this.Home();
 		}
 		catch(Exception ex){
@@ -475,7 +634,7 @@ public class ExplorationPage extends BasePage{
 		}
 	}  
 
-	public void expandExploration() throws Throwable{
+	public void expandComparison() throws Throwable{
 		BasePage.click(expand);
 		this.waitForEditAndDelete();
 	}
@@ -519,14 +678,14 @@ public class ExplorationPage extends BasePage{
 		BasePage.click(saveChanges);
 	}
 
-	public void RemoveItemsfromExploration(String ExplorationToCreate, String entityToSelect, String textToSearch) throws Throwable
+	public void RemoveItemsfromComparison(String ComparisonToCreate, String ControlSetName, String entityToSelect, String textToSearch) throws Throwable
 	{
-		this.createExploration(ExplorationToCreate, entityToSelect, textToSearch);	 
-		this.Exploration();
-		this.waitForExploration();
-		WebElement opn = this.openExploration(ExplorationToCreate);
+		this.createComparisonControl(ComparisonToCreate,ControlSetName, entityToSelect, textToSearch);	 
+		this.Comparison();
+		this.waitForComparison();
+		WebElement opn = this.openComparison(ComparisonToCreate);
 		BasePage.click(opn);
-		this.expandExploration();
+		this.expandComparison();
 		this.editCard();	  
 		List<String>  myAlist = new ArrayList<String>();
 		myAlist.add("EFO_1000779");
@@ -550,60 +709,59 @@ public class ExplorationPage extends BasePage{
 
 	public void addItemsFromSet(String existingSetName) throws AWTException, InterruptedException{	    
 		BasePage.click(addFromSet);	    	
-		WebElement opn = this.openExploration(existingSetName);
+		WebElement opn = this.openComparison(existingSetName);
 		BasePage.click(opn);  
 	}
 
-	public void CreateExplorationFromFile(String ExplorationName,String EntitytoSelect, String FileLocation) throws Throwable { 
+	public void CreateComparisonFromFile(String ComparisonName, String CardName,String EntitytoSelect, String FileLocation) throws Throwable { 
 		try {
-			this.Exploration();
-			this.waitForExploration();
-			this.addExploration();
-			this.createExplorationSearch();
-			this.verifyExplorationHomePage("Uncategorized");
-			this.ExplorationTitle(ExplorationName);
+			this.Comparison();
+			this.waitForComparison();
+			this.addComparison();
+			this.ComparisonTitle(ComparisonName);
+			Thread.sleep(3000);
+			this.NameforCard(CardName);
+			Thread.sleep(3000);		
+			this.verifyComparisonHomePage("Uncategorized");	
 			this.selectEntity(EntitytoSelect);
 			this.addItemsFromFile(FileLocation); 
-			this.AddandStart(); 
-			BasePage.waitforAnElement(ExplorationList);
-			ExtentTestManager.getTest().log(Status.PASS, ExplorationName +" Exploration is created using a file after Search");
-			this.createCheck(ExplorationName);
-			ExtentTestManager.getTest().log(Status.PASS, "Created Exploration is verified");
+			this.AddandAccept(); 
+			BasePage.waitforAnElement(ComparisonList);
+			ExtentTestManager.getTest().log(Status.PASS, ComparisonName +" Comparison is created using a file");
+			this.createCheck(ComparisonName);
+			ExtentTestManager.getTest().log(Status.PASS, "Created Comparison is verified");
 			this.Home();
 		}
-		catch(Exception ex){
-			throw ex;
-		}
-		catch(AssertionError ex){
+		catch(Exception | AssertionError ex){
 			throw ex;
 		}
 	}
 
-	public void CreateExplorationFromSet(String SetName, String entityToSelect, String textToSearch, String ExplorationName) throws Throwable { 
+	public void CreateComparisonFromSet(String SetName, String entityToSelect, String textToSearch, String ComparisonName, String CardName) throws Throwable { 
 		try {
 			objSetPage = new SetPage();  
 			objSetPage.createSet(SetName, entityToSelect, textToSearch);
 			this.Home();
 
-			this.Exploration();
-			this.waitForExploration();
-			this.addExploration();
-			this.createExplorationSearch();
-			this.verifyExplorationHomePage("Uncategorized");
-			this.ExplorationTitle(ExplorationName);
+			this.Comparison();
+			this.waitForComparison();
+			this.addComparison();
+			this.ComparisonTitle(ComparisonName);
+			Thread.sleep(3000);
+			this.NameforCard(CardName);
+			Thread.sleep(3000);		
+			this.verifyComparisonHomePage("Uncategorized");
 			this.selectEntity(entityToSelect);
 			this.addItemsFromSet(SetName); 
-			this.clickStart();  
-			BasePage.waitforAnElement(ExplorationList);
-			ExtentTestManager.getTest().log(Status.PASS, ExplorationName +" Exploration is created using a set after Search");
-			this.createCheck(ExplorationName);
-			ExtentTestManager.getTest().log(Status.PASS, "Created Exploration is verified");
+			this.accept(); 
+			ExtentTestManager.getTest().log(Status.PASS, SetName + " Set is added as base to create Comparison " + ComparisonName);	
+			BasePage.waitforAnElement(ComparisonList);
+			ExtentTestManager.getTest().log(Status.PASS, ComparisonName +" is created using a set");
+			this.createCheck(ComparisonName);
+			ExtentTestManager.getTest().log(Status.PASS, "Created Comparison is verified");
 			this.Home();
 		}
-		catch(Exception ex){
-			throw ex;
-		}
-		catch(AssertionError ex){
+		catch(Exception | AssertionError ex){
 			throw ex;
 		}
 	}
@@ -644,16 +802,15 @@ public class ExplorationPage extends BasePage{
 	}	
 
 
-	//Adding a set from expand into exploration
-	public void ExpandAddFromSet(String setToAdd, String entityToSelect, String textToSearchInSet, String ExplorationName, String textToSearchInExploration) throws Throwable {    // Add from a set
+	//Adding a set from expand into Comparison
+	public void ExpandAddFromSet(String setToAdd, String entityToSelect, String textToSearchInSet, String ComparisonName, String ControlSetName, String textToSearchInComparison) throws Throwable {    // Add from a set
 		try {
 			objSetPage = new SetPage();  
 			objSetPage.createSet(setToAdd, entityToSelect, textToSearchInSet);
 			this.Home();
 
-			
-			this.createExploration(ExplorationName, entityToSelect, textToSearchInExploration);
-			this.expandExploration();
+			this.createComparisonControl(ComparisonName,ControlSetName, entityToSelect, textToSearchInComparison);	 
+			this.expandComparison();
 			this.editCard();
 			String NoOfRecordsInitial = ItemCountInExpand.getText();
 			this.addItemsExpand();
@@ -661,7 +818,7 @@ public class ExplorationPage extends BasePage{
 			Thread.sleep(5000);
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
-			ExtentTestManager.getTest().log(Status.PASS, "Exploration - Set added in expand");
+			ExtentTestManager.getTest().log(Status.PASS, "Comparison - Set added in expand");
 		}
 		catch(Exception ex) {
 			throw ex;
@@ -690,12 +847,12 @@ public class ExplorationPage extends BasePage{
 		BasePage.click(Add);
 	}
 
-	//Adding items from catalog from expand into exploration
-	public void ExpandAddFromCatalog(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch, String TextToSearch) throws Throwable{ 
+	//Adding items from catalog from expand into Comparison
+	public void ExpandAddFromCatalog(String ComparisonToCreate, String ControlSetName ,String EntitytoSelect, String ItemtoSearch, String TextToSearch) throws Throwable{ 
 		try {
-			this.createExploration(ExplorationToCreate, EntitytoSelect, ItemtoSearch);
-			this.expandExploration();
-			
+			this.createComparisonControl(ComparisonToCreate,ControlSetName, EntitytoSelect, TextToSearch);	 
+			this.expandComparison();
+
 			this.editCard();
 			String NoOfRecordsInitial = ItemCountInExpand.getText();
 			this.addItemsExpand();
@@ -705,7 +862,7 @@ public class ExplorationPage extends BasePage{
 			Thread.sleep(5000);
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
-			ExtentTestManager.getTest().log(Status.PASS, "Exploration - Items added from Catalog in expand");
+			ExtentTestManager.getTest().log(Status.PASS, "Comparison - Items added from Catalog in expand");
 		}
 		catch(Exception ex) {
 			throw ex;
@@ -746,7 +903,6 @@ public class ExplorationPage extends BasePage{
 		Thread.sleep(5000);
 	}	
 
-
 	public void addFromFile(String CategoryName, String Filelocation, String FileName) throws AWTException, InterruptedException, AssertionError {	    
 		BasePage.click(addFromFile);	 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from a File']")));
@@ -761,11 +917,11 @@ public class ExplorationPage extends BasePage{
 		BasePage.click(AddToGrid);
 	}
 
-	//Adding items from File from expand into Exploration
-	public void ExpandAddFromFile(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch , String CategoryName, String Filelocation, String FileName) throws Throwable { 
+	//Adding items from File from expand into Comparison
+	public void ExpandAddFromFile(String ComparisonToCreate, String ControlSetName, String EntitytoSelect,  String textToSearch , String CategoryName, String Filelocation, String FileName) throws Throwable { 
 		try {
-			this.createExploration(ExplorationToCreate, EntitytoSelect, ItemtoSearch);
-			this.expandExploration();
+			this.createComparisonControl(ComparisonToCreate,ControlSetName, EntitytoSelect, textToSearch);	 
+			this.expandComparison();
 			waitforAnElement(edit);
 			this.editCard();
 			String NoOfRecordsInitial = ItemCountInExpand.getText();
@@ -775,7 +931,7 @@ public class ExplorationPage extends BasePage{
 			waitforAnElement(ItemCountInExpand);
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
-			ExtentTestManager.getTest().log(Status.PASS, "Exploration - Items added from File in expand");
+			ExtentTestManager.getTest().log(Status.PASS, "Comparison - Items added from File in expand");
 		}
 		catch(Exception ex) {
 			if(dialogBoxClose.isDisplayed()) {
@@ -797,11 +953,11 @@ public class ExplorationPage extends BasePage{
 		BasePage.click(deleteCardExpand);
 	}
 
-	public void RemoveItemsfromExploration() throws Throwable
+	public void RemoveItemsfromComparison() throws Throwable
 	{
-		WebElement opn = this.openExploration("Share Set1");
+		WebElement opn = this.openComparison("Share Set1");
 		BasePage.click(opn);
-		this.expandExploration();
+		this.expandComparison();
 		this.editCard();	  
 		List<String>  myAlist = new ArrayList<String>();
 		myAlist.add("EFO_1000779");
@@ -818,18 +974,18 @@ public class ExplorationPage extends BasePage{
 		BasePage.click(Delete);
 	}
 
-	public void DeleteExploraionInExpand(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch) throws Throwable { 
+	public void DeleteExploraionInExpand(String ComparisonToCreate, String ControlSetName, String EntitytoSelect, String textToSearch) throws Throwable { 
 		try {
-			this.createExploration(ExplorationToCreate, EntitytoSelect, ItemtoSearch);
-			this.expandExploration();
+			this.createComparisonControl(ComparisonToCreate,ControlSetName, EntitytoSelect, textToSearch);	 
+			this.expandComparison();
 			this.DeleteCardExpand();
-			WebElement DeleteConfirm =  driver.findElement(By.xpath("//*[@role='heading' and text()='Remove "+EntitytoSelect+"?']"));
-			BasePage.waitforAnElement(DeleteConfirm);
-			this.Remove();
-			ExtentTestManager.getTest().log(Status.PASS, "First Card is deleted via  expanded view");
-			BasePage.waitforAnElement(startButton);
-			this.verifyExplorationHomePage("Uncategorized");
-			BasePage.CompareAttributeText("Value", ExplorationToCreate, titleExploration); //Exploration page
+			String DeleteConfirm =  driver.findElement(By.xpath("//*[@role='heading']")).getText();
+			Assert.assertEquals(DeleteConfirm, "Delete Set");
+			this.Delete();
+			ExtentTestManager.getTest().log(Status.PASS, "Control Card is deleted via expanded view");
+			waitforAnElement(ChooseNameOfSet);
+			this.verifyComparisonHomePage("Uncategorized");
+			BasePage.CompareAttributeText("Value", ComparisonToCreate, titleComparison); //Comparison page
 			ExtentTestManager.getTest().log(Status.PASS, "Removal verified");
 		}
 		catch(Exception ex) {
@@ -840,64 +996,18 @@ public class ExplorationPage extends BasePage{
 		}
 	}
 
-	public int NoOfPagesInExplorationPage() throws InterruptedException, AWTException { 
-		String Pagecount = NoOfPagesInExploration.getText();
+	public int NoOfPagesInComparisonPage() throws InterruptedException, AWTException { 
+		String Pagecount = NoOfPagesInComparison.getText();
 		Integer n = Integer.valueOf(Pagecount);
 		return n;
 	}
-
-	//	public void DeleteExplorationLoop(String ExplorationToDelete) throws InterruptedException, AWTException { 
-	//		Integer NoofPages = this.NoOfPagesInExplorationPage();
-	//		WebElement ED = driver.findElement(By.xpath("//*[text()='"+ExplorationToDelete+"']"));
-	//		WebElement threeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+ExplorationToDelete+"']//parent::div//parent::div//child::button")));
-	//
-	//		List<WebElement> EDs = driver.findElements(By.xpath("//*[text()='"+ExplorationToDelete+"']"));
-	//		if (EDs.size() != 0) {
-	//			Page.scrollIntoView(ED);
-	//			BasePage.click(threeButton);
-	//			BasePage.click(Delete);
-	//			Thread.sleep(2000);
-	//			BasePage.click(Delete);
-	//		}
-	//		else if (EDs.size()== 0) {
-	//
-	//			for (int i=0; i<NoofPages;i++) {
-	//
-	//				if (EDs.size() != 0) {
-	//					Page.scrollIntoView(ED);
-	//					BasePage.click(threeButton);
-	//					BasePage.click(Delete);
-	//					Thread.sleep(2000);
-	//					BasePage.click(Delete);
-	//					break;
-	//				}
-	//				else {
-	//					BasePage.click(NextPage);
-	//					Thread.sleep(2000);
-	//				}
-	//			}
-	//		}
-	//		else if (!NextPage.isEnabled()) {		
-	//			System.out.print("The set to be deleted is not found");
-	//		}
-	//
-	//		else {				
-	//			System.out.print("The set to be deleted is not found");
-	//		}
-	//	}
-
-
-	//	public void DeleteAnExploration(String ExplorationToDelete) throws InterruptedException, AWTException { 
-	//		Page.verifyPage("EXPLORATIONS", ExplorationTitle); //Exploration page
-	//		this.DeleteExplorationLoop(ExplorationToDelete);
-	//	}
 
 	public void selectMenuOptionInList(String SetName)
 	{
 		try {	
 			outerloop:
 				do{
-					for (WebElement element : ExplorationGridItems) {
+					for (WebElement element : ComparisonGridItems) {
 						if(element.isDisplayed() == false)  {scrollIntoView(element);}	    				
 						String textFromGrid = element.getText();	    				
 						if(textFromGrid.contains(SetName)) {
@@ -915,17 +1025,17 @@ public class ExplorationPage extends BasePage{
 		catch(Exception ex) {}
 	}
 
-	public void DeleteExploration(String ExplorationtoDelete) throws Throwable{
+	public void DeleteComparison(String ComparisontoDelete) throws Throwable{
 		try {
-			this.Exploration();
-			this.waitForExploration();
-			selectMenuOptionInList(ExplorationtoDelete);
+			this.Comparison();
+			this.waitForComparison();
+			selectMenuOptionInList(ComparisontoDelete);
 			Thread.sleep(3000);
 			BasePage.click(deleteIcon);
 			String DeleteConfirm =  driver.findElement(By.xpath("//*[@role='heading']")).getText();
-			Assert.assertEquals(DeleteConfirm, "Delete Exploration?");
+			Assert.assertEquals(DeleteConfirm, "Delete Comparison?");
 			BasePage.click(deleteIcon);	 
-			ExtentTestManager.getTest().log(Status.PASS, ExplorationtoDelete + " Exploration is Deleted");
+			ExtentTestManager.getTest().log(Status.PASS, ComparisontoDelete + " Comparison is Deleted");
 		}
 		catch(Exception ex) {
 			throw ex;
@@ -935,25 +1045,25 @@ public class ExplorationPage extends BasePage{
 		}
 	}
 
-	public void createAndDeleteExploration(String ExplorationToCreate, String entityToSelect, String textToSearch) throws Throwable{
-		this.createExploration(ExplorationToCreate, entityToSelect, textToSearch);	 
-		this.DeleteExploration(ExplorationToCreate);   	    	
+	public void createAndDeleteComparison(String ComparisonToCreate,String ControlSetName, String entityToSelect, String textToSearch) throws Throwable{
+		this.createComparisonControl(ComparisonToCreate,ControlSetName, entityToSelect, textToSearch);	  
+		this.DeleteComparison(ComparisonToCreate);   	    	
 	}
 
-	public void ShareExploration(String ExplorationToShare, String personToBeShared) throws Throwable{
+	public void ShareComparison(String ComparisonToShare, String personToBeShared) throws Throwable{
 		try {
-			this.Exploration();
-			this.waitForExploration();
-			selectMenuOptionInList(ExplorationToShare);
+			this.Comparison();
+			this.waitForComparison();
+			selectMenuOptionInList(ComparisonToShare);
 			Thread.sleep(3000);
 			BasePage.click(shareIcon);
-			String SetNameInShare = ExplorationNameInShare.getText();
-			Assert.assertEquals(SetNameInShare, ExplorationToShare);
+			String SetNameInShare = ComparisonNameInShare.getText();
+			Assert.assertEquals(SetNameInShare, ComparisonToShare);
 			BasePage.enterText(selectPersonToShare,personToBeShared);	
 			BasePage.click(suggestedUsers);
 			BasePage.click(share);	
 			BasePage.waitforAnElement(ShareSuccess);
-			ExtentTestManager.getTest().log(Status.PASS, ExplorationToShare + " Exploration is Shared");
+			ExtentTestManager.getTest().log(Status.PASS, ComparisonToShare + " Comparison is Shared");
 		}
 		catch(Exception ex) {
 			throw ex;
@@ -964,19 +1074,19 @@ public class ExplorationPage extends BasePage{
 
 	}
 
-	public void createAndShareExploration(String ExplorationToCreate, String entityToSelect, String textToSearch, String personToBeShared) throws Throwable{
-		this.createExploration(ExplorationToCreate, entityToSelect, textToSearch);	  
-		this.ShareExploration(ExplorationToCreate, personToBeShared);
+	public void createAndShareComparison(String ComparisonToCreate,String ControlSetName, String entityToSelect, String textToSearch, String personToBeShared) throws Throwable{
+		this.createComparisonControl(ComparisonToCreate,ControlSetName, entityToSelect, textToSearch);	  
+		this.ShareComparison(ComparisonToCreate, personToBeShared);
 	}
 
 
-	public void searchInExpand(String SearchInExploration) throws InterruptedException, AWTException, AssertionError { 
+	public void searchInExpand(String SearchInComparison) throws InterruptedException, AWTException, AssertionError { 
 		try {
 			Thread.sleep(20000);
 			BasePage.click(serachBoxExpand);
-			serachBoxExpand.sendKeys(SearchInExploration);
+			serachBoxExpand.sendKeys(SearchInComparison);
 			Thread.sleep(2000);
-			BasePage.CompareAttributeText("value",SearchInExploration,serachBoxExpand);
+			BasePage.CompareAttributeText("value",SearchInComparison,serachBoxExpand);
 		}
 		catch(Exception ex){
 			throw ex;
@@ -986,11 +1096,11 @@ public class ExplorationPage extends BasePage{
 		}
 	}
 
-	public void searchInExplorationExpand(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch, String SearchInExploration) throws Throwable { 
-		this.createExploration(ExplorationToCreate, EntitytoSelect, ItemtoSearch);
-		this.expandExploration();
-		this.searchInExpand(SearchInExploration);
-		ExtentTestManager.getTest().log(Status.PASS, "Search in done using text - "+ SearchInExploration);
+	public void searchInComparisonExpand(String ComparisonToCreate,String ControlSetName,String EntitytoSelect, String textToSearch, String SearchInComparison) throws Throwable { 
+		this.createComparisonControl(ComparisonToCreate,ControlSetName, EntitytoSelect, textToSearch);	 
+		this.expandComparison();
+		this.searchInExpand(SearchInComparison);
+		ExtentTestManager.getTest().log(Status.PASS, "Search in done using text - "+ SearchInComparison);
 	}
 
 	public void DeleteclickinCard() throws AWTException, InterruptedException { 
@@ -1002,17 +1112,17 @@ public class ExplorationPage extends BasePage{
 	}
 
 
-	public void deleteExplorationInFirstCard(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch) throws Throwable { 
+	public void deleteComparisonInFirstCard(String ComparisonToCreate, String ControlSetName, String EntitytoSelect, String textToSearch) throws Throwable { 
 		try {
-			this.createExploration(ExplorationToCreate, EntitytoSelect, ItemtoSearch);
+			this.createComparisonControl(ComparisonToCreate,ControlSetName, EntitytoSelect, textToSearch);	 
 			this.DeleteclickinCard();
 			WebElement DeleteConfirm =  driver.findElement(By.xpath("//*[@role='heading' and text()='Remove "+EntitytoSelect+"?']"));
 			BasePage.waitforAnElement(DeleteConfirm);
 			this.Remove();
-			ExtentTestManager.getTest().log(Status.PASS, "First Card is deleted in Exploration in non-expanded view");
-			BasePage.waitforAnElement(startButton);
-			this.verifyExplorationHomePage("Uncategorized");
-			BasePage.CompareAttributeText("Value", ExplorationToCreate, titleExploration);
+			ExtentTestManager.getTest().log(Status.PASS, ControlSetName +" Card is deleted in Comparison in non-expanded view");
+			waitforAnElement(ChooseNameOfSet);
+			this.verifyComparisonHomePage("Uncategorized");
+			BasePage.CompareAttributeText("Value", ComparisonToCreate, titleComparison);
 			ExtentTestManager.getTest().log(Status.PASS, "Removal verified");
 		}
 		catch (Exception ex) {
@@ -1023,18 +1133,18 @@ public class ExplorationPage extends BasePage{
 		}
 	}
 
-	public void deleteExplorationInLaterCard(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch, String RelationCardType) throws Throwable { 
+	public void deleteComparisonInLaterCard(String ComparisonToCreate,String ControlSetName, String CaseSetName, String EntitytoSelect, String ItemtoSearchControl, String ItemtoSearchCase) throws Throwable { 
 		try {
-			this.createRelationCardFirst(ExplorationToCreate, EntitytoSelect, ItemtoSearch, RelationCardType);
+			this.createComparisonControlandCase(ComparisonToCreate,ControlSetName, CaseSetName, EntitytoSelect, ItemtoSearchControl, ItemtoSearchCase);
 			BasePage.click(DeleteinCard2);
-			WebElement DeleteConfirm =  driver.findElement(By.xpath("//*[@role='heading' and text()='Remove "+RelationCardType+"?']"));
+			WebElement DeleteConfirm =  driver.findElement(By.xpath("//*[@role='heading' and text()='Remove "+EntitytoSelect+"?']"));
 			BasePage.waitforAnElement(DeleteConfirm);
 			this.Remove();
-			ExtentTestManager.getTest().log(Status.PASS, "Second Card is deleted in Exploration in non-expanded view");
+			ExtentTestManager.getTest().log(Status.PASS, "Second Card is deleted in Comparison in non-expanded view");
 			Thread.sleep(3000);
 			int NoOfCards = setCards.size();
 			Assert.assertEquals(NoOfCards, 1);
-			BasePage.CompareAttributeText("Value", ExplorationToCreate, titleExploration);
+			BasePage.CompareAttributeText("Value", ComparisonToCreate, titleComparison);
 			ExtentTestManager.getTest().log(Status.PASS, "Removal verified");
 		}
 		catch (Exception ex) {
@@ -1088,13 +1198,13 @@ public class ExplorationPage extends BasePage{
 
 	public void GridChanges(String setToCreate,String EntitytoSelect, String ItemtoSearch, String NoofRows, String PrimaryColumn, String SecondaryColumn) throws Throwable { 
 		try {	
-			this.addExploration();
-			this.verifyExplorationHomePage("Uncategorized");
-			this.ExplorationTitle(setToCreate); //Create a set
+			this.addComparison();
+			this.verifyComparisonHomePage("Uncategorized");
+			this.ComparisonTitle(setToCreate); //Create a set
 			this.selectEntity(EntitytoSelect);
 			this.searchItems(ItemtoSearch);
-			this.AddandStart();
-			this.expandExploration();
+			this.AddandAccept();
+			this.expandComparison();
 			this.GridSettings();
 			this.GridRows(NoofRows);
 			this.GridPrimaryColumn(PrimaryColumn);
@@ -1112,7 +1222,7 @@ public class ExplorationPage extends BasePage{
 	}
 
 	//	public void SharetLoop(String SetToShare, String SharedUser) throws InterruptedException, AWTException { 
-	//		Integer NoofPages = this.NoOfPagesInExplorationPage();
+	//		Integer NoofPages = this.NoOfPagesInComparisonPage();
 	//		WebElement SS = driver.findElement(By.xpath("//*[text()='"+SetToShare+"']"));
 	//		WebElement threeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+SetToShare+"']//parent::div//parent::div//child::button")));
 	//
@@ -1160,12 +1270,12 @@ public class ExplorationPage extends BasePage{
 	//	}
 	//
 	//	public void shareASet(String SetToShare, String SharedUser) throws InterruptedException, AWTException { 
-	//		Page.verifyPage("MY DATA", ExplorationTitle); //My Data page
+	//		Page.verifyPage("MY DATA", ComparisonTitle); //My Data page
 	//		this.shareASet(SetToShare, SharedUser);
 	//	}
 
-	public void addRelation() throws AWTException, InterruptedException { 
-		BasePage.click(addRelation);
+	public void addCard() throws AWTException, InterruptedException { 
+		BasePage.click(addCard);
 	}
 
 	public WebElement RelationEntity(String RelationCardType) {
@@ -1205,7 +1315,7 @@ public class ExplorationPage extends BasePage{
 	}
 
 	public void createRelationLater(String RelationCardType) throws InterruptedException, AWTException { 
-		this.addRelation();
+		this.addCard();
 		Thread.sleep(3000);
 		try {
 			this.RelationEntity(RelationCardType).isDisplayed();
@@ -1237,8 +1347,8 @@ public class ExplorationPage extends BasePage{
 		Assert.assertEquals(ActualElementName, RelationCardType);
 	}
 
-	public void createRelationCardFirst(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch, String RelationCardType) throws Throwable { 
-		this.createExploration(ExplorationToCreate, EntitytoSelect, ItemtoSearch);
+	public void createRelationCardFirst(String ComparisonToCreate, String ControlSetName, String EntitytoSelect, String textToSearch, String RelationCardType) throws Throwable { 
+		this.createComparisonControl(ComparisonToCreate,ControlSetName, EntitytoSelect, textToSearch);	 
 		this.createRelationFirst(RelationCardType);
 		ExtentTestManager.getTest().log(Status.PASS, "First Relation card created of type : "+ RelationCardType);
 		this.CheckRelationCreated(RelationCardType);
@@ -1246,7 +1356,7 @@ public class ExplorationPage extends BasePage{
 	}
 
 	// Need to update
-	public void SelectItemsInExplorationCard(String NumberOfItemsToSelect) throws InterruptedException, AWTException { 
+	public void SelectItemsInComparisonCard(String NumberOfItemsToSelect) throws InterruptedException, AWTException { 
 		for (int i=1; i == Integer.parseInt(NumberOfItemsToSelect);i++)	{
 			try {
 				WebElement SelectItem = driver.findElement(By.xpath("(//div[@role='checkbox']["+i+"]"));
@@ -1261,15 +1371,15 @@ public class ExplorationPage extends BasePage{
 		}
 	}
 
-	public void createRelationCardMulti(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch, String RelationCardType, String RelationCardType2, String NumberOfItemsToSelect) throws Throwable { 
-		this.createExploration(ExplorationToCreate, EntitytoSelect, ItemtoSearch);
+	public void createRelationCardMulti(String ComparisonToCreate, String ControlSetName, String EntitytoSelect, String textToSearch, String RelationCardType, String RelationCardType2, String NumberOfItemsToSelect) throws Throwable { 
+		this.createComparisonControl(ComparisonToCreate,ControlSetName, EntitytoSelect, textToSearch);	 
 		this.createRelationFirst(RelationCardType);
 		ExtentTestManager.getTest().log(Status.PASS, "First Relation card created of type : "+ RelationCardType);
 		this.CheckRelationCreated(RelationCardType);
 		ExtentTestManager.getTest().log(Status.PASS, "Created first relation card verified");
-		BasePage.waitforAnElement(ExplorationList2);
+		BasePage.waitforAnElement(ComparisonList2);
 		//		Thread.sleep(60000);
-		this.SelectItemsInExplorationCard(NumberOfItemsToSelect);
+		this.SelectItemsInComparisonCard(NumberOfItemsToSelect);
 		this.createRelationLater(RelationCardType2);
 		ExtentTestManager.getTest().log(Status.PASS, "Second Relation card created of type : "+ RelationCardType2);
 		this.CheckRelationCreated(RelationCardType2);
