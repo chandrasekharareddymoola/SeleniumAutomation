@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
@@ -49,10 +50,10 @@ public class ComparisonPage extends BasePage{
 
 	@FindBy(xpath = "//*[text()='Run Comparison']/ancestor::button")
 	public WebElement runComparison;
-	
+
 	@FindBy(xpath = "//*[@type='button' and @title='Close']")
 	public WebElement closeRunComparison;
-	
+
 	@FindBy(xpath = "//*[text()='Search for entities']")
 	public WebElement searchforentities;
 
@@ -208,6 +209,9 @@ public class ComparisonPage extends BasePage{
 
 	@FindBy(xpath = "(//*[@class='ms-List' and @role='presentation'])[2]")
 	public WebElement ComparisonList2;
+
+	@FindBy(xpath = "(//*[@class='ms-List' and @role='presentation'])[last()]")
+	public WebElement LastComparisonList;
 
 	@FindBy(xpath = "//*[@data-icon-name='Trash']")
 	public WebElement DeleteinCard;
@@ -551,7 +555,7 @@ public class ComparisonPage extends BasePage{
 			throw ex;
 		}
 	}   
-	
+
 	public void createComparisonWithcontrolandCaseRunComparison(String ComparisonName,String ControlSetName, String CaseSetName, String EntitytoSelect, String ItemtoSearchControl, String ItemtoSearchCase) throws Throwable{	    	
 		try {
 			this.createComparisonControlandCase(ComparisonName,ControlSetName,CaseSetName,EntitytoSelect,ItemtoSearchControl,ItemtoSearchCase);
@@ -564,6 +568,81 @@ public class ComparisonPage extends BasePage{
 			throw ex;
 		}
 	}  
+
+
+	public void createComparisonWithControlandMultipleCase(String ComparisonName,String ControlSetName, String EntitytoSelect, String ItemtoSearchControl , Integer NumberOfCaseSets) throws Throwable{	    	
+		try {
+			this.createComparisonControl(ComparisonName,ControlSetName, EntitytoSelect, ItemtoSearchControl);
+			for(int i=0; i<NumberOfCaseSets; i++) {
+				this.waitForaddCard();
+				this.addCard();
+				Thread.sleep(3000);
+				int j=i+1;
+				this.NameforCard("Case Set "+ j);
+				Thread.sleep(3000);
+				BasePage.verifyPage(EntitytoSelect, caseCardEntity);
+				String ItemtoSearchCase = generateRandomWord(3);
+				this.searchItems(ItemtoSearchCase); 
+				this.AddandAccept();  
+				BasePage.waitforAnElement(LastComparisonList);
+				ExtentTestManager.getTest().log(Status.PASS, ComparisonName + " Comparison added with " + i + " Case Set(s)" );
+			}
+			this.createCheck(ComparisonName);
+			ExtentTestManager.getTest().log(Status.PASS, "Created Comparison is verified");
+		}
+		catch(Exception | AssertionError ex){
+			throw ex;
+		}
+	} 
+	
+	
+	String generateRandomWord(int wordLength) {
+	    Random r = new Random(); // Intialize a Random Number Generator with SysTime as the seed
+	    StringBuilder sb = new StringBuilder(wordLength);
+	    for(int i = 0; i < wordLength; i++) { // For each letter in the word
+	        char tmp = (char) ('a' + r.nextInt('z' - 'a')); // Generate a letter between a and z
+	        sb.append(tmp); // Add it to the String
+	    }
+	    return sb.toString();
+	}
+
+	public void createComparisonControlandMultipleCase(String ComparisonName,String ControlSetName, String EntitytoSelect, String ItemtoSearchControl , Integer NumberOfCaseSets) throws Throwable{	    	
+		try {
+			this.createComparisonControl(ComparisonName,ControlSetName, EntitytoSelect, ItemtoSearchControl);
+			for(int i=0; i<NumberOfCaseSets; i++) {
+				this.waitForaddCard();
+				this.addCard();
+				Thread.sleep(3000);
+				int j=i+1;
+				this.NameforCard("Case Set "+ j);
+				Thread.sleep(3000);
+				BasePage.verifyPage(EntitytoSelect, caseCardEntity);
+				String ItemtoSearchCase = generateRandomWord(3);
+				this.searchItems(ItemtoSearchCase); 
+				this.AddandAccept();  
+				BasePage.waitforAnElement(LastComparisonList);
+				ExtentTestManager.getTest().log(Status.PASS, ComparisonName + " Comparison added with " + i + " Case Set(s)" );
+			}
+		}
+		catch(Exception | AssertionError ex){
+			throw ex;
+		}
+	} 
+	
+	public void createComparisonWithControlandMultipleCaseRunComparison(String ComparisonName,String ControlSetName, String EntitytoSelect, String ItemtoSearchControl , Integer NumberOfCaseSets) throws Throwable{	    	
+		try {
+			this.createComparisonControlandMultipleCase(ComparisonName,ControlSetName,EntitytoSelect, ItemtoSearchControl, NumberOfCaseSets);
+			this.runComparison();
+			waitforAnElement(comparisonsResultsHeader);
+			ExtentTestManager.getTest().log(Status.PASS, ComparisonName + " Comparison Results Page is displayed");
+			BasePage.click(closeRunComparison);
+		}
+		catch(Exception | AssertionError ex){
+			throw ex;
+		}
+	} 
+	
+	
 
 	public void updateComparisonWithCaseCard(String ComparisonName,String EntitytoSelect,String CaseSetName,String ItemtoSearchCase) throws Throwable{	    	
 		try {
@@ -848,26 +927,24 @@ public class ComparisonPage extends BasePage{
 	}
 
 	//Adding items from catalog from expand into Comparison
-	public void ExpandAddFromCatalog(String ComparisonToCreate, String ControlSetName ,String EntitytoSelect, String ItemtoSearch, String TextToSearch) throws Throwable{ 
+	public void ExpandAddFromCatalog(String ComparisonToCreate, String ControlSetName ,String EntitytoSelect, String TexttoSearchinControl, String TextToSearchinCatalog) throws Throwable{ 
 		try {
-			this.createComparisonControl(ComparisonToCreate,ControlSetName, EntitytoSelect, TextToSearch);	 
+			this.createComparisonControl(ComparisonToCreate,ControlSetName, EntitytoSelect, TexttoSearchinControl);	 
 			this.expandComparison();
 
 			this.editCard();
 			String NoOfRecordsInitial = ItemCountInExpand.getText();
 			this.addItemsExpand();
-			this.addFromSetCatalog(TextToSearch); // Text to be added 
-			ExtentTestManager.getTest().log(Status.PASS, TextToSearch + " is searched");
+			this.addFromSetCatalog(TextToSearchinCatalog); // Text to be added 
+			ExtentTestManager.getTest().log(Status.PASS, TextToSearchinCatalog + " is searched");
 			this.add();
 			Thread.sleep(5000);
+			waitforAnElement(ItemCountInExpand);
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
 			ExtentTestManager.getTest().log(Status.PASS, "Comparison - Items added from Catalog in expand");
 		}
-		catch(Exception ex) {
-			throw ex;
-		}
-		catch(AssertionError ex) {
+		catch(Exception | AssertionError ex) {
 			throw ex;
 		}
 	}
@@ -878,9 +955,14 @@ public class ComparisonPage extends BasePage{
 
 	public void FileuploadCategory(String CategoryName) throws AWTException, InterruptedException{	    
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Drag files here']")));
-		this.fileSelectDropdown();
-		BasePage.click(driver.findElement(By.xpath("//*[@title='"+CategoryName+"']")));
-		BasePage.click(clickUpload);
+		try {
+			this.fileSelectDropdown();
+			BasePage.click(driver.findElement(By.xpath("//*[@title='"+CategoryName+"']")));
+			BasePage.click(clickUpload);
+		}
+		catch (Exception ex){
+			BasePage.click(clickUpload);
+		}
 	}	
 
 
@@ -1347,14 +1429,6 @@ public class ComparisonPage extends BasePage{
 		Assert.assertEquals(ActualElementName, RelationCardType);
 	}
 
-	public void createRelationCardFirst(String ComparisonToCreate, String ControlSetName, String EntitytoSelect, String textToSearch, String RelationCardType) throws Throwable { 
-		this.createComparisonControl(ComparisonToCreate,ControlSetName, EntitytoSelect, textToSearch);	 
-		this.createRelationFirst(RelationCardType);
-		ExtentTestManager.getTest().log(Status.PASS, "First Relation card created of type : "+ RelationCardType);
-		this.CheckRelationCreated(RelationCardType);
-		ExtentTestManager.getTest().log(Status.PASS, "Created first relation card verified");
-	}
-
 	// Need to update
 	public void SelectItemsInComparisonCard(String NumberOfItemsToSelect) throws InterruptedException, AWTException { 
 		for (int i=1; i == Integer.parseInt(NumberOfItemsToSelect);i++)	{
@@ -1371,20 +1445,6 @@ public class ComparisonPage extends BasePage{
 		}
 	}
 
-	public void createRelationCardMulti(String ComparisonToCreate, String ControlSetName, String EntitytoSelect, String textToSearch, String RelationCardType, String RelationCardType2, String NumberOfItemsToSelect) throws Throwable { 
-		this.createComparisonControl(ComparisonToCreate,ControlSetName, EntitytoSelect, textToSearch);	 
-		this.createRelationFirst(RelationCardType);
-		ExtentTestManager.getTest().log(Status.PASS, "First Relation card created of type : "+ RelationCardType);
-		this.CheckRelationCreated(RelationCardType);
-		ExtentTestManager.getTest().log(Status.PASS, "Created first relation card verified");
-		BasePage.waitforAnElement(ComparisonList2);
-		//		Thread.sleep(60000);
-		this.SelectItemsInComparisonCard(NumberOfItemsToSelect);
-		this.createRelationLater(RelationCardType2);
-		ExtentTestManager.getTest().log(Status.PASS, "Second Relation card created of type : "+ RelationCardType2);
-		this.CheckRelationCreated(RelationCardType2);
-		ExtentTestManager.getTest().log(Status.PASS, "Created second relation card verified");
-	}
 
 	public void captureScreenshot(String screenShotName) throws IOException
 	{
