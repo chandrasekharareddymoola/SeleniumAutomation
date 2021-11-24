@@ -320,7 +320,7 @@ public class ComparisonTest extends BaseTest{
 	public void DeleteComparison_Test() throws Throwable  {
 		try {
 			/* Delete A Comparison */
-			objComparisonPage.DeleteComparison("Comparison 10");
+			objComparisonPage.DeleteComparison("Comparison 9");
 			onSuccessMeassage("Deleted A Comparison Successfully");
 		}
 		catch(Exception | AssertionError ex)
@@ -362,6 +362,21 @@ public class ComparisonTest extends BaseTest{
 	//	//			onFailureMeassage(ex.getMessage(),"ComparisonItemsRemoveFail","ComparisonItemsRemoveFail");
 	//	//		}
 	//	//	}
+	
+	
+//	@Test(priority = 20, description = "Create Comparison with a control and Verify")
+//	public void CreateComparisonWithContol_Test() throws Throwable {
+//		try {
+//			/* Creates an Comparison with control and Verify */		 
+//			objComparisonPage.createComparisonWithControl("Comparison Control 1", "Control Set ","Disease", "kera");
+//			onSuccessMeassage("Comparison is Created Successfully with Control Card");
+//		}
+//		catch(Throwable ex)
+//		{
+//			objComparisonPage.captureScreenshot("createComparisonWithControlFail");
+//			onFailureMeassage(ex.getMessage(),"createComparisonWithControlFail","createComparisonWithControlFail");
+//		}
+//	}
 
 	public void onSuccessMeassage(String successMessage)
 	{

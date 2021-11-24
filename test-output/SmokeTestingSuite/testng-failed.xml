@@ -6,35 +6,31 @@
   </listeners>
   <test thread-count="5" name="Smoke Test cases(failed)">
     <classes>
-      <class name="com.eagle.TestCases.LoginTest">
+      <class name="com.eagle.TestCases.ComparisonTest">
         <methods>
-          <include name="launchApplication"/>
+          <include name="SearchInComparisonExpand_Test"/>
+          <include name="DeleteComparisonSecondCard_Test"/>
+          <include name="CreateComparisonWithContolandCase_Test"/>
+          <include name="DeleteCardInComparisonExpand_Test"/>
+          <include name="createComparisonWithControlandCaseRunComparison_Test"/>
+          <include name="DeleteComparison_Test"/>
+          <include name="ComparisonExpandAddFromFile_Test"/>
+          <include name="CreateAndDeleteComparison_Test"/>
           <include name="beforeClass"/>
-          <include name="VerifyLoginPage_Test"/>
-        </methods>
-      </class> <!-- com.eagle.TestCases.LoginTest -->
-      <class name="com.eagle.TestCases.ExplorationTest">
-        <methods>
-          <include name="CreateExplorationFromFile_Test"/>
-          <include name="DeleteCardInExplorationExpand_Test"/>
-          <include name="ExplorationExpandAddFromCatalog_Test"/>
-          <include name="CreateExplorationFromSet_Test"/>
-          <include name="DeleteExploration_Test"/>
-          <include name="DeleteExplorationFirstCard_Test"/>
-          <include name="CreateExplorationFromSetInitally_Test"/>
-          <include name="ShareExploration_Test"/>
+          <include name="ComparisonCreateMultipleCaseCardsRunComparison_Test"/>
+          <include name="CreateComparisonFromFile_Test"/>
+          <include name="ShareComparison_Test"/>
           <include name="launchApplication"/>
-          <include name="SearchInExplorationExpand_Test"/>
-          <include name="DeleteExplorationSecondCard_Test"/>
-          <include name="ExplorationExpandAddFromFile_Test"/>
-          <include name="beforeClass"/>
-          <include name="CreateAndDeleteExploration_Test"/>
-          <include name="ExplorationCreateARelationCard_Test"/>
-          <include name="ExplorationExpandAddFromSet_Test"/>
-          <include name="CreateExplorationFromSearch_Test"/>
-          <include name="CreateAndShareExploration_Test"/>
+          <include name="ComparisonExpandAddFromCatalog_Test"/>
+          <include name="ComparisonCreateMultipleCaseCards_Test"/>
+          <include name="CreateComparisonWithContol_Test"/>
+          <include name="updateComparisonWithCaseCard_Test"/>
+          <include name="ComparisonExpandAddFromSet_Test"/>
+          <include name="CreateComparisonFromSet_Test"/>
+          <include name="CreateAndShareComparison_Test"/>
+          <include name="DeleteComparisonFirstCard_Test"/>
         </methods>
-      </class> <!-- com.eagle.TestCases.ExplorationTest -->
+      </class> <!-- com.eagle.TestCases.ComparisonTest -->
     </classes>
   </test> <!-- Smoke Test cases(failed) -->
 </suite> <!-- Failed suite [SmokeTestingSuite] -->

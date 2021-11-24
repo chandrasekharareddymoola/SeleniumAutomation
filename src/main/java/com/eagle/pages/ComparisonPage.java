@@ -272,6 +272,13 @@ public class ComparisonPage extends BasePage{
 
 	@FindBy(xpath = "//div[@class='ms-List']//div[@role='rowheader' and @aria-colindex='1']")
 	public List<WebElement> GridItems;
+	
+	@FindBy(xpath = "//span[text()='An error occured. Please contact your administrator.']")
+	public WebElement ErrorInListLoad;
+	
+	@FindBy(xpath = "//*[@scraper-tag='HandleError' and text()='Fetch failed']")
+	public WebElement fetchFailed;
+	
 
 
 	public WebElement openComparison(String name) {
@@ -1376,58 +1383,7 @@ public class ComparisonPage extends BasePage{
 		BasePage.click(this.RelationEntityinDropdown(RelationCardType));
 	}
 
-	public void createRelationFirst(String RelationCardType) throws InterruptedException, AWTException { 
-		try {
-			this.RelationEntity(RelationCardType).isDisplayed();
-			this.Relationclick(RelationCardType);
-		}
-		catch (Exception NoSuchElement) {
-			BasePage.click(addRelationCategory);
-			try{
-				this.RelationEntityinDropdown(RelationCardType).isDisplayed();
-				this.RelationdropdownClick(RelationCardType);
-				Thread.sleep(2000);
-				this.Relationclick(RelationCardType);
-			}
-			catch (Exception NoSuchElementindropdown) {
-				System.out.println("The entity is not present");
-				throw NoSuchElement;
-			}
-		}
-	}
 
-	public void createRelationLater(String RelationCardType) throws InterruptedException, AWTException { 
-		this.addCard();
-		Thread.sleep(3000);
-		try {
-			this.RelationEntity(RelationCardType).isDisplayed();
-			this.Relationclick(RelationCardType);
-		}
-		catch (Exception NoSuchElement) {
-			BasePage.click(addRelationCategory);
-			try{
-				this.RelationEntityinDropdown(RelationCardType).isDisplayed();
-				this.RelationdropdownClick(RelationCardType);
-				Thread.sleep(2000);
-				this.Relationclick(RelationCardType);
-			}
-			catch (Exception NoSuchElementindropdown) {
-				System.out.println("The entity is not present");
-			}
-		}
-	}
-
-
-	public void CheckRelationCreated(String RelationCardType) throws AWTException, InterruptedException {
-		Thread.sleep(5000);
-		int NoOfCards = setCards.size();
-		WebElement LastCard = driver.findElement(By.xpath("(//*[@scraper-tag='SetCardContent'])["+NoOfCards+"]"));
-		BasePage.waitforAnElement(LastCard);	
-
-		WebElement ActualElementType = driver.findElement(By.xpath("(//*[@class='ms-Label SetCardCategorySelector__categoryName___OkSRM root-82'])["+NoOfCards+"]"));
-		String ActualElementName = ActualElementType.getText();
-		Assert.assertEquals(ActualElementName, RelationCardType);
-	}
 
 	// Need to update
 	public void SelectItemsInComparisonCard(String NumberOfItemsToSelect) throws InterruptedException, AWTException { 
