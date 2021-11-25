@@ -364,19 +364,19 @@ public class ComparisonTest extends BaseTest{
 	//	//	}
 	
 	
-//	@Test(priority = 20, description = "Create Comparison with a control and Verify")
-//	public void CreateComparisonWithContol_Test() throws Throwable {
-//		try {
-//			/* Creates an Comparison with control and Verify */		 
-//			objComparisonPage.createComparisonWithControl("Comparison Control 1", "Control Set ","Disease", "kera");
-//			onSuccessMeassage("Comparison is Created Successfully with Control Card");
-//		}
-//		catch(Throwable ex)
-//		{
-//			objComparisonPage.captureScreenshot("createComparisonWithControlFail");
-//			onFailureMeassage(ex.getMessage(),"createComparisonWithControlFail","createComparisonWithControlFail");
-//		}
-//	}
+	@Test(priority = 20, description = "Interchange Control and Case sets in the Comparison")
+	public void ChangeControlAndCase_Test() throws Throwable {
+		try {
+			/* Changes the Control and Case in Comparison */		 
+			objComparisonPage.ChangeControlAndCase("Control and Case Change", "Control Set ","Case Set" ,"Disease", "kera", "dol");
+			onSuccessMeassage("Comparison is Created Successfully with Control Card");
+		}
+		catch(Throwable ex)
+		{
+			objComparisonPage.captureScreenshot("changeControlAndCaseFail");
+			onFailureMeassage(ex.getMessage(),"changeControlAndCaseFail","changeControlAndCaseFail");
+		}
+	}
 
 	public void onSuccessMeassage(String successMessage)
 	{

@@ -81,7 +81,7 @@ public class ExplorationPage extends BasePage{
 	public WebElement accept;	
 
 	@FindBy(xpath = "//*[@class='ExpandedCardViewHeader__title___r34jA']")
-	public WebElement setNameInExpand;	
+	public WebElement ExplorationNameInExpand;	
 
 	@FindBy(xpath = "//*[@class='ms-Dropdown-container']")
 	public WebElement fileSelectDropdown;	
@@ -705,6 +705,7 @@ public class ExplorationPage extends BasePage{
 			Thread.sleep(5000);
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
+			BasePage.verifyPage(ExplorationToCreate,ExplorationNameInExpand); 
 			ExtentTestManager.getTest().log(Status.PASS, "Exploration - Items added from Catalog in expand");
 		}
 		catch(Exception ex) {
@@ -777,11 +778,11 @@ public class ExplorationPage extends BasePage{
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
 			ExtentTestManager.getTest().log(Status.PASS, "Exploration - Items added from File in expand");
 		}
-		catch(Exception ex) {
+		catch (Exception ExpandAddFromFileFail) {
 			if(dialogBoxClose.isDisplayed()) {
 				BasePage.click(dialogBoxClose);
 			}
-			throw ex;
+			throw ExpandAddFromFileFail;
 		}
 		catch(AssertionError ex) {
 			if(dialogBoxClose.isDisplayed()) {
@@ -1100,7 +1101,7 @@ public class ExplorationPage extends BasePage{
 			this.GridPrimaryColumn(PrimaryColumn);
 			this.GridSecondaryColumn(SecondaryColumn);
 			BasePage.click(Apply);
-			BasePage.verifyPage(setToCreate,setNameInExpand); //verifying the set name
+			BasePage.verifyPage(setToCreate,ExplorationNameInExpand); //verifying the set name
 			this.VerifyGrid(NoofRows,PrimaryColumn,SecondaryColumn);
 		}
 		catch (Exception ex) {

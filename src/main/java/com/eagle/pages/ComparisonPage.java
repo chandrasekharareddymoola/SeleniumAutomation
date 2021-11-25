@@ -91,7 +91,7 @@ public class ComparisonPage extends BasePage{
 	public WebElement accept;	
 
 	@FindBy(xpath = "//*[@class='ExpandedCardViewHeader__title___r34jA']")
-	public WebElement setNameInExpand;	
+	public WebElement ComparisonNameInExpand;	
 
 	@FindBy(xpath = "//*[@class='ms-Dropdown-container']")
 	public WebElement fileSelectDropdown;	
@@ -272,14 +272,30 @@ public class ComparisonPage extends BasePage{
 
 	@FindBy(xpath = "//div[@class='ms-List']//div[@role='rowheader' and @aria-colindex='1']")
 	public List<WebElement> GridItems;
-	
+
 	@FindBy(xpath = "//span[text()='An error occured. Please contact your administrator.']")
 	public WebElement ErrorInListLoad;
-	
+
 	@FindBy(xpath = "//*[@scraper-tag='HandleError' and text()='Fetch failed']")
 	public WebElement fetchFailed;
-	
 
+	@FindBy(xpath = "(//*[@role='listbox'])[2]")
+	public WebElement dropDown2;
+	
+	@FindBy(xpath = "(//*[@role='listbox'])[2]//span[@role='option']")
+	public WebElement dropDown2text;
+
+	@FindBy(xpath = "(//*[@role='listbox'])[3]")
+	public WebElement dropDown3;
+	
+	@FindBy(xpath = "(//*[@role='listbox'])[3]//span[@role='option']")
+	public WebElement dropDown3text;
+
+	@FindBy(xpath = "//*[@type='button' and @title='CONTROL']")
+	public WebElement controlButton;
+
+	@FindBy(xpath = "//*[@type='button' and @title='CASE']")
+	public WebElement caseButton;
 
 	public WebElement openComparison(String name) {
 		return driver.findElement(By.xpath("//div[@class='ms-List']//div[@role='rowheader' and @aria-colindex='1']//div[@title='"+ name +"']"));   		
@@ -601,16 +617,16 @@ public class ComparisonPage extends BasePage{
 			throw ex;
 		}
 	} 
-	
-	
+
+
 	String generateRandomWord(int wordLength) {
-	    Random r = new Random(); // Intialize a Random Number Generator with SysTime as the seed
-	    StringBuilder sb = new StringBuilder(wordLength);
-	    for(int i = 0; i < wordLength; i++) { // For each letter in the word
-	        char tmp = (char) ('a' + r.nextInt('z' - 'a')); // Generate a letter between a and z
-	        sb.append(tmp); // Add it to the String
-	    }
-	    return sb.toString();
+		Random r = new Random(); // Intialize a Random Number Generator with SysTime as the seed
+		StringBuilder sb = new StringBuilder(wordLength);
+		for(int i = 0; i < wordLength; i++) { // For each letter in the word
+			char tmp = (char) ('a' + r.nextInt('z' - 'a')); // Generate a letter between a and z
+			sb.append(tmp); // Add it to the String
+		}
+		return sb.toString();
 	}
 
 	public void createComparisonControlandMultipleCase(String ComparisonName,String ControlSetName, String EntitytoSelect, String ItemtoSearchControl , Integer NumberOfCaseSets) throws Throwable{	    	
@@ -635,7 +651,7 @@ public class ComparisonPage extends BasePage{
 			throw ex;
 		}
 	} 
-	
+
 	public void createComparisonWithControlandMultipleCaseRunComparison(String ComparisonName,String ControlSetName, String EntitytoSelect, String ItemtoSearchControl , Integer NumberOfCaseSets) throws Throwable{	    	
 		try {
 			this.createComparisonControlandMultipleCase(ComparisonName,ControlSetName,EntitytoSelect, ItemtoSearchControl, NumberOfCaseSets);
@@ -648,8 +664,67 @@ public class ComparisonPage extends BasePage{
 			throw ex;
 		}
 	} 
-	
-	
+
+	public void firstCardControlChangeAndVerify() throws Throwable{	    	
+		try {
+			BasePage.click(dropDown2);
+			BasePage.click(caseButton);
+			Thread.sleep(2000);
+			ExtentTestManager.getTest().log(Status.PASS, "CONTROL Card is changed to Case");
+			System.out.println(dropDown3text.getText());
+			BasePage.verifyPage("CONTROL", dropDown3text);
+			ExtentTestManager.getTest().log(Status.PASS, "CASE Card change to Control is verified");
+		}
+		catch(Exception | AssertionError ex){
+			throw ex;
+		}
+	}  
+
+	public void secondCardControlChangeAndVerify() throws Throwable{	    	
+		try {
+			BasePage.click(dropDown3);
+			BasePage.click(caseButton);
+			Thread.sleep(2000);
+			ExtentTestManager.getTest().log(Status.PASS, "CONTROL Card is changed to Case again");
+			BasePage.verifyPage("CONTROL", dropDown2text);
+			ExtentTestManager.getTest().log(Status.PASS, "CASE Card change to Control is verified again");
+		}
+		catch(Exception | AssertionError ex){
+			throw ex;
+		}
+	}  
+
+	public void secondCardCaseChangeAndVerify() throws Throwable{	    	
+		try {
+			BasePage.click(dropDown3);
+			BasePage.click(controlButton);
+			Thread.sleep(2000);
+			ExtentTestManager.getTest().log(Status.PASS, "CASE Card is changed to Control");
+			BasePage.verifyPage("CASE", dropDown2text);
+			ExtentTestManager.getTest().log(Status.PASS, "CONTROL Card change to Case is verified");
+		}
+		catch(Exception | AssertionError ex){
+			throw ex;
+		}
+	}  
+
+	public void ChangeControlAndCase(String ComparisonName,String ControlSetName, String CaseSetName, String EntitytoSelect, String ItemtoSearchControl, String ItemtoSearchCase) throws Throwable{	    	
+		try {
+			this.createComparisonControlandCase(ComparisonName,ControlSetName,CaseSetName,EntitytoSelect,ItemtoSearchControl,ItemtoSearchCase);
+			this.waitForaddCard();
+			this.firstCardControlChangeAndVerify();
+			Thread.sleep(3000);
+			this.secondCardControlChangeAndVerify();
+			Thread.sleep(3000);
+			this.secondCardCaseChangeAndVerify();
+			Thread.sleep(3000);
+			ExtentTestManager.getTest().log(Status.PASS, ComparisonName + "  - Control and case change is verified");
+		}
+		catch(Exception | AssertionError ex){
+			throw ex;
+		}
+	}  
+
 
 	public void updateComparisonWithCaseCard(String ComparisonName,String EntitytoSelect,String CaseSetName,String ItemtoSearchCase) throws Throwable{	    	
 		try {
@@ -949,6 +1024,7 @@ public class ComparisonPage extends BasePage{
 			waitforAnElement(ItemCountInExpand);
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
+			BasePage.verifyPage(ControlSetName,ComparisonNameInExpand);
 			ExtentTestManager.getTest().log(Status.PASS, "Comparison - Items added from Catalog in expand");
 		}
 		catch(Exception | AssertionError ex) {
@@ -1022,17 +1098,11 @@ public class ComparisonPage extends BasePage{
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
 			ExtentTestManager.getTest().log(Status.PASS, "Comparison - Items added from File in expand");
 		}
-		catch(Exception ex) {
+		catch (Exception ExpandAddFromFileFail) {
 			if(dialogBoxClose.isDisplayed()) {
 				BasePage.click(dialogBoxClose);
 			}
-			throw ex;
-		}
-		catch(AssertionError ex) {
-			if(dialogBoxClose.isDisplayed()) {
-				BasePage.click(dialogBoxClose);
-			}
-			throw ex;
+			throw ExpandAddFromFileFail;
 		}
 	}
 
@@ -1299,7 +1369,7 @@ public class ComparisonPage extends BasePage{
 			this.GridPrimaryColumn(PrimaryColumn);
 			this.GridSecondaryColumn(SecondaryColumn);
 			BasePage.click(Apply);
-			BasePage.verifyPage(setToCreate,setNameInExpand); //verifying the set name
+			BasePage.verifyPage(setToCreate,ComparisonNameInExpand); //verifying the set name
 			this.VerifyGrid(NoofRows,PrimaryColumn,SecondaryColumn);
 		}
 		catch (Exception ex) {

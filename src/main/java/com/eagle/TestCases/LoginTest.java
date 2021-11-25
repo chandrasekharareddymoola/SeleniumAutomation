@@ -34,8 +34,8 @@ public class LoginTest extends BaseTest{
 			    onSuccessMeassage("Login is successfull");
 	    	}
 	      	catch(Exception ex){
-	      		objLogin.captureScreenshot("createInvFail");
-				onFailreMeassage(ex.getMessage(),"createInvFail");					
+	      		objLogin.captureScreenshot("createFail");
+				onFailreMeassage(ex.getMessage(),"createFail");					
 			}
 	    }
 		
