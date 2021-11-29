@@ -196,6 +196,9 @@ public class SetPage extends BasePage{
 	@FindBy(xpath = "//button//span[contains(text(),'Share')]")
 	public WebElement shareIcon;
 
+	@FindBy(xpath = "//*[@scraper-tag='HandleError' and text()='Fetch failed']")
+	public WebElement fetchFailed;
+	
 	@FindBy(xpath = "//input[@role='textbox']")
 	public WebElement selectPersonToShare;
 
@@ -370,8 +373,9 @@ public class SetPage extends BasePage{
 		ExtentTestManager.getTest().log(Status.PASS, "Set "+ SetName +" is opened");
 	}
 
-	public void expandSet() throws InterruptedException, AWTException{
+	public void expandSet() throws Throwable{
 		BasePage.click(expand);
+		this.waitForEditAndDelete();
 	}
 
 	public void editSet() throws InterruptedException, AWTException{
@@ -413,7 +417,7 @@ public class SetPage extends BasePage{
 		BasePage.click(saveChanges);
 	}
 
-	public void RemoveItemsfromSet(String SetToCreate, String entityToSelect, String textToSearch) throws InterruptedException, AWTException
+	public void RemoveItemsfromSet(String SetToCreate, String entityToSelect, String textToSearch) throws Throwable
 	{
 		this.createSet(SetToCreate, entityToSelect, textToSearch);	 
 		this.Set();
@@ -424,7 +428,7 @@ public class SetPage extends BasePage{
 		List<String>  myAlist = new ArrayList<String>();
 		myAlist.add("EFO_1000779");
 		myAlist.add("EFO_1000778");
-		myAlist.add("seborrheic keratosis");
+//		myAlist.add("seborrheic keratosis");
 		myAlist.add("EFO_1000758");
 		myAlist.add("EFO_1000745");
 		this.selectItems(myAlist);	  
@@ -437,8 +441,8 @@ public class SetPage extends BasePage{
 		ExtentTestManager.getTest().log(Status.PASS, "File uploaded successfully");
 	}
 
-	public void addItemsExpand() throws InterruptedException, AWTException {	    
-		BasePage.click(addItemsExpand);	 				
+	public void addItemsExpand() throws InterruptedException, AWTException  {	    
+		BasePage.click(addItemsExpand);	 	
 	}
 
 	public void addItemsFromSet(String existingSetName) throws InterruptedException, AWTException{	    
@@ -532,9 +536,10 @@ public class SetPage extends BasePage{
 	}	
 
 	//Adding items from Set from expand into Set
-	public void ExpandAddFromSet(String setToAdd, String entityToSelect,String textToSearchSet1, String setToCreate, String textToSearchSet2) throws InterruptedException, AWTException, AssertionError {    // Add from a set
+	public void ExpandAddFromSet(String setToAdd, String entityToSelect,String textToSearchSet1, String setToCreate, String textToSearchSet2) throws Throwable {    // Add from a set
 		try {
 			this.createSet(setToAdd, entityToSelect, textToSearchSet1);
+			this.Set();
 			this.addSet();
 			this.verifySetHomePage("Uncategorized");
 			this.setTitle(setToCreate); //Create a set
@@ -547,7 +552,7 @@ public class SetPage extends BasePage{
 			String NoOfRecordsInitial = ItemCountInExpand.getText();
 			this.addItemsExpand();
 			this.addFromSetExpand(setToAdd); // Set to be added
-			Thread.sleep(5000);
+			this.waitForSaveChanges();
 			waitforAnElement(ItemCountInExpand);
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);		
@@ -583,7 +588,7 @@ public class SetPage extends BasePage{
 	}
 
 	//Adding items from Catalog from expand into Set
-	public void ExpandAddFromCatalog(String setToCreate, String entityToSelect, String textToSearch, String TextToSearch) throws InterruptedException, AWTException, AssertionError  { 
+	public void ExpandAddFromCatalog(String setToCreate, String entityToSelect, String textToSearch, String TextToSearch) throws Throwable  { 
 		try {
 			this.Set();
 			this.addSet();
@@ -600,7 +605,7 @@ public class SetPage extends BasePage{
 			this.addFromSetCatalog(TextToSearch); // Text to be added 
 			ExtentTestManager.getTest().log(Status.PASS, TextToSearch + " is searched");
 			this.add();
-			Thread.sleep(5000);
+			this.waitForSaveChanges();
 			waitforAnElement(ItemCountInExpand);
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
@@ -674,7 +679,7 @@ public class SetPage extends BasePage{
 	}
 
 	//Adding items from File from expand into Set
-	public void ExpandAddFromFile(String setToCreate, String entityToSelect, String textToSearch, String CategoryName, String Filelocation, String FileName) throws InterruptedException, AWTException, AssertionError { 
+	public void ExpandAddFromFile(String setToCreate, String entityToSelect, String textToSearch, String CategoryName, String Filelocation, String FileName) throws Throwable { 
 		try {
 			this.Set();
 			this.addSet();
@@ -690,6 +695,7 @@ public class SetPage extends BasePage{
 			Thread.sleep(3000);
 			this.addFromFile(CategoryName, Filelocation, FileName); 
 			this.addToGrid();
+			this.waitForSaveChanges();
 			BasePage.verifyPage(setToCreate,setNameInExpand); //verifying the set name
 			ExtentTestManager.getTest().log(Status.PASS, "Set - Added from file in expand");
 		}
@@ -716,7 +722,7 @@ public class SetPage extends BasePage{
 		BasePage.click(Delete);
 	}
 
-	public void DeleteCardInExpand(String setToCreate, String entityToSelect, String textToSearch) throws InterruptedException, AWTException, AssertionError { 
+	public void DeleteCardInExpand(String setToCreate, String entityToSelect, String textToSearch) throws Throwable { 
 		try {
 			this.Set();
 			this.addSet();
@@ -884,6 +890,63 @@ public class SetPage extends BasePage{
 		BasePage.verifyPage("MY DATA", MyDataTitle); //My Data page
 		this.DeleteSetLoop(setToDelete);
 	}
+	
+	public void waitForEditAndDelete() throws Throwable{
+		try {  
+			boolean iden = true;
+			outerloop:
+			do
+			{
+				try {	    	
+					edit.isDisplayed();
+					iden = false;	  
+				}
+				catch(Exception ex) {
+					try {
+						if (fetchFailed.isDisplayed()) {
+							break outerloop;
+						}
+					}
+					catch (Exception et){
+						Thread.sleep(5000);}	 
+				}
+			}
+			while(iden);	         
+		}
+		catch(Exception | AssertionError ex)
+		{
+			throw ex;
+		}
+	}
+	
+	
+	public void waitForSaveChanges() throws Throwable{
+		try {  
+			boolean iden = true;
+			outerloop:
+			do
+			{
+				try {	    	
+					saveChanges.isDisplayed();
+					iden = false;	  
+				}
+				catch(Exception ex) {
+					try {
+						if (fetchFailed.isDisplayed()) {
+							break outerloop;
+						}
+					}
+					catch (Exception et){
+						Thread.sleep(5000);}	 
+				}
+			}
+			while(iden);	         
+		}
+		catch(Exception | AssertionError ex)
+		{
+			throw ex;
+		}
+	}
 
 	public void searchInExpand(String SearchInSet) throws InterruptedException, AWTException { 
 		BasePage.click(serachBox);
@@ -892,7 +955,7 @@ public class SetPage extends BasePage{
 		BasePage.CompareAttributeText("value",SearchInSet,serachBoxExpand);
 	}
 
-	public void searchInSetExpand(String setToCreate, String entityToSelect, String textToSearch, String SearchInSet) throws InterruptedException, AWTException { 
+	public void searchInSetExpand(String setToCreate, String entityToSelect, String textToSearch, String SearchInSet) throws Throwable { 
 		try {
 			this.addSet();
 			this.verifySetHomePage("Uncategorized");
@@ -947,13 +1010,11 @@ public class SetPage extends BasePage{
 		Assert.assertEquals(RN, NoofRows);
 	}
 
-	public void GridChanges(String setToCreate, String entityToSelect, String textToSearch, String NoofRows, String PrimaryColumn, String SecondaryColumn) throws InterruptedException, AWTException { 
+	public void GridChanges(String setToCreate, String entityToSelect, String textToSearch, String NoofRows, String PrimaryColumn, String SecondaryColumn) throws Throwable { 
 		try {
 			this.Set();
 			this.addSet();
 			this.verifySetHomePage("Uncategorized");
-
-			this.addSet();
 			this.setTitle(setToCreate); //Create a set
 			this.selectEntity(entityToSelect);
 			this.searchItems(textToSearch);
@@ -964,6 +1025,7 @@ public class SetPage extends BasePage{
 			this.GridPrimaryColumn(PrimaryColumn);
 			this.GridSecondaryColumn(SecondaryColumn);
 			BasePage.click(Apply);
+			this.waitForEditAndDelete();
 			waitforAnElement(setNameInExpand);
 			BasePage.verifyPage(setToCreate,setNameInExpand); //verifying the set name
 			this.VerifyGrid(NoofRows,PrimaryColumn,SecondaryColumn);

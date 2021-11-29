@@ -46,7 +46,7 @@
 		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
 			<li>
                 <a href='#!'>
-                    <span class='label suite-start-time blue darken-3'>Thursday, November 25, 2021, 10:28 AM (IST)</span>
+                    <span class='label suite-start-time blue darken-3'>Monday, November 29, 2021, 10:40 AM (IST)</span>
 				</a>
 			</li>
 			<li>
@@ -72,6 +72,7 @@
 				</a>
 				<ul id='tests-toggle' class='dropdown-content'>
 											<li status='pass'><a href='#!'>Pass <i class='material-icons green-text'>check_circle</i></a></li>
+						<li status='fail'><a href='#!'>Fail <i class='material-icons red-text'>cancel</i></a></li>
 					<li class='divider'></li>
 					<li status='clear' clear='true'><a href='#!'>Clear Filters <i class='material-icons'>clear</i></a></li>
 				</ul>
@@ -123,14 +124,14 @@
 				<li class='test displayed active  pass' status='pass' bdd='false' test-id='1'>
 					<div class='test-heading'>
 						<span class='test-name'>VerifyLoginPage_Test</span>
-						<span class='test-time'>Thursday, November 25, 2021, 10:28 AM (IST)</span>
+						<span class='test-time'>Monday, November 29, 2021, 10:40 AM (IST)</span>
 						<span class='test-status right pass'>pass</span>
 					</div>
 					<div class='test-content hide'>
 <div class='test-time-info'>
-	<span class='label start-time'>Thursday, November 25, 2021, 10:28 AM (IST)</span>
-	<span class='label end-time'>Thursday, November 25, 2021, 10:29 AM (IST)</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 0m 47s+152ms</span>
+	<span class='label start-time'>Monday, November 29, 2021, 10:40 AM (IST)</span>
+	<span class='label end-time'>Monday, November 29, 2021, 10:41 AM (IST)</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 48s+273ms</span>
 </div>
 	<div class='test-steps'>
 		<table class='bordered table-results'>
@@ -144,12 +145,12 @@
 			<tbody>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>10:29:37 AM</td>
+					<td class='timestamp'>10:41:16 AM</td>
 					<td class='step-details'>Test Passed</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>10:29:37 AM</td>
+					<td class='timestamp'>10:41:16 AM</td>
 					<td class='step-details'>Login is successfull</td>
 				</tr>
 			</tbody>
@@ -159,17 +160,17 @@
 				</li>
 				
 				
-				<li class='test displayed active  pass' status='pass' bdd='false' test-id='2'>
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='2'>
 					<div class='test-heading'>
-						<span class='test-name'>ChangeControlAndCase_Test</span>
-						<span class='test-time'>Thursday, November 25, 2021, 10:29 AM (IST)</span>
-						<span class='test-status right pass'>pass</span>
+						<span class='test-name'>ComparisonExpandAddFromFile_Test</span>
+						<span class='test-time'>Monday, November 29, 2021, 10:41 AM (IST)</span>
+						<span class='test-status right fail'>fail</span>
 					</div>
 					<div class='test-content hide'>
 <div class='test-time-info'>
-	<span class='label start-time'>Thursday, November 25, 2021, 10:29 AM (IST)</span>
-	<span class='label end-time'>Thursday, November 25, 2021, 10:32 AM (IST)</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 2m 54s+658ms</span>
+	<span class='label start-time'>Monday, November 29, 2021, 10:41 AM (IST)</span>
+	<span class='label end-time'>Monday, November 29, 2021, 10:44 AM (IST)</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 3m 34s+85ms</span>
 </div>
 	<div class='test-steps'>
 		<table class='bordered table-results'>
@@ -183,58 +184,179 @@
 			<tbody>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>10:30:16 AM</td>
-					<td class='step-details'>Control and Case Change Comparison is created with a control Set</td>
+					<td class='timestamp'>10:41:54 AM</td>
+					<td class='step-details'>ComAddfromFile 1 Comparison is created with a control Set</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>10:44:50 AM</td>
+					<td class='step-details'>Test Failed</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>10:44:50 AM</td>
+					<td class='step-details'>ComparisonExpandAddFromFileFail : element not interactable
+  (Session info: chrome=95.0.4638.69)
+Build info: version: '3.14.0', revision: 'aacccce0', time: '2018-08-02T20:19:58.91Z'
+System info: host: 'MUGUNTH-DESKTOP', ip: '172.17.200.17', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '15.0.2'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 95.0.4638.69, chrome: {chromedriverVersion: 95.0.4638.69 (6a1600ed572fe..., userDataDir: C:\Users\MUGUNT~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:53445}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 29f0ca74fc983e2552be7b9824accfcd</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+							<ul class='screenshots'>
+								<li><img data-featherlight='C:\Users\MugunthRaman\git\EagleAutomation/Resources/ErrorScreenshots/ComparisonExpandAddFromFileFail.png' width='10%' src='C:\Users\MugunthRaman\git\EagleAutomation/Resources/ErrorScreenshots/ComparisonExpandAddFromFileFail.png' data-src='C:\Users\MugunthRaman\git\EagleAutomation/Resources/ErrorScreenshots/ComparisonExpandAddFromFileFail.png'></li>
+							</ul>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='3'>
+					<div class='test-heading'>
+						<span class='test-name'>ComparisonCreateMultipleCaseCards_Test</span>
+						<span class='test-time'>Monday, November 29, 2021, 10:44 AM (IST)</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Monday, November 29, 2021, 10:44 AM (IST)</span>
+	<span class='label end-time'>Monday, November 29, 2021, 10:47 AM (IST)</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 2m 16s+855ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:45:15 AM</td>
+					<td class='step-details'>CompRela 2 Comparison is created with a control Set</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>10:32:00 AM</td>
-					<td class='step-details'>Control and Case Change Comparison is created with a control and case Set</td>
+					<td class='timestamp'>10:46:13 AM</td>
+					<td class='step-details'>CompRela 2 Comparison added with 0 Case Set(s)</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>10:32:17 AM</td>
-					<td class='step-details'>CONTROL Card is changed to Case</td>
+					<td class='timestamp'>10:46:42 AM</td>
+					<td class='step-details'>CompRela 2 Comparison added with 1 Case Set(s)</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>10:32:18 AM</td>
-					<td class='step-details'>CASE Card change to Control is verified</td>
+					<td class='timestamp'>10:47:02 AM</td>
+					<td class='step-details'>CompRela 2 Comparison is present in the list</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>10:32:23 AM</td>
-					<td class='step-details'>CONTROL Card is changed to Case again</td>
+					<td class='timestamp'>10:47:07 AM</td>
+					<td class='step-details'>Created Comparison is verified</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>10:32:23 AM</td>
-					<td class='step-details'>CASE Card change to Control is verified again</td>
-				</tr>
-				<tr class='log' status='pass'>
-					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>10:32:29 AM</td>
-					<td class='step-details'>CASE Card is changed to Control</td>
-				</tr>
-				<tr class='log' status='pass'>
-					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>10:32:29 AM</td>
-					<td class='step-details'>CONTROL Card change to Case is verified</td>
-				</tr>
-				<tr class='log' status='pass'>
-					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>10:32:32 AM</td>
-					<td class='step-details'>Control and Case Change  - Control and case change is verified</td>
-				</tr>
-				<tr class='log' status='pass'>
-					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>10:32:32 AM</td>
+					<td class='timestamp'>10:47:07 AM</td>
 					<td class='step-details'>Test Passed</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>10:32:32 AM</td>
-					<td class='step-details'>Comparison is Created Successfully with Control Card</td>
+					<td class='timestamp'>10:47:07 AM</td>
+					<td class='step-details'>Comparison Created and added with multiple Case Cards Successfully</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='4'>
+					<div class='test-heading'>
+						<span class='test-name'>DeleteComparison_Test</span>
+						<span class='test-time'>Monday, November 29, 2021, 10:47 AM (IST)</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Monday, November 29, 2021, 10:47 AM (IST)</span>
+	<span class='label end-time'>Monday, November 29, 2021, 10:47 AM (IST)</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 22s+305ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:47:29 AM</td>
+					<td class='step-details'>search Comparison Comparison is Deleted</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:47:29 AM</td>
+					<td class='step-details'>Test Passed</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:47:29 AM</td>
+					<td class='step-details'>Deleted A Comparison Successfully</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='5'>
+					<div class='test-heading'>
+						<span class='test-name'>ShareComparison_Test</span>
+						<span class='test-time'>Monday, November 29, 2021, 10:47 AM (IST)</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Monday, November 29, 2021, 10:47 AM (IST)</span>
+	<span class='label end-time'>Monday, November 29, 2021, 10:48 AM (IST)</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 31s+89ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:48:00 AM</td>
+					<td class='step-details'>ComAddfromFile 1 Comparison is Shared</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:48:00 AM</td>
+					<td class='step-details'>Test Passed</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>10:48:00 AM</td>
+					<td class='step-details'>Shared A Comparison Successfully</td>
 				</tr>
 			</tbody>
 		</table>
@@ -274,10 +396,10 @@
 					<canvas id='parent-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>2</span> test(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='80%'><span class='strong'>4</span> test(s) passed</span>
 				</div>
 				<div class='block text-small'>
-					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+					<span class='strong tooltipped' data-position='top' data-tooltip='20%'>1</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
 				</div>
 			</div>
 		</div>
@@ -289,10 +411,10 @@
 					<canvas id='child-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>13</span> step(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='88.889%'><span class='strong'>16</span> step(s) passed</span>
 				</div>
 				<div class='block text-small'>
-					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+					<span class='strong tooltipped' data-position='top' data-tooltip='11.111%'>2</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
 				</div>
 			</div>
 		</div>
@@ -311,31 +433,31 @@
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Tests
-					<div class='panel-lead'>2</div>
+					<div class='panel-lead'>5</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Steps
-					<div class='panel-lead'>13</div>
+					<div class='panel-lead'>18</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Start
-					<div class='panel-lead'>Thursday, November 25, 2021, 10:28 AM (IST)</div>
+					<div class='panel-lead'>Monday, November 29, 2021, 10:40 AM (IST)</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 			 		End
-			 		<div class='panel-lead'>Thursday, November 25, 2021, 10:32 AM (IST)</div>
+			 		<div class='panel-lead'>Monday, November 29, 2021, 10:48 AM (IST)</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Time Taken
-					<div class='panel-lead'>0h 3m 42s+683ms</div>
+					<div class='panel-lead'>0h 7m 33s+470ms</div>
 				</div>
 			</div>
 			<div class='col s4'>
@@ -368,22 +490,22 @@
 
 		<script>
 			var statusGroup = {
-				passParent: 2,
-				failParent: 0,
+				passParent: 4,
+				failParent: 1,
 				fatalParent: 0,
 				errorParent: 0,
 				warningParent: 0,
 				skipParent: 0,
-				exceptionsParent: 0,
+				exceptionsParent: 1,
 				
-				passChild: 13,
-				failChild: 0,
+				passChild: 16,
+				failChild: 2,
 				fatalChild: 0,
 				errorChild: 0,
 				warningChild: 0,
 				skipChild: 0,
 				infoChild: 0,
-				exceptionsChild: 0,
+				exceptionsChild: 2,
 				
 				passGrandChild: 0,
 				failGrandChild: 0,

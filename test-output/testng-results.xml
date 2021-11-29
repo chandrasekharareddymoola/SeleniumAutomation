@@ -1,38 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
+<testng-results ignored="0" total="5" passed="5" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2021-11-25T10:28:42 IST" name="SmokeTestingSuite" finished-at="2021-11-25T10:32:32 IST" duration-ms="230000">
+  <suite started-at="2021-11-29T10:40:20 IST" name="SmokeTestingSuite" finished-at="2021-11-29T10:48:00 IST" duration-ms="460663">
     <groups>
     </groups>
-    <test started-at="2021-11-25T10:28:42 IST" name="Smoke Test cases" finished-at="2021-11-25T10:32:32 IST" duration-ms="230000">
+    <test started-at="2021-11-29T10:40:20 IST" name="Smoke Test cases" finished-at="2021-11-29T10:48:00 IST" duration-ms="460663">
       <class name="com.eagle.TestCases.LoginTest">
-        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.LoginTest@4803b726]" started-at="2021-11-25T10:28:42 IST" name="launchApplication" finished-at="2021-11-25T10:28:49 IST" duration-ms="7461" status="PASS">
+        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.LoginTest@316bcf94]" started-at="2021-11-29T10:40:20 IST" name="launchApplication" finished-at="2021-11-29T10:40:27 IST" duration-ms="7392" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchApplication -->
-        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.LoginTest@4803b726]" started-at="2021-11-25T10:28:49 IST" name="beforeClass" finished-at="2021-11-25T10:28:49 IST" duration-ms="20" status="PASS">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.LoginTest@316bcf94]" started-at="2021-11-29T10:40:27 IST" name="beforeClass" finished-at="2021-11-29T10:40:27 IST" duration-ms="24" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeClass -->
-        <test-method signature="VerifyLoginPage_Test()[pri:0, instance:com.eagle.TestCases.LoginTest@4803b726]" started-at="2021-11-25T10:28:49 IST" name="VerifyLoginPage_Test" description="Login functionality verification" finished-at="2021-11-25T10:29:37 IST" duration-ms="47278" status="PASS">
+        <test-method signature="VerifyLoginPage_Test()[pri:0, instance:com.eagle.TestCases.LoginTest@316bcf94]" started-at="2021-11-29T10:40:27 IST" name="VerifyLoginPage_Test" description="Login functionality verification" finished-at="2021-11-29T10:41:16 IST" duration-ms="48430" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- VerifyLoginPage_Test -->
       </class> <!-- com.eagle.TestCases.LoginTest -->
       <class name="com.eagle.TestCases.ComparisonTest">
-        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.ComparisonTest@32502377]" started-at="2021-11-25T10:29:37 IST" name="launchApplication" finished-at="2021-11-25T10:29:37 IST" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- launchApplication -->
-        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.ComparisonTest@32502377]" started-at="2021-11-25T10:29:37 IST" name="beforeClass" finished-at="2021-11-25T10:29:37 IST" duration-ms="544" status="PASS">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.ComparisonTest@66f57048]" started-at="2021-11-29T10:41:16 IST" name="beforeClass" finished-at="2021-11-29T10:41:16 IST" duration-ms="437" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeClass -->
-        <test-method signature="ChangeControlAndCase_Test()[pri:20, instance:com.eagle.TestCases.ComparisonTest@32502377]" started-at="2021-11-25T10:29:37 IST" name="ChangeControlAndCase_Test" description="Interchange Control and Case sets in the Comparison" finished-at="2021-11-25T10:32:32 IST" duration-ms="174660" status="PASS">
+        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.ComparisonTest@66f57048]" started-at="2021-11-29T10:41:16 IST" name="launchApplication" finished-at="2021-11-29T10:41:16 IST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- ChangeControlAndCase_Test -->
+        </test-method> <!-- launchApplication -->
+        <test-method signature="ComparisonExpandAddFromFile_Test()[pri:12, instance:com.eagle.TestCases.ComparisonTest@66f57048]" started-at="2021-11-29T10:41:16 IST" name="ComparisonExpandAddFromFile_Test" description="Comparison - Expand and add items from File" finished-at="2021-11-29T10:44:50 IST" duration-ms="214090" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ComparisonExpandAddFromFile_Test -->
+        <test-method signature="ComparisonCreateMultipleCaseCards_Test()[pri:13, instance:com.eagle.TestCases.ComparisonTest@66f57048]" started-at="2021-11-29T10:44:50 IST" name="ComparisonCreateMultipleCaseCards_Test" description="Comparison - Create with multiple Case Cards" finished-at="2021-11-29T10:47:07 IST" duration-ms="136855" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ComparisonCreateMultipleCaseCards_Test -->
+        <test-method signature="DeleteComparison_Test()[pri:17, instance:com.eagle.TestCases.ComparisonTest@66f57048]" started-at="2021-11-29T10:47:07 IST" name="DeleteComparison_Test" description="Delete A Comparison" finished-at="2021-11-29T10:47:29 IST" duration-ms="22306" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- DeleteComparison_Test -->
+        <test-method signature="ShareComparison_Test()[pri:18, instance:com.eagle.TestCases.ComparisonTest@66f57048]" started-at="2021-11-29T10:47:29 IST" name="ShareComparison_Test" description="Sharing A Comparison" finished-at="2021-11-29T10:48:00 IST" duration-ms="31090" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ShareComparison_Test -->
       </class> <!-- com.eagle.TestCases.ComparisonTest -->
     </test> <!-- Smoke Test cases -->
   </suite> <!-- SmokeTestingSuite -->

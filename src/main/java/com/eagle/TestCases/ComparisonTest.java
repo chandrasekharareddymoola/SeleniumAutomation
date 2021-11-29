@@ -320,7 +320,7 @@ public class ComparisonTest extends BaseTest{
 	public void DeleteComparison_Test() throws Throwable  {
 		try {
 			/* Delete A Comparison */
-			objComparisonPage.DeleteComparison("Comparison 9");
+			objComparisonPage.DeleteComparison("search Comparison");
 			onSuccessMeassage("Deleted A Comparison Successfully");
 		}
 		catch(Exception | AssertionError ex)
@@ -334,7 +334,7 @@ public class ComparisonTest extends BaseTest{
 	public void ShareComparison_Test() throws Throwable  {
 		try {
 			/* Share A Comparison */
-			objComparisonPage.ShareComparison("Comparison 9","mugunth.raman@eaglegenomics.com");
+			objComparisonPage.ShareComparison("ComAddfromFile 1","mugunth.raman@eaglegenomics.com");
 			onSuccessMeassage("Shared A Comparison Successfully");
 		}
 		catch(Exception | AssertionError ex)
@@ -344,26 +344,25 @@ public class ComparisonTest extends BaseTest{
 		}
 	}
 
-	//	//	@Test(priority = 19, description = "Remove items from Comparison Expand")
-	//	//	public void RemoveItemsfromComparison_Test() throws InterruptedException, IOException  {
-	//	//		try {
-	//	//			/* Remove items in Expanded Set */
-	//	//			objComparisonPage.RemoveItemsfromComparison("Remove Item Comparison","Disease","Kera");
-	//	//			onSuccessMeassage("Items removed successfully in Comparison Expand");
-	//	//		}
-	//	//		catch(Exception ex)
-	//	//		{
-	//	//			objComparisonPage.captureScreenshot("ComparisonItemsRemoveFail");
-	//	//			onFailureMeassage(ex.getMessage(),"ComparisonItemsRemoveFail","ComparisonItemsRemoveFail");
-	//	//		}
-	//	//		catch(AssertionError ex)
-	//	//		{
-	//	//			objComparisonPage.captureScreenshot("ComparisonItemsRemoveFail");
-	//	//			onFailureMeassage(ex.getMessage(),"ComparisonItemsRemoveFail","ComparisonItemsRemoveFail");
-	//	//		}
-	//	//	}
-	
-	
+	//	@Test(priority = 19, description = "Remove items from Comparison Expand")
+	//	public void RemoveItemsfromComparison_Test() throws Throwable  {
+	//		try {
+	//			/* Remove items in Expanded Set */
+	//			objComparisonPage.RemoveItemsfromComparison("Remove Item Comparison","Control Set" ,"Disease","Kera");
+	//			onSuccessMeassage("Items removed successfully in Comparison Expand");
+	//		}
+	//		catch(Exception ex)
+	//		{
+	//			objComparisonPage.captureScreenshot("ComparisonItemsRemoveFail");
+	//			onFailureMeassage(ex.getMessage(),"ComparisonItemsRemoveFail","ComparisonItemsRemoveFail");
+	//		}
+	//		catch(AssertionError ex)
+	//		{
+	//			objComparisonPage.captureScreenshot("ComparisonItemsRemoveFail");
+	//			onFailureMeassage(ex.getMessage(),"ComparisonItemsRemoveFail","ComparisonItemsRemoveFail");
+	//		}
+	//	}
+
 	@Test(priority = 20, description = "Interchange Control and Case sets in the Comparison")
 	public void ChangeControlAndCase_Test() throws Throwable {
 		try {

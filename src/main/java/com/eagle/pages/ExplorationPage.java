@@ -73,6 +73,9 @@ public class ExplorationPage extends BasePage{
 
 	@FindBy(xpath = "//div//input[@role='searchbox' and @placeholder='Search in this list...']")
 	public WebElement serachBoxExpand;	
+	
+	@FindBy(xpath = "//*[@scraper-tag='HandleError' and text()='Fetch failed']")
+	public WebElement fetchFailed;
 
 	@FindBy(xpath = "//button[@title='Add all items']")
 	public WebElement addAll;		
@@ -250,7 +253,7 @@ public class ExplorationPage extends BasePage{
 
 	@FindBy(xpath = "//*[@role='columnheader']")
 	public WebElement columnHeaderFirstPage;
-	
+
 	@FindBy(xpath = "//*[@data-icon-name='Cancel']")
 	public WebElement dialogBoxClose;
 
@@ -371,16 +374,25 @@ public class ExplorationPage extends BasePage{
 		}
 	}
 	
-	public void waitForExplorationTitle() throws Throwable{
+	public void waitForEditAndDelete() throws Throwable{
 		try {  
 			boolean iden = true;
+			outerloop:
 			do
 			{
 				try {	    	
-					titleExploration.isDisplayed();
+					edit.isDisplayed();
 					iden = false;	  
 				}
-				catch(Exception ex) {Thread.sleep(5000);}	 
+				catch(Exception ex) {
+					try {
+						if (fetchFailed.isDisplayed()) {
+							break outerloop;
+						}
+					}
+					catch (Exception et){
+						Thread.sleep(5000);}	 
+				}
 			}
 			while(iden);	         
 		}
@@ -390,13 +402,42 @@ public class ExplorationPage extends BasePage{
 		}
 	}
 	
-	public void waitForEditAndDelete() throws Throwable{
+	
+	public void waitForSaveChanges() throws Throwable{
+		try {  
+			boolean iden = true;
+			outerloop:
+			do
+			{
+				try {	    	
+					saveChanges.isDisplayed();
+					iden = false;	  
+				}
+				catch(Exception ex) {
+					try {
+						if (fetchFailed.isDisplayed()) {
+							break outerloop;
+						}
+					}
+					catch (Exception et){
+						Thread.sleep(5000);}	 
+				}
+			}
+			while(iden);	         
+		}
+		catch(Exception | AssertionError ex)
+		{
+			throw ex;
+		}
+	}
+
+	public void waitForExplorationTitle() throws Throwable{
 		try {  
 			boolean iden = true;
 			do
 			{
 				try {	    	
-					edit.isDisplayed();
+					titleExploration.isDisplayed();
 					iden = false;	  
 				}
 				catch(Exception ex) {Thread.sleep(5000);}	 
@@ -651,14 +692,14 @@ public class ExplorationPage extends BasePage{
 			objSetPage.createSet(setToAdd, entityToSelect, textToSearchInSet);
 			this.Home();
 
-			
+
 			this.createExploration(ExplorationName, entityToSelect, textToSearchInExploration);
 			this.expandExploration();
 			this.editCard();
 			String NoOfRecordsInitial = ItemCountInExpand.getText();
 			this.addItemsExpand();
 			this.addFromSetExpand(setToAdd); // Set to be added
-			Thread.sleep(5000);
+			this.waitForSaveChanges();
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
 			ExtentTestManager.getTest().log(Status.PASS, "Exploration - Set added in expand");
@@ -695,14 +736,14 @@ public class ExplorationPage extends BasePage{
 		try {
 			this.createExploration(ExplorationToCreate, EntitytoSelect, ItemtoSearch);
 			this.expandExploration();
-			
+
 			this.editCard();
 			String NoOfRecordsInitial = ItemCountInExpand.getText();
 			this.addItemsExpand();
 			this.addFromSetCatalog(TextToSearch); // Text to be added 
 			ExtentTestManager.getTest().log(Status.PASS, TextToSearch + " is searched");
 			this.add();
-			Thread.sleep(5000);
+			this.waitForSaveChanges();
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
 			BasePage.verifyPage(ExplorationToCreate,ExplorationNameInExpand); 
@@ -773,6 +814,7 @@ public class ExplorationPage extends BasePage{
 			this.addItemsExpand();
 			this.addFromFile(CategoryName, Filelocation, FileName); 
 			this.addToGrid();
+			this.waitForSaveChanges();
 			waitforAnElement(ItemCountInExpand);
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
@@ -1250,7 +1292,8 @@ public class ExplorationPage extends BasePage{
 	public void SelectItemsInExplorationCard(String NumberOfItemsToSelect) throws InterruptedException, AWTException { 
 		for (int i=1; i == Integer.parseInt(NumberOfItemsToSelect);i++)	{
 			try {
-				WebElement SelectItem = driver.findElement(By.xpath("(//div[@role='checkbox']["+i+"]"));
+			//	WebElement SelectItem = driver.findElement(By.xpath("(//div[@role='checkbox']["+i+"]"));
+				WebElement SelectItem = driver.findElement(By.xpath(" (//*[@data-icon-name='StatusCircleCheckmark'])["+i+"]"));
 				wait.until(ExpectedConditions.elementToBeClickable(SelectItem));
 				Thread.sleep(5000);
 				BasePage.click(SelectItem);

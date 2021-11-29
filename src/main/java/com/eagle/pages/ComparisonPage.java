@@ -281,13 +281,13 @@ public class ComparisonPage extends BasePage{
 
 	@FindBy(xpath = "(//*[@role='listbox'])[2]")
 	public WebElement dropDown2;
-	
+
 	@FindBy(xpath = "(//*[@role='listbox'])[2]//span[@role='option']")
 	public WebElement dropDown2text;
 
 	@FindBy(xpath = "(//*[@role='listbox'])[3]")
 	public WebElement dropDown3;
-	
+
 	@FindBy(xpath = "(//*[@role='listbox'])[3]//span[@role='option']")
 	public WebElement dropDown3text;
 
@@ -461,13 +461,22 @@ public class ComparisonPage extends BasePage{
 	public void waitForEditAndDelete() throws Throwable{
 		try {  
 			boolean iden = true;
+			outerloop:
 			do
 			{
 				try {	    	
 					edit.isDisplayed();
 					iden = false;	  
 				}
-				catch(Exception ex) {Thread.sleep(5000);}	 
+				catch(Exception ex) {
+					try {
+						if (fetchFailed.isDisplayed()) {
+							break outerloop;
+						}
+					}
+					catch (Exception et){
+						Thread.sleep(5000);}	 
+				}
 			}
 			while(iden);	         
 		}
@@ -487,6 +496,34 @@ public class ComparisonPage extends BasePage{
 					iden = false;	  
 				}
 				catch(Exception | AssertionError ex) {Thread.sleep(5000);}	 
+			}
+			while(iden);	         
+		}
+		catch(Exception | AssertionError ex)
+		{
+			throw ex;
+		}
+	}
+	
+	public void waitForSaveChanges() throws Throwable{
+		try {  
+			boolean iden = true;
+			outerloop:
+			do
+			{
+				try {	    	
+					saveChanges.isDisplayed();
+					iden = false;	  
+				}
+				catch(Exception ex) {
+					try {
+						if (fetchFailed.isDisplayed()) {
+							break outerloop;
+						}
+					}
+					catch (Exception et){
+						Thread.sleep(5000);}	 
+				}
 			}
 			while(iden);	         
 		}
@@ -584,6 +621,7 @@ public class ComparisonPage extends BasePage{
 			this.createComparisonControlandCase(ComparisonName,ControlSetName,CaseSetName,EntitytoSelect,ItemtoSearchControl,ItemtoSearchCase);
 			this.runComparison();
 			waitforAnElement(comparisonsResultsHeader);
+			Thread.sleep(5000);
 			ExtentTestManager.getTest().log(Status.PASS, ComparisonName + " Comparison Results Page is displayed");
 			BasePage.click(closeRunComparison);
 		}
@@ -607,6 +645,7 @@ public class ComparisonPage extends BasePage{
 				String ItemtoSearchCase = generateRandomWord(3);
 				this.searchItems(ItemtoSearchCase); 
 				this.AddandAccept();  
+				Thread.sleep(3000);
 				BasePage.waitforAnElement(LastComparisonList);
 				ExtentTestManager.getTest().log(Status.PASS, ComparisonName + " Comparison added with " + i + " Case Set(s)" );
 			}
@@ -657,6 +696,7 @@ public class ComparisonPage extends BasePage{
 			this.createComparisonControlandMultipleCase(ComparisonName,ControlSetName,EntitytoSelect, ItemtoSearchControl, NumberOfCaseSets);
 			this.runComparison();
 			waitforAnElement(comparisonsResultsHeader);
+			Thread.sleep(5000);
 			ExtentTestManager.getTest().log(Status.PASS, ComparisonName + " Comparison Results Page is displayed");
 			BasePage.click(closeRunComparison);
 		}
@@ -851,7 +891,7 @@ public class ComparisonPage extends BasePage{
 		List<String>  myAlist = new ArrayList<String>();
 		myAlist.add("EFO_1000779");
 		myAlist.add("EFO_1000778");
-		myAlist.add("seborrheic keratosis");
+		myAlist.add("EFO_0005584");
 		myAlist.add("EFO_1000758");
 		myAlist.add("EFO_1000745");
 		this.selectItems(myAlist);	  
@@ -976,7 +1016,8 @@ public class ComparisonPage extends BasePage{
 			String NoOfRecordsInitial = ItemCountInExpand.getText();
 			this.addItemsExpand();
 			this.addFromSetExpand(setToAdd); // Set to be added
-			Thread.sleep(5000);
+			this.waitForSaveChanges();
+			waitforAnElement(ItemCountInExpand);
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
 			ExtentTestManager.getTest().log(Status.PASS, "Comparison - Set added in expand");
@@ -1020,7 +1061,7 @@ public class ComparisonPage extends BasePage{
 			this.addFromSetCatalog(TextToSearchinCatalog); // Text to be added 
 			ExtentTestManager.getTest().log(Status.PASS, TextToSearchinCatalog + " is searched");
 			this.add();
-			Thread.sleep(5000);
+			this.waitForSaveChanges();
 			waitforAnElement(ItemCountInExpand);
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
@@ -1093,6 +1134,7 @@ public class ComparisonPage extends BasePage{
 			this.addItemsExpand();
 			this.addFromFile(CategoryName, Filelocation, FileName); 
 			this.addToGrid();
+			this.waitForSaveChanges();
 			waitforAnElement(ItemCountInExpand);
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
@@ -1480,6 +1522,19 @@ public class ComparisonPage extends BasePage{
 		File DestFile=new File(fileWithPath);
 		FileUtils.copyFile(SrcFile, DestFile);
 	}
+
+
+	public void rowrext() throws Throwable
+	{
+		this.createComparisonControl("A","A", "Disease", "dengue");	 
+		this.expandComparison();
+		this.searchInExpand("den");
+		ExtentTestManager.getTest().log(Status.PASS, "Search in done using text - ");
+		WebElement a = driver.findElement(By.xpath("//*[@class='TableRowDefault__bodyRow___1_m1h']"));
+		String b = a.getText();
+		System.out.println(b);
+	}
+
 
 
 }

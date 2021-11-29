@@ -250,24 +250,24 @@ public class ExplorationTest extends BaseTest{
 		}
 	}
 
-	//	 	@Test(priority = 12, description = "Exploration - Create with 2 additional relation Card")
-	//		public void ExplorationCreateTwoRelationCard_Test() throws Throwable  {
-	//		try {
-	//			/* Exploration - Create with 2 additional relation Cards */
-	//			objExplorationPage.createRelationCardMulti("ExpRela 2", "Disease", "kera", "Gene","Chemical Compound","5");
-	//			onSuccessMeassage("Exploration Created and added with 2 relation Cards Successfully");
-	//		}
-	//		catch(Exception ex)
-	//		{
-	//			objExplorationPage.captureScreenshot("ExplorationAdd2RelationFail");
-	//			onFailureMeassage(ex.getMessage(),"ExplorationAdd2RelationFail","ExplorationAdd2RelationFail");
-	//		}
-	//		catch(AssertionError ex)
-	//		{
-	//			objExplorationPage.captureScreenshot("ExplorationAdd2RelationFail");
-	//			onFailureMeassage(ex.getMessage(),"ExplorationAdd2RelationFail","ExplorationAdd2RelationFail");
-	//		}
-	//	}
+	@Test(priority = 12, description = "Exploration - Create with 2 additional relation Card")
+	public void ExplorationCreateTwoRelationCard_Test() throws Throwable  {
+		try {
+			/* Exploration - Create with 2 additional relation Cards */
+			objExplorationPage.createRelationCardMulti("ExpRela 2", "Disease", "kera", "Gene","Chemical Compound","5");
+			onSuccessMeassage("Exploration Created and added with 2 relation Cards Successfully");
+		}
+		catch(Exception ex)
+		{
+			objExplorationPage.captureScreenshot("ExplorationAdd2RelationFail");
+			onFailureMeassage(ex.getMessage(),"ExplorationAdd2RelationFail","ExplorationAdd2RelationFail");
+		}
+		catch(AssertionError ex)
+		{
+			objExplorationPage.captureScreenshot("ExplorationAdd2RelationFail");
+			onFailureMeassage(ex.getMessage(),"ExplorationAdd2RelationFail","ExplorationAdd2RelationFail");
+		}
+	}
 
 	@Test(priority = 13, description = "Create And Delete An Exploration")
 	public void CreateAndDeleteExploration_Test() throws Throwable  {
