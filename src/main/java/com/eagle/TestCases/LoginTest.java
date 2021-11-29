@@ -25,17 +25,17 @@ public class LoginTest extends BaseTest{
 		public void beforeClass()  {	
 			objLogin = new LoginPage();	
 		}
-	
-		
+
 		@Test(priority = 0, description = "Login with valid credentials")
-		public void VerifyLogin_Test() throws InterruptedException, IOException{
+		public void VerifyLoginPage_Test() throws Throwable{
 	      try{
 			    objLogin.loginTo(); 	
 			    onSuccessMeassage("Login is successfully verified");
 	    	}
 	      	catch(Exception ex){
 	      		objLogin.captureScreenshot("loginFail");
-				onFailreMeassage(ex.getMessage(),"loginFail");					
+				onFailreMeassage(ex.getMessage(),"loginFail");								
+
 			}
 	    }
 		
@@ -49,7 +49,7 @@ public class LoginTest extends BaseTest{
 		{
 			ExtentTestManager.getTest().log(Status.FAIL, "Test Failed");
 			ExtentTestManager.getTest().log(Status.FAIL, failureMessage);
-			ExtentTestManager.getTest().addScreenCaptureFromPath(screenShotName);		
+			ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir") + "./Resources/ErrorScreenshots/"+screenShotName+".png");
 		}
 		
 }
