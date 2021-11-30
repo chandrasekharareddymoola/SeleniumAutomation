@@ -83,11 +83,12 @@ public class LoginPage extends BasePage{
 				}
 				catch(Exception ex) {
 					Thread.sleep(5000);
+					if(catalogInitializeError.isDisplayed()) {throw new InterruptedException ("Error while initializing catalog");}
 				}
 			}	 
 			while(iden);	         
 		}
-		catch(Exception | AssertionError ex)
+		catch(Exception ex)
 		{
 			throw ex;
 		}

@@ -18,7 +18,7 @@ public class HomeTest extends BaseTest{
 		objHome = new HomePage();	
 	}
 	
-	@Test(priority = 0, description = "Check the visibility of Logo")
+	@Test(priority = 8, description = "Check the visibility of Logo")
 	public void VerifyLogoVisibility_Test() throws InterruptedException, IOException{
       try{
     	  	objHome.verifyLogoVisibility();	
@@ -66,6 +66,30 @@ public class HomeTest extends BaseTest{
 		}
     }
 	
+	@Test(priority = 4, description = "Search and Save the Global search")
+	public void CreateGlobalSearch_Test() throws InterruptedException, IOException{
+      try{
+    	  	objHome.createGlobalSearch();
+		    onSuccessMeassage("Search is successfully created and saved");
+    	}
+      	catch(Exception ex){
+      		objHome.captureScreenshot("SavesearchFail");
+			onFailreMeassage(ex.getMessage(),"SavesearchFail");					
+		}
+    }
+	
+	@Test(priority = 0, description = "Verify Saved Searches")
+	public void VerifySavedSearches_Test() throws InterruptedException, IOException{
+      try{
+    	  	objHome.verifySavedSearches();
+		    onSuccessMeassage("Search is successfully created and saved");
+    	}
+      	catch(Exception ex){
+      		objHome.captureScreenshot("SavesearchFail");
+			onFailreMeassage(ex.getMessage(),"SavesearchFail");					
+		}
+    }
+	
 	public void onSuccessMeassage(String successMessage)
 	{
 		ExtentTestManager.getTest().log(Status.PASS, "Test Passed");
@@ -76,7 +100,7 @@ public class HomeTest extends BaseTest{
 	{
 		ExtentTestManager.getTest().log(Status.FAIL, "Test Failed");
 		ExtentTestManager.getTest().log(Status.FAIL, failureMessage);
-		ExtentTestManager.getTest().addScreenCaptureFromPath(screenShotName);		
+		ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir") + "./Resources/ErrorScreenshots/"+screenShotName+".png");	
 	}
 
 }

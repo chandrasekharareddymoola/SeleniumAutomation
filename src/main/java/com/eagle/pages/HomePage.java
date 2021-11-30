@@ -4,13 +4,16 @@ import java.io.File;
 import java.io.IOException;
 import java.time.Year;
 import java.util.Calendar;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -62,6 +65,31 @@ public class HomePage extends BasePage{
 	@FindBy(xpath = "//span[contains(text(),'Back')]")
 	public WebElement profileBack;	
 	
+	@FindBy(xpath = "//input[@role='searchbox']")
+	public WebElement searchBox;
+	
+	@FindBy(xpath = "//div[contains(@class,'ms-Dropdown-container')]")
+	public WebElement searchFiter;	
+		
+	public WebElement selectFilter(String entityName) {
+		return this.driver.findElement(By.xpath("//div[@title='"+ entityName +"']"));   		
+	}	
+	
+	@FindBy(xpath = "//*[text()='Save Search']")
+	public WebElement saveSearch;	
+	
+	@FindBy(xpath = "//*[text()='Save']")
+	public WebElement saveButton;	
+	
+	@FindBy(xpath = "//button//span[text()='View saved searches']")
+	public WebElement viewSavedSearches;
+	
+	@FindBy(xpath = "//i[@data-icon-name='Forward']")
+	public WebElement forward;
+	
+	@FindBy(xpath = "//div[@class='ms-List']//div[@role='rowheader' and @aria-colindex='1']")
+	public List<WebElement> searchGridItems;
+	
 	
 	public HomePage(){ 		 
 		 PageFactory.initElements(driver, this); 
@@ -70,6 +98,24 @@ public class HomePage extends BasePage{
     public String getHomePageDashboardUserName(){
     	return searchIcon.getText();
     }
+    
+    public void openItemFromList(String inv)
+	{
+		try {	    		
+			do{ 
+				for (WebElement element : searchGridItems) {
+					if(element.isDisplayed() == false)  {scrollIntoView(element);}	    				
+					String textFromGrid = element.getText();	    				
+					if(inv.equals(textFromGrid)) {		    					
+						BasePage.click(element);	
+					}		    				
+				}
+				BasePage.click(forward); 
+			}
+			while(forward.isEnabled());  
+		}	    	
+		catch(Exception ex) {}
+	}
     
     public void verifyLogoVisibility()
     {
@@ -99,7 +145,7 @@ public class HomePage extends BasePage{
     	}    
     } 
     
-    public void verifyUserProfiles()
+    public void verifyUserProfiles() throws Exception
     {
     	try {
     		BasePage.click(userControl);
@@ -126,7 +172,41 @@ public class HomePage extends BasePage{
     	} 
     }
     
-    public void logout()
+    public void createGlobalSearch()
+    {
+    	try {
+    		BasePage.click(searchIcon);
+    		BasePage.click(searchFiter);
+    		WebElement filtr = this.selectFilter("Cell Type");
+    		WebElement filtr1 = this.selectFilter("Gene");
+    		BasePage.click(filtr);
+    		BasePage.click(filtr1);    		
+    		BasePage.enterText(searchBox, "pax");
+    		searchBox.sendKeys(Keys.ENTER);
+    		BasePage.click(saveSearch);
+    		BasePage.click(saveButton);    		
+    	}
+    	catch(Exception ex) 	{
+    		
+    	}
+    	
+    }
+    
+    public void verifySavedSearches()
+    {
+    	try {
+    		BasePage.click(searchIcon);
+    		BasePage.click(viewSavedSearches);
+    		this.openItemFromList("virus");    		
+    	}
+    	catch(Exception ex)    	{
+    		
+    	}
+    	
+    }    
+    
+    
+    public void logout() throws Exception
     {
     	try {
     		   BasePage.click(userControl);

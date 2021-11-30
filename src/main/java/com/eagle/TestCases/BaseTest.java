@@ -14,6 +14,8 @@ import org.testng.annotations.BeforeClass;
 import com.eagle.ConfigUtils.ReadObject;
 import com.eagle.pages.BasePage;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 //import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseTest {
@@ -28,11 +30,18 @@ public class BaseTest {
 	@BeforeClass
 	public static void launchApplication() throws IOException, InterruptedException, AWTException{
 		if(webdriver==null) {		
-			setChromeDriverProperty(); 
-			webdriver=new ChromeDriver();
-			WebDriverWait wait = new WebDriverWait(webdriver,60);
-			webdriver.manage().window().maximize();
-
+			
+			WebDriverManager.chromedriver().setup();
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("start-maximized"); 
+			options.addArguments("enable-automation"); 
+			options.addArguments("--no-sandbox"); 
+			options.addArguments("--disable-infobars");
+			options.addArguments("--disable-dev-shm-usage");
+			options.addArguments("--disable-browser-side-navigation"); 
+			options.addArguments("--disable-gpu"); 
+			webdriver = new ChromeDriver(options); 
+			
 			ReadObject object = new ReadObject();
 			Properties configObject = object.getObjectRepositoty();	     
 			String url = configObject.getProperty("EnvironmentURL");	
@@ -46,10 +55,6 @@ public class BaseTest {
 			basePage.setPassword(emailPass);
 		}
 	}
-
-	
-	  private static void setChromeDriverProperty(){
-	  System.setProperty("webdriver.chrome.driver", "./Resources/chromedriver.exe"); }
 	  
 	  public void closeBroswer()
 	  {
