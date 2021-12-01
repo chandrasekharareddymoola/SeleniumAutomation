@@ -16,6 +16,7 @@ import com.eagle.pages.HomePage;
 import com.eagle.pages.LoginPage;
 import com.eagle.Reports.ExtentTestManager;
 import com.eagle.pages.BasePage;
+import com.eagle.TestCases.BaseTest;
 
 public class LoginTest extends BaseTest{  
 	   	 

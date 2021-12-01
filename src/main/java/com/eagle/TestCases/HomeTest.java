@@ -18,7 +18,7 @@ public class HomeTest extends BaseTest{
 		objHome = new HomePage();	
 	}
 	
-	@Test(priority = 8, description = "Check the visibility of Logo")
+	@Test(priority = 0, description = "Check the visibility of Logo")
 	public void VerifyLogoVisibility_Test() throws InterruptedException, IOException{
       try{
     	  	objHome.verifyLogoVisibility();	
@@ -78,7 +78,7 @@ public class HomeTest extends BaseTest{
 		}
     }
 	
-	@Test(priority = 0, description = "Verify Saved Searches")
+	@Test(priority = 5, description = "Verify Saved Searches")
 	public void VerifySavedSearches_Test() throws InterruptedException, IOException{
       try{
     	  	objHome.verifySavedSearches();

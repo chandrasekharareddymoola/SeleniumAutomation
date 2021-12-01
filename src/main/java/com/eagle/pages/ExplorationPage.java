@@ -73,7 +73,7 @@ public class ExplorationPage extends BasePage{
 
 	@FindBy(xpath = "//div//input[@role='searchbox' and @placeholder='Search in this list...']")
 	public WebElement serachBoxExpand;	
-	
+
 	@FindBy(xpath = "//*[@scraper-tag='HandleError' and text()='Fetch failed']")
 	public WebElement fetchFailed;
 
@@ -373,57 +373,57 @@ public class ExplorationPage extends BasePage{
 			throw ex;
 		}
 	}
-	
+
 	public void waitForEditAndDelete() throws Throwable{
 		try {  
 			boolean iden = true;
 			outerloop:
-			do
-			{
-				try {	    	
-					edit.isDisplayed();
-					iden = false;	  
-				}
-				catch(Exception ex) {
-					try {
-						if (fetchFailed.isDisplayed()) {
-							break outerloop;
-						}
+				do
+				{
+					try {	    	
+						edit.isDisplayed();
+						iden = false;	  
 					}
-					catch (Exception et){
-						Thread.sleep(5000);}	 
+					catch(Exception ex) {
+						try {
+							if (fetchFailed.isDisplayed()) {
+								break outerloop;
+							}
+						}
+						catch (Exception et){
+							Thread.sleep(5000);}	 
+					}
 				}
-			}
-			while(iden);	         
+				while(iden);	         
 		}
 		catch(Exception | AssertionError ex)
 		{
 			throw ex;
 		}
 	}
-	
-	
+
+
 	public void waitForSaveChanges() throws Throwable{
 		try {  
 			boolean iden = true;
 			outerloop:
-			do
-			{
-				try {	    	
-					saveChanges.isDisplayed();
-					iden = false;	  
-				}
-				catch(Exception ex) {
-					try {
-						if (fetchFailed.isDisplayed()) {
-							break outerloop;
-						}
+				do
+				{
+					try {	    	
+						saveChanges.isDisplayed();
+						iden = false;	  
 					}
-					catch (Exception et){
-						Thread.sleep(5000);}	 
+					catch(Exception ex) {
+						try {
+							if (fetchFailed.isDisplayed()) {
+								break outerloop;
+							}
+						}
+						catch (Exception et){
+							Thread.sleep(5000);}	 
+					}
 				}
-			}
-			while(iden);	         
+				while(iden);	         
 		}
 		catch(Exception | AssertionError ex)
 		{
@@ -1288,22 +1288,21 @@ public class ExplorationPage extends BasePage{
 		ExtentTestManager.getTest().log(Status.PASS, "Created first relation card verified");
 	}
 
-	// Need to update
 	public void SelectItemsInExplorationCard(String NumberOfItemsToSelect) throws InterruptedException, AWTException { 
-		for (int i=1; i == Integer.parseInt(NumberOfItemsToSelect);i++)	{
-			try {
-			//	WebElement SelectItem = driver.findElement(By.xpath("(//div[@role='checkbox']["+i+"]"));
-				WebElement SelectItem = driver.findElement(By.xpath(" (//*[@data-icon-name='StatusCircleCheckmark'])["+i+"]"));
-				wait.until(ExpectedConditions.elementToBeClickable(SelectItem));
-				Thread.sleep(5000);
-				BasePage.click(SelectItem);
+		try {
+			Thread.sleep(60000);
+			for (int i=1; i<= Integer.parseInt(NumberOfItemsToSelect) ; i++) {
+				WebElement SelectItemabove = driver.findElement(By.xpath("(//*[@data-icon-name='StatusCircleCheckmark']//parent::div//parent::div[@role='checkbox'])["+i+"]"));
+				BasePage.waitforAnElementtoBeClicked(SelectItemabove);
+				BasePage.click(SelectItemabove);
+				BasePage.CompareAttributeText("aria-checked","true",SelectItemabove);
 			}
-			catch(Exception ex) {
-				throw ex;
-			}
-
+		}
+		catch (Exception e){
+			ExtentTestManager.getTest().log(Status.FAIL, "Not able to click element");
 		}
 	}
+
 
 	public void createRelationCardMulti(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch, String RelationCardType, String RelationCardType2, String NumberOfItemsToSelect) throws Throwable { 
 		this.createExploration(ExplorationToCreate, EntitytoSelect, ItemtoSearch);
@@ -1312,12 +1311,28 @@ public class ExplorationPage extends BasePage{
 		this.CheckRelationCreated(RelationCardType);
 		ExtentTestManager.getTest().log(Status.PASS, "Created first relation card verified");
 		BasePage.waitforAnElement(ExplorationList2);
-		//		Thread.sleep(60000);
 		this.SelectItemsInExplorationCard(NumberOfItemsToSelect);
+		ExtentTestManager.getTest().log(Status.PASS, NumberOfItemsToSelect + " Items selected in First Relation card");
 		this.createRelationLater(RelationCardType2);
 		ExtentTestManager.getTest().log(Status.PASS, "Second Relation card created of type : "+ RelationCardType2);
 		this.CheckRelationCreated(RelationCardType2);
 		ExtentTestManager.getTest().log(Status.PASS, "Created second relation card verified");
+	}
+
+	public void SortColumnInExploration(String ExplorationName, String entityToSelect, String textToSearch, String ColumnToBeSorted) throws Throwable{
+		this.createExploration(ExplorationName, entityToSelect, textToSearch);	
+		ExtentTestManager.getTest().log(Status.PASS, ExplorationName + " is Created");
+		this.expandExploration();
+		WebElement SortColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+ColumnToBeSorted+"']")));
+		Thread.sleep(3000);
+		WebElement NextColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+ColumnToBeSorted+"']//parent::div//parent::div/following-sibling::div")));
+		scrollIntoView(NextColumnname);
+		BasePage.click(SortColumnname);
+		Thread.sleep(3000);
+		ExtentTestManager.getTest().log(Status.PASS, ColumnToBeSorted + " is Sorted Descending");
+		BasePage.click(SortColumnname);
+		Thread.sleep(3000);
+		ExtentTestManager.getTest().log(Status.PASS, ColumnToBeSorted + " is Sorted Ascending");
 	}
 
 	public void captureScreenshot(String screenShotName) throws IOException

@@ -12,25 +12,25 @@ import com.eagle.pages.SetPage;
 
 public class SetTest extends BaseTest{
 
-//	LoginPage objLogin;
+	//	LoginPage objLogin;
 	SetPage objSetPage; 
-	
-	
+
+
 
 	@BeforeClass
 	public void beforeClass() throws InterruptedException, IOException, AWTException  {	
 		objSetPage = new SetPage();	
-//		objLogin = new LoginPage();
-//		objLogin.loginTo();
+		//		objLogin = new LoginPage();
+		//		objLogin.loginTo();
 	}
-	
-//	public void main() throws InterruptedException, IOException  {	
-//		objSetPage = new SetPage();	
-//		objLogin = new LoginPage();
-//		objLogin.loginTo();
-//		objSetPage.RemoveItemsfromSet("Remove Item Set","Disease","Kera");
-//	}
-	
+
+	//	public void main() throws InterruptedException, IOException  {	
+	//		objSetPage = new SetPage();	
+	//		objLogin = new LoginPage();
+	//		objLogin.loginTo();
+	//		objSetPage.RemoveItemsfromSet("Remove Item Set","Disease","Kera");
+	//	}
+
 //	@Test(priority = 0, description = "Create Set")
 //	public void CreateSet_Test() throws InterruptedException, IOException {
 //		try {
@@ -49,11 +49,11 @@ public class SetTest extends BaseTest{
 //			onFailureMeassage(ex.getMessage(),"createSetFail","createSetFail");
 //		}
 //	}
-//	
+//
 //	@Test(priority = 1, description = "View Set")
 //	public void ViewSet_Test() throws InterruptedException, IOException  {
 //		try {
-//			 /* To view the Investigation */
+//			/* To view the Investigation */
 //			objSetPage.viewSet("Share Set1");
 //			onSuccessMeassage("Set is successfully opened");
 //		}
@@ -68,11 +68,11 @@ public class SetTest extends BaseTest{
 //			onFailureMeassage(ex.getMessage(),"viewSetFail","viewSetFail");
 //		}
 //	}
-//	
+//
 //	@Test(priority = 2, description = "Create Set From File")
 //	public void CreateSetFromFile_Test() throws InterruptedException, IOException  {
 //		try {
-//			 /* To Create a Set From File */
+//			/* To Create a Set From File */
 //			objSetPage.CreateSetFromFile("Set From File 1","Disease", "C:\\Users\\MugunthRaman\\git\\EagleAutomation\\Resources\\Q4 - Upload file - 1 (2).xlsx");
 //			onSuccessMeassage("Set is successfully Created from File");
 //		}
@@ -87,11 +87,11 @@ public class SetTest extends BaseTest{
 //			onFailureMeassage(ex.getMessage(),"createSetFromFileFail","createSetFromFileFail");
 //		}
 //	}
-//	
+//
 //	@Test(priority = 3, description = "Create Set From Another Set")
 //	public void CreateSetFromSet_Test() throws InterruptedException, IOException  {
 //		try {
-//			 /* To Create a Set From Another Set */
+//			/* To Create a Set From Another Set */
 //			objSetPage.CreateSetFromSet("Base Set 1","Disease","Kera","Set From Set 1"); 
 //			onSuccessMeassage("Set is successfully Created from Another Set");
 //		}
@@ -106,11 +106,11 @@ public class SetTest extends BaseTest{
 //			onFailureMeassage(ex.getMessage(),"createSetFromSetFail","createSetFromSetFail");
 //		}
 //	}
-//	
+//
 //	@Test(priority = 4, description = "Search A Text In Set Expand")
 //	public void SearchInSetExpand_Test() throws Throwable  {
 //		try {
-//			 /* To Search a Text in Expanded Set */
+//			/* To Search a Text in Expanded Set */
 //			objSetPage.searchInSetExpand("Search Set 1","Disease","Kera","le");
 //			onSuccessMeassage("Search successful in Set Expand");
 //		}
@@ -125,7 +125,7 @@ public class SetTest extends BaseTest{
 //			onFailureMeassage(ex.getMessage(),"SearchInSetExpandFail","SearchInSetExpandFail");
 //		}
 //	}
-//	
+//
 //	@Test(priority = 5, description = "Set - Expand and add items from Catalog")
 //	public void SetExpandAddFromCatalog_Test() throws Throwable  {
 //		try {
@@ -145,7 +145,7 @@ public class SetTest extends BaseTest{
 //			onFailureMeassage(ex.getMessage(),"SetExpandAddFromCatalogFail","SetExpandAddFromCatalogFail");
 //		}
 //	}
-//	
+//
 //	@Test(priority = 6, description = "Set - Expand and add items from Set")
 //	public void SetExpandAddFromSet_Test() throws Throwable  {
 //		try {
@@ -165,7 +165,7 @@ public class SetTest extends BaseTest{
 //			onFailureMeassage(ex.getMessage(),"SetExpandAddFromSetFail","SetExpandAddFromSetFail");
 //		}
 //	}
-//	
+//
 //	@Test(priority = 7, description = "Set - Expand and add items from File")
 //	public void SetExpandAddFromFile_Test() throws Throwable  {
 //		try {
@@ -185,7 +185,7 @@ public class SetTest extends BaseTest{
 //			onFailureMeassage(ex.getMessage(),"SetExpandAddFromFileFail","SetExpandAddFromFileFail");
 //		}
 //	}
-//	
+//
 //	@Test(priority = 8, description = "Delete Card in Set Expand")
 //	public void DeleteCardInSetExpand_Test() throws Throwable  {
 //		try {
@@ -204,12 +204,12 @@ public class SetTest extends BaseTest{
 //			onFailureMeassage(ex.getMessage(),"DeleteSetInExpandFail","DeleteSetInExpandFail");
 //		}
 //	}
-	
+//
 	@Test(priority = 9, description = "Remove items from Set Expand")
 	public void RemoveItemsfromSet_Test() throws Throwable  {
 		try {
 			/* Remove items in Expanded Set */
-			objSetPage.RemoveItemsfromSet("Remove Item Set","Disease","Kera");
+			objSetPage.RemoveItemsfromSet("Remove Item Set","Disease","kera");
 			onSuccessMeassage("Items removed successfully in Set Expand");
 		}
 		catch(Exception ex)
@@ -223,7 +223,7 @@ public class SetTest extends BaseTest{
 			onFailureMeassage(ex.getMessage(),"SetItemsRemoveFail","SetItemsRemoveFail");
 		}
 	}
-
+//
 //	@Test(priority = 10, description = "Modify Grid Settings in Set Expand")
 //	public void GridChangesInSet_Test() throws Throwable  {
 //		try {
@@ -280,7 +280,7 @@ public class SetTest extends BaseTest{
 //			onFailureMeassage(ex.getMessage(),"CreateAndShareSetFail","CreateAndShareSetFail");
 //		}
 //	}
-//	
+//
 //	@Test(priority = 13, description = "Deleting A Set")
 //	public void DeleteSet_Test() throws InterruptedException, IOException  {
 //		try {
@@ -307,25 +307,33 @@ public class SetTest extends BaseTest{
 //			objSetPage.ShareSet("GridSet","mugunth.raman@eaglegenomics.com");
 //			onSuccessMeassage("Shared A Set Successfully");
 //		}
-//		catch(Exception ex)
-//		{
-//			objSetPage.captureScreenshot("ShareSetFail");
-//			onFailureMeassage(ex.getMessage(),"ShareSetFail","ShareSetFail");
-//		}
-//		catch(AssertionError ex)
+//		catch(Exception | AssertionError ex)
 //		{
 //			objSetPage.captureScreenshot("ShareSetFail");
 //			onFailureMeassage(ex.getMessage(),"ShareSetFail","ShareSetFail");
 //		}
 //	}
-	
-	
+
+//	@Test(priority = 15, description = "Sorting a column in a Set")
+//	public void SortColumnSet_Test() throws Throwable  {
+//		try {
+//			/* Sorting column in a set */
+//			objSetPage.SortColumnInSet("SortSet", "Disease", "pero", "EFO Name");
+//			onSuccessMeassage("Column in Set Sorted Successfully");
+//		}
+//		catch(Exception | AssertionError ex)
+//		{
+//			objSetPage.captureScreenshot("SortColumnSetFail");
+//			onFailureMeassage(ex.getMessage(),"SortColumnSetFail","SortColumnSetFail");
+//		}
+//	}
+
 	public void onSuccessMeassage(String successMessage)
 	{
 		ExtentTestManager.getTest().log(Status.PASS, "Test Passed");
 		ExtentTestManager.getTest().log(Status.PASS, successMessage);
 	}
-	
+
 	public void onFailureMeassage(String ReasonForFail, String failureMessage,String screenShotName) throws IOException, InterruptedException
 	{
 		ExtentTestManager.getTest().log(Status.FAIL, "Test Failed");

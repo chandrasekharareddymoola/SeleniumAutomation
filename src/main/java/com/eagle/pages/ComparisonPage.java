@@ -1509,8 +1509,23 @@ public class ComparisonPage extends BasePage{
 			catch(Exception ex) {
 				throw ex;
 			}
-
 		}
+	}
+	
+	public void SortColumnInComparison(String ComparisonName, String ControlSetName ,String entityToSelect, String textToSearch, String ColumnToBeSorted) throws Throwable{
+		this.createComparisonControl(ComparisonName, ControlSetName, entityToSelect, textToSearch);	 
+		ExtentTestManager.getTest().log(Status.PASS, ComparisonName + " is Created");
+		this.expandComparison();
+		WebElement SortColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+ColumnToBeSorted+"']")));
+		Thread.sleep(3000);
+		WebElement NextColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+ColumnToBeSorted+"']//parent::div//parent::div/following-sibling::div")));
+		scrollIntoView(NextColumnname);
+	    BasePage.click(SortColumnname);
+	    Thread.sleep(3000);
+	    ExtentTestManager.getTest().log(Status.PASS, ColumnToBeSorted + " is Sorted Descending");
+	    BasePage.click(SortColumnname);
+	    Thread.sleep(3000);
+	    ExtentTestManager.getTest().log(Status.PASS, ColumnToBeSorted + " is Sorted Ascending");
 	}
 
 

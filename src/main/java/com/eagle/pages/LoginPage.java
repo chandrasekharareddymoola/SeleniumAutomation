@@ -5,20 +5,11 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.Assert;
-
-import com.aventstack.extentreports.Status;
-import com.eagle.Reports.ExtentTestManager;
-
 
 public class LoginPage extends BasePage{
 
@@ -75,15 +66,25 @@ public class LoginPage extends BasePage{
 			this.setCredentials();
 			this.clickLogin();	     
 			boolean iden = true;
+			outerloop:
 			do
 			{
 				try {	    		  
-					copyRightIdentifier.click();
+					BasePage.click(copyRightIdentifier);
 					iden = false;	  
 				}
 				catch(Exception ex) {
 					Thread.sleep(5000);
-					if(catalogInitializeError.isDisplayed()) {throw new InterruptedException ("Error while initializing catalog");}
+					if(catalogInitializeError.isDisplayed()) {
+						throw new InterruptedException ("Error while initializing catalog");
+						}
+					try {
+						if (catalogInitializeError.isDisplayed()) {
+							break outerloop;
+						}
+					}
+					catch (Exception et){
+						Thread.sleep(5000);}	 
 				}
 			}	 
 			while(iden);	         

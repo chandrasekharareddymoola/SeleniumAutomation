@@ -198,7 +198,7 @@ public class SetPage extends BasePage{
 
 	@FindBy(xpath = "//*[@scraper-tag='HandleError' and text()='Fetch failed']")
 	public WebElement fetchFailed;
-	
+
 	@FindBy(xpath = "//input[@role='textbox']")
 	public WebElement selectPersonToShare;
 
@@ -368,7 +368,7 @@ public class SetPage extends BasePage{
 	}   	  	     	
 
 	public void viewSet(String SetName) throws InterruptedException, AWTException{
-		this.Set();	  
+		this.Set(); 
 		this.openItemFromList(SetName);	    
 		ExtentTestManager.getTest().log(Status.PASS, "Set "+ SetName +" is opened");
 	}
@@ -392,24 +392,32 @@ public class SetPage extends BasePage{
 
 	public void selectItems(List<String> myAlist){  
 		try {
-
 			do{ 
 				for(String item : myAlist)
 				{
-					for (WebElement element : gridItems) {
-						scrollIntoView(element);
-						String textFromGrid = element.getText();	    				
-						if(item.equals(textFromGrid)) {
-							WebElement checkBox = element.findElement(By.tagName("i"));
-							checkBox.click();			    				
+					outerloop:
+						for (WebElement element : gridItems) {
+							if(element.isDisplayed()==false)
+							{
+								scrollIntoView(element);
+							}
+							String textFromGrid = element.getText();	    				
+							if(item.equals(textFromGrid))
+							{
+								WebElement checkBox = element.findElement(By.tagName("i"));
+								checkBox.click();		
+								break outerloop;
+							}
+
 						}
-					}
 				}
 				BasePage.click(forward); 
 			}
 			while(forward.isEnabled());  
 		}	    	
-		catch(Exception ex) {}
+		catch(Exception ex) {
+			
+		}
 	}
 
 	public void removeItems() throws InterruptedException, AWTException{	
@@ -426,9 +434,7 @@ public class SetPage extends BasePage{
 		this.expandSet();
 		this.editSet();	  
 		List<String>  myAlist = new ArrayList<String>();
-		myAlist.add("EFO_1000779");
 		myAlist.add("EFO_1000778");
-//		myAlist.add("seborrheic keratosis");
 		myAlist.add("EFO_1000758");
 		myAlist.add("EFO_1000745");
 		this.selectItems(myAlist);	  
@@ -890,57 +896,57 @@ public class SetPage extends BasePage{
 		BasePage.verifyPage("MY DATA", MyDataTitle); //My Data page
 		this.DeleteSetLoop(setToDelete);
 	}
-	
+
 	public void waitForEditAndDelete() throws Throwable{
 		try {  
 			boolean iden = true;
 			outerloop:
-			do
-			{
-				try {	    	
-					edit.isDisplayed();
-					iden = false;	  
-				}
-				catch(Exception ex) {
-					try {
-						if (fetchFailed.isDisplayed()) {
-							break outerloop;
-						}
+				do
+				{
+					try {	    	
+						edit.isDisplayed();
+						iden = false;	  
 					}
-					catch (Exception et){
-						Thread.sleep(5000);}	 
+					catch(Exception ex) {
+						try {
+							if (fetchFailed.isDisplayed()) {
+								break outerloop;
+							}
+						}
+						catch (Exception et){
+							Thread.sleep(5000);}	 
+					}
 				}
-			}
-			while(iden);	         
+				while(iden);	         
 		}
 		catch(Exception | AssertionError ex)
 		{
 			throw ex;
 		}
 	}
-	
-	
+
+
 	public void waitForSaveChanges() throws Throwable{
 		try {  
 			boolean iden = true;
 			outerloop:
-			do
-			{
-				try {	    	
-					saveChanges.isDisplayed();
-					iden = false;	  
-				}
-				catch(Exception ex) {
-					try {
-						if (fetchFailed.isDisplayed()) {
-							break outerloop;
-						}
+				do
+				{
+					try {	    	
+						saveChanges.isDisplayed();
+						iden = false;	  
 					}
-					catch (Exception et){
-						Thread.sleep(5000);}	 
+					catch(Exception ex) {
+						try {
+							if (fetchFailed.isDisplayed()) {
+								break outerloop;
+							}
+						}
+						catch (Exception et){
+							Thread.sleep(5000);}	 
+					}
 				}
-			}
-			while(iden);	         
+				while(iden);	         
 		}
 		catch(Exception | AssertionError ex)
 		{
@@ -1201,6 +1207,54 @@ public class SetPage extends BasePage{
 			System.out.print("The set to be deleted is not found");
 		}
 	}
+	
+	public void verifySortAscending(String ColumnToBeSorted) throws Throwable{
+		Integer NumOfPrecedingColumns = driver.findElements(By.xpath("//*[text()='"+ColumnToBeSorted+"']//parent::div//parent::div//preceding-sibling::div")).size();
+		Integer CurrentColumn = NumOfPrecedingColumns + 1;
+		Integer NoOfRows = RowsintableExpand.size();
+		List<String>  myBlist = new ArrayList<String>();
+		for(int i=1; i<=NoOfRows; i++) {
+		WebElement text = driver.findElement(By.xpath("(((//div[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"])//div)["+CurrentColumn+"]"));
+		myBlist.add(text.getText());
+		}
+		for(int j=0;j<myBlist.size();j++){
+		    System.out.println(myBlist.get(j));
+		} 
+		ExtentTestManager.getTest().log(Status.PASS, ColumnToBeSorted + " is Sorted Descending");
+	}
+	
+	
+	
+	public void SortColumnInSet(String SetName, String entityToSelect, String textToSearch, String ColumnToBeSorted) throws Throwable{
+		this.createSet(SetName, entityToSelect, textToSearch);	
+		this.Set();
+		WebElement opn = this.openSet(SetName);
+		BasePage.click(opn);
+		ExtentTestManager.getTest().log(Status.PASS, SetName + " is Created");
+		this.expandSet();
+		WebElement SortColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+ColumnToBeSorted+"']")));
+		Thread.sleep(3000);
+		WebElement NextColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+ColumnToBeSorted+"']//parent::div//parent::div/following-sibling::div")));
+		scrollIntoView(NextColumnname);
+	    BasePage.click(SortColumnname);
+	    Thread.sleep(3000);
+	    ExtentTestManager.getTest().log(Status.PASS, ColumnToBeSorted + " is Sorted Descending");
+	    this.verifySortAscending(ColumnToBeSorted);
+	    BasePage.click(SortColumnname);
+	    Thread.sleep(3000);
+	    ExtentTestManager.getTest().log(Status.PASS, ColumnToBeSorted + " is Sorted Ascending");
+	}
+
+	
+//	//		WebElement SortColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+configObject.getProperty("SortColumn")+"']")));
+//	//		Thread.sleep(5000);
+//	//
+//	//		WebElement NextColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+configObject.getProperty("SortColumn")+"']//parent::div//parent::div/following-sibling::div")));
+//	//		scrollIntoView(NextColumnname);
+//	//		Thread.sleep(5000);
+//	//
+//	//		customclick(SortColumnname);
+//	//		Thread.sleep(5000);
 
 	public void shareASet(String SetToShare, String SharedUser) throws InterruptedException, AWTException { 
 		BasePage.verifyPage("MY DATA", MyDataTitle); //My Data page

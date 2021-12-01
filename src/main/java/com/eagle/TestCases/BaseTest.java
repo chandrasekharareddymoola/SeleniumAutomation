@@ -30,7 +30,7 @@ public class BaseTest {
 	@BeforeClass
 	public static void launchApplication() throws IOException, InterruptedException, AWTException{
 		if(webdriver==null) {		
-			
+
 			WebDriverManager.chromedriver().setup();
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("start-maximized"); 
@@ -41,6 +41,7 @@ public class BaseTest {
 			options.addArguments("--disable-browser-side-navigation"); 
 			options.addArguments("--disable-gpu"); 
 			webdriver = new ChromeDriver(options); 
+
 			
 			ReadObject object = new ReadObject();
 			Properties configObject = object.getObjectRepositoty();	     
@@ -53,12 +54,14 @@ public class BaseTest {
 			basePage.setWebDriver(webdriver);	
 			basePage.setUserName(email);
 			basePage.setPassword(emailPass);
-		}
+			}
 	}
-	  
-	  public void closeBroswer()
-	  {
-		  webdriver.quit();
-	  }
+
+
+	public void closeBroswer()
+	{
+		webdriver.quit();
+	}
+		
 }
-	
+
