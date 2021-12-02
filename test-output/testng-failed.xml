@@ -6,29 +6,13 @@
   </listeners>
   <test thread-count="5" name="Smoke Test cases(failed)">
     <classes>
-      <class name="com.eagle.TestCases.LogoutTest">
+      <class name="com.eagle.TestCases.SetTest">
         <methods>
           <include name="launchApplication"/>
           <include name="beforeClass"/>
-          <include name="VerifyLogout_Test"/>
-          <include name="afterClass"/>
+          <include name="SortColumnSet_Test"/>
         </methods>
-      </class> <!-- com.eagle.TestCases.LogoutTest -->
-      <class name="com.eagle.TestCases.LoginTest">
-        <methods>
-          <include name="beforeClass"/>
-          <include name="VerifyLoginPage_Test"/>
-        </methods>
-      </class> <!-- com.eagle.TestCases.LoginTest -->
-      <class name="com.eagle.TestCases.HomeTest">
-        <methods>
-          <include name="launchApplication"/>
-          <include name="VerifyLogoVisibility_Test"/>
-          <include name="VerifyCopyRights"/>
-          <include name="beforeClass"/>
-          <include name="VerifyUserProfile"/>
-        </methods>
-      </class> <!-- com.eagle.TestCases.HomeTest -->
+      </class> <!-- com.eagle.TestCases.SetTest -->
     </classes>
   </test> <!-- Smoke Test cases(failed) -->
 </suite> <!-- Failed suite [SmokeTestingSuite] -->

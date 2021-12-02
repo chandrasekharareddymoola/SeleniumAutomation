@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -353,6 +354,7 @@ public class SetPage extends BasePage{
 			this.setTitle(SetName);
 			this.selectEntity(entityToSelect);
 			this.searchItems(textToSearch); 
+			Thread.sleep(3000);
 			this.AddandAccept(); 	
 			BasePage.waitforAnElement(editCardIcon);
 			ExtentTestManager.getTest().log(Status.PASS, "Set "+ SetName +" is Created");
@@ -390,6 +392,20 @@ public class SetPage extends BasePage{
 		BasePage.click(accept);
 	}
 
+	public void GridPrimaryColumnAlone(String PrimaryColumn) throws Throwable { 
+		try {	
+			this.GridSettings();
+			this.GridPrimaryColumn(PrimaryColumn);
+			BasePage.click(Apply);
+		}
+		catch (Exception ex) {
+			throw ex;
+		}
+		catch (AssertionError ex) {
+			throw ex;
+		}
+	}
+
 	public void selectItems(List<String> myAlist){  
 		try {
 			do{ 
@@ -408,7 +424,6 @@ public class SetPage extends BasePage{
 								checkBox.click();		
 								break outerloop;
 							}
-
 						}
 				}
 				BasePage.click(forward); 
@@ -416,7 +431,6 @@ public class SetPage extends BasePage{
 			while(forward.isEnabled());  
 		}	    	
 		catch(Exception ex) {
-			
 		}
 	}
 
@@ -427,19 +441,29 @@ public class SetPage extends BasePage{
 
 	public void RemoveItemsfromSet(String SetToCreate, String entityToSelect, String textToSearch) throws Throwable
 	{
-		this.createSet(SetToCreate, entityToSelect, textToSearch);	 
-		this.Set();
-		WebElement opn = this.openSet(SetToCreate);
-		BasePage.click(opn);
-		this.expandSet();
-		this.editSet();	  
-		List<String>  myAlist = new ArrayList<String>();
-		myAlist.add("EFO_1000778");
-		myAlist.add("EFO_1000758");
-		myAlist.add("EFO_1000745");
-		this.selectItems(myAlist);	  
-		this.removeItems();	 
-		System.out.println("Items removed successfully");
+		try {
+			this.createSet(SetToCreate, entityToSelect, textToSearch);	 
+			this.Set();
+			WebElement opn = this.openSet(SetToCreate);
+			BasePage.click(opn);
+			this.expandSet();
+			this.editSet();	  
+			String NoOfRecordsInitial = ItemCountInExpand.getText();
+			List<String>  myAlist = new ArrayList<String>();
+			myAlist.add("Orphanet_79173");
+			myAlist.add("EFO_0007864");
+			myAlist.add("MONDO_0056803");
+			this.selectItems(myAlist);	  
+			this.removeItems();	 
+			this.waitForSaveChanges();
+			waitforAnElement(ItemCountInExpand);
+			String NoOfRecordsFinal = ItemCountInExpand.getText();
+			this.DecreaseCompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
+			ExtentTestManager.getTest().log(Status.PASS, "Set - Items removed successfully");
+		}
+		catch (Exception ex){
+			System.out.println("Remove items failed");
+		}
 	}
 
 	public void addItemsFromFile(String filePath) {	    
@@ -538,6 +562,15 @@ public class SetPage extends BasePage{
 		}
 		else{
 			System.out.println("Number of records have not increased or in worst case have decreased");
+		}
+	}	
+
+	public void DecreaseCompareTwovalues(String Value1, String Value2) throws InterruptedException, AWTException {	    
+		if(Integer.parseInt(Value1)<Integer.parseInt(Value2)){
+			System.out.println("Number of records have decrease");
+		}
+		else{
+			System.out.println("Number of records have not decreased or in worst case have increased");
 		}
 	}	
 
@@ -697,11 +730,15 @@ public class SetPage extends BasePage{
 			ExtentTestManager.getTest().log(Status.PASS, setToCreate + " is created ");
 			this.expandSet();
 			this.editSet();
+			String NoOfRecordsInitial = ItemCountInExpand.getText();
 			this.addItemsExpand();
 			Thread.sleep(3000);
 			this.addFromFile(CategoryName, Filelocation, FileName); 
 			this.addToGrid();
 			this.waitForSaveChanges();
+			waitforAnElement(ItemCountInExpand);
+			String NoOfRecordsFinal = ItemCountInExpand.getText();
+			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);		
 			BasePage.verifyPage(setToCreate,setNameInExpand); //verifying the set name
 			ExtentTestManager.getTest().log(Status.PASS, "Set - Added from file in expand");
 		}
@@ -1207,60 +1244,82 @@ public class SetPage extends BasePage{
 			System.out.print("The set to be deleted is not found");
 		}
 	}
-	
+
 	public void verifySortAscending(String ColumnToBeSorted) throws Throwable{
 		Integer NumOfPrecedingColumns = driver.findElements(By.xpath("//*[text()='"+ColumnToBeSorted+"']//parent::div//parent::div//preceding-sibling::div")).size();
 		Integer CurrentColumn = NumOfPrecedingColumns + 1;
 		Integer NoOfRows = RowsintableExpand.size();
-		List<String>  myBlist = new ArrayList<String>();
+		List<String>  OriginalList = new ArrayList<String>();
+		List<String>  TempList = new ArrayList<String>();
 		for(int i=1; i<=NoOfRows; i++) {
-		WebElement text = driver.findElement(By.xpath("(((//div[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"])//div)["+CurrentColumn+"]"));
-		myBlist.add(text.getText());
+			WebElement text = driver.findElement(By.xpath("(((//div[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"])//div)["+CurrentColumn+"]"));
+			OriginalList.add(text.getText());
+			TempList.add(text.getText());
 		}
-		for(int j=0;j<myBlist.size();j++){
-		    System.out.println(myBlist.get(j));
-		} 
-		ExtentTestManager.getTest().log(Status.PASS, ColumnToBeSorted + " is Sorted Descending");
-	}
-	
-	
-	
-	public void SortColumnInSet(String SetName, String entityToSelect, String textToSearch, String ColumnToBeSorted) throws Throwable{
-		this.createSet(SetName, entityToSelect, textToSearch);	
-		this.Set();
-		WebElement opn = this.openSet(SetName);
-		BasePage.click(opn);
-		ExtentTestManager.getTest().log(Status.PASS, SetName + " is Created");
-		this.expandSet();
-		WebElement SortColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+ColumnToBeSorted+"']")));
-		Thread.sleep(3000);
-		WebElement NextColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+ColumnToBeSorted+"']//parent::div//parent::div/following-sibling::div")));
-		scrollIntoView(NextColumnname);
-	    BasePage.click(SortColumnname);
-	    Thread.sleep(3000);
-	    ExtentTestManager.getTest().log(Status.PASS, ColumnToBeSorted + " is Sorted Descending");
-	    this.verifySortAscending(ColumnToBeSorted);
-	    BasePage.click(SortColumnname);
-	    Thread.sleep(3000);
-	    ExtentTestManager.getTest().log(Status.PASS, ColumnToBeSorted + " is Sorted Ascending");
+		Collections.sort(TempList);
+		assertEquals(OriginalList, TempList);
+		ExtentTestManager.getTest().log(Status.PASS,"Ascending sorting of "+ ColumnToBeSorted + " is verified");
 	}
 
-	
-//	//		WebElement SortColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+configObject.getProperty("SortColumn")+"']")));
-//	//		Thread.sleep(5000);
-//	//
-//	//		WebElement NextColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+configObject.getProperty("SortColumn")+"']//parent::div//parent::div/following-sibling::div")));
-//	//		scrollIntoView(NextColumnname);
-//	//		Thread.sleep(5000);
-//	//
-//	//		customclick(SortColumnname);
-//	//		Thread.sleep(5000);
+	public void verifySortDescending(String ColumnToBeSorted) throws Throwable{
+		Integer NumOfPrecedingColumns = driver.findElements(By.xpath("//*[text()='"+ColumnToBeSorted+"']//parent::div//parent::div//preceding-sibling::div")).size();
+		Integer CurrentColumn = NumOfPrecedingColumns + 1;
+		Integer NoOfRows = RowsintableExpand.size();
+		List<String>  OriginalList = new ArrayList<String>();
+		List<String>  TempList = new ArrayList<String>();
+		for(int i=1; i<=NoOfRows; i++) {
+			WebElement text = driver.findElement(By.xpath("(((//div[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"])//div)["+CurrentColumn+"]"));
+			OriginalList.add(text.getText());
+			TempList.add(text.getText());
+		}
+		Collections.sort(TempList,Collections.reverseOrder());
+		assertEquals(OriginalList, TempList);
+		ExtentTestManager.getTest().log(Status.PASS,"Descending sorting of "+ ColumnToBeSorted + " is verified");
+	}
+
+	public void SortColumnInSet(String SetName, String entityToSelect, String textToSearch, String ColumnToBeSorted) throws Throwable{
+		try {
+			this.createSet(SetName, entityToSelect, textToSearch);	
+			this.Set();
+			WebElement opn = this.openSet(SetName);
+			BasePage.click(opn);
+			ExtentTestManager.getTest().log(Status.PASS, SetName + " is Created");
+			this.expandSet();
+			WebElement SortColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+ColumnToBeSorted+"']")));
+			Thread.sleep(3000);
+			WebElement NextColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+ColumnToBeSorted+"']//parent::div//parent::div/following-sibling::div")));
+			scrollIntoView(NextColumnname);
+			BasePage.click(SortColumnname);
+			Thread.sleep(3000);
+			ExtentTestManager.getTest().log(Status.PASS, ColumnToBeSorted + " is Sorted Ascending");
+			this.verifySortAscending(ColumnToBeSorted);
+			BasePage.click(SortColumnname);
+			Thread.sleep(3000);
+			ExtentTestManager.getTest().log(Status.PASS, ColumnToBeSorted + " is Sorted Descending");
+			this.verifySortDescending(ColumnToBeSorted);
+		}
+		catch(Throwable ex){
+			System.out.println("Some issue with sort");		
+			throw ex;
+		}
+	}
+
+
+	//	//		WebElement SortColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+configObject.getProperty("SortColumn")+"']")));
+	//	//		Thread.sleep(5000);
+	//	//
+	//	//		WebElement NextColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+configObject.getProperty("SortColumn")+"']//parent::div//parent::div/following-sibling::div")));
+	//	//		scrollIntoView(NextColumnname);
+	//	//		Thread.sleep(5000);
+	//	//
+	//	//		customclick(SortColumnname);
+	//	//		Thread.sleep(5000);
 
 	public void shareASet(String SetToShare, String SharedUser) throws InterruptedException, AWTException { 
 		BasePage.verifyPage("MY DATA", MyDataTitle); //My Data page
 		this.shareASet(SetToShare, SharedUser);
 		Boolean a = ShareSuccess.isDisplayed();
-		if (a=true) {
+		if (a==true) {
 			System.out.println("Set shared successfully");
 		}
 		else{

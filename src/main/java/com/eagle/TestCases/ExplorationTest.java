@@ -250,24 +250,24 @@ public class ExplorationTest extends BaseTest{
 //		}
 //	}
 //
-	@Test(priority = 12, description = "Exploration - Create with 2 additional relation Card")
-	public void ExplorationCreateTwoRelationCard_Test() throws Throwable  {
-		try {
-			/* Exploration - Create with 2 additional relation Cards */
-			objExplorationPage.createRelationCardMulti("ExpRela 2", "Disease", "kera", "Gene","SNP","5");
-			onSuccessMeassage("Exploration Created and added with 2 relation Cards Successfully");
-		}
-		catch(Exception ex)
-		{
-			objExplorationPage.captureScreenshot("ExplorationAdd2RelationFail");
-			onFailureMeassage(ex.getMessage(),"ExplorationAdd2RelationFail","ExplorationAdd2RelationFail");
-		}
-		catch(AssertionError ex)
-		{
-			objExplorationPage.captureScreenshot("ExplorationAdd2RelationFail");
-			onFailureMeassage(ex.getMessage(),"ExplorationAdd2RelationFail","ExplorationAdd2RelationFail");
-		}
-	}
+//	@Test(priority = 12, description = "Exploration - Create with 2 additional relation Card")
+//	public void ExplorationCreateTwoRelationCard_Test() throws Throwable  {
+//		try {
+//			/* Exploration - Create with 2 additional relation Cards */
+//			objExplorationPage.createRelationCardMulti("ExpRela 2", "Disease", "kera", "Gene","SNP","5");
+//			onSuccessMeassage("Exploration Created and added with 2 relation Cards Successfully");
+//		}
+//		catch(Exception ex)
+//		{
+//			objExplorationPage.captureScreenshot("ExplorationAdd2RelationFail");
+//			onFailureMeassage(ex.getMessage(),"ExplorationAdd2RelationFail","ExplorationAdd2RelationFail");
+//		}
+//		catch(AssertionError ex)
+//		{
+//			objExplorationPage.captureScreenshot("ExplorationAdd2RelationFail");
+//			onFailureMeassage(ex.getMessage(),"ExplorationAdd2RelationFail","ExplorationAdd2RelationFail");
+//		}
+//	}
 //
 //	@Test(priority = 13, description = "Create And Delete An Exploration")
 //	public void CreateAndDeleteExploration_Test() throws Throwable  {
@@ -344,39 +344,39 @@ public class ExplorationTest extends BaseTest{
 //			onFailureMeassage(ex.getMessage(),"ShareExplorationFail","ShareExplorationFail");
 //		}
 //	}
-
-	//	@Test(priority = 17, description = "Remove items from Exploration Expand")
-	//	public void RemoveItemsfromExploration_Test() throws InterruptedException, IOException  {
-	//		try {
-	//			/* Remove items in Expanded Set */
-	//			objExplorationPage.RemoveItemsfromExploration("Remove Item Exploration","Disease","Kera");
-	//			onSuccessMeassage("Items removed successfully in Exploration Expand");
-	//		}
-	//		catch(Exception ex)
-	//		{
-	//			objExplorationPage.captureScreenshot("ExplorationItemsRemoveFail");
-	//			onFailureMeassage(ex.getMessage(),"ExplorationItemsRemoveFail","ExplorationItemsRemoveFail");
-	//		}
-	//		catch(AssertionError ex)
-	//		{
-	//			objExplorationPage.captureScreenshot("ExplorationItemsRemoveFail");
-	//			onFailureMeassage(ex.getMessage(),"ExplorationItemsRemoveFail","ExplorationItemsRemoveFail");
-	//		}
-	//	}
+	
+//		@Test(priority = 17, description = "Remove items from Exploration Expand")
+//		public void RemoveItemsfromExploration_Test() throws Throwable  {
+//			try {
+//				/* Remove items in Expanded Set */
+//				objExplorationPage.RemoveItemsfromExploration("Remove Item Exploration","RNA","asb");
+//				onSuccessMeassage("Items removed successfully in Exploration Expand");
+//			}
+//			catch(Exception ex)
+//			{
+//				objExplorationPage.captureScreenshot("ExplorationItemsRemoveFail");
+//				onFailureMeassage(ex.getMessage(),"ExplorationItemsRemoveFail","ExplorationItemsRemoveFail");
+//			}
+//			catch(AssertionError ex)
+//			{
+//				objExplorationPage.captureScreenshot("ExplorationItemsRemoveFail");
+//				onFailureMeassage(ex.getMessage(),"ExplorationItemsRemoveFail","ExplorationItemsRemoveFail");
+//			}
+//		}
 //	
-//	@Test(priority = 18, description = "Sorting a column in an Exploration")
-//	public void SortColumnSet_Test() throws Throwable  {
-//		try {
-//			/* Sorting column in a Exploration */
-//			objExplorationPage.SortColumnInExploration("SortExploration", "Disease", "Kera", "EFO Name");
-//			onSuccessMeassage("Column in Set Sorted Successfully");
-//		}
-//		catch(Exception | AssertionError ex)
-//		{
-//			objExplorationPage.captureScreenshot("SortColumnExplorationFail");
-//			onFailureMeassage(ex.getMessage(),"SortColumnExplorationFail","SortColumnExplorationFail");
-//		}
-//	}
+	@Test(priority = 18, description = "Sorting a column in an Exploration")
+	public void SortColumnExploration_Test() throws Throwable  {
+		try {
+			/* Sorting column in a Exploration */
+			objExplorationPage.SortColumnInExploration("SortExploration", "Disease", "Kera", "EFO Name");
+			onSuccessMeassage("Column in Exploration Sorted Successfully");
+		}
+		catch(Exception | AssertionError ex)
+		{
+			objExplorationPage.captureScreenshot("SortColumnExplorationFail");
+			onFailureMeassage(ex.getMessage(),"SortColumnExplorationFail","SortColumnExplorationFail");
+		}
+	}
 
 	public void onSuccessMeassage(String successMessage)
 	{

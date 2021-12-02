@@ -42,7 +42,6 @@ public class BaseTest {
 			options.addArguments("--disable-gpu"); 
 			webdriver = new ChromeDriver(options); 
 
-			
 			ReadObject object = new ReadObject();
 			Properties configObject = object.getObjectRepositoty();	     
 			String url = configObject.getProperty("EnvironmentURL");	

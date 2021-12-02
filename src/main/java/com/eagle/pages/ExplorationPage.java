@@ -1,5 +1,7 @@
 package com.eagle.pages;
 
+import static org.testng.Assert.assertEquals;
+
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.Toolkit;
@@ -8,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -191,7 +194,7 @@ public class ExplorationPage extends BasePage{
 	@FindBy(xpath = "//*[text()='Secondary column']//parent::div//following-sibling::div//div[@role='listbox']")
 	public WebElement SecondaryColumnDropdown;
 
-	@FindBy(xpath = "//*[@class='TableRowDefault__bodyRow___1_m1h")
+	@FindBy(xpath = "//*[@class='TableRowDefault__bodyRow___1_m1h']")
 	public List <WebElement> RowsintableExpand;
 
 	@FindBy(xpath = "//*[@data-icon-name='ShareIOS']")
@@ -480,10 +483,11 @@ public class ExplorationPage extends BasePage{
 		this.addExploration();
 		this.createExplorationSearch();
 		this.verifyExplorationHomePage("Uncategorized");
-		Thread.sleep(10000);
+		Thread.sleep(3000);
 		this.ExplorationTitle(ExplorationName);
 		this.selectEntity(EntitytoSelect);
 		this.searchItems(ItemtoSearch); 
+		Thread.sleep(3000);
 		this.AddandStart();   
 		BasePage.waitforAnElement(ExplorationList);
 		ExtentTestManager.getTest().log(Status.PASS, ExplorationName + " is created");
@@ -533,32 +537,63 @@ public class ExplorationPage extends BasePage{
 		BasePage.click(accept);
 	}
 
-	public void selectItems(List<String> myAlist)throws AWTException, InterruptedException{  
+	public void selectItems(List<String> myAlist){  
 		try {
-
 			do{ 
 				for(String item : myAlist)
 				{
-					for (WebElement element : gridItems) {
-						scrollIntoView(element);
-						String textFromGrid = element.getText();	    				
-						if(item.equals(textFromGrid)) {
-							WebElement checkBox = element.findElement(By.tagName("i"));
-							checkBox.click();			    				
+					outerloop:
+						for (WebElement element : gridItems) {
+							if(element.isDisplayed()==false)
+							{
+								scrollIntoView(element);
+							}
+							String textFromGrid = element.getText();	    				
+							if(item.equals(textFromGrid))
+							{
+								WebElement checkBox = element.findElement(By.tagName("i"));
+								checkBox.click();		
+								break outerloop;
+							}
+
 						}
-					}
 				}
 				BasePage.click(forward); 
 			}
 			while(forward.isEnabled());  
 		}	    	
-		catch(Exception ex) {}
+		catch(Exception ex) {
+
+		}
 	}
 
 	public void removeItems()throws AWTException, InterruptedException{	
 		BasePage.click(remove);
 		BasePage.click(saveChanges);
 	}
+
+	public void GridPrimaryColumnAlone(String PrimaryColumn) throws Throwable { 
+		try {	
+			this.GridSettings();
+			this.GridPrimaryColumn(PrimaryColumn);
+			BasePage.click(Apply);
+		}
+		catch (Exception ex) {
+			throw ex;
+		}
+		catch (AssertionError ex) {
+			throw ex;
+		}
+	}
+
+	public void DecreaseCompareTwovalues(String Value1, String Value2) throws InterruptedException, AWTException {	    
+		if(Integer.parseInt(Value1)<Integer.parseInt(Value2)){
+			System.out.println("Number of records have decrease");
+		}
+		else{
+			System.out.println("Number of records have not decreased or in worst case have increased");
+		}
+	}	
 
 	public void RemoveItemsfromExploration(String ExplorationToCreate, String entityToSelect, String textToSearch) throws Throwable
 	{
@@ -568,16 +603,21 @@ public class ExplorationPage extends BasePage{
 		WebElement opn = this.openExploration(ExplorationToCreate);
 		BasePage.click(opn);
 		this.expandExploration();
-		this.editCard();	  
+		this.GridPrimaryColumnAlone("Name");
+		Thread.sleep(5000);
+		this.editCard();	
+		String NoOfRecordsInitial = ItemCountInExpand.getText();
 		List<String>  myAlist = new ArrayList<String>();
-		myAlist.add("EFO_1000779");
-		myAlist.add("EFO_1000778");
-		myAlist.add("seborrheic keratosis");
-		myAlist.add("EFO_1000758");
-		myAlist.add("EFO_1000745");
+		myAlist.add("ASB11");
+		myAlist.add("ASB5");
+		myAlist.add("ASB9");
 		this.selectItems(myAlist);	  
 		this.removeItems();	 
-		System.out.println("Items removed successfully");
+		this.waitForSaveChanges();
+		waitforAnElement(ItemCountInExpand);
+		String NoOfRecordsFinal = ItemCountInExpand.getText();
+		this.DecreaseCompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
+		ExtentTestManager.getTest().log(Status.PASS, "Exploration - Items removed successfully");
 	}
 
 	public void addItemsFromFile(String filePath) throws AWTException, InterruptedException {	    
@@ -840,22 +880,6 @@ public class ExplorationPage extends BasePage{
 		BasePage.click(deleteCardExpand);
 	}
 
-	public void RemoveItemsfromExploration() throws Throwable
-	{
-		WebElement opn = this.openExploration("Share Set1");
-		BasePage.click(opn);
-		this.expandExploration();
-		this.editCard();	  
-		List<String>  myAlist = new ArrayList<String>();
-		myAlist.add("EFO_1000779");
-		myAlist.add("EFO_1000778");
-		myAlist.add("seborrheic keratosis");
-		myAlist.add("EFO_1000758");
-		myAlist.add("EFO_1000745");
-		this.selectItems(myAlist);	  
-		this.removeItems();	 
-		System.out.println("Items removed successfully");
-	}
 
 	public void Delete() throws AWTException, InterruptedException{ 
 		BasePage.click(Delete);
@@ -1303,6 +1327,37 @@ public class ExplorationPage extends BasePage{
 		}
 	}
 
+	public void verifySortAscending(String ColumnToBeSorted) throws Throwable{
+		Integer NumOfPrecedingColumns = driver.findElements(By.xpath("//*[text()='"+ColumnToBeSorted+"']//parent::div//parent::div//preceding-sibling::div")).size();
+		Integer CurrentColumn = NumOfPrecedingColumns + 1;
+		Integer NoOfRows = RowsintableExpand.size();
+		List<String>  OriginalList = new ArrayList<String>();
+		List<String>  TempList = new ArrayList<String>();
+		for(int i=1; i<=NoOfRows; i++) {
+			WebElement text = driver.findElement(By.xpath("(((//div[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"])//div)["+CurrentColumn+"]"));
+			OriginalList.add(text.getText());
+			TempList.add(text.getText());
+		}
+		Collections.sort(TempList);
+		assertEquals(OriginalList, TempList);
+		ExtentTestManager.getTest().log(Status.PASS,"Ascending sorting of "+ ColumnToBeSorted + " is verified");
+	}
+
+	public void verifySortDescending(String ColumnToBeSorted) throws Throwable{
+		Integer NumOfPrecedingColumns = driver.findElements(By.xpath("//*[text()='"+ColumnToBeSorted+"']//parent::div//parent::div//preceding-sibling::div")).size();
+		Integer CurrentColumn = NumOfPrecedingColumns + 1;
+		Integer NoOfRows = RowsintableExpand.size();
+		List<String>  OriginalList = new ArrayList<String>();
+		List<String>  TempList = new ArrayList<String>();
+		for(int i=1; i<=NoOfRows; i++) {
+			WebElement text = driver.findElement(By.xpath("(((//div[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"])//div)["+CurrentColumn+"]"));
+			OriginalList.add(text.getText());
+			TempList.add(text.getText());
+		}
+		Collections.sort(TempList,Collections.reverseOrder());
+		assertEquals(OriginalList, TempList);
+		ExtentTestManager.getTest().log(Status.PASS,"Descending sorting of "+ ColumnToBeSorted + " is verified");
+	}
 
 	public void createRelationCardMulti(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch, String RelationCardType, String RelationCardType2, String NumberOfItemsToSelect) throws Throwable { 
 		this.createExploration(ExplorationToCreate, EntitytoSelect, ItemtoSearch);
@@ -1319,21 +1374,32 @@ public class ExplorationPage extends BasePage{
 		ExtentTestManager.getTest().log(Status.PASS, "Created second relation card verified");
 	}
 
+
 	public void SortColumnInExploration(String ExplorationName, String entityToSelect, String textToSearch, String ColumnToBeSorted) throws Throwable{
-		this.createExploration(ExplorationName, entityToSelect, textToSearch);	
-		ExtentTestManager.getTest().log(Status.PASS, ExplorationName + " is Created");
-		this.expandExploration();
-		WebElement SortColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+ColumnToBeSorted+"']")));
-		Thread.sleep(3000);
-		WebElement NextColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+ColumnToBeSorted+"']//parent::div//parent::div/following-sibling::div")));
-		scrollIntoView(NextColumnname);
-		BasePage.click(SortColumnname);
-		Thread.sleep(3000);
-		ExtentTestManager.getTest().log(Status.PASS, ColumnToBeSorted + " is Sorted Descending");
-		BasePage.click(SortColumnname);
-		Thread.sleep(3000);
-		ExtentTestManager.getTest().log(Status.PASS, ColumnToBeSorted + " is Sorted Ascending");
+		try {
+			this.createExploration(ExplorationName, entityToSelect, textToSearch);	
+			ExtentTestManager.getTest().log(Status.PASS, ExplorationName + " is Created");
+			this.expandExploration();
+			WebElement SortColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+ColumnToBeSorted+"']")));
+			Thread.sleep(3000);
+			WebElement NextColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+ColumnToBeSorted+"']//parent::div//parent::div/following-sibling::div")));
+			scrollIntoView(NextColumnname);
+			BasePage.click(SortColumnname);
+			Thread.sleep(3000);
+			ExtentTestManager.getTest().log(Status.PASS, ColumnToBeSorted + " is Sorted Ascending");
+			this.verifySortAscending(ColumnToBeSorted);
+			BasePage.click(SortColumnname);
+			Thread.sleep(3000);
+			ExtentTestManager.getTest().log(Status.PASS, ColumnToBeSorted + " is Sorted Descending");
+			this.verifySortDescending(ColumnToBeSorted);
+		}
+		catch(Throwable ex){
+			System.out.println("Some issue with sort");		
+			throw ex;
+		}
 	}
+
+
 
 	public void captureScreenshot(String screenShotName) throws IOException
 	{
