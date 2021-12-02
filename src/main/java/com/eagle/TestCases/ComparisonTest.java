@@ -344,24 +344,24 @@ public class ComparisonTest extends BaseTest{
 //		}
 //	}
 
-//		@Test(priority = 19, description = "Remove items from Comparison Expand")
-//		public void RemoveItemsfromComparison_Test() throws Throwable  {
-//			try {
-//				/* Remove items in Expanded Set */
-//				objComparisonPage.RemoveItemsfromComparison("Remove Item Comparison","Control Set" ,"Gene","asph");
-//				onSuccessMeassage("Items removed successfully in Comparison Expand");
-//			}
-//			catch(Exception ex)
-//			{
-//				objComparisonPage.captureScreenshot("ComparisonItemsRemoveFail");
-//				onFailureMeassage(ex.getMessage(),"ComparisonItemsRemoveFail","ComparisonItemsRemoveFail");
-//			}
-//			catch(AssertionError ex)
-//			{
-//				objComparisonPage.captureScreenshot("ComparisonItemsRemoveFail");
-//				onFailureMeassage(ex.getMessage(),"ComparisonItemsRemoveFail","ComparisonItemsRemoveFail");
-//			}
-//		}
+		@Test(priority = 19, description = "Remove items from Comparison Expand")
+		public void RemoveItemsfromComparison_Test() throws Throwable  {
+			try {
+				/* Remove items in Expanded Set */
+				objComparisonPage.RemoveItemsfromComparison("Remove Item Comparison","Control Set" ,"Gene","asph");
+				onSuccessMeassage("Items removed successfully in Comparison Expand");
+			}
+			catch(Exception ex)
+			{
+				objComparisonPage.captureScreenshot("ComparisonItemsRemoveFail");
+				onFailureMeassage(ex.getMessage(),"ComparisonItemsRemoveFail","ComparisonItemsRemoveFail");
+			}
+			catch(AssertionError ex)
+			{
+				objComparisonPage.captureScreenshot("ComparisonItemsRemoveFail");
+				onFailureMeassage(ex.getMessage(),"ComparisonItemsRemoveFail","ComparisonItemsRemoveFail");
+			}
+		}
 
 //	@Test(priority = 20, description = "Interchange Control and Case sets in the Comparison")
 //	public void ChangeControlAndCase_Test() throws Throwable {
@@ -377,19 +377,19 @@ public class ComparisonTest extends BaseTest{
 //		}
 //	}
 //	
-	@Test(priority = 21, description = "Sorting a column in a Comparison")
-	public void SortColumnComparison_Test() throws Throwable  {
-		try {
-			/* Sorting column in a Exploration */
-			objComparisonPage.SortColumnInComparison("SortComparison","ControlSet" , "Disease", "Kera", "EFO Name");
-			onSuccessMeassage("Column in Comparison Sorted Successfully");
-		}
-		catch(Exception | AssertionError ex)
-		{
-			objComparisonPage.captureScreenshot("SortColumnComparisonFail");
-			onFailureMeassage(ex.getMessage(),"SortColumnComparisonFail","SortColumnComparisonFail");
-		}
-	}
+//	@Test(priority = 21, description = "Sorting a column in a Comparison")
+//	public void SortColumnComparison_Test() throws Throwable  {
+//		try {
+//			/* Sorting column in a Exploration */
+//			objComparisonPage.SortColumnInComparison("SortComparison","ControlSet" , "Disease", "Kera", "EFO Name");
+//			onSuccessMeassage("Column in Comparison Sorted Successfully");
+//		}
+//		catch(Exception | AssertionError ex)
+//		{
+//			objComparisonPage.captureScreenshot("SortColumnComparisonFail");
+//			onFailureMeassage(ex.getMessage(),"SortColumnComparisonFail","SortColumnComparisonFail");
+//		}
+//	}
 
 	public void onSuccessMeassage(String successMessage)
 	{

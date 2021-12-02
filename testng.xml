@@ -4,11 +4,12 @@
 	<listeners>
 		<listener class-name="com.eagle.Reports.TestListener" />
 	</listeners>
-  	<test name="Smoke Test cases" preserve-order="true">
-	    <classes>   
-		      <class name="com.eagle.TestCases.LoginTest"/>  	
-		      <class name="com.eagle.TestCases.ExplorationTest"/>
-		      <class name="com.eagle.TestCases.ComparisonTest"/>
-	    </classes>
-  	</test> <!-- Test -->
+	<test name="Smoke Test cases" preserve-order="true">
+		<classes>
+			<class name="com.eagle.TestCases.LoginTest" />
+			<class name="com.eagle.TestCases.SetTest" />
+			<class name="com.eagle.TestCases.ExplorationTest" />
+			<class name="com.eagle.TestCases.ComparisonTest" />
+		</classes>
+	</test> <!-- Test -->
 </suite> <!-- Suite -->

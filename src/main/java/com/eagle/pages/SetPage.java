@@ -190,6 +190,9 @@ public class SetPage extends BasePage{
 
 	@FindBy(xpath = "//*[@class='TableRowDefault__bodyRow___1_m1h']")
 	public List <WebElement> RowsintableExpand;
+	
+	@FindBy(xpath = "(//*[@class='TableRowDefault__bodyRow___1_m1h'])[1]")
+	public WebElement FirstRowintableExpand;
 
 	@FindBy(xpath = "//button//span[contains(text(),'Delete')]")
 	public WebElement deleteIcon;
@@ -406,31 +409,39 @@ public class SetPage extends BasePage{
 		}
 	}
 
-	public void selectItems(List<String> myAlist){  
+	public void selectItems(List<String> myAlist) throws Throwable{  
 		try {
+			outloop:
 			do{ 
 				for(String item : myAlist)
 				{
-					outerloop:
-						for (WebElement element : gridItems) {
-							if(element.isDisplayed()==false)
-							{
-								scrollIntoView(element);
-							}
-							String textFromGrid = element.getText();	    				
-							if(item.equals(textFromGrid))
-							{
-								WebElement checkBox = element.findElement(By.tagName("i"));
-								checkBox.click();		
-								break outerloop;
-							}
+					for (WebElement element : gridItems) {
+						if(element.isDisplayed()==false)
+						{
+							scrollIntoView(element);
 						}
+						String textFromGrid = element.getText();	    				
+						if(item.equals(textFromGrid))
+						{
+							WebElement checkBox = element.findElement(By.tagName("i"));
+							checkBox.click();	
+							scrollIntoView(FirstRowintableExpand);
+						}
+					}
 				}
-				BasePage.click(forward); 
+				try {
+				Thread.sleep(3000);
+				forward.click();
+				scrollIntoView(FirstRowintableExpand);
+				}
+				catch(Exception e){
+					break outloop;
+				}
 			}
 			while(forward.isEnabled());  
 		}	    	
 		catch(Exception ex) {
+			throw ex;
 		}
 	}
 
@@ -455,14 +466,18 @@ public class SetPage extends BasePage{
 			myAlist.add("MONDO_0056803");
 			this.selectItems(myAlist);	  
 			this.removeItems();	 
-			this.waitForSaveChanges();
+			this.waitForEditAndDelete();
+			ExtentTestManager.getTest().log(Status.PASS, "Set - Items removed successfully");
 			waitforAnElement(ItemCountInExpand);
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.DecreaseCompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
-			ExtentTestManager.getTest().log(Status.PASS, "Set - Items removed successfully");
+			int Difference = Integer.parseInt(NoOfRecordsInitial)-Integer.parseInt(NoOfRecordsFinal);
+			assertEquals(Difference, myAlist.size());
+			ExtentTestManager.getTest().log(Status.PASS, "Decrease in count is verified");
 		}
 		catch (Exception ex){
 			System.out.println("Remove items failed");
+			throw ex;
 		}
 	}
 
@@ -566,7 +581,7 @@ public class SetPage extends BasePage{
 	}	
 
 	public void DecreaseCompareTwovalues(String Value1, String Value2) throws InterruptedException, AWTException {	    
-		if(Integer.parseInt(Value1)<Integer.parseInt(Value2)){
+		if(Integer.parseInt(Value2)<Integer.parseInt(Value1)){
 			System.out.println("Number of records have decrease");
 		}
 		else{
@@ -866,7 +881,6 @@ public class SetPage extends BasePage{
 					Thread.sleep(2000);
 
 				}
-				BasePage.click(forward); 
 				BasePage.click(forward); 
 			}
 			while(forward.isEnabled());  

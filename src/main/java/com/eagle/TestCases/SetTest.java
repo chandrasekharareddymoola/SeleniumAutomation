@@ -205,19 +205,19 @@ public class SetTest extends BaseTest{
 //		}
 //	}
 //
-//	@Test(priority = 9, description = "Remove items from Set Expand")
-//	public void RemoveItemsfromSet_Test() throws Throwable  {
-//		try {
-//			/* Remove items in Expanded Set */
-//			objSetPage.RemoveItemsfromSet("Remove Item Set","Disease","sulf");
-//			onSuccessMeassage("Items removed successfully in Set Expand");
-//		}
-//		catch(Exception | AssertionError ex)
-//		{
-//			objSetPage.captureScreenshot("SetItemsRemoveFail");
-//			onFailureMeassage(ex.getMessage(),"SetItemsRemoveFail", "SetItemsRemoveFail");
-//		}
-//	}
+	@Test(priority = 9, description = "Remove items from Set Expand")
+	public void RemoveItemsfromSet_Test() throws Throwable  {
+		try {
+			/* Remove items in Expanded Set */
+			objSetPage.RemoveItemsfromSet("Remove Item Set","Disease","sulf");
+			onSuccessMeassage("Items removed successfully in Set Expand");
+		}
+		catch(Exception | AssertionError ex)
+		{
+			objSetPage.captureScreenshot("SetItemsRemoveFail");
+			onFailureMeassage(ex.getMessage(),"SetItemsRemoveFail", "SetItemsRemoveFail");
+		}
+	}
 //
 //	@Test(priority = 10, description = "Modify Grid Settings in Set Expand")
 //	public void GridChangesInSet_Test() throws Throwable  {
@@ -309,19 +309,19 @@ public class SetTest extends BaseTest{
 //		}
 //	}
 
-	@Test(priority = 15, description = "Sorting a column in a Set")
-	public void SortColumnSet_Test() throws Throwable  {
-		try {
-			/* Sorting column in a set */
-			objSetPage.SortColumnInSet("SortSet", "Disease", "pero", "EFO Name");
-			onSuccessMeassage("Column in Set Sorted Successfully");
-		}
-		catch(Throwable ex)
-		{
-			objSetPage.captureScreenshot("SortColumnSetFail");
-			onFailureMeassage(ex.getMessage(),"SortColumnSetFail","SortColumnSetFail");
-		}
-	}
+//	@Test(priority = 15, description = "Sorting a column in a Set")
+//	public void SortColumnSet_Test() throws Throwable  {
+//		try {
+//			/* Sorting column in a set */
+//			objSetPage.SortColumnInSet("SortSet", "Disease", "pero", "EFO Name");
+//			onSuccessMeassage("Column in Set Sorted Successfully");
+//		}
+//		catch(Throwable ex)
+//		{
+//			objSetPage.captureScreenshot("SortColumnSetFail");
+//			onFailureMeassage(ex.getMessage(),"SortColumnSetFail","SortColumnSetFail");
+//		}
+//	}
 
 	public void onSuccessMeassage(String successMessage)
 	{

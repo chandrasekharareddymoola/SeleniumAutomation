@@ -260,6 +260,8 @@ public class ExplorationPage extends BasePage{
 	@FindBy(xpath = "//*[@data-icon-name='Cancel']")
 	public WebElement dialogBoxClose;
 
+	@FindBy(xpath = "(//*[@class='TableRowDefault__bodyRow___1_m1h'])[1]")
+	public WebElement FirstRowintableExpand;
 
 
 	public WebElement openExploration(String name) {
@@ -537,33 +539,39 @@ public class ExplorationPage extends BasePage{
 		BasePage.click(accept);
 	}
 
-	public void selectItems(List<String> myAlist){  
+	public void selectItems(List<String> myAlist) throws Throwable{  
 		try {
+			outloop:
 			do{ 
 				for(String item : myAlist)
 				{
-					outerloop:
-						for (WebElement element : gridItems) {
-							if(element.isDisplayed()==false)
-							{
-								scrollIntoView(element);
-							}
-							String textFromGrid = element.getText();	    				
-							if(item.equals(textFromGrid))
-							{
-								WebElement checkBox = element.findElement(By.tagName("i"));
-								checkBox.click();		
-								break outerloop;
-							}
-
+					for (WebElement element : gridItems) {
+						if(element.isDisplayed()==false)
+						{
+							scrollIntoView(element);
 						}
+						String textFromGrid = element.getText();	    				
+						if(item.equals(textFromGrid))
+						{
+							WebElement checkBox = element.findElement(By.tagName("i"));
+							checkBox.click();	
+							scrollIntoView(FirstRowintableExpand);
+						}
+					}
 				}
-				BasePage.click(forward); 
+				try {
+				Thread.sleep(3000);
+				forward.click();
+				scrollIntoView(FirstRowintableExpand);
+				}
+				catch(Exception e){
+					break outloop;
+				}
 			}
 			while(forward.isEnabled());  
 		}	    	
 		catch(Exception ex) {
-
+			throw ex;
 		}
 	}
 
@@ -587,7 +595,7 @@ public class ExplorationPage extends BasePage{
 	}
 
 	public void DecreaseCompareTwovalues(String Value1, String Value2) throws InterruptedException, AWTException {	    
-		if(Integer.parseInt(Value1)<Integer.parseInt(Value2)){
+		if(Integer.parseInt(Value2)<Integer.parseInt(Value1)){
 			System.out.println("Number of records have decrease");
 		}
 		else{
@@ -608,16 +616,19 @@ public class ExplorationPage extends BasePage{
 		this.editCard();	
 		String NoOfRecordsInitial = ItemCountInExpand.getText();
 		List<String>  myAlist = new ArrayList<String>();
-		myAlist.add("ASB11");
-		myAlist.add("ASB5");
-		myAlist.add("ASB9");
+		myAlist.add("AL160411.1");
+		myAlist.add("AC060814.4");
+		myAlist.add("AL022100.1");
 		this.selectItems(myAlist);	  
 		this.removeItems();	 
-		this.waitForSaveChanges();
+		this.waitForEditAndDelete();
+		ExtentTestManager.getTest().log(Status.PASS, "Exploration - Items removed successfully");
 		waitforAnElement(ItemCountInExpand);
 		String NoOfRecordsFinal = ItemCountInExpand.getText();
 		this.DecreaseCompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
-		ExtentTestManager.getTest().log(Status.PASS, "Exploration - Items removed successfully");
+		int Difference = Integer.parseInt(NoOfRecordsInitial)-Integer.parseInt(NoOfRecordsFinal);
+		assertEquals(Difference, myAlist.size());
+		ExtentTestManager.getTest().log(Status.PASS, "Decrease in count is verified");
 	}
 
 	public void addItemsFromFile(String filePath) throws AWTException, InterruptedException {	    

@@ -6,13 +6,13 @@
   </listeners>
   <test thread-count="5" name="Smoke Test cases(failed)">
     <classes>
-      <class name="com.eagle.TestCases.SetTest">
+      <class name="com.eagle.TestCases.ExplorationTest">
         <methods>
           <include name="launchApplication"/>
+          <include name="RemoveItemsfromExploration_Test"/>
           <include name="beforeClass"/>
-          <include name="SortColumnSet_Test"/>
         </methods>
-      </class> <!-- com.eagle.TestCases.SetTest -->
+      </class> <!-- com.eagle.TestCases.ExplorationTest -->
     </classes>
   </test> <!-- Smoke Test cases(failed) -->
 </suite> <!-- Failed suite [SmokeTestingSuite] -->
