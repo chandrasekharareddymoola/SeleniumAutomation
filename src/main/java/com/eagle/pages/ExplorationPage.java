@@ -704,8 +704,11 @@ public class ExplorationPage extends BasePage{
 		BasePage.click(close);
 	}
 
-	public void saveChanges() throws AWTException, InterruptedException{	
+	public void saveChanges() throws InterruptedException, AWTException{
+		BasePage.scrollToTop();
 		BasePage.click(saveChanges);
+		ExtentTestManager.getTest().log(Status.PASS, "Changes are Saved");
+		this.Home();
 	}
 
 	public void searchExpandEnterName(String SetNameToAddFrom) throws AWTException, InterruptedException{ 		 
@@ -740,9 +743,9 @@ public class ExplorationPage extends BasePage{
 	public void ExpandAddFromSet(String setToAdd, String entityToSelect, String textToSearchInSet, String ExplorationName, String textToSearchInExploration) throws Throwable {    // Add from a set
 		try {
 			objSetPage = new SetPage();  
-			objSetPage.createSet(setToAdd, entityToSelect, textToSearchInSet);
+			List <String> setItems = objSetPage.createSetforAdd(setToAdd, entityToSelect, textToSearchInSet);
+			System.out.println(setItems);
 			this.Home();
-
 
 			this.createExploration(ExplorationName, entityToSelect, textToSearchInExploration);
 			this.expandExploration();
@@ -753,6 +756,7 @@ public class ExplorationPage extends BasePage{
 			this.waitForSaveChanges();
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
+			objSetPage.verifyAfterAdd(setItems);
 			ExtentTestManager.getTest().log(Status.PASS, "Exploration - Set added in expand");
 		}
 		catch(Exception ex) {
@@ -1063,12 +1067,52 @@ public class ExplorationPage extends BasePage{
 			throw ex;
 		}
 	}
+	
+	public void verifyAfterSearch(String SearchInExploration) throws InterruptedException, AWTException { 
+		try {
+			int j =1 ;
+			outloop:
+			do {
+				try {
+					int NoOfRows = RowsintableExpand.size();
+					for(int i=1 ; i< NoOfRows ;i++) {
+						WebElement tableRows = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"]")));
+						String valuesInRows = tableRows.getText().toLowerCase();
+						String SearchInSetLowerCase = SearchInExploration.toLowerCase();				
+						boolean  comp = valuesInRows.contains(SearchInSetLowerCase);
+						assertEquals(comp, true);
+						ExtentTestManager.getTest().log(Status.PASS, i + " row is verified" + " in page " + j);
+					}
+				}
+				catch (Exception e) {
+					System.out.println("Error in Search verification");
+					throw e;
+				}
+				try {
+					Thread.sleep(3000);
+					forward.click();
+					j++;
+					scrollIntoView(FirstRowintableExpand);
+				}
+				catch(Exception e){
+					break outloop;
+				}
+			}
+			while(forward.isEnabled()); 
+		}
+		catch(Exception r){
+			System.out.println("Some problem with forward button");
+			throw r;
+		}
+	}
 
 	public void searchInExplorationExpand(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch, String SearchInExploration) throws Throwable { 
 		this.createExploration(ExplorationToCreate, EntitytoSelect, ItemtoSearch);
 		this.expandExploration();
 		this.searchInExpand(SearchInExploration);
 		ExtentTestManager.getTest().log(Status.PASS, "Search in done using text - "+ SearchInExploration);
+		this.verifyAfterSearch(SearchInExploration);
+		ExtentTestManager.getTest().log(Status.PASS, "Search is verified");
 	}
 
 	public void DeleteclickinCard() throws AWTException, InterruptedException { 

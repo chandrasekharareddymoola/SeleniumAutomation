@@ -210,25 +210,20 @@ public class ComparisonTest extends BaseTest{
 //
 //	}
 //
-//	@Test(priority = 11, description = "Comparison - Expand and add items from Set")
-//	public void ComparisonExpandAddFromSet_Test() throws Throwable  {
-//		try {
-//			/* Comparison - Expand and add items from Set */
-//			objComparisonPage.ExpandAddFromSet("SetAdd 1", "Disease", "aber", "ComAddFromSet",  "Control Card", "dol" ); 
-//			objComparisonPage.saveChanges();
-//			onSuccessMeassage("Items Added from Set into Comparison successfully");
-//		}
-//		catch(Exception ex)
-//		{
-//			objComparisonPage.captureScreenshot("ComparisonExpandAddFromSetFail");
-//			onFailureMeassage(ex.getMessage(),"ComparisonExpandAddFromSetFail","ComparisonExpandAddFromSetFail");
-//		}
-//		catch(AssertionError ex)
-//		{
-//			objComparisonPage.captureScreenshot("ComparisonExpandAddFromSetFail");
-//			onFailureMeassage(ex.getMessage(),"ComparisonExpandAddFromSetFail","ComparisonExpandAddFromSetFail");
-//		}
-//	}
+	@Test(priority = 11, description = "Comparison - Expand and add items from Set")
+	public void ComparisonExpandAddFromSet_Test() throws Throwable  {
+		try {
+			/* Comparison - Expand and add items from Set */
+			objComparisonPage.ExpandAddFromSet("SetAdd 1", "Disease", "aber", "ComAddFromSet",  "Control Card", "dol"); 
+			objComparisonPage.saveChanges();
+			onSuccessMeassage("Items Added from Set into Comparison successfully");
+		}
+		catch(Exception | AssertionError ex)
+		{
+			objComparisonPage.captureScreenshot("ComparisonExpandAddFromSetFail");
+			onFailureMeassage(ex.getMessage(),"ComparisonExpandAddFromSetFail","ComparisonExpandAddFromSetFail");
+		}
+	}
 //
 //	@Test(priority = 12, description = "Comparison - Expand and add items from File")
 //	public void ComparisonExpandAddFromFile_Test() throws Throwable  {
@@ -344,24 +339,24 @@ public class ComparisonTest extends BaseTest{
 //		}
 //	}
 
-		@Test(priority = 19, description = "Remove items from Comparison Expand")
-		public void RemoveItemsfromComparison_Test() throws Throwable  {
-			try {
-				/* Remove items in Expanded Set */
-				objComparisonPage.RemoveItemsfromComparison("Remove Item Comparison","Control Set" ,"Gene","asph");
-				onSuccessMeassage("Items removed successfully in Comparison Expand");
-			}
-			catch(Exception ex)
-			{
-				objComparisonPage.captureScreenshot("ComparisonItemsRemoveFail");
-				onFailureMeassage(ex.getMessage(),"ComparisonItemsRemoveFail","ComparisonItemsRemoveFail");
-			}
-			catch(AssertionError ex)
-			{
-				objComparisonPage.captureScreenshot("ComparisonItemsRemoveFail");
-				onFailureMeassage(ex.getMessage(),"ComparisonItemsRemoveFail","ComparisonItemsRemoveFail");
-			}
-		}
+//		@Test(priority = 19, description = "Remove items from Comparison Expand")
+//		public void RemoveItemsfromComparison_Test() throws Throwable  {
+//			try {
+//				/* Remove items in Expanded Set */
+//				objComparisonPage.RemoveItemsfromComparison("Remove Item Comparison","Control Set" ,"Gene","asph");
+//				onSuccessMeassage("Items removed successfully in Comparison Expand");
+//			}
+//			catch(Exception ex)
+//			{
+//				objComparisonPage.captureScreenshot("ComparisonItemsRemoveFail");
+//				onFailureMeassage(ex.getMessage(),"ComparisonItemsRemoveFail","ComparisonItemsRemoveFail");
+//			}
+//			catch(AssertionError ex)
+//			{
+//				objComparisonPage.captureScreenshot("ComparisonItemsRemoveFail");
+//				onFailureMeassage(ex.getMessage(),"ComparisonItemsRemoveFail","ComparisonItemsRemoveFail");
+//			}
+//		}
 
 //	@Test(priority = 20, description = "Interchange Control and Case sets in the Comparison")
 //	public void ChangeControlAndCase_Test() throws Throwable {

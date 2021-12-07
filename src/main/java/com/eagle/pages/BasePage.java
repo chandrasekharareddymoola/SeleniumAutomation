@@ -36,8 +36,11 @@ public class BasePage{
 	}
 
 	public static void enterUserPass(WebElement user, WebElement pass) throws InterruptedException, AWTException {		
-		click(user);	user.sendKeys(userName);	
-		click(pass);	pass.sendKeys(passWord);	
+		click(user);	user.sendKeys(userName);
+//		Thread.sleep(1000);
+//		if(pass.isDisplayed()) {
+			click(pass);	pass.sendKeys(passWord);	
+//		}
 	}
 
 	public static void click(WebElement element) throws InterruptedException, AWTException {
@@ -56,10 +59,11 @@ public class BasePage{
 
 	public static void verifyPage(String ItemToVerify, WebElement field) throws InterruptedException, AWTException, AssertionError {		
 		try {
+			BasePage.waitforAnElement(field);
 			String getheadertext = field.getText().trim();
 			Assert.assertEquals(ItemToVerify, getheadertext);
 		}
-		catch (AssertionError ex) {
+		catch (Exception | AssertionError ex) {
 			throw ex;
 		}
 	}
@@ -71,6 +75,12 @@ public class BasePage{
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollTo(document.body.scrollHeight,0)");
 		js.executeScript("arguments[0].scrollIntoView(true);", element);
+	}
+	
+	public static void scrollToTop() {
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollTo(document.body.scrollHeight,0)");
 	}
 
 	public static void enterText(WebElement field, String value) throws InterruptedException, AWTException {
@@ -86,7 +96,7 @@ public class BasePage{
 		WebDriverWait wait = new WebDriverWait(driver, 60);
 		wait.until(ExpectedConditions.visibilityOf(Element));	
 	}
-	
+
 	public static void waitforAnElementtoBeClicked(WebElement Element) throws InterruptedException, AWTException{
 		WebDriverWait wait = new WebDriverWait(driver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(Element));	
@@ -100,9 +110,10 @@ public class BasePage{
 	public static void CompareAttributeText(String attribute, String s, WebElement Element) throws InterruptedException, AWTException, AssertionError { 
 		try {
 			String t = Element.getAttribute(attribute);
-			Assert.assertEquals(s, t);
+			assertEquals(s, t);
 		}		
 		catch (AssertionError ex) {
+			System.out.println("Assertion fail");
 			throw ex;
 		}
 	}

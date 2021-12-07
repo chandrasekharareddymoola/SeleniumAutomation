@@ -146,25 +146,25 @@ public class SetTest extends BaseTest{
 //		}
 //	}
 //
-//	@Test(priority = 6, description = "Set - Expand and add items from Set")
-//	public void SetExpandAddFromSet_Test() throws Throwable  {
-//		try {
-//			/* Set - Expand and add items from Set */
-//			objSetPage.ExpandAddFromSet("Base Set 2","Disease","dol","Set Add Set expand 1", "Kera");
-//			objSetPage.saveChanges();
-//			onSuccessMeassage("Items Added from Set into another Set successfully");
-//		}
-//		catch(Exception ex)
-//		{
-//			objSetPage.captureScreenshot("SetExpandAddFromSetFail");
-//			onFailureMeassage(ex.getMessage(),"SetExpandAddFromSetFail","SetExpandAddFromSetFail");
-//		}
-//		catch(AssertionError ex)
-//		{
-//			objSetPage.captureScreenshot("SetExpandAddFromSetFail");
-//			onFailureMeassage(ex.getMessage(),"SetExpandAddFromSetFail","SetExpandAddFromSetFail");
-//		}
-//	}
+	@Test(priority = 6, description = "Set - Expand and add items from Set")
+	public void SetExpandAddFromSet_Test() throws Throwable  {
+		try {
+			/* Set - Expand and add items from Set */
+			objSetPage.ExpandAddFromSet("Base Set 2","Disease","leukocytes","Set Add Set expand 1", "Kera");
+			objSetPage.saveChanges();
+			onSuccessMeassage("Items Added from Set into another Set successfully");
+		}
+		catch(Exception ex)
+		{
+			objSetPage.captureScreenshot("SetExpandAddFromSetFail");
+			onFailureMeassage(ex.getMessage(),"SetExpandAddFromSetFail","SetExpandAddFromSetFail");
+		}
+		catch(AssertionError ex)
+		{
+			objSetPage.captureScreenshot("SetExpandAddFromSetFail");
+			onFailureMeassage(ex.getMessage(),"SetExpandAddFromSetFail","SetExpandAddFromSetFail");
+		}
+	}
 //
 //	@Test(priority = 7, description = "Set - Expand and add items from File")
 //	public void SetExpandAddFromFile_Test() throws Throwable  {
@@ -205,19 +205,19 @@ public class SetTest extends BaseTest{
 //		}
 //	}
 //
-	@Test(priority = 9, description = "Remove items from Set Expand")
-	public void RemoveItemsfromSet_Test() throws Throwable  {
-		try {
-			/* Remove items in Expanded Set */
-			objSetPage.RemoveItemsfromSet("Remove Item Set","Disease","sulf");
-			onSuccessMeassage("Items removed successfully in Set Expand");
-		}
-		catch(Exception | AssertionError ex)
-		{
-			objSetPage.captureScreenshot("SetItemsRemoveFail");
-			onFailureMeassage(ex.getMessage(),"SetItemsRemoveFail", "SetItemsRemoveFail");
-		}
-	}
+//	@Test(priority = 9, description = "Remove items from Set Expand")
+//	public void RemoveItemsfromSet_Test() throws Throwable  {
+//		try {
+//			/* Remove items in Expanded Set */
+//			objSetPage.RemoveItemsfromSet("Remove Item Set","Disease","sulf");
+//			onSuccessMeassage("Items removed successfully in Set Expand");
+//		}
+//		catch(Exception | AssertionError ex)
+//		{
+//			objSetPage.captureScreenshot("SetItemsRemoveFail");
+//			onFailureMeassage(ex.getMessage(),"SetItemsRemoveFail", "SetItemsRemoveFail");
+//		}
+//	}
 //
 //	@Test(priority = 10, description = "Modify Grid Settings in Set Expand")
 //	public void GridChangesInSet_Test() throws Throwable  {

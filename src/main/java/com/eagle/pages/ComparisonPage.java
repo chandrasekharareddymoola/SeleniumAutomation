@@ -538,7 +538,7 @@ public class ComparisonPage extends BasePage{
 			throw ex;
 		}
 	}
-
+	
 	public void createComparisonWithControl(String ComparisonName,String ControlSetName, String EntitytoSelect, String ItemtoSearch) throws Throwable{	    	
 		try {
 			this.Comparison();
@@ -1009,8 +1009,11 @@ public class ComparisonPage extends BasePage{
 		BasePage.click(close);
 	}
 
-	public void saveChanges() throws AWTException, InterruptedException{	
+	public void saveChanges() throws InterruptedException, AWTException{
+		BasePage.scrollToTop();
 		BasePage.click(saveChanges);
+		ExtentTestManager.getTest().log(Status.PASS, "Changes are Saved");
+		this.Home();
 	}
 
 	public void searchExpandEnterName(String SetNameToAddFrom) throws AWTException, InterruptedException{ 		 
@@ -1045,7 +1048,7 @@ public class ComparisonPage extends BasePage{
 	public void ExpandAddFromSet(String setToAdd, String entityToSelect, String textToSearchInSet, String ComparisonName, String ControlSetName, String textToSearchInComparison) throws Throwable {    // Add from a set
 		try {
 			objSetPage = new SetPage();  
-			objSetPage.createSet(setToAdd, entityToSelect, textToSearchInSet);
+			List <String> setItems = objSetPage.createSetforAdd(setToAdd, entityToSelect, textToSearchInSet);
 			this.Home();
 
 			this.createComparisonControl(ComparisonName,ControlSetName, entityToSelect, textToSearchInComparison);	 
@@ -1058,6 +1061,7 @@ public class ComparisonPage extends BasePage{
 			waitforAnElement(ItemCountInExpand);
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
+			objSetPage.verifyAfterAdd(setItems);
 			ExtentTestManager.getTest().log(Status.PASS, "Comparison - Set added in expand");
 		}
 		catch(Exception ex) {
@@ -1317,12 +1321,52 @@ public class ComparisonPage extends BasePage{
 			throw ex;
 		}
 	}
+	
+	public void verifyAfterSearch(String SearchInComparison) throws InterruptedException, AWTException { 
+		try {
+			int j =1 ;
+			outloop:
+			do {
+				try {
+					int NoOfRows = RowsintableExpand.size();
+					for(int i=1 ; i< NoOfRows ;i++) {
+						WebElement tableRows = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"]")));
+						String valuesInRows = tableRows.getText().toLowerCase();
+						String SearchInSetLowerCase = SearchInComparison.toLowerCase();				
+						boolean  comp = valuesInRows.contains(SearchInSetLowerCase);
+						assertEquals(comp, true);
+						ExtentTestManager.getTest().log(Status.PASS, i + " row is verified" + " in page " + j);
+					}
+				}
+				catch (Exception e) {
+					System.out.println("Error in Search verification");
+					throw e;
+				}
+				try {
+					Thread.sleep(3000);
+					forward.click();
+					j++;
+					scrollIntoView(FirstRowintableExpand);
+				}
+				catch(Exception e){
+					break outloop;
+				}
+			}
+			while(forward.isEnabled()); 
+		}
+		catch(Exception r){
+			System.out.println("Some problem with forward button");
+			throw r;
+		}
+	}
 
 	public void searchInComparisonExpand(String ComparisonToCreate,String ControlSetName,String EntitytoSelect, String textToSearch, String SearchInComparison) throws Throwable { 
 		this.createComparisonControl(ComparisonToCreate,ControlSetName, EntitytoSelect, textToSearch);	 
 		this.expandComparison();
 		this.searchInExpand(SearchInComparison);
 		ExtentTestManager.getTest().log(Status.PASS, "Search in done using text - "+ SearchInComparison);
+		this.verifyAfterSearch(SearchInComparison);
+		ExtentTestManager.getTest().log(Status.PASS, "Search is verified");
 	}
 
 	public void DeleteclickinCard() throws AWTException, InterruptedException { 

@@ -56,7 +56,6 @@ public class BaseTest {
 			}
 	}
 
-
 	public void closeBroswer()
 	{
 		webdriver.quit();

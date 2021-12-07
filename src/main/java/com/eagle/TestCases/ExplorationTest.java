@@ -191,26 +191,26 @@ public class ExplorationTest extends BaseTest{
 //
 //	}
 //
-//	@Test(priority = 9, description = "Exploration - Expand and add items from Set")
-//	public void ExplorationExpandAddFromSet_Test() throws Throwable  {
-//		try {
-//			/* Exploration - Expand and add items from Set */
-//			objExplorationPage.ExpandAddFromSet("SetAdd 1", "Disease", "aber", "ExpAddFromSet", "dol" ); 
-//			objExplorationPage.saveChanges();
-//			onSuccessMeassage("Items Added from Set into Exploration successfully");
-//		}
-//		catch(Exception ex)
-//		{
-//			objExplorationPage.captureScreenshot("ExplorationExpandAddFromSetFail");
-//			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromSetFail","ExplorationExpandAddFromSetFail");
-//		}
-//		catch(AssertionError ex)
-//		{
-//			objExplorationPage.captureScreenshot("ExplorationExpandAddFromSetFail");
-//			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromSetFail","ExplorationExpandAddFromSetFail");
-//		}
-//	}
-//
+	@Test(priority = 9, description = "Exploration - Expand and add items from Set")
+	public void ExplorationExpandAddFromSet_Test() throws Throwable  {
+		try {
+			/* Exploration - Expand and add items from Set */
+			objExplorationPage.ExpandAddFromSet("SetAdd 1", "Disease", "leukocytes", "ExpAddFromSet", "aber" ); 
+			objExplorationPage.saveChanges();
+			onSuccessMeassage("Items Added from Set into Exploration successfully");
+		}
+		catch(Exception ex)
+		{
+			objExplorationPage.captureScreenshot("ExplorationExpandAddFromSetFail");
+			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromSetFail","ExplorationExpandAddFromSetFail");
+		}
+		catch(AssertionError ex)
+		{
+			objExplorationPage.captureScreenshot("ExplorationExpandAddFromSetFail");
+			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromSetFail","ExplorationExpandAddFromSetFail");
+		}
+	}
+
 //	@Test(priority = 10, description = "Exploration - Expand and add items from File")
 //	public void ExplorationExpandAddFromFile_Test() throws Throwable  {
 //		try {
@@ -344,25 +344,25 @@ public class ExplorationTest extends BaseTest{
 //			onFailureMeassage(ex.getMessage(),"ShareExplorationFail","ShareExplorationFail");
 //		}
 //	}
-	
-		@Test(priority = 17, description = "Remove items from Exploration Expand")
-		public void RemoveItemsfromExploration_Test() throws Throwable  {
-			try {
-				/* Remove items in Expanded Set */
-				objExplorationPage.RemoveItemsfromExploration("Remove Item Exploration","RNA","asb");
-				onSuccessMeassage("Items removed successfully in Exploration Expand");
-			}
-			catch(Exception ex)
-			{
-				objExplorationPage.captureScreenshot("ExplorationItemsRemoveFail");
-				onFailureMeassage(ex.getMessage(),"ExplorationItemsRemoveFail","ExplorationItemsRemoveFail");
-			}
-			catch(AssertionError ex)
-			{
-				objExplorationPage.captureScreenshot("ExplorationItemsRemoveFail");
-				onFailureMeassage(ex.getMessage(),"ExplorationItemsRemoveFail","ExplorationItemsRemoveFail");
-			}
-		}
+//	
+//		@Test(priority = 17, description = "Remove items from Exploration Expand")
+//		public void RemoveItemsfromExploration_Test() throws Throwable  {
+//			try {
+//				/* Remove items in Expanded Set */
+//				objExplorationPage.RemoveItemsfromExploration("Remove Item Exploration","RNA","asb");
+//				onSuccessMeassage("Items removed successfully in Exploration Expand");
+//			}
+//			catch(Exception ex)
+//			{
+//				objExplorationPage.captureScreenshot("ExplorationItemsRemoveFail");
+//				onFailureMeassage(ex.getMessage(),"ExplorationItemsRemoveFail","ExplorationItemsRemoveFail");
+//			}
+//			catch(AssertionError ex)
+//			{
+//				objExplorationPage.captureScreenshot("ExplorationItemsRemoveFail");
+//				onFailureMeassage(ex.getMessage(),"ExplorationItemsRemoveFail","ExplorationItemsRemoveFail");
+//			}
+//		}
 //	
 //	@Test(priority = 18, description = "Sorting a column in an Exploration")
 //	public void SortColumnExploration_Test() throws Throwable  {
