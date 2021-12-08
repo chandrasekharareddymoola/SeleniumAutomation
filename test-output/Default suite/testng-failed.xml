@@ -3,20 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.eagle.TestCases.InvestigationTest">
+      <class name="com.eagle.TestCases.ExplorationTest">
         <methods>
-          <include name="EditInvestigation_Test"/>
           <include name="launchApplication"/>
-          <include name="ViewInvestigation_Test"/>
-          <include name="LinkExplorationWithInvestigation_Test"/>
-          <include name="CreateInvestigation_Test"/>
-          <include name="LinkSetWithInvestigation_Test"/>
-          <include name="DeleteInvestigation_Test"/>
           <include name="beforeClass"/>
-          <include name="LinkComparisonWithInvestigation_Test"/>
-          <include name="ShareInvestigation_Test"/>
+          <include name="ExplorationExpandAddFromCatalog_Test"/>
         </methods>
-      </class> <!-- com.eagle.TestCases.InvestigationTest -->
+      </class> <!-- com.eagle.TestCases.ExplorationTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -146,45 +146,45 @@ public class SetTest extends BaseTest{
 //		}
 //	}
 //
-	@Test(priority = 6, description = "Set - Expand and add items from Set")
-	public void SetExpandAddFromSet_Test() throws Throwable  {
-		try {
-			/* Set - Expand and add items from Set */
-			objSetPage.ExpandAddFromSet("Base Set 2","Disease","leukocytes","Set Add Set expand 1", "Kera");
-			objSetPage.saveChanges();
-			onSuccessMeassage("Items Added from Set into another Set successfully");
-		}
-		catch(Exception ex)
-		{
-			objSetPage.captureScreenshot("SetExpandAddFromSetFail");
-			onFailureMeassage(ex.getMessage(),"SetExpandAddFromSetFail","SetExpandAddFromSetFail");
-		}
-		catch(AssertionError ex)
-		{
-			objSetPage.captureScreenshot("SetExpandAddFromSetFail");
-			onFailureMeassage(ex.getMessage(),"SetExpandAddFromSetFail","SetExpandAddFromSetFail");
-		}
-	}
-//
-//	@Test(priority = 7, description = "Set - Expand and add items from File")
-//	public void SetExpandAddFromFile_Test() throws Throwable  {
+//	@Test(priority = 6, description = "Set - Expand and add items from Set")
+//	public void SetExpandAddFromSet_Test() throws Throwable  {
 //		try {
-//			/* Set - Expand and add items from File */
-//			objSetPage.ExpandAddFromFile("ESFIle 1","Disease","kera","Disease", "C:\\Users\\MugunthRaman\\git\\EagleAutomation\\Resources\\Q4 - Upload file - 1 (2).xlsx", "Q4 - Upload file - 1 (2).xlsx");
+//			/* Set - Expand and add items from Set */
+//			objSetPage.ExpandAddFromSet("Base Set 2","Disease","leukocytes","Set Add Set expand 1", "Kera");
 //			objSetPage.saveChanges();
-//			onSuccessMeassage("Items Added from File into Set successfully");
+//			onSuccessMeassage("Items Added from Set into another Set successfully");
 //		}
 //		catch(Exception ex)
 //		{
-//			objSetPage.captureScreenshot("SetExpandAddFromFileFail");
-//			onFailureMeassage(ex.getMessage(),"SetExpandAddFromFileFail","SetExpandAddFromFileFail");
+//			objSetPage.captureScreenshot("SetExpandAddFromSetFail");
+//			onFailureMeassage(ex.getMessage(),"SetExpandAddFromSetFail","SetExpandAddFromSetFail");
 //		}
 //		catch(AssertionError ex)
 //		{
-//			objSetPage.captureScreenshot("SetExpandAddFromFileFail");
-//			onFailureMeassage(ex.getMessage(),"SetExpandAddFromFileFail","SetExpandAddFromFileFail");
+//			objSetPage.captureScreenshot("SetExpandAddFromSetFail");
+//			onFailureMeassage(ex.getMessage(),"SetExpandAddFromSetFail","SetExpandAddFromSetFail");
 //		}
 //	}
+//
+	@Test(priority = 7, description = "Set - Expand and add items from File")
+	public void SetExpandAddFromFile_Test() throws Throwable  {
+		try {
+			/* Set - Expand and add items from File */
+			objSetPage.ExpandAddFromFile("ESFile 1","Disease","kera","Disease", "C:\\Users\\MugunthRaman\\git\\EagleAutomation\\Resources\\Q4 - Upload file - 1 (2).xlsx", "Q4 - Upload file - 1 (2).xlsx");
+			objSetPage.saveChanges();
+			onSuccessMeassage("Items Added from File into Set successfully");
+		}
+		catch(Exception ex)
+		{
+			objSetPage.captureScreenshot("SetExpandAddFromFileFail");
+			onFailureMeassage(ex.getMessage(),"SetExpandAddFromFileFail","SetExpandAddFromFileFail");
+		}
+		catch(AssertionError ex)
+		{
+			objSetPage.captureScreenshot("SetExpandAddFromFileFail");
+			onFailureMeassage(ex.getMessage(),"SetExpandAddFromFileFail","SetExpandAddFromFileFail");
+		}
+	}
 //
 //	@Test(priority = 8, description = "Delete Card in Set Expand")
 //	public void DeleteCardInSetExpand_Test() throws Throwable  {

@@ -191,45 +191,45 @@ public class ExplorationTest extends BaseTest{
 //
 //	}
 //
-	@Test(priority = 9, description = "Exploration - Expand and add items from Set")
-	public void ExplorationExpandAddFromSet_Test() throws Throwable  {
-		try {
-			/* Exploration - Expand and add items from Set */
-			objExplorationPage.ExpandAddFromSet("SetAdd 1", "Disease", "leukocytes", "ExpAddFromSet", "aber" ); 
-			objExplorationPage.saveChanges();
-			onSuccessMeassage("Items Added from Set into Exploration successfully");
-		}
-		catch(Exception ex)
-		{
-			objExplorationPage.captureScreenshot("ExplorationExpandAddFromSetFail");
-			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromSetFail","ExplorationExpandAddFromSetFail");
-		}
-		catch(AssertionError ex)
-		{
-			objExplorationPage.captureScreenshot("ExplorationExpandAddFromSetFail");
-			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromSetFail","ExplorationExpandAddFromSetFail");
-		}
-	}
-
-//	@Test(priority = 10, description = "Exploration - Expand and add items from File")
-//	public void ExplorationExpandAddFromFile_Test() throws Throwable  {
+//	@Test(priority = 9, description = "Exploration - Expand and add items from Set")
+//	public void ExplorationExpandAddFromSet_Test() throws Throwable  {
 //		try {
-//			/* Exploration - Expand and add items from File */
-//			objExplorationPage.ExpandAddFromFile("ExpAddfromFile 1","Disease","kera","Disease", "C:\\Users\\MugunthRaman\\git\\EagleAutomation\\Resources\\Q4 - Upload file - 1 (2).xlsx", "Q4 - Upload file - 1 (2).xlsx");
+//			/* Exploration - Expand and add items from Set */
+//			objExplorationPage.ExpandAddFromSet("SetAdd 1", "Disease", "leukocytes", "ExpAddFromSet", "aber" ); 
 //			objExplorationPage.saveChanges();
-//			onSuccessMeassage("Items Added from File into Exploration successfully");
+//			onSuccessMeassage("Items Added from Set into Exploration successfully");
 //		}
 //		catch(Exception ex)
 //		{
-//			objExplorationPage.captureScreenshot("ExplorationExpandAddFromFileFail");
-//			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromFileFail","ExplorationExpandAddFromFileFail");
+//			objExplorationPage.captureScreenshot("ExplorationExpandAddFromSetFail");
+//			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromSetFail","ExplorationExpandAddFromSetFail");
 //		}
 //		catch(AssertionError ex)
 //		{
-//			objExplorationPage.captureScreenshot("ExplorationExpandAddFromFileFail");
-//			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromFileFail","ExplorationExpandAddFromFileFail");
+//			objExplorationPage.captureScreenshot("ExplorationExpandAddFromSetFail");
+//			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromSetFail","ExplorationExpandAddFromSetFail");
 //		}
 //	}
+
+	@Test(priority = 10, description = "Exploration - Expand and add items from File")
+	public void ExplorationExpandAddFromFile_Test() throws Throwable  {
+		try {
+			/* Exploration - Expand and add items from File */
+			objExplorationPage.ExpandAddFromFile("ExpAddfromFile 1","Disease","kera","Disease", "C:\\Users\\MugunthRaman\\git\\EagleAutomation\\Resources\\Q4 - Upload file - 1 (2).xlsx", "Q4 - Upload file - 1 (2).xlsx");
+			objExplorationPage.saveChanges();
+			onSuccessMeassage("Items Added from File into Exploration successfully");
+		}
+		catch(Exception ex)
+		{
+			objExplorationPage.captureScreenshot("ExplorationExpandAddFromFileFail");
+			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromFileFail","ExplorationExpandAddFromFileFail");
+		}
+		catch(AssertionError ex)
+		{
+			objExplorationPage.captureScreenshot("ExplorationExpandAddFromFileFail");
+			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromFileFail","ExplorationExpandAddFromFileFail");
+		}
+	}
 //
 //	@Test(priority = 11, description = "Exploration - Create with one additional relation Card")
 //	public void ExplorationCreateARelationCard_Test() throws Throwable  {

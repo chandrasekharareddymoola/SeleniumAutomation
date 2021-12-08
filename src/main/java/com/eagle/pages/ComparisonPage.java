@@ -302,6 +302,19 @@ public class ComparisonPage extends BasePage{
 
 	@FindBy(xpath = "(//*[@class='TableRowDefault__bodyRow___1_m1h'])[1]")
 	public WebElement FirstRowintableExpand;
+	
+	@FindBy(xpath = "//*[@class='CatalogSearchResults__itemName___1PfVJ']")
+	public List <WebElement> ItemsInCatalog;
+	
+	@FindBy(xpath = "//*[@class='CatalogSearchResults__itemName___1PfVJ']")
+	public List <WebElement> ItemsInFile;
+	
+	@FindBy(xpath = "//*[@class='TableRowDefault__bodyRow___1_m1h']/child::div")
+	public List <WebElement> EachElementInExpand;
+	
+	@FindBy(xpath = "//*[@data-automationid='DetailsList']")
+	public WebElement FileDataList;
+	
 
 	public WebElement openComparison(String name) {
 		return driver.findElement(By.xpath("//div[@class='ms-List']//div[@role='rowheader' and @aria-colindex='1']//div[@title='"+ name +"']"));   		
@@ -1078,13 +1091,113 @@ public class ComparisonPage extends BasePage{
 		searchCatalog.sendKeys(SearchInCatalog);
 		Thread.sleep(2000);
 	}
+	
+	public List<String> getItemsWhileAddingFromCatalog() throws InterruptedException, AWTException { 
+		try {
+			int NoOfItems = ItemsInCatalog.size();
+			List <String> CatalogItems = new ArrayList<String>() ;
+			for(int i=1 ; i<= NoOfItems ;i++) 
+			{
+				WebElement CatalogItem = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@class='CatalogSearchResults__itemName___1PfVJ'])["+i+"]")));
+				String CatalogItemLCase = CatalogItem.getText().toLowerCase();
+				CatalogItems.add(CatalogItemLCase);
+			}
+			return CatalogItems;
+		}
+		catch (Exception w) 
+		{
+			throw w;
+		}
+	}
+	
+	public List<String> getItemsWhileAddingFromFile() throws InterruptedException, AWTException { 
+		try {
+			int NoOfItems = ItemsInFile.size();
+			List <String> FileItems = new ArrayList<String>() ;
+			for(int i=1 ; i<= NoOfItems ;i++) 
+			{
+				WebElement CatalogItem = driver.findElement(By.xpath("(//*[@class='CatalogSearchResults__itemName___1PfVJ'])["+i+"]"));
+				BasePage.scrollIntoView(CatalogItem);
+				String CatalogItemLCase = CatalogItem.getText().toLowerCase();
+				System.out.println(CatalogItemLCase);
+				FileItems.add(CatalogItemLCase);
+			}
+			return FileItems;
+		}
+		catch (Exception w) 
+		{
+			throw w;
+		}
+	}
 
-	public void addFromSetCatalog(String TextToSearch) throws AWTException, InterruptedException {	    
+	public List<String> addFromComCatalog(String TextToSearch) throws InterruptedException, AWTException {	    
 		BasePage.click(addFromExpandCatalog);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from the Catalog']")));
 		this.searchCatalog(TextToSearch);
 		Thread.sleep(3000);
+		List <String> CatalogItems = getItemsWhileAddingFromCatalog();
 		BasePage.click(addAll);
+		ExtentTestManager.getTest().log(Status.PASS, "Added From Catalog");
+		return CatalogItems;
+	}
+	
+	public void verifyAfterAdd(List<String> Items) throws InterruptedException, AWTException { 
+		try {
+			int k =1 ;
+			int count = 0;
+			outloop1:
+				do {
+					int NoOfRows = RowsintableExpand.size();
+					int TotalElements = EachElementInExpand.size();
+					int NoOfColumns =  TotalElements / NoOfRows;
+					for(String item : Items) {
+						try {
+							outloop2:
+								for(int i=1 ; i<= NoOfRows ;i++) 
+								{
+									for(int j=1 ; j<= NoOfColumns ;j++) 
+									{
+										WebElement tableRows = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("((//*[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"]/child::div)["+j+"]")));
+										String valuesInRows = tableRows.getText().toLowerCase();
+										String ItemsLowerCase = item.toLowerCase();		
+										boolean  comp = valuesInRows.equals(ItemsLowerCase);
+										if (comp == true) 
+										{
+											count++;
+											ExtentTestManager.getTest().log(Status.PASS, "Value present in row: " + i + ", column:" + j + " of page " + k);
+											break outloop2;
+										}
+									}
+								}
+						}
+						catch (Exception e) {
+							System.out.println("Error in Add verification");
+							throw e;
+						}
+						catch (AssertionError f) {
+							System.out.println("One/many of the values are not added");
+							throw f;
+						}
+					}
+					try {
+						Thread.sleep(3000);
+						forward.click();
+						ExtentTestManager.getTest().log(Status.PASS, "Page " + k + " is checked");
+						k++;
+						scrollIntoView(FirstRowintableExpand);
+					}
+					catch(Exception e){
+						assertEquals(count, Items.size());
+						ExtentTestManager.getTest().log(Status.PASS, "All values added are verified");
+						break outloop1;
+					}
+				}
+				while(forward.isEnabled()); 
+		}
+		catch(Exception r){
+			System.out.println("some problem with forward button");
+			throw r;
+		}
 	}
 
 	public void add() throws AWTException, InterruptedException{	    
@@ -1100,7 +1213,7 @@ public class ComparisonPage extends BasePage{
 			this.editCard();
 			String NoOfRecordsInitial = ItemCountInExpand.getText();
 			this.addItemsExpand();
-			this.addFromSetCatalog(TextToSearchinCatalog); // Text to be added 
+			List<String> CatalogItems = addFromComCatalog(TextToSearchinCatalog); // Text to be added 
 			ExtentTestManager.getTest().log(Status.PASS, TextToSearchinCatalog + " is searched");
 			this.add();
 			this.waitForSaveChanges();
@@ -1108,6 +1221,7 @@ public class ComparisonPage extends BasePage{
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
 			BasePage.verifyPage(ControlSetName,ComparisonNameInExpand);
+			this.verifyAfterAdd(CatalogItems);
 			ExtentTestManager.getTest().log(Status.PASS, "Comparison - Items added from Catalog in expand");
 		}
 		catch(Exception | AssertionError ex) {
@@ -1151,15 +1265,30 @@ public class ComparisonPage extends BasePage{
 		Thread.sleep(5000);
 	}	
 
-	public void addFromFile(String CategoryName, String Filelocation, String FileName) throws AWTException, InterruptedException, AssertionError {	    
-		BasePage.click(addFromFile);	 
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from a File']")));
-		this.FileuploadCategory(CategoryName);
-		this.FileUploadFormExplorer(Filelocation);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Searching in ']")));
-		BasePage.verifyPage(FileName, uploadedFileName);
-		BasePage.click(addAll);
-	}	
+	public List<String> addFromFile(String CategoryName, String Filelocation, String FileName) throws AWTException, InterruptedException, AssertionError {	    
+		try {
+			BasePage.click(addFromFile);	
+			Thread.sleep(3000);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from a File']")));
+			this.FileuploadCategory(CategoryName);
+			this.FileUploadFormExplorer(Filelocation);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Searching in ']")));
+			BasePage.verifyPage(FileName, uploadedFileName);
+			BasePage.waitforAnElement(FileDataList);
+			List <String> FileItems = getItemsWhileAddingFromFile();
+			BasePage.click(addAll);
+			ExtentTestManager.getTest().log(Status.PASS, "Added from file");
+			
+			return FileItems;
+		}
+		catch (Exception addFromFileFail) {
+			throw addFromFileFail;
+		}
+		catch (AssertionError addFromFileFail) {
+			throw addFromFileFail;
+		}
+	}
+	
 
 	public void addToGrid() throws AWTException, InterruptedException{	    
 		BasePage.click(AddToGrid);
@@ -1174,12 +1303,13 @@ public class ComparisonPage extends BasePage{
 			this.editCard();
 			String NoOfRecordsInitial = ItemCountInExpand.getText();
 			this.addItemsExpand();
-			this.addFromFile(CategoryName, Filelocation, FileName); 
+			List <String> FileItems = this.addFromFile(CategoryName, Filelocation, FileName); 
 			this.addToGrid();
 			this.waitForSaveChanges();
 			waitforAnElement(ItemCountInExpand);
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
+			this.verifyAfterAdd(FileItems);
 			ExtentTestManager.getTest().log(Status.PASS, "Comparison - Items added from File in expand");
 		}
 		catch (Exception ExpandAddFromFileFail) {

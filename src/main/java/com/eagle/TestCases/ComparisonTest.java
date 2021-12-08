@@ -210,40 +210,40 @@ public class ComparisonTest extends BaseTest{
 //
 //	}
 //
-	@Test(priority = 11, description = "Comparison - Expand and add items from Set")
-	public void ComparisonExpandAddFromSet_Test() throws Throwable  {
-		try {
-			/* Comparison - Expand and add items from Set */
-			objComparisonPage.ExpandAddFromSet("SetAdd 1", "Disease", "aber", "ComAddFromSet",  "Control Card", "dol"); 
-			objComparisonPage.saveChanges();
-			onSuccessMeassage("Items Added from Set into Comparison successfully");
-		}
-		catch(Exception | AssertionError ex)
-		{
-			objComparisonPage.captureScreenshot("ComparisonExpandAddFromSetFail");
-			onFailureMeassage(ex.getMessage(),"ComparisonExpandAddFromSetFail","ComparisonExpandAddFromSetFail");
-		}
-	}
-//
-//	@Test(priority = 12, description = "Comparison - Expand and add items from File")
-//	public void ComparisonExpandAddFromFile_Test() throws Throwable  {
+//	@Test(priority = 11, description = "Comparison - Expand and add items from Set")
+//	public void ComparisonExpandAddFromSet_Test() throws Throwable  {
 //		try {
-//			/* Comparison - Expand and add items from File */
-//			objComparisonPage.ExpandAddFromFile("ComAddfromFile 1","Control Card", "Disease","kera","Disease", "C:\\Users\\MugunthRaman\\git\\EagleAutomation\\Resources\\Q4 - Upload file - 1 (2).xlsx", "Q4 - Upload file - 1 (2).xlsx");
+//			/* Comparison - Expand and add items from Set */
+//			objComparisonPage.ExpandAddFromSet("SetAdd 1", "Disease", "aber", "ComAddFromSet",  "Control Card", "dol"); 
 //			objComparisonPage.saveChanges();
-//			onSuccessMeassage("Items Added from File into Comparison successfully");
+//			onSuccessMeassage("Items Added from Set into Comparison successfully");
 //		}
-//		catch(Exception ex)
+//		catch(Exception | AssertionError ex)
 //		{
-//			objComparisonPage.captureScreenshot("ComparisonExpandAddFromFileFail");
-//			onFailureMeassage(ex.getMessage(),"ComparisonExpandAddFromFileFail","ComparisonExpandAddFromFileFail");
-//		}
-//		catch(AssertionError ex)
-//		{
-//			objComparisonPage.captureScreenshot("ComparisonExpandAddFromFileFail");
-//			onFailureMeassage(ex.getMessage(),"ComparisonExpandAddFromFileFail","ComparisonExpandAddFromFileFail");
+//			objComparisonPage.captureScreenshot("ComparisonExpandAddFromSetFail");
+//			onFailureMeassage(ex.getMessage(),"ComparisonExpandAddFromSetFail","ComparisonExpandAddFromSetFail");
 //		}
 //	}
+//
+	@Test(priority = 12, description = "Comparison - Expand and add items from File")
+	public void ComparisonExpandAddFromFile_Test() throws Throwable  {
+		try {
+			/* Comparison - Expand and add items from File */
+			objComparisonPage.ExpandAddFromFile("ComAddfromFile 1","Control Card", "Disease","kera","Disease", "C:\\Users\\MugunthRaman\\git\\EagleAutomation\\Resources\\Q4 - Upload file - 1 (2).xlsx", "Q4 - Upload file - 1 (2).xlsx");
+			objComparisonPage.saveChanges();
+			onSuccessMeassage("Items Added from File into Comparison successfully");
+		}
+		catch(Exception ex)
+		{
+			objComparisonPage.captureScreenshot("ComparisonExpandAddFromFileFail");
+			onFailureMeassage(ex.getMessage(),"ComparisonExpandAddFromFileFail","ComparisonExpandAddFromFileFail");
+		}
+		catch(AssertionError ex)
+		{
+			objComparisonPage.captureScreenshot("ComparisonExpandAddFromFileFail");
+			onFailureMeassage(ex.getMessage(),"ComparisonExpandAddFromFileFail","ComparisonExpandAddFromFileFail");
+		}
+	}
 //
 //	@Test(priority = 13, description = "Comparison - Create with multiple Case Cards")
 //	public void ComparisonCreateMultipleCaseCards_Test() throws Throwable  {

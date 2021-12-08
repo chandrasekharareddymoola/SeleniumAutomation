@@ -233,6 +233,12 @@ public class SetPage extends BasePage{
 	@FindBy(xpath = "//*[@class='CatalogSearchResults__itemName___1PfVJ']")
 	public List <WebElement> ItemsInCatalog;
 
+	@FindBy(xpath = "//*[@class='CatalogSearchResults__itemName___1PfVJ']")
+	public List <WebElement> ItemsInFile;
+	
+	@FindBy(xpath = "//*[@data-automationid='DetailsList']")
+	public WebElement FileDataList;
+	
 
 	//Page level functions on the objects
 	WebDriverWait wait = new WebDriverWait(driver, 5);
@@ -685,14 +691,16 @@ public class SetPage extends BasePage{
 			String NoOfRecordsInitial = ItemCountInExpand.getText();
 			this.addItemsExpand();
 			List<String> CatalogItems = this.addFromSetCatalog(TextToSearch); // Text to be added 
+			System.out.println(CatalogItems);
+			System.out.println(CatalogItems.size());
 			ExtentTestManager.getTest().log(Status.PASS, TextToSearch + " is searched");
 			this.add();
 			this.waitForSaveChanges();
 			waitforAnElement(ItemCountInExpand);
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
-			BasePage.verifyPage(setToCreate,setNameInExpand); //verifying the set name
 			this.verifyAfterAdd(CatalogItems);
+			BasePage.verifyPage(setToCreate,setNameInExpand); //verifying the set name
 			ExtentTestManager.getTest().log(Status.PASS, "Set - Added from catalog and count increase verified");
 		}
 		catch(AssertionError addfromCatalogFail) {
@@ -737,17 +745,21 @@ public class SetPage extends BasePage{
 	}	
 
 
-	public void addFromFile(String CategoryName, String Filelocation, String FileName) throws AWTException, InterruptedException, AssertionError {	    
+	public List<String> addFromFile(String CategoryName, String Filelocation, String FileName) throws AWTException, InterruptedException, AssertionError {	    
 		try {
 			BasePage.click(addFromFile);	
-			Thread.sleep(5000);
+			Thread.sleep(3000);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from a File']")));
 			this.FileuploadCategory(CategoryName);
 			this.FileUploadFormExplorer(Filelocation);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Searching in ']")));
 			BasePage.verifyPage(FileName, uploadedFileName);
+			BasePage.waitforAnElement(FileDataList);
+			List <String> FileItems = getItemsWhileAddingFromFile();
 			BasePage.click(addAll);
 			ExtentTestManager.getTest().log(Status.PASS, "Added from file");
+			
+			return FileItems;
 		}
 		catch (Exception addFromFileFail) {
 			throw addFromFileFail;
@@ -777,23 +789,24 @@ public class SetPage extends BasePage{
 			String NoOfRecordsInitial = ItemCountInExpand.getText();
 			this.addItemsExpand();
 			Thread.sleep(3000);
-			this.addFromFile(CategoryName, Filelocation, FileName); 
-			this.addToGrid();
+			List <String> FileItems = this.addFromFile(CategoryName, Filelocation, FileName); 
+			this.addToGrid();          
 			this.waitForSaveChanges();
 			waitforAnElement(ItemCountInExpand);
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);		
+			this.verifyAfterAdd(FileItems);
 			BasePage.verifyPage(setToCreate,setNameInExpand); //verifying the set name
 			ExtentTestManager.getTest().log(Status.PASS, "Set - Added from file in expand");
 		}
 		catch (Exception ExpandAddFromFileFail) {
-			if(dialogBoxClose.isDisplayed()) {
+			if(dialogBoxClose.isDisplayed()) {     
 				BasePage.click(dialogBoxClose);
 			}
 			throw ExpandAddFromFileFail;
 		}
 		catch (AssertionError ExpandAddFromFileFail) {
-			if(dialogBoxClose.isDisplayed()) {
+			if(dialogBoxClose.isDisplayed()) {        
 				BasePage.click(dialogBoxClose);
 			}
 			throw ExpandAddFromFileFail;
@@ -1097,17 +1110,38 @@ public class SetPage extends BasePage{
 		}
 	}
 
+	
 	public List<String> getItemsWhileAddingFromCatalog() throws InterruptedException, AWTException { 
 		try {
 			int NoOfItems = ItemsInCatalog.size();
 			List <String> CatalogItems = new ArrayList<String>() ;
-			for(int i=1 ; i< NoOfItems ;i++) 
+			for(int i=1 ; i<= NoOfItems ;i++) 
 			{
 				WebElement CatalogItem = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@class='CatalogSearchResults__itemName___1PfVJ'])["+i+"]")));
 				String CatalogItemLCase = CatalogItem.getText().toLowerCase();
 				CatalogItems.add(CatalogItemLCase);
 			}
 			return CatalogItems;
+		}
+		catch (Exception w) 
+		{
+			throw w;
+		}
+	}
+	
+	public List<String> getItemsWhileAddingFromFile() throws InterruptedException, AWTException { 
+		try {
+			int NoOfItems = ItemsInFile.size();
+			List <String> FileItems = new ArrayList<String>() ;
+			for(int i=1 ; i<= NoOfItems ;i++) 
+			{
+				WebElement CatalogItem = driver.findElement(By.xpath("(//*[@class='CatalogSearchResults__itemName___1PfVJ'])["+i+"]"));
+				BasePage.scrollIntoView(CatalogItem);
+				String CatalogItemLCase = CatalogItem.getText().toLowerCase();
+				System.out.println(CatalogItemLCase);
+				FileItems.add(CatalogItemLCase);
+			}
+			return FileItems;
 		}
 		catch (Exception w) 
 		{
@@ -1122,11 +1156,8 @@ public class SetPage extends BasePage{
 			outloop1:
 				do {
 					int NoOfRows = RowsintableExpand.size();
-					System.out.println("No of rows:" + NoOfRows);
 					int TotalElements = EachElementInExpand.size();
-					
 					int NoOfColumns =  TotalElements / NoOfRows;
-					
 					for(String item : Items) {
 						try {
 							outloop2:
@@ -1140,7 +1171,6 @@ public class SetPage extends BasePage{
 										boolean  comp = valuesInRows.equals(ItemsLowerCase);
 										if (comp == true) 
 										{
-											System.out.println(ItemsLowerCase);
 											count++;
 											ExtentTestManager.getTest().log(Status.PASS, "Value present in row: " + i + ", column:" + j + " of page " + k);
 											break outloop2;
@@ -1166,7 +1196,7 @@ public class SetPage extends BasePage{
 					}
 					catch(Exception e){
 						assertEquals(count, Items.size());
-						System.out.println(count);
+						ExtentTestManager.getTest().log(Status.PASS, "All values added are verified");
 						break outloop1;
 					}
 				}

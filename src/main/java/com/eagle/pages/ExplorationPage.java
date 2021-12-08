@@ -262,6 +262,18 @@ public class ExplorationPage extends BasePage{
 
 	@FindBy(xpath = "(//*[@class='TableRowDefault__bodyRow___1_m1h'])[1]")
 	public WebElement FirstRowintableExpand;
+	
+	@FindBy(xpath = "//*[@class='CatalogSearchResults__itemName___1PfVJ']")
+	public List <WebElement> ItemsInCatalog;
+	
+	@FindBy(xpath = "//*[@class='TableRowDefault__bodyRow___1_m1h']/child::div")
+	public List <WebElement> EachElementInExpand;
+	
+	@FindBy(xpath = "//*[@class='CatalogSearchResults__itemName___1PfVJ']")
+	public List <WebElement> ItemsInFile;
+	
+	@FindBy(xpath = "//*[@data-automationid='DetailsList']")
+	public WebElement FileDataList;
 
 
 	public WebElement openExploration(String name) {
@@ -766,6 +778,44 @@ public class ExplorationPage extends BasePage{
 			throw ex;
 		}
 	}
+	
+	public List<String> getItemsWhileAddingFromCatalog() throws InterruptedException, AWTException { 
+		try {
+			int NoOfItems = ItemsInCatalog.size();
+			List <String> CatalogItems = new ArrayList<String>() ;
+			for(int i=1 ; i<= NoOfItems ;i++) 
+			{
+				WebElement CatalogItem = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@class='CatalogSearchResults__itemName___1PfVJ'])["+i+"]")));
+				String CatalogItemLCase = CatalogItem.getText().toLowerCase();
+				CatalogItems.add(CatalogItemLCase);
+			}
+			return CatalogItems;
+		}
+		catch (Exception w) 
+		{
+			throw w;
+		}
+	}
+	
+	public List<String> getItemsWhileAddingFromFile() throws InterruptedException, AWTException { 
+		try {
+			int NoOfItems = ItemsInFile.size();
+			List <String> FileItems = new ArrayList<String>() ;
+			for(int i=1 ; i<= NoOfItems ;i++) 
+			{
+				WebElement CatalogItem = driver.findElement(By.xpath("(//*[@class='CatalogSearchResults__itemName___1PfVJ'])["+i+"]"));
+				BasePage.scrollIntoView(CatalogItem);
+				String CatalogItemLCase = CatalogItem.getText().toLowerCase();
+				System.out.println(CatalogItemLCase);
+				FileItems.add(CatalogItemLCase);
+			}
+			return FileItems;
+		}
+		catch (Exception w) 
+		{
+			throw w;
+		}
+	}
 
 	public void searchCatalog(String SearchInCatalog) throws AWTException, InterruptedException{	    
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from the Catalog']")));
@@ -774,13 +824,76 @@ public class ExplorationPage extends BasePage{
 		Thread.sleep(2000);
 	}
 
-	public void addFromSetCatalog(String TextToSearch) throws AWTException, InterruptedException {	    
+	public List<String> addFromExpCatalog(String TextToSearch) throws InterruptedException, AWTException {	    
 		BasePage.click(addFromExpandCatalog);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from the Catalog']")));
 		this.searchCatalog(TextToSearch);
 		Thread.sleep(3000);
+		List <String> CatalogItems = getItemsWhileAddingFromCatalog();
 		BasePage.click(addAll);
+		ExtentTestManager.getTest().log(Status.PASS, "Added From Catalog");
+		return CatalogItems;
 	}
+	
+	public void verifyAfterAdd(List<String> Items) throws InterruptedException, AWTException { 
+		try {
+			int k =1 ;
+			int count = 0;
+			outloop1:
+				do {
+					int NoOfRows = RowsintableExpand.size();
+					int TotalElements = EachElementInExpand.size();
+					int NoOfColumns =  TotalElements / NoOfRows;
+					for(String item : Items) {
+						try {
+							outloop2:
+								for(int i=1 ; i<= NoOfRows ;i++) 
+								{
+									for(int j=1 ; j<= NoOfColumns ;j++) 
+									{
+										WebElement tableRows = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("((//*[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"]/child::div)["+j+"]")));
+										String valuesInRows = tableRows.getText().toLowerCase();
+										String ItemsLowerCase = item.toLowerCase();		
+										boolean  comp = valuesInRows.equals(ItemsLowerCase);
+										if (comp == true) 
+										{
+											count++;
+											ExtentTestManager.getTest().log(Status.PASS, "Value present in row: " + i + ", column:" + j + " of page " + k);
+											break outloop2;
+										}
+									}
+								}
+						}
+						catch (Exception e) {
+							System.out.println("Error in Add verification");
+							throw e;
+						}
+						catch (AssertionError f) {
+							System.out.println("One/many of the values are not added");
+							throw f;
+						}
+					}
+					try {
+						Thread.sleep(3000);
+						forward.click();
+						ExtentTestManager.getTest().log(Status.PASS, "Page " + k + " is checked");
+						k++;
+						scrollIntoView(FirstRowintableExpand);
+					}
+					catch(Exception e){
+						assertEquals(count, Items.size());
+						ExtentTestManager.getTest().log(Status.PASS, "All values added are verified");
+						break outloop1;
+					}
+				}
+				while(forward.isEnabled()); 
+		}
+		catch(Exception r){
+			System.out.println("some problem with forward button");
+			throw r;
+		}
+	}
+
 
 	public void add() throws AWTException, InterruptedException{	    
 		BasePage.click(Add);
@@ -795,12 +908,14 @@ public class ExplorationPage extends BasePage{
 			this.editCard();
 			String NoOfRecordsInitial = ItemCountInExpand.getText();
 			this.addItemsExpand();
-			this.addFromSetCatalog(TextToSearch); // Text to be added 
+			List<String> CatalogItems = addFromExpCatalog(TextToSearch); // Text to be added 
+			System.out.println(CatalogItems);
 			ExtentTestManager.getTest().log(Status.PASS, TextToSearch + " is searched");
 			this.add();
 			this.waitForSaveChanges();
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
+			this.verifyAfterAdd(CatalogItems);
 			BasePage.verifyPage(ExplorationToCreate,ExplorationNameInExpand); 
 			ExtentTestManager.getTest().log(Status.PASS, "Exploration - Items added from Catalog in expand");
 		}
@@ -844,15 +959,29 @@ public class ExplorationPage extends BasePage{
 	}	
 
 
-	public void addFromFile(String CategoryName, String Filelocation, String FileName) throws AWTException, InterruptedException, AssertionError {	    
-		BasePage.click(addFromFile);	 
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from a File']")));
-		this.FileuploadCategory(CategoryName);
-		this.FileUploadFormExplorer(Filelocation);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Searching in ']")));
-		BasePage.verifyPage(FileName, uploadedFileName);
-		BasePage.click(addAll);
-	}	
+	public List<String> addFromFile(String CategoryName, String Filelocation, String FileName) throws AWTException, InterruptedException, AssertionError {	    
+		try {
+			BasePage.click(addFromFile);	
+			Thread.sleep(3000);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from a File']")));
+			this.FileuploadCategory(CategoryName);
+			this.FileUploadFormExplorer(Filelocation);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Searching in ']")));
+			BasePage.verifyPage(FileName, uploadedFileName);
+			BasePage.waitforAnElement(FileDataList);
+			List <String> FileItems = getItemsWhileAddingFromFile();
+			BasePage.click(addAll);
+			ExtentTestManager.getTest().log(Status.PASS, "Added from file");
+			
+			return FileItems;
+		}
+		catch (Exception addFromFileFail) {
+			throw addFromFileFail;
+		}
+		catch (AssertionError addFromFileFail) {
+			throw addFromFileFail;
+		}
+	}
 
 	public void addToGrid() throws AWTException, InterruptedException{	    
 		BasePage.click(AddToGrid);
@@ -867,12 +996,14 @@ public class ExplorationPage extends BasePage{
 			this.editCard();
 			String NoOfRecordsInitial = ItemCountInExpand.getText();
 			this.addItemsExpand();
-			this.addFromFile(CategoryName, Filelocation, FileName); 
+			Thread.sleep(3000);
+			List <String> FileItems = this.addFromFile(CategoryName, Filelocation, FileName); 
 			this.addToGrid();
 			this.waitForSaveChanges();
 			waitforAnElement(ItemCountInExpand);
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
+			this.verifyAfterAdd(FileItems);
 			ExtentTestManager.getTest().log(Status.PASS, "Exploration - Items added from File in expand");
 		}
 		catch (Exception ExpandAddFromFileFail) {

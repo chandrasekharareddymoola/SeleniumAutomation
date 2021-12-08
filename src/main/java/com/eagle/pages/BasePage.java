@@ -44,7 +44,6 @@ public class BasePage{
 	}
 
 	public static void click(WebElement element) throws InterruptedException, AWTException {
-
 		WebDriverWait wait = new WebDriverWait(driver, 60);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		wait.until(ExpectedConditions.visibilityOf(element));
