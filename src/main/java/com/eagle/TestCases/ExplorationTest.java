@@ -18,25 +18,25 @@ public class ExplorationTest extends BaseTest{
 		objExplorationPage = new ExplorationPage();		
 	}
 
-//	@Test(priority = 0, description = "Create Exploration From Search")
-//	public void CreateExplorationFromSearch_Test() throws Throwable {
-//		try {
-//			/* Creates an Exploration From Search */		 
-//			objExplorationPage.createExplorationFromSearch("ExSearch 1", "Disease", "kera");
-//			onSuccessMeassage("Exploration is Created Successfully From Search");
-//		}
-//		catch(Exception ex)
-//		{
-//			objExplorationPage.captureScreenshot("createExplorationFromSearchFail");
-//			onFailureMeassage(ex.getMessage(),"createExplorationFromSearchFail","createExplorationFromSearchFail");
-//		}
-//		catch(AssertionError ex)
-//		{
-//			objExplorationPage.captureScreenshot("createExplorationFromSearchFail");
-//			onFailureMeassage(ex.getMessage(),"createExplorationFromSearchFail","createExplorationFromSearchFail");
-//		}
-//	}	
-//
+	@Test(priority = 0, description = "Create Exploration From Search")
+	public void CreateExplorationFromSearch_Test() throws Throwable {
+		try {
+			/* Creates an Exploration From Search */		 
+			objExplorationPage.createExplorationFromSearch("ExSearch 1", "Disease", "kera");
+			onSuccessMeassage("Exploration is Created Successfully From Search");
+		}
+		catch(Exception ex)
+		{
+			objExplorationPage.captureScreenshot("createExplorationFromSearchFail");
+			onFailureMeassage(ex.getMessage(),"createExplorationFromSearchFail","createExplorationFromSearchFail");
+		}
+		catch(AssertionError ex)
+		{
+			objExplorationPage.captureScreenshot("createExplorationFromSearchFail");
+			onFailureMeassage(ex.getMessage(),"createExplorationFromSearchFail","createExplorationFromSearchFail");
+		}
+	}	
+
 //	@Test(priority = 1, description = "Create Exploration From Set Initally")
 //	public void CreateExplorationFromSetInitally_Test() throws Throwable {
 //		try {
@@ -55,45 +55,45 @@ public class ExplorationTest extends BaseTest{
 //			onFailureMeassage(ex.getMessage(),"createExplorationFromSetInitalFail","createExplorationFromSetInitalFail");
 //		}
 //	}
-//
-//	@Test(priority = 2, description = "Create Exploration From Set After clicking From Search")
-//	public void CreateExplorationFromSet_Test() throws Throwable {
-//		try {
-//			/* Creates an Exploration From Set - After Search */		 
-//			objExplorationPage.CreateExplorationFromSet("SetAdd 2", "Disease", "kera", "ExFrom Set 2");
-//			onSuccessMeassage("Exploration is Created Successfully From Set");
-//		}
-//		catch(Exception ex)
-//		{
-//			objExplorationPage.captureScreenshot("createExplorationFromSetFail");
-//			onFailureMeassage(ex.getMessage(),"createExplorationFromSetFail","createExplorationFromSetFail");
-//		}
-//		catch(AssertionError ex)
-//		{
-//			objExplorationPage.captureScreenshot("createExplorationFromSetFail");
-//			onFailureMeassage(ex.getMessage(),"createExplorationFromSetFail","createExplorationFromSetFail");
-//		}
-//	}
-//
-//	@Test(priority = 3, description = "Create Exploration From File After clicking From Search")
-//	public void CreateExplorationFromFile_Test() throws Throwable {
-//		try {
-//			/* Creates an Exploration From File - After Search */	 
-//			objExplorationPage.CreateExplorationFromFile("ExFileUpload", "Disease", "C:\\Users\\MugunthRaman\\git\\EagleAutomation\\Resources\\Q4 - Upload file - 1 (2).xlsx");
-//			onSuccessMeassage("Exploration is Created Successfully From File");
-//		}
-//		catch(Exception ex)
-//		{
-//			objExplorationPage.captureScreenshot("createExplorationFromFileFail");
-//			onFailureMeassage(ex.getMessage(),"createExplorationFromFileFail","createExplorationFromFileFail");
-//		}
-//		catch(AssertionError ex)
-//		{
-//			objExplorationPage.captureScreenshot("createExplorationFromFileFail");
-//			onFailureMeassage(ex.getMessage(),"createExplorationFromFileFail","createExplorationFromFileFail");
-//		}
-//	}
-//
+
+	@Test(priority = 2, description = "Create Exploration From Set After clicking From Search")
+	public void CreateExplorationFromSet_Test() throws Throwable {
+		try {
+			/* Creates an Exploration From Set - After Search */		 
+			objExplorationPage.CreateExplorationFromSet("SetAdd 2", "Disease", "kera", "ExFrom Set 2");
+			onSuccessMeassage("Exploration is Created Successfully From Set");
+		}
+		catch(Exception ex)
+		{
+			objExplorationPage.captureScreenshot("createExplorationFromSetFail");
+			onFailureMeassage(ex.getMessage(),"createExplorationFromSetFail","createExplorationFromSetFail");
+		}
+		catch(AssertionError ex)
+		{
+			objExplorationPage.captureScreenshot("createExplorationFromSetFail");
+			onFailureMeassage(ex.getMessage(),"createExplorationFromSetFail","createExplorationFromSetFail");
+		}
+	}
+
+	@Test(priority = 3, description = "Create Exploration From File After clicking From Search")
+	public void CreateExplorationFromFile_Test() throws Throwable {
+		try {
+			/* Creates an Exploration From File - After Search */	 
+			objExplorationPage.CreateExplorationFromFile("ExFileUpload", "Disease", "C:\\Users\\MugunthRaman\\git\\EagleAutomation\\Resources\\Q4 - Upload file - 1 (2).xlsx");
+			onSuccessMeassage("Exploration is Created Successfully From File");
+		}
+		catch(Exception ex)
+		{
+			objExplorationPage.captureScreenshot("createExplorationFromFileFail");
+			onFailureMeassage(ex.getMessage(),"createExplorationFromFileFail","createExplorationFromFileFail");
+		}
+		catch(AssertionError ex)
+		{
+			objExplorationPage.captureScreenshot("createExplorationFromFileFail");
+			onFailureMeassage(ex.getMessage(),"createExplorationFromFileFail","createExplorationFromFileFail");
+		}
+	}
+
 //	@Test(priority = 4, description = "Search A Text In Exploration Expand")
 //	public void SearchInExplorationExpand_Test() throws Throwable  {
 //		try {
@@ -150,47 +150,47 @@ public class ExplorationTest extends BaseTest{
 //			onFailureMeassage(ex.getMessage(),"ExplorationFirstCardDeleteFail","ExplorationFirstCardDeleteFail");
 //		}
 //	}
-//
-//	@Test(priority = 7, description = "Delete The Second Card in Exploration")
-//	public void DeleteExplorationSecondCard_Test() throws Throwable  {
-//		try {
-//			/* Delete The Second Card in Exploration */
-//			objExplorationPage.deleteExplorationInLaterCard("DExploration2Card", "Disease", "kera","Gene");
-//			onSuccessMeassage("Deleted The first Card in Exploration Successfully");
-//		}
-//		catch(Exception ex)
-//		{
-//			objExplorationPage.captureScreenshot("ExplorationSecondCardDeleteFail");
-//			onFailureMeassage(ex.getMessage(),"ExplorationSecondCardDeleteFail","ExplorationSecondCardDeleteFail");
-//		}
-//		catch(AssertionError ex)
-//		{
-//			objExplorationPage.captureScreenshot("ExplorationSecondCardDeleteFail");
-//			onFailureMeassage(ex.getMessage(),"ExplorationSecondCardDeleteFail","ExplorationSecondCardDeleteFail");
-//		}
-//	}
-//
-//	@Test(priority = 8, description = "Exploration - Expand and add items from Catalog")
-//	public void ExplorationExpandAddFromCatalog_Test() throws Throwable  {
-//		try {
-//			/* Set - Expand and add items from Catalog */
-//			objExplorationPage.ExpandAddFromCatalog("ExpAddFromCatalog", "Disease", "aber", "dengue");
-//			objExplorationPage.saveChanges();
-//			onSuccessMeassage("Items Added from Catalog into Exploration successfully");
-//		}
-//		catch(Exception ex)
-//		{
-//			objExplorationPage.captureScreenshot("ExplorationExpandAddFromCatalogFail");
-//			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromCatalogFail","ExplorationExpandAddFromCatalogFail");
-//		}
-//		catch(AssertionError ex)
-//		{
-//			objExplorationPage.captureScreenshot("ExplorationExpandAddFromCatalogFail");
-//			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromCatalogFail","ExplorationExpandAddFromCatalogFail");
-//		}
-//
-//	}
-//
+
+	@Test(priority = 7, description = "Delete The Second Card in Exploration")
+	public void DeleteExplorationSecondCard_Test() throws Throwable  {
+		try {
+			/* Delete The Second Card in Exploration */
+			objExplorationPage.deleteExplorationInLaterCard("DExploration2Card", "Disease", "kera","Gene");
+			onSuccessMeassage("Deleted The first Card in Exploration Successfully");
+		}
+		catch(Exception ex)
+		{
+			objExplorationPage.captureScreenshot("ExplorationSecondCardDeleteFail");
+			onFailureMeassage(ex.getMessage(),"ExplorationSecondCardDeleteFail","ExplorationSecondCardDeleteFail");
+		}
+		catch(AssertionError ex)
+		{
+			objExplorationPage.captureScreenshot("ExplorationSecondCardDeleteFail");
+			onFailureMeassage(ex.getMessage(),"ExplorationSecondCardDeleteFail","ExplorationSecondCardDeleteFail");
+		}
+	}
+
+	@Test(priority = 8, description = "Exploration - Expand and add items from Catalog")
+	public void ExplorationExpandAddFromCatalog_Test() throws Throwable  {
+		try {
+			/* Set - Expand and add items from Catalog */
+			objExplorationPage.ExpandAddFromCatalog("ExpAddFromCatalog", "Disease", "aber", "dengue");
+			objExplorationPage.saveChanges();
+			onSuccessMeassage("Items Added from Catalog into Exploration successfully");
+		}
+		catch(Exception ex)
+		{
+			objExplorationPage.captureScreenshot("ExplorationExpandAddFromCatalogFail");
+			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromCatalogFail","ExplorationExpandAddFromCatalogFail");
+		}
+		catch(AssertionError ex)
+		{
+			objExplorationPage.captureScreenshot("ExplorationExpandAddFromCatalogFail");
+			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromCatalogFail","ExplorationExpandAddFromCatalogFail");
+		}
+
+	}
+
 //	@Test(priority = 9, description = "Exploration - Expand and add items from Set")
 //	public void ExplorationExpandAddFromSet_Test() throws Throwable  {
 //		try {
@@ -210,65 +210,65 @@ public class ExplorationTest extends BaseTest{
 //			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromSetFail","ExplorationExpandAddFromSetFail");
 //		}
 //	}
-//
-//	@Test(priority = 10, description = "Exploration - Expand and add items from File")
-//	public void ExplorationExpandAddFromFile_Test() throws Throwable  {
-//		try {
-//			/* Exploration - Expand and add items from File */
-//			objExplorationPage.ExpandAddFromFile("ExpAddfromFile 1","Disease","kera","Disease", "C:\\Users\\MugunthRaman\\git\\EagleAutomation\\Resources\\Q4 - Upload file - 1 (2).xlsx", "Q4 - Upload file - 1 (2).xlsx");
-//			objExplorationPage.saveChanges();
-//			onSuccessMeassage("Items Added from File into Exploration successfully");
-//		}
-//		catch(Exception ex)
-//		{
-//			objExplorationPage.captureScreenshot("ExplorationExpandAddFromFileFail");
-//			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromFileFail","ExplorationExpandAddFromFileFail");
-//		}
-//		catch(AssertionError ex)
-//		{
-//			objExplorationPage.captureScreenshot("ExplorationExpandAddFromFileFail");
-//			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromFileFail","ExplorationExpandAddFromFileFail");
-//		}
-//	}
-//
-//	@Test(priority = 11, description = "Exploration - Create with one additional relation Card")
-//	public void ExplorationCreateARelationCard_Test() throws Throwable  {
-//		try {
-//			/* Exploration - Create with one additional relation Card */
-//			objExplorationPage.createRelationCardFirst("ExpRela 1", "Disease", "kera", "Gene");
-//			onSuccessMeassage("Exploration Created and added with a relation Card Successfully");
-//		}
-//		catch(Exception ex)
-//		{
-//			objExplorationPage.captureScreenshot("ExplorationAddARelationFail");
-//			onFailureMeassage(ex.getMessage(),"ExplorationAddARelationFail","ExplorationAddARelationFail");
-//		}
-//		catch(AssertionError ex)
-//		{
-//			objExplorationPage.captureScreenshot("ExplorationAddARelationFail");
-//			onFailureMeassage(ex.getMessage(),"ExplorationAddARelationFail","ExplorationAddARelationFail");
-//		}
-//	}
-//
-//	@Test(priority = 12, description = "Exploration - Create with 2 additional relation Card")
-//	public void ExplorationCreateTwoRelationCard_Test() throws Throwable  {
-//		try {
-//			/* Exploration - Create with 2 additional relation Cards */
-//			objExplorationPage.createRelationCardMulti("ExpRela 2", "Disease", "kera", "Gene","SNP","5");
-//			onSuccessMeassage("Exploration Created and added with 2 relation Cards Successfully");
-//		}
-//		catch(Exception ex)
-//		{
-//			objExplorationPage.captureScreenshot("ExplorationAdd2RelationFail");
-//			onFailureMeassage(ex.getMessage(),"ExplorationAdd2RelationFail","ExplorationAdd2RelationFail");
-//		}
-//		catch(AssertionError ex)
-//		{
-//			objExplorationPage.captureScreenshot("ExplorationAdd2RelationFail");
-//			onFailureMeassage(ex.getMessage(),"ExplorationAdd2RelationFail","ExplorationAdd2RelationFail");
-//		}
-//	}
-//
+
+	@Test(priority = 10, description = "Exploration - Expand and add items from File")
+	public void ExplorationExpandAddFromFile_Test() throws Throwable  {
+		try {
+			/* Exploration - Expand and add items from File */
+			objExplorationPage.ExpandAddFromFile("ExpAddfromFile 1","Disease","kera","Disease", "C:\\Users\\MugunthRaman\\git\\EagleAutomation\\Resources\\Q4 - Upload file - 1 (2).xlsx", "Q4 - Upload file - 1 (2).xlsx");
+			objExplorationPage.saveChanges();
+			onSuccessMeassage("Items Added from File into Exploration successfully");
+		}
+		catch(Exception ex)
+		{
+			objExplorationPage.captureScreenshot("ExplorationExpandAddFromFileFail");
+			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromFileFail","ExplorationExpandAddFromFileFail");
+		}
+		catch(AssertionError ex)
+		{
+			objExplorationPage.captureScreenshot("ExplorationExpandAddFromFileFail");
+			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromFileFail","ExplorationExpandAddFromFileFail");
+		}
+	}
+
+	@Test(priority = 11, description = "Exploration - Create with one additional relation Card")
+	public void ExplorationCreateARelationCard_Test() throws Throwable  {
+		try {
+			/* Exploration - Create with one additional relation Card */
+			objExplorationPage.createRelationCardFirst("ExpRela 1", "Disease", "kera", "Gene");
+			onSuccessMeassage("Exploration Created and added with a relation Card Successfully");
+		}
+		catch(Exception ex)
+		{
+			objExplorationPage.captureScreenshot("ExplorationAddARelationFail");
+			onFailureMeassage(ex.getMessage(),"ExplorationAddARelationFail","ExplorationAddARelationFail");
+		}
+		catch(AssertionError ex)
+		{
+			objExplorationPage.captureScreenshot("ExplorationAddARelationFail");
+			onFailureMeassage(ex.getMessage(),"ExplorationAddARelationFail","ExplorationAddARelationFail");
+		}
+	}
+
+	@Test(priority = 12, description = "Exploration - Create with 2 additional relation Card")
+	public void ExplorationCreateTwoRelationCard_Test() throws Throwable  {
+		try {
+			/* Exploration - Create with 2 additional relation Cards */
+			objExplorationPage.createRelationCardMulti("ExpRela 2", "Disease", "kera", "Gene","SNP","5");
+			onSuccessMeassage("Exploration Created and added with 2 relation Cards Successfully");
+		}
+		catch(Exception ex)
+		{
+			objExplorationPage.captureScreenshot("ExplorationAdd2RelationFail");
+			onFailureMeassage(ex.getMessage(),"ExplorationAdd2RelationFail","ExplorationAdd2RelationFail");
+		}
+		catch(AssertionError ex)
+		{
+			objExplorationPage.captureScreenshot("ExplorationAdd2RelationFail");
+			onFailureMeassage(ex.getMessage(),"ExplorationAdd2RelationFail","ExplorationAdd2RelationFail");
+		}
+	}
+
 //	@Test(priority = 13, description = "Create And Delete An Exploration")
 //	public void CreateAndDeleteExploration_Test() throws Throwable  {
 //		try {
@@ -287,7 +287,7 @@ public class ExplorationTest extends BaseTest{
 //			onFailureMeassage(ex.getMessage(),"CreateAndDeleteExplorationFail","CreateAndDeleteExplorationFail");
 //		}
 //	}
-//
+
 //	@Test(priority = 14, description = "Create And Share An Exploration")
 //	public void CreateAndShareExploration_Test() throws Throwable  {
 //		try {
@@ -325,45 +325,45 @@ public class ExplorationTest extends BaseTest{
 //			onFailureMeassage(ex.getMessage(),"DeleteExplorationFail","DeleteExplorationFail");
 //		}
 //	}
-//
-//	@Test(priority = 16, description = "Sharing An Exploration")
-//	public void ShareExploration_Test() throws Throwable  {
+
+	@Test(priority = 16, description = "Sharing An Exploration")
+	public void ShareExploration_Test() throws Throwable  {
+		try {
+			/* Share An Exploration */
+			objExplorationPage.ShareExploration("ExSearch 1","mugunth.raman@eaglegenomics.com");
+			onSuccessMeassage("Shared An Exploration Successfully");
+		}
+		catch(Exception ex)
+		{
+			objExplorationPage.captureScreenshot("ShareExplorationFail");
+			onFailureMeassage(ex.getMessage(),"ShareExplorationFail","ShareExplorationFail");
+		}
+		catch(AssertionError ex)
+		{
+			objExplorationPage.captureScreenshot("ShareExplorationFail");
+			onFailureMeassage(ex.getMessage(),"ShareExplorationFail","ShareExplorationFail");
+		}
+	}
+
+//	@Test(priority = 17, description = "Remove items from Exploration Expand")
+//	public void RemoveItemsfromExploration_Test() throws Throwable  {
 //		try {
-//			/* Share An Exploration */
-//			objExplorationPage.ShareExploration("UntitledExploration-29 Oct 2021","mugunth.raman@eaglegenomics.com");
-//			onSuccessMeassage("Shared An Exploration Successfully");
+//			/* Remove items in Expanded Set */
+//			objExplorationPage.RemoveItemsfromExploration("Remove Item Exploration","RNA","asb");
+//			onSuccessMeassage("Items removed successfully in Exploration Expand");
 //		}
 //		catch(Exception ex)
 //		{
-//			objExplorationPage.captureScreenshot("ShareExplorationFail");
-//			onFailureMeassage(ex.getMessage(),"ShareExplorationFail","ShareExplorationFail");
+//			objExplorationPage.captureScreenshot("ExplorationItemsRemoveFail");
+//			onFailureMeassage(ex.getMessage(),"ExplorationItemsRemoveFail","ExplorationItemsRemoveFail");
 //		}
 //		catch(AssertionError ex)
 //		{
-//			objExplorationPage.captureScreenshot("ShareExplorationFail");
-//			onFailureMeassage(ex.getMessage(),"ShareExplorationFail","ShareExplorationFail");
+//			objExplorationPage.captureScreenshot("ExplorationItemsRemoveFail");
+//			onFailureMeassage(ex.getMessage(),"ExplorationItemsRemoveFail","ExplorationItemsRemoveFail");
 //		}
 //	}
-//	
-//		@Test(priority = 17, description = "Remove items from Exploration Expand")
-//		public void RemoveItemsfromExploration_Test() throws Throwable  {
-//			try {
-//				/* Remove items in Expanded Set */
-//				objExplorationPage.RemoveItemsfromExploration("Remove Item Exploration","RNA","asb");
-//				onSuccessMeassage("Items removed successfully in Exploration Expand");
-//			}
-//			catch(Exception ex)
-//			{
-//				objExplorationPage.captureScreenshot("ExplorationItemsRemoveFail");
-//				onFailureMeassage(ex.getMessage(),"ExplorationItemsRemoveFail","ExplorationItemsRemoveFail");
-//			}
-//			catch(AssertionError ex)
-//			{
-//				objExplorationPage.captureScreenshot("ExplorationItemsRemoveFail");
-//				onFailureMeassage(ex.getMessage(),"ExplorationItemsRemoveFail","ExplorationItemsRemoveFail");
-//			}
-//		}
-//	
+//
 //	@Test(priority = 18, description = "Sorting a column in an Exploration")
 //	public void SortColumnExploration_Test() throws Throwable  {
 //		try {
@@ -377,21 +377,21 @@ public class ExplorationTest extends BaseTest{
 //			onFailureMeassage(ex.getMessage(),"SortColumnExplorationFail","SortColumnExplorationFail");
 //		}
 //	}
-	
-	@Test(priority = 19, description = "Filtering an Exploration with one filter")
-	public void FilterExploration_Test() throws Throwable  {
-		try {
-			/* Filtering in an Exploration */
-			objExplorationPage.FilterExploration("Filter Exploration1","Disease","kera", "EFO Name","contains","vul");
-			onSuccessMeassage("Filtering done in Exploration Successfully for 1 filter");
-		}
-		catch(Throwable ex)
-		{
-			objExplorationPage.captureScreenshot("FilterExplorationFail");
-			onFailureMeassage(ex.getMessage(),"FilterExplorationFail","FilterExplorationFail");
-		}
-	}
-	
+//
+//	@Test(priority = 19, description = "Filtering an Exploration with one filter")
+//	public void FilterExploration_Test() throws Throwable  {
+//		try {
+//			/* Filtering in an Exploration */
+//			objExplorationPage.FilterExploration("Filter Exploration1","Disease","kera", "EFO Name","contains","vul");
+//			onSuccessMeassage("Filtering done in Exploration Successfully for 1 filter");
+//		}
+//		catch(Throwable ex)
+//		{
+//			objExplorationPage.captureScreenshot("FilterExplorationFail");
+//			onFailureMeassage(ex.getMessage(),"FilterExplorationFail","FilterExplorationFail");
+//		}
+//	}
+//
 //	@Test(priority = 20, description = "Filtering an Exploration with 2 filters")
 //	public void FilterMultiComparison_Test() throws Throwable  {
 //		try {

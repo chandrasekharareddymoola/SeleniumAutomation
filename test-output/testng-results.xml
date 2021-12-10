@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testng-results ignored="0" total="9" passed="9" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
@@ -16,10 +17,30 @@
           </reporter-output>
         </test-method> <!-- beforeClass -->
         <test-method signature="VerifyLoginPage_Test()[pri:0, instance:com.eagle.TestCases.LoginTest@31fa1761]" started-at="2021-12-10T13:19:15 IST" name="VerifyLoginPage_Test" description="Login with valid credentials" finished-at="2021-12-10T13:19:43 IST" duration-ms="27800" status="PASS">
+=======
+<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2021-12-10T16:22:04 IST" name="SmokeTestingSuite" finished-at="2021-12-10T16:22:40 IST" duration-ms="35959">
+    <groups>
+    </groups>
+    <test started-at="2021-12-10T16:22:04 IST" name="Smoke Test cases" finished-at="2021-12-10T16:22:40 IST" duration-ms="35959">
+      <class name="com.eagle.TestCases.LoginTest">
+        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.LoginTest@316bcf94]" started-at="2021-12-10T16:22:04 IST" name="launchApplication" finished-at="2021-12-10T16:22:12 IST" duration-ms="7962" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- launchApplication -->
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.LoginTest@316bcf94]" started-at="2021-12-10T16:22:12 IST" name="beforeClass" finished-at="2021-12-10T16:22:12 IST" duration-ms="20" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method signature="VerifyLoginPage_Test()[pri:0, instance:com.eagle.TestCases.LoginTest@316bcf94]" started-at="2021-12-10T16:22:12 IST" name="VerifyLoginPage_Test" description="Login with valid credentials" finished-at="2021-12-10T16:22:39 IST" duration-ms="27464" status="PASS">
+>>>>>>> b234db967759853d008a5504c437fd03a05cd364
           <reporter-output>
           </reporter-output>
         </test-method> <!-- VerifyLoginPage_Test -->
       </class> <!-- com.eagle.TestCases.LoginTest -->
+<<<<<<< HEAD
       <class name="com.eagle.TestCases.InvestigationTest">
         <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.InvestigationTest@783a467b]" started-at="2021-12-10T13:19:43 IST" name="beforeClass" finished-at="2021-12-10T13:19:43 IST" duration-ms="9" status="PASS">
           <reporter-output>
@@ -62,6 +83,22 @@
           </reporter-output>
         </test-method> <!-- DeleteInvestigation_Test -->
       </class> <!-- com.eagle.TestCases.InvestigationTest -->
+=======
+      <class name="com.eagle.TestCases.SetTest">
+        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.SetTest@72e5a8e]" started-at="2021-12-10T16:22:39 IST" name="launchApplication" finished-at="2021-12-10T16:22:39 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- launchApplication -->
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.SetTest@72e5a8e]" started-at="2021-12-10T16:22:39 IST" name="beforeClass" finished-at="2021-12-10T16:22:40 IST" duration-ms="350" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method signature="CreateSet_Test()[pri:0, instance:com.eagle.TestCases.SetTest@72e5a8e]" started-at="2021-12-10T16:22:40 IST" name="CreateSet_Test" description="Create Set" finished-at="2021-12-10T16:22:40 IST" duration-ms="135" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CreateSet_Test -->
+      </class> <!-- com.eagle.TestCases.SetTest -->
+>>>>>>> b234db967759853d008a5504c437fd03a05cd364
     </test> <!-- Smoke Test cases -->
   </suite> <!-- SmokeTestingSuite -->
 </testng-results>

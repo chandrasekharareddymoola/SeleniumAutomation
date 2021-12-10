@@ -139,7 +139,7 @@ public class ExplorationPage extends BasePage{
 
 	@FindBy(xpath = "//i[@data-icon-name='Forward']")
 	public WebElement forward;
-	
+
 	@FindBy(xpath = "//i[@data-icon-name='Back']")
 	public WebElement backward;
 
@@ -265,19 +265,19 @@ public class ExplorationPage extends BasePage{
 
 	@FindBy(xpath = "(//*[@class='TableRowDefault__bodyRow___1_m1h'])[1]")
 	public WebElement FirstRowintableExpand;
-	
+
 	@FindBy(xpath = "//*[@class='CatalogSearchResults__itemName___1PfVJ']")
 	public List <WebElement> ItemsInCatalog;
-	
+
 	@FindBy(xpath = "//*[@class='TableRowDefault__bodyRow___1_m1h']/child::div")
 	public List <WebElement> EachElementInExpand;
-	
+
 	@FindBy(xpath = "//*[@class='CatalogSearchResults__itemName___1PfVJ']")
 	public List <WebElement> ItemsInFile;
-	
+
 	@FindBy(xpath = "//*[@data-automationid='DetailsList']")
 	public WebElement FileDataList;
-	
+
 	@FindBy(xpath = "//*[@data-icon-name='Filter']")
 	public WebElement FilterIconInExpand;
 
@@ -292,15 +292,22 @@ public class ExplorationPage extends BasePage{
 
 	@FindBy(xpath = "(//*[@role='gridcell']//*[@type='text'])[1]")
 	public WebElement valueForFilter;
-	
+
 	@FindBy(xpath = "(//*[@role='gridcell']//*[@type='text'])[2]")
 	public WebElement valueForFilter2;
 
 	@FindBy(xpath = "(//*[@data-icon-name='Add'])[1]")
 	public WebElement AddFilter;
-	
+
 	@FindBy(xpath = "//*[text()='Done']")
 	public WebElement DoneButton;
+
+	@FindBy(xpath = "//*[text()='Nothing to show']")
+	public WebElement notingToShowText;
+
+	@FindBy(xpath = "//*[text()='An error occured. Please contact your administrator.']")
+	public WebElement contactAdminErrorMainPage;
+
 
 
 	public WebElement openExploration(String name) {
@@ -408,7 +415,28 @@ public class ExplorationPage extends BasePage{
 					columnHeaderFirstPage.isDisplayed();
 					iden = false;	  
 				}
-				catch(Exception ex) {Thread.sleep(5000);}	 
+				catch(Exception ex) {
+					try {
+						try {
+							if(notingToShowText.isDisplayed()) {
+								throw	ex;
+							}
+						}
+						catch(Exception ey) {
+							try {
+								if(contactAdminErrorMainPage.isDisplayed()) {
+									throw	ex;
+								}
+							}
+							catch(Exception ez) {
+								throw ez;
+							}
+						}
+					}
+					catch(Exception ez) {
+						Thread.sleep(5000);	 
+					}
+				}
 			}
 			while(iden);	         
 		}
@@ -581,33 +609,33 @@ public class ExplorationPage extends BasePage{
 	public void selectItems(List<String> myAlist) throws Throwable{  
 		try {
 			outloop:
-			do{ 
-				for(String item : myAlist)
-				{
-					for (WebElement element : gridItems) {
-						if(element.isDisplayed()==false)
-						{
-							scrollIntoView(element);
-						}
-						String textFromGrid = element.getText();	    				
-						if(item.equals(textFromGrid))
-						{
-							WebElement checkBox = element.findElement(By.tagName("i"));
-							checkBox.click();	
-							scrollIntoView(FirstRowintableExpand);
+				do{ 
+					for(String item : myAlist)
+					{
+						for (WebElement element : gridItems) {
+							if(element.isDisplayed()==false)
+							{
+								scrollIntoView(element);
+							}
+							String textFromGrid = element.getText();	    				
+							if(item.equals(textFromGrid))
+							{
+								WebElement checkBox = element.findElement(By.tagName("i"));
+								checkBox.click();	
+								scrollIntoView(FirstRowintableExpand);
+							}
 						}
 					}
+					try {
+						Thread.sleep(3000);
+						forward.click();
+						scrollIntoView(FirstRowintableExpand);
+					}
+					catch(Exception e){
+						break outloop;
+					}
 				}
-				try {
-				Thread.sleep(3000);
-				forward.click();
-				scrollIntoView(FirstRowintableExpand);
-				}
-				catch(Exception e){
-					break outloop;
-				}
-			}
-			while(forward.isEnabled());  
+				while(forward.isEnabled());  
 		}	    	
 		catch(Exception ex) {
 			throw ex;
@@ -805,7 +833,7 @@ public class ExplorationPage extends BasePage{
 			throw ex;
 		}
 	}
-	
+
 	public List<String> getItemsWhileAddingFromCatalog() throws InterruptedException, AWTException { 
 		try {
 			int NoOfItems = ItemsInCatalog.size();
@@ -823,7 +851,7 @@ public class ExplorationPage extends BasePage{
 			throw w;
 		}
 	}
-	
+
 	public List<String> getItemsWhileAddingFromFile() throws InterruptedException, AWTException { 
 		try {
 			int NoOfItems = ItemsInFile.size();
@@ -861,7 +889,7 @@ public class ExplorationPage extends BasePage{
 		ExtentTestManager.getTest().log(Status.PASS, "Added From Catalog");
 		return CatalogItems;
 	}
-	
+
 	public void verifyAfterAdd(List<String> Items) throws InterruptedException, AWTException { 
 		try {
 			int k =1 ;
@@ -999,7 +1027,7 @@ public class ExplorationPage extends BasePage{
 			List <String> FileItems = getItemsWhileAddingFromFile();
 			BasePage.click(addAll);
 			ExtentTestManager.getTest().log(Status.PASS, "Added from file");
-			
+
 			return FileItems;
 		}
 		catch (Exception addFromFileFail) {
@@ -1225,38 +1253,38 @@ public class ExplorationPage extends BasePage{
 			throw ex;
 		}
 	}
-	
+
 	public void verifyAfterSearch(String SearchInExploration) throws InterruptedException, AWTException { 
 		try {
 			int j =1 ;
 			outloop:
-			do {
-				try {
-					int NoOfRows = RowsintableExpand.size();
-					for(int i=1 ; i<= NoOfRows ;i++) {
-						WebElement tableRows = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"]")));
-						String valuesInRows = tableRows.getText().toLowerCase();
-						String SearchInSetLowerCase = SearchInExploration.toLowerCase();				
-						boolean  comp = valuesInRows.contains(SearchInSetLowerCase);
-						assertEquals(comp, true);
-						ExtentTestManager.getTest().log(Status.PASS, i + " row is verified" + " in page " + j);
+				do {
+					try {
+						int NoOfRows = RowsintableExpand.size();
+						for(int i=1 ; i<= NoOfRows ;i++) {
+							WebElement tableRows = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"]")));
+							String valuesInRows = tableRows.getText().toLowerCase();
+							String SearchInSetLowerCase = SearchInExploration.toLowerCase();				
+							boolean  comp = valuesInRows.contains(SearchInSetLowerCase);
+							assertEquals(comp, true);
+							ExtentTestManager.getTest().log(Status.PASS, i + " row is verified" + " in page " + j);
+						}
+					}
+					catch (Exception e) {
+						System.out.println("Error in Search verification");
+						throw e;
+					}
+					try {
+						Thread.sleep(3000);
+						forward.click();
+						j++;
+						scrollIntoView(FirstRowintableExpand);
+					}
+					catch(Exception e){
+						break outloop;
 					}
 				}
-				catch (Exception e) {
-					System.out.println("Error in Search verification");
-					throw e;
-				}
-				try {
-					Thread.sleep(3000);
-					forward.click();
-					j++;
-					scrollIntoView(FirstRowintableExpand);
-				}
-				catch(Exception e){
-					break outloop;
-				}
-			}
-			while(forward.isEnabled()); 
+				while(forward.isEnabled()); 
 		}
 		catch(Exception r){
 			System.out.println("Some problem with forward button");
@@ -1611,28 +1639,28 @@ public class ExplorationPage extends BasePage{
 			throw ex;
 		}
 	}
-	
+
 	public void ApplyFilter(String Attribute, String FilterType, String textToFilter) throws Throwable { 
 		try {
-		BasePage.click(FilterIconInExpand);
-		BasePage.waitforAnElement(EditFilterText);
-		BasePage.click(SelectAnAttribute);
-		WebElement AttributeToSelect = driver.findElement(By.xpath("//*[@type='button']//*[text()='"+Attribute+"']"));
-		BasePage.click(AttributeToSelect);
-		BasePage.click(SelectFilterType);
-		WebElement FilterTypeToApply = null;
-		if (FilterType.equalsIgnoreCase("Contains")) {
-			FilterTypeToApply = driver.findElement(By.xpath("//*[@type='button']//*[text()='Contains']"));
-		}
-		if (FilterType.equalsIgnoreCase("Equals")) {
-			FilterTypeToApply = driver.findElement(By.xpath("//*[@type='button']//*[text()='Equals']"));
-		}
-		BasePage.click(FilterTypeToApply);
-		BasePage.click(valueForFilter);
-		valueForFilter.sendKeys(textToFilter);
-		BasePage.click(AddFilter);
-		ExtentTestManager.getTest().log(Status.PASS, "Filter is applied with "+ Attribute+" --> "+ FilterType+"\""+textToFilter+"\"");
-		BasePage.click(DoneButton);
+			BasePage.click(FilterIconInExpand);
+			BasePage.waitforAnElement(EditFilterText);
+			BasePage.click(SelectAnAttribute);
+			WebElement AttributeToSelect = driver.findElement(By.xpath("//*[@type='button']//*[text()='"+Attribute+"']"));
+			BasePage.click(AttributeToSelect);
+			BasePage.click(SelectFilterType);
+			WebElement FilterTypeToApply = null;
+			if (FilterType.equalsIgnoreCase("Contains")) {
+				FilterTypeToApply = driver.findElement(By.xpath("//*[@type='button']//*[text()='Contains']"));
+			}
+			if (FilterType.equalsIgnoreCase("Equals")) {
+				FilterTypeToApply = driver.findElement(By.xpath("//*[@type='button']//*[text()='Equals']"));
+			}
+			BasePage.click(FilterTypeToApply);
+			BasePage.click(valueForFilter);
+			valueForFilter.sendKeys(textToFilter);
+			BasePage.click(AddFilter);
+			ExtentTestManager.getTest().log(Status.PASS, "Filter is applied with "+ Attribute+" --> "+ FilterType+"\""+textToFilter+"\"");
+			BasePage.click(DoneButton);
 		}
 		catch(Exception Ex){
 			ExtentTestManager.getTest().log(Status.FAIL, "Error in applying filter");
@@ -1753,7 +1781,7 @@ public class ExplorationPage extends BasePage{
 			throw r;
 		}
 	}
-	
+
 	public void verifyAfterFilterdual(String Attribute1, String Attribute2, String FilterType1, String FilterType2, String textToFilter1,String textToFilter2) throws InterruptedException, AWTException { 
 		try {
 			int j =1 ;
