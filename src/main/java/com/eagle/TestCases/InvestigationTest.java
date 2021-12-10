@@ -33,7 +33,7 @@ public class InvestigationTest extends BaseTest {
 			System.out.print(functionName);
 			String value = this.getConfiguration().get(functionName);
 			String[] invParameters =value.split(",");
-			String invName = invParameters[0]+dtText;
+			String invName = invParameters[0].trim()+dtText;
 			
 			objInvestigationPage.createInvestigation(invName,invParameters[1]);
 			onSuccessMeassage("Investigation is successfully created");

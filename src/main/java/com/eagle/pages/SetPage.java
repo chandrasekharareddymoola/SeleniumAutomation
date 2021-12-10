@@ -256,16 +256,16 @@ public class SetPage extends BasePage{
 
 	@FindBy(xpath = "(//*[@role='gridcell']//*[@type='text'])[1]")
 	public WebElement valueForFilter;
-	
+
 	@FindBy(xpath = "(//*[@role='gridcell']//*[@type='text'])[2]")
 	public WebElement valueForFilter2;
 
 	@FindBy(xpath = "(//*[@data-icon-name='Add'])[1]")
 	public WebElement AddFilter;
-	
+
 	@FindBy(xpath = "//*[text()='Done']")
 	public WebElement DoneButton;
-	
+
 	@FindBy(xpath = "//*[text()='Nothing to show']")
 	public WebElement notingToShowText;
 
@@ -297,7 +297,7 @@ public class SetPage extends BasePage{
 		BasePage.click(setIcon);
 		action.moveToElement(TermsOfUse).perform();
 	}
-	
+
 	public void waitForSet() throws Throwable{
 		try {  
 			boolean iden = true;
@@ -308,15 +308,27 @@ public class SetPage extends BasePage{
 					iden = false;	  
 				}
 				catch(Exception ex) {
-					if(notingToShowText.isDisplayed()) {
-						throw	ex;
+					try {
+						try {
+							if(notingToShowText.isDisplayed()) {
+								throw	ex;
+							}
+						}
+						catch(Exception ey) {
+							try {
+								if(contactAdminErrorMainPage.isDisplayed()) {
+									throw	ex;
+								}
+							}
+							catch(Exception ez) {
+								throw ez;
+							}
+						}
 					}
-					if(contactAdminErrorMainPage.isDisplayed()) {
-						throw	ex;
+					catch(Exception ez) {
+						Thread.sleep(5000);	 
 					}
-
-					Thread.sleep(5000);
-				}	 
+				}
 			}
 			while(iden);	         
 		}
@@ -1605,25 +1617,25 @@ public class SetPage extends BasePage{
 
 	public void ApplyFilter(String Attribute, String FilterType, String textToFilter) throws Throwable { 
 		try {
-		BasePage.click(FilterIconInExpand);
-		BasePage.waitforAnElement(EditFilterText);
-		BasePage.click(SelectAnAttribute);
-		WebElement AttributeToSelect = driver.findElement(By.xpath("//*[@type='button']//*[text()='"+Attribute+"']"));
-		BasePage.click(AttributeToSelect);
-		BasePage.click(SelectFilterType);
-		WebElement FilterTypeToApply = null;
-		if (FilterType.equalsIgnoreCase("Contains")) {
-			FilterTypeToApply = driver.findElement(By.xpath("//*[@type='button']//*[text()='Contains']"));
-		}
-		if (FilterType.equalsIgnoreCase("Equals")) {
-			FilterTypeToApply = driver.findElement(By.xpath("//*[@type='button']//*[text()='Equals']"));
-		}
-		BasePage.click(FilterTypeToApply);
-		BasePage.click(valueForFilter);
-		valueForFilter.sendKeys(textToFilter);
-		BasePage.click(AddFilter);
-		ExtentTestManager.getTest().log(Status.PASS, "Filter is applied with "+ Attribute+" --> "+ FilterType+"\""+textToFilter+"\"");
-		BasePage.click(DoneButton);
+			BasePage.click(FilterIconInExpand);
+			BasePage.waitforAnElement(EditFilterText);
+			BasePage.click(SelectAnAttribute);
+			WebElement AttributeToSelect = driver.findElement(By.xpath("//*[@type='button']//*[text()='"+Attribute+"']"));
+			BasePage.click(AttributeToSelect);
+			BasePage.click(SelectFilterType);
+			WebElement FilterTypeToApply = null;
+			if (FilterType.equalsIgnoreCase("Contains")) {
+				FilterTypeToApply = driver.findElement(By.xpath("//*[@type='button']//*[text()='Contains']"));
+			}
+			if (FilterType.equalsIgnoreCase("Equals")) {
+				FilterTypeToApply = driver.findElement(By.xpath("//*[@type='button']//*[text()='Equals']"));
+			}
+			BasePage.click(FilterTypeToApply);
+			BasePage.click(valueForFilter);
+			valueForFilter.sendKeys(textToFilter);
+			BasePage.click(AddFilter);
+			ExtentTestManager.getTest().log(Status.PASS, "Filter is applied with "+ Attribute+" --> "+ FilterType+"\""+textToFilter+"\"");
+			BasePage.click(DoneButton);
 		}
 		catch(Exception Ex){
 			ExtentTestManager.getTest().log(Status.FAIL, "Error in applying filter");
@@ -1744,7 +1756,7 @@ public class SetPage extends BasePage{
 			throw r;
 		}
 	}
-	
+
 	public void verifyAfterFilterdual(String Attribute1, String Attribute2, String FilterType1, String FilterType2, String textToFilter1,String textToFilter2) throws InterruptedException, AWTException { 
 		try {
 			int j =1 ;

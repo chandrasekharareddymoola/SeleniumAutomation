@@ -60,7 +60,7 @@ public class BasePage{
 		try {
 			BasePage.waitforAnElement(field);
 			String getheadertext = field.getText().trim();
-			Assert.assertEquals(ItemToVerify, getheadertext);
+			Assert.assertEquals(getheadertext, ItemToVerify);
 		}
 		catch (Exception | AssertionError ex) {
 			throw ex;

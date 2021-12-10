@@ -482,15 +482,27 @@ public class ComparisonPage extends BasePage{
 					iden = false;	  
 				}
 				catch(Exception ex) {
-					if(notingToShowText.isDisplayed()) {
-						throw	ex;
+					try {
+						try {
+							if(notingToShowText.isDisplayed()) {
+								throw	ex;
+							}
+						}
+						catch(Exception ey) {
+							try {
+								if(contactAdminErrorMainPage.isDisplayed()) {
+									throw	ex;
+								}
+							}
+							catch(Exception ez) {
+								throw ez;
+							}
+						}
 					}
-					if(contactAdminErrorMainPage.isDisplayed()) {
-						throw	ex;
+					catch(Exception ez) {
+						Thread.sleep(5000);	 
 					}
-
-					Thread.sleep(5000);
-				}	 
+				}
 			}
 			while(iden);	         
 		}
