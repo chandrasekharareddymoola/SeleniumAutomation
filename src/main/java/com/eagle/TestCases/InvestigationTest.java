@@ -1,5 +1,9 @@
 package com.eagle.TestCases;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import com.aventstack.extentreports.Status;
@@ -10,6 +14,10 @@ public class InvestigationTest extends BaseTest {
 	
 	InvestigationPage objInvestigationPage;	
 	
+	Date dt = new Date();
+	DateFormat dtFrmt = new SimpleDateFormat("ddMMMyyyyHHmmss");
+	String dtText = dtFrmt.format(dt);
+	
 	@BeforeClass
 	public void beforeClass()  {	
 			objInvestigationPage = new InvestigationPage();		
@@ -19,8 +27,15 @@ public class InvestigationTest extends BaseTest {
 	public void CreateInvestigation_Test() throws InterruptedException, IOException {
 		
 		try {
-			/* To initiate the creation of Investigation */		 
-			objInvestigationPage.createInvestigation("Investigation 1","Investigation 1");
+			/* To initiate the creation of Investigation */		
+			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();	
+			
+			System.out.print(functionName);
+			String value = this.getConfiguration().get(functionName);
+			String[] invParameters =value.split(",");
+			String invName = invParameters[0]+dtText;
+			
+			objInvestigationPage.createInvestigation(invName,invParameters[1]);
 			onSuccessMeassage("Investigation is successfully created");
 		}
 		catch(Exception ex)
@@ -62,7 +77,7 @@ public class InvestigationTest extends BaseTest {
 	
 	@Test(priority = 3, description = "Link Set With Investigation")
 	public void LinkSetWithInvestigation_Test() throws InterruptedException, IOException  {
-		try {
+		try {                                              
 			 /* To Link set to an Investigation */
 			  objInvestigationPage.linkSettoInvestigation("Modified title" ,"UntitledSet-20 Oct 2021");
 			  onSuccessMeassage("Investigation is successfully linked with set");
@@ -76,7 +91,7 @@ public class InvestigationTest extends BaseTest {
 	
 	
 	@Test(priority = 4, description = "Link Exploration With Investigation")
-	public void LinkExplorationWithInvestigation_Test() throws InterruptedException, IOException  {
+	public void LinkExplorationWithInvestigation_Test() throws InterruptedException, IOException  {                                                   
 		try {
 			/* To Link exploration to an Investigation */
 			   //ERROR //		  
