@@ -131,11 +131,14 @@ public class SetPage extends BasePage{
 	@FindBy(xpath = "//span[contains(text(),'Remove Items')]")
 	public WebElement remove;	
 
-	@FindBy(xpath = "//span[contains(text(),'Save Changes')]")
+	@FindBy(xpath = "//*[text()='Save Changes']")
 	public WebElement saveChanges;	
 
 	@FindBy(xpath = "//i[@data-icon-name='Forward']")
 	public WebElement forward;
+
+	@FindBy(xpath = "//i[@data-icon-name='Back']")
+	public WebElement backward;
 
 	@FindBy(xpath = "//span[contains(text(),'Add items from a set')]")
 	public WebElement addFromSet;	
@@ -190,7 +193,7 @@ public class SetPage extends BasePage{
 
 	@FindBy(xpath = "//*[@class='TableRowDefault__bodyRow___1_m1h']")
 	public List <WebElement> RowsintableExpand;
-	
+
 	@FindBy(xpath = "(//*[@class='TableRowDefault__bodyRow___1_m1h'])[1]")
 	public WebElement FirstRowintableExpand;
 
@@ -223,6 +226,46 @@ public class SetPage extends BasePage{
 
 	@FindBy(xpath = "//*[@data-icon-name='Cancel']")
 	public WebElement dialogBoxClose;
+
+	@FindBy(xpath = "//*[@class='ms-List-cell']")
+	public List <WebElement> ItemsInSet;
+
+	@FindBy(xpath = "//*[@class='TableRowDefault__bodyRow___1_m1h']/child::div")
+	public List <WebElement> EachElementInExpand;
+
+	@FindBy(xpath = "//*[@class='CatalogSearchResults__itemName___1PfVJ']")
+	public List <WebElement> ItemsInCatalog;
+
+	@FindBy(xpath = "//*[@class='CatalogSearchResults__itemName___1PfVJ']")
+	public List <WebElement> ItemsInFile;
+
+	@FindBy(xpath = "//*[@data-automationid='DetailsList']")
+	public WebElement FileDataList;
+
+	@FindBy(xpath = "//*[@data-icon-name='Filter']")
+	public WebElement FilterIconInExpand;
+
+	@FindBy(xpath = "//*[text()='Edit filters']")
+	public WebElement EditFilterText;
+
+	@FindBy(xpath = "//*[@role='option' and text()='Select an attribute']")
+	public WebElement SelectAnAttribute;
+
+	@FindBy(xpath = "//*[@role='option' and text()='Select filter type']")
+	public WebElement SelectFilterType;
+
+	@FindBy(xpath = "(//*[@role='gridcell']//*[@type='text'])[1]")
+	public WebElement valueForFilter;
+	
+	@FindBy(xpath = "(//*[@role='gridcell']//*[@type='text'])[2]")
+	public WebElement valueForFilter2;
+
+	@FindBy(xpath = "(//*[@data-icon-name='Add'])[1]")
+	public WebElement AddFilter;
+	
+	@FindBy(xpath = "//*[text()='Done']")
+	public WebElement DoneButton;
+
 
 
 	//Page level functions on the objects
@@ -364,13 +407,33 @@ public class SetPage extends BasePage{
 			this.createCheck(SetName);
 			this.Home();
 		}
-		catch (AssertionError createSetFail){
+		catch (AssertionError | Exception createSetFail){
 			throw createSetFail;
 		}
-		catch (Exception createSetFail){
+	}   	
+
+
+	public List <String> createSetforAdd(String SetName,String entityToSelect, String textToSearch) throws InterruptedException, AWTException, AssertionError{	    	
+		try {
+			this.Set();
+			this.addSet();
+			this.verifySetHomePage("Uncategorized");
+			this.setTitle(SetName);
+			this.selectEntity(entityToSelect);
+			this.searchItems(textToSearch); 
+			Thread.sleep(3000);
+			this.AddandAccept(); 	
+			List <String> setItems = this.getItemsWhileCreatingSet();
+			BasePage.waitforAnElement(editCardIcon);
+			ExtentTestManager.getTest().log(Status.PASS, "Set "+ SetName +" is Created");
+			this.createCheck(SetName);
+			this.Home();
+			return setItems;
+		}
+		catch (AssertionError | Exception createSetFail){
 			throw createSetFail;
 		}
-	}   	  	     	
+	} 
 
 	public void viewSet(String SetName) throws InterruptedException, AWTException{
 		this.Set(); 
@@ -412,33 +475,33 @@ public class SetPage extends BasePage{
 	public void selectItems(List<String> myAlist) throws Throwable{  
 		try {
 			outloop:
-			do{ 
-				for(String item : myAlist)
-				{
-					for (WebElement element : gridItems) {
-						if(element.isDisplayed()==false)
-						{
-							scrollIntoView(element);
-						}
-						String textFromGrid = element.getText();	    				
-						if(item.equals(textFromGrid))
-						{
-							WebElement checkBox = element.findElement(By.tagName("i"));
-							checkBox.click();	
-							scrollIntoView(FirstRowintableExpand);
+				do{ 
+					for(String item : myAlist)
+					{
+						for (WebElement element : gridItems) {
+							if(element.isDisplayed()==false)
+							{
+								scrollIntoView(element);
+							}
+							String textFromGrid = element.getText();	    				
+							if(item.equals(textFromGrid))
+							{
+								WebElement checkBox = element.findElement(By.tagName("i"));
+								checkBox.click();	
+								scrollIntoView(FirstRowintableExpand);
+							}
 						}
 					}
+					try {
+						Thread.sleep(3000);
+						forward.click();
+						scrollIntoView(FirstRowintableExpand);
+					}
+					catch(Exception e){
+						break outloop;
+					}
 				}
-				try {
-				Thread.sleep(3000);
-				forward.click();
-				scrollIntoView(FirstRowintableExpand);
-				}
-				catch(Exception e){
-					break outloop;
-				}
-			}
-			while(forward.isEnabled());  
+				while(forward.isEnabled());  
 		}	    	
 		catch(Exception ex) {
 			throw ex;
@@ -517,7 +580,6 @@ public class SetPage extends BasePage{
 		catch (AssertionError ecf){
 			throw ecf;
 		}
-
 	}
 
 	public void CreateSetFromSet(String existingSetName, String entityToSelect, String textToSearch, String setToCreate) throws Exception, AssertionError { 
@@ -568,7 +630,7 @@ public class SetPage extends BasePage{
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Select a Set']")));
 		this.searchExpandEnterName(SetNameToAddFrom);
 		this.clickSetInExpand(SetNameToAddFrom);
-		ExtentTestManager.getTest().log(Status.PASS, SetNameToAddFrom + " is selected to be added ");
+		ExtentTestManager.getTest().log(Status.PASS, SetNameToAddFrom + " is selected and added ");
 	}	
 
 	public void CompareTwovalues(String Value1, String Value2) throws InterruptedException, AWTException {	    
@@ -592,7 +654,7 @@ public class SetPage extends BasePage{
 	//Adding items from Set from expand into Set
 	public void ExpandAddFromSet(String setToAdd, String entityToSelect,String textToSearchSet1, String setToCreate, String textToSearchSet2) throws Throwable {    // Add from a set
 		try {
-			this.createSet(setToAdd, entityToSelect, textToSearchSet1);
+			List <String> setItems = this.createSetforAdd(setToAdd, entityToSelect, textToSearchSet1);
 			this.Set();
 			this.addSet();
 			this.verifySetHomePage("Uncategorized");
@@ -605,18 +667,16 @@ public class SetPage extends BasePage{
 			this.editSet();
 			String NoOfRecordsInitial = ItemCountInExpand.getText();
 			this.addItemsExpand();
-			this.addFromSetExpand(setToAdd); // Set to be added
+			this.addFromSetExpand(setToAdd); //Set to be added
 			this.waitForSaveChanges();
 			waitforAnElement(ItemCountInExpand);
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
-			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);		
+			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
+			this.verifyAfterAdd(setItems);
 			BasePage.verifyPage(setToCreate,setNameInExpand); //verifying the set name
 			ExtentTestManager.getTest().log(Status.PASS, "Set - Set added in expand");
 		}
-		catch (Exception ExpandAddFromSetFail) {
-			throw ExpandAddFromSetFail;
-		}
-		catch (AssertionError ExpandAddFromSetFail) {
+		catch (Exception | AssertionError ExpandAddFromSetFail) {
 			throw ExpandAddFromSetFail;
 		}
 	}
@@ -628,13 +688,15 @@ public class SetPage extends BasePage{
 		Thread.sleep(2000);
 	}
 
-	public void addFromSetCatalog(String TextToSearch) throws InterruptedException, AWTException {	    
+	public List<String> addFromSetCatalog(String TextToSearch) throws InterruptedException, AWTException {	    
 		BasePage.click(addFromExpandCatalog);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from the Catalog']")));
 		this.searchCatalog(TextToSearch);
 		Thread.sleep(3000);
+		List <String> CatalogItems = this.getItemsWhileAddingFromCatalog();
 		BasePage.click(addAll);
 		ExtentTestManager.getTest().log(Status.PASS, "Added From Catalog");
+		return CatalogItems;
 	}
 
 	public void add() throws InterruptedException, AWTException{	    
@@ -656,13 +718,16 @@ public class SetPage extends BasePage{
 			this.editSet();
 			String NoOfRecordsInitial = ItemCountInExpand.getText();
 			this.addItemsExpand();
-			this.addFromSetCatalog(TextToSearch); // Text to be added 
+			List<String> CatalogItems = this.addFromSetCatalog(TextToSearch); // Text to be added 
+			System.out.println(CatalogItems);
+			System.out.println(CatalogItems.size());
 			ExtentTestManager.getTest().log(Status.PASS, TextToSearch + " is searched");
 			this.add();
 			this.waitForSaveChanges();
 			waitforAnElement(ItemCountInExpand);
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
+			this.verifyAfterAdd(CatalogItems);
 			BasePage.verifyPage(setToCreate,setNameInExpand); //verifying the set name
 			ExtentTestManager.getTest().log(Status.PASS, "Set - Added from catalog and count increase verified");
 		}
@@ -708,17 +773,21 @@ public class SetPage extends BasePage{
 	}	
 
 
-	public void addFromFile(String CategoryName, String Filelocation, String FileName) throws AWTException, InterruptedException, AssertionError {	    
+	public List<String> addFromFile(String CategoryName, String Filelocation, String FileName) throws AWTException, InterruptedException, AssertionError {	    
 		try {
 			BasePage.click(addFromFile);	
-			Thread.sleep(5000);
+			Thread.sleep(3000);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from a File']")));
 			this.FileuploadCategory(CategoryName);
 			this.FileUploadFormExplorer(Filelocation);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Searching in ']")));
 			BasePage.verifyPage(FileName, uploadedFileName);
+			BasePage.waitforAnElement(FileDataList);
+			List <String> FileItems = getItemsWhileAddingFromFile();
 			BasePage.click(addAll);
 			ExtentTestManager.getTest().log(Status.PASS, "Added from file");
+
+			return FileItems;
 		}
 		catch (Exception addFromFileFail) {
 			throw addFromFileFail;
@@ -748,23 +817,24 @@ public class SetPage extends BasePage{
 			String NoOfRecordsInitial = ItemCountInExpand.getText();
 			this.addItemsExpand();
 			Thread.sleep(3000);
-			this.addFromFile(CategoryName, Filelocation, FileName); 
-			this.addToGrid();
+			List <String> FileItems = this.addFromFile(CategoryName, Filelocation, FileName); 
+			this.addToGrid();          
 			this.waitForSaveChanges();
 			waitforAnElement(ItemCountInExpand);
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);		
+			this.verifyAfterAdd(FileItems);
 			BasePage.verifyPage(setToCreate,setNameInExpand); //verifying the set name
 			ExtentTestManager.getTest().log(Status.PASS, "Set - Added from file in expand");
 		}
 		catch (Exception ExpandAddFromFileFail) {
-			if(dialogBoxClose.isDisplayed()) {
+			if(dialogBoxClose.isDisplayed()) {     
 				BasePage.click(dialogBoxClose);
 			}
 			throw ExpandAddFromFileFail;
 		}
 		catch (AssertionError ExpandAddFromFileFail) {
-			if(dialogBoxClose.isDisplayed()) {
+			if(dialogBoxClose.isDisplayed()) {        
 				BasePage.click(dialogBoxClose);
 			}
 			throw ExpandAddFromFileFail;
@@ -859,34 +929,34 @@ public class SetPage extends BasePage{
 	//		this.DeleteSetLoop(setToDelete);
 	//	}
 
-	public void DeleteSetLoop(String SetToDelete) throws InterruptedException, AWTException { 
-		try
-		{
-			do
-			{
-				Integer NoofPages = this.NoOfPagesInSetPage();
-				WebElement SD = driver.findElement(By.xpath("//*[text()='"+SetToDelete+"']"));
-				WebElement threeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+SetToDelete+"']//parent::div//parent::div//child::button")));
-
-				List<WebElement> SDs = driver.findElements(By.xpath("//*[text()='"+SetToDelete+"']"));
-				if (SDs.size() != 0) {
-					BasePage.scrollIntoView(SD);
-					BasePage.click(threeButton);
-					BasePage.click(Delete);
-					Thread.sleep(2000);
-					BasePage.click(Delete);
-				}
-				else {
-					BasePage.click(NextPage);
-					Thread.sleep(2000);
-
-				}
-				BasePage.click(forward); 
-			}
-			while(forward.isEnabled());  
-		}	    	
-		catch(Exception ex) {}
-	}
+	//	public void DeleteSetLoop(String SetToDelete) throws InterruptedException, AWTException { 
+	//		try
+	//		{
+	//			do
+	//			{
+	//				Integer NoofPages = this.NoOfPagesInSetPage();
+	//				WebElement SD = driver.findElement(By.xpath("//*[text()='"+SetToDelete+"']"));
+	//				WebElement threeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+SetToDelete+"']//parent::div//parent::div//child::button")));
+	//
+	//				List<WebElement> SDs = driver.findElements(By.xpath("//*[text()='"+SetToDelete+"']"));
+	//				if (SDs.size() != 0) {
+	//					BasePage.scrollIntoView(SD);
+	//					BasePage.click(threeButton);
+	//					BasePage.click(Delete);
+	//					Thread.sleep(2000);
+	//					BasePage.click(Delete);
+	//				}
+	//				else {
+	//					BasePage.click(NextPage);
+	//					Thread.sleep(2000);
+	//
+	//				}
+	//				BasePage.click(forward); 
+	//			}
+	//			while(forward.isEnabled());  
+	//		}	    	
+	//		catch(Exception ex) {}
+	//	}
 
 	/*
 	 * public void openItemFromList(String SetName) { try { do{ for (WebElement
@@ -943,10 +1013,10 @@ public class SetPage extends BasePage{
 	}
 
 
-	public void DeleteASet(String setToDelete) throws InterruptedException, AWTException { 
-		BasePage.verifyPage("MY DATA", MyDataTitle); //My Data page
-		this.DeleteSetLoop(setToDelete);
-	}
+	//	public void DeleteASet(String setToDelete) throws InterruptedException, AWTException { 
+	//		BasePage.verifyPage("MY DATA", MyDataTitle); //My Data page
+	//		this.DeleteSetLoop(setToDelete);
+	//	}
 
 	public void waitForEditAndDelete() throws Throwable{
 		try {  
@@ -1012,6 +1082,162 @@ public class SetPage extends BasePage{
 		BasePage.CompareAttributeText("value",SearchInSet,serachBoxExpand);
 	}
 
+	public void verifyAfterSearch(String SearchInSet) throws InterruptedException, AWTException { 
+		try {
+			int j =1 ;
+			outloop:
+				do {
+					try {
+						int NoOfRows = RowsintableExpand.size();
+						for(int i=1 ; i<= NoOfRows ;i++) {
+							WebElement tableRows = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"]")));
+							String valuesInRows = tableRows.getText().toLowerCase();
+							String SearchInSetLowerCase = SearchInSet.toLowerCase();				
+							boolean  comp = valuesInRows.contains(SearchInSetLowerCase);
+							assertEquals(comp, true);
+							ExtentTestManager.getTest().log(Status.PASS, i + " row is verified" + " in page " + j);
+						}
+					}
+					catch (Exception e) {
+						System.out.println("Error in Search verification");
+						throw e;
+					}
+					try {
+						Thread.sleep(3000);
+						forward.click();
+						j++;
+						scrollIntoView(FirstRowintableExpand);
+					}
+					catch(Exception e){
+						break outloop;
+					}
+				}
+				while(forward.isEnabled()); 
+		}
+		catch(Exception r){
+			System.out.println("Some problem with forward button");
+			throw r;
+		}
+	}
+
+
+
+	public List<String> getItemsWhileCreatingSet() throws InterruptedException, AWTException { 
+		try {
+			int NoOfItems = ItemsInSet.size();
+			List <String> SetItems = new ArrayList<String>() ;
+			for(int i=0 ; i< NoOfItems ;i++) 
+			{
+				WebElement SetItem = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='ms-List-cell' and @data-list-index='"+i+"']//div[@class='SetMembers__cell___2OPak']")));
+				String SetItemLCase = SetItem.getText().toLowerCase();
+				SetItems.add(SetItemLCase);
+			}
+			return SetItems;
+		}
+		catch (Exception w) 
+		{
+			throw w;
+		}
+	}
+
+
+	public List<String> getItemsWhileAddingFromCatalog() throws InterruptedException, AWTException { 
+		try {
+			int NoOfItems = ItemsInCatalog.size();
+			List <String> CatalogItems = new ArrayList<String>() ;
+			for(int i=1 ; i<= NoOfItems ;i++) 
+			{
+				WebElement CatalogItem = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@class='CatalogSearchResults__itemName___1PfVJ'])["+i+"]")));
+				String CatalogItemLCase = CatalogItem.getText().toLowerCase();
+				CatalogItems.add(CatalogItemLCase);
+			}
+			return CatalogItems;
+		}
+		catch (Exception w) 
+		{
+			throw w;
+		}
+	}
+
+	public List<String> getItemsWhileAddingFromFile() throws InterruptedException, AWTException { 
+		try {
+			int NoOfItems = ItemsInFile.size();
+			List <String> FileItems = new ArrayList<String>() ;
+			for(int i=1 ; i<= NoOfItems ;i++) 
+			{
+				WebElement CatalogItem = driver.findElement(By.xpath("(//*[@class='CatalogSearchResults__itemName___1PfVJ'])["+i+"]"));
+				BasePage.scrollIntoView(CatalogItem);
+				String CatalogItemLCase = CatalogItem.getText().toLowerCase();
+				System.out.println(CatalogItemLCase);
+				FileItems.add(CatalogItemLCase);
+			}
+			return FileItems;
+		}
+		catch (Exception w) 
+		{
+			throw w;
+		}
+	}
+
+	public void verifyAfterAdd(List<String> Items) throws InterruptedException, AWTException { 
+		try {
+			int k =1 ;
+			int count = 0;
+			outloop1:
+				do {
+					int NoOfRows = RowsintableExpand.size();
+					int TotalElements = EachElementInExpand.size();
+					int NoOfColumns =  TotalElements / NoOfRows;
+					for(String item : Items) {
+						try {
+							outloop2:
+								for(int i=1 ; i<= NoOfRows ;i++) 
+								{
+									for(int j=1 ; j<= NoOfColumns ;j++) 
+									{
+										WebElement tableRows = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("((//*[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"]/child::div)["+j+"]")));
+										String valuesInRows = tableRows.getText().toLowerCase();
+										String ItemsLowerCase = item.toLowerCase();		
+										boolean  comp = valuesInRows.equals(ItemsLowerCase);
+										if (comp == true) 
+										{
+											count++;
+											ExtentTestManager.getTest().log(Status.PASS, "Value present in row: " + i + ", column:" + j + " of page " + k);
+											break outloop2;
+										}
+									}
+								}
+						}
+						catch (Exception e) {
+							System.out.println("Error in Add verification");
+							throw e;
+						}
+						catch (AssertionError f) {
+							System.out.println("One/many of the values are not added");
+							throw f;
+						}
+					}
+					try {
+						Thread.sleep(3000);
+						forward.click();
+						ExtentTestManager.getTest().log(Status.PASS, "Page " + k + " is checked");
+						k++;
+						scrollIntoView(FirstRowintableExpand);
+					}
+					catch(Exception e){
+						assertEquals(count, Items.size());
+						ExtentTestManager.getTest().log(Status.PASS, "All values added are verified");
+						break outloop1;
+					}
+				}
+				while(forward.isEnabled()); 
+		}
+		catch(Exception r){
+			System.out.println("some problem with forward button");
+			throw r;
+		}
+	}
+
 	public void searchInSetExpand(String setToCreate, String entityToSelect, String textToSearch, String SearchInSet) throws Throwable { 
 		try {
 			this.addSet();
@@ -1023,6 +1249,8 @@ public class SetPage extends BasePage{
 			this.expandSet();
 			this.searchInExpand(SearchInSet);
 			ExtentTestManager.getTest().log(Status.PASS, "Search in done using text - "+ SearchInSet);
+			this.verifyAfterSearch(SearchInSet);
+			ExtentTestManager.getTest().log(Status.PASS, "Search is verified");
 		}
 		catch(Exception es) {
 			throw es;
@@ -1339,6 +1567,262 @@ public class SetPage extends BasePage{
 		else{
 			System.out.println("Set shared failed");
 		}
+	}
+
+	public void ApplyFilter(String Attribute, String FilterType, String textToFilter) throws Throwable { 
+		try {
+		BasePage.click(FilterIconInExpand);
+		BasePage.waitforAnElement(EditFilterText);
+		BasePage.click(SelectAnAttribute);
+		WebElement AttributeToSelect = driver.findElement(By.xpath("//*[@type='button']//*[text()='"+Attribute+"']"));
+		BasePage.click(AttributeToSelect);
+		BasePage.click(SelectFilterType);
+		WebElement FilterTypeToApply = null;
+		if (FilterType.equalsIgnoreCase("Contains")) {
+			FilterTypeToApply = driver.findElement(By.xpath("//*[@type='button']//*[text()='Contains']"));
+		}
+		if (FilterType.equalsIgnoreCase("Equals")) {
+			FilterTypeToApply = driver.findElement(By.xpath("//*[@type='button']//*[text()='Equals']"));
+		}
+		BasePage.click(FilterTypeToApply);
+		BasePage.click(valueForFilter);
+		valueForFilter.sendKeys(textToFilter);
+		BasePage.click(AddFilter);
+		ExtentTestManager.getTest().log(Status.PASS, "Filter is applied with "+ Attribute+" --> "+ FilterType+"\""+textToFilter+"\"");
+		BasePage.click(DoneButton);
+		}
+		catch(Exception Ex){
+			ExtentTestManager.getTest().log(Status.FAIL, "Error in applying filter");
+			throw Ex;
+		}
+	}
+
+	public void ApplyMultipleFilter(String Attribute1, String FilterType1, String textToFilter1, String Attribute2, String FilterType2, String textToFilter2) throws Throwable { 
+		BasePage.click(FilterIconInExpand);
+		BasePage.waitforAnElement(EditFilterText);
+		for (int i=1; i<=2; i++) {
+			if(i==1){
+				BasePage.click(SelectAnAttribute);
+				WebElement AttributeToSelect = driver.findElement(By.xpath("//*[@type='button']//*[text()='"+Attribute1+"']"));
+				BasePage.click(AttributeToSelect);
+				BasePage.click(SelectFilterType);
+				WebElement FilterTypeToApply = null;
+				if (FilterType1.equalsIgnoreCase("Contains")) {
+					FilterTypeToApply = driver.findElement(By.xpath("//*[@type='button']//*[text()='Contains']"));
+				}
+				if (FilterType1.equalsIgnoreCase("Equals")) {
+					FilterTypeToApply = driver.findElement(By.xpath("//*[@type='button']//*[text()='Equals']"));
+				}
+				BasePage.click(FilterTypeToApply);
+				BasePage.click(valueForFilter);
+				valueForFilter.sendKeys(textToFilter1);
+				BasePage.click(AddFilter);
+				ExtentTestManager.getTest().log(Status.PASS, "Filter is applied with "+ Attribute1+" --> "+ FilterType1+"\""+textToFilter1+"\"");
+			}
+			if(i==2) {
+				BasePage.click(SelectAnAttribute);
+				WebElement AttributeToSelect = driver.findElement(By.xpath("//*[@type='button']//*[text()='"+Attribute2+"']"));
+				BasePage.click(AttributeToSelect);
+				BasePage.click(SelectFilterType);
+				WebElement FilterTypeToApply = null;
+				if (FilterType2.equalsIgnoreCase("Contains")) {
+					FilterTypeToApply = driver.findElement(By.xpath("//*[@type='button']//*[text()='Contains']"));
+				}
+				if (FilterType2.equalsIgnoreCase("Equals")) {
+					FilterTypeToApply = driver.findElement(By.xpath("//*[@type='button']//*[text()='Equals']"));
+				}
+				BasePage.click(FilterTypeToApply);
+				BasePage.click(valueForFilter2);
+				valueForFilter2.sendKeys(textToFilter2);
+				ExtentTestManager.getTest().log(Status.PASS, "Filter is applied with "+ Attribute2+" --> "+ FilterType2+"\""+textToFilter2+"\"");
+			}
+		}
+		BasePage.click(DoneButton);
+	}
+
+	public void moveToFirstPage(String textToFilter) throws InterruptedException, AWTException { 
+		try {
+			outloop:
+				do {
+					try {
+						Thread.sleep(1000);
+						backward.click();
+						scrollIntoView(FirstRowintableExpand);
+					}
+					catch(Exception e){
+						break outloop;
+					}
+				}
+				while(backward.isEnabled());
+		}
+		catch(Exception e) {
+			System.out.println("Some problem with backward click");
+			throw e;
+		}
+	}
+
+	public void verifyAfterFilter(String Attribute,String FilterType,String textToFilter) throws InterruptedException, AWTException { 
+		try {
+			Integer NumOfPrecedingColumns = driver.findElements(By.xpath("//*[text()='"+Attribute+"']//parent::div//parent::div//preceding-sibling::div")).size();
+			Integer CurrentColumn = NumOfPrecedingColumns + 1;
+			int j=1;
+			outloop:
+				do {
+					try {
+						int NoOfRows = RowsintableExpand.size();
+						for(int i=1 ; i<= NoOfRows ;i++) {
+							WebElement text = driver.findElement(By.xpath("(((//div[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"])//div)["+CurrentColumn+"]"));
+							String valuesInRows = text.getText().toLowerCase();
+							String SearchInSetLowerCase = textToFilter.toLowerCase();
+							boolean  comp = false;
+							if (FilterType.equalsIgnoreCase("contains")) {
+								comp = valuesInRows.contains(SearchInSetLowerCase);
+							}
+							if (FilterType.equalsIgnoreCase("euqals")) {
+								comp = valuesInRows.equals(SearchInSetLowerCase);
+							}
+							assertEquals(comp, true);
+							ExtentTestManager.getTest().log(Status.PASS,  " Row " +i+ " of " +Attribute+" is verified" + " in page " +j );
+						}
+					}
+					catch (Exception e) {
+						System.out.println("Error in filter verification");
+						throw e;
+					}
+					catch (AssertionError f) {
+						System.out.println("Error in filter functionality");
+						throw f;
+					}
+					try {
+						Thread.sleep(3000);
+						forward.click();
+						j++;
+						scrollIntoView(FirstRowintableExpand);
+					}
+					catch(Exception e){
+						break outloop;
+					}
+				}
+				while(forward.isEnabled()); 
+		}
+		catch(Exception | AssertionError r){
+			System.out.println("Some problem with forward button");
+			throw r;
+		}
+	}
+	
+	public void verifyAfterFilterdual(String Attribute1, String Attribute2, String FilterType1, String FilterType2, String textToFilter1,String textToFilter2) throws InterruptedException, AWTException { 
+		try {
+			int j =1 ;
+			List <String> filterList = new ArrayList<String>();
+			filterList.add(FilterType1);
+			filterList.add(FilterType2);
+			List <String> attributeList = new ArrayList<String>();
+			attributeList.add(Attribute1);
+			attributeList.add(Attribute2);
+			List <String> textToFilterList = new ArrayList<String>();
+			textToFilterList.add(textToFilter1);
+			textToFilterList.add(textToFilter2);
+			int k = 0;
+			String Attribute = null;
+			String textToFilter = null;
+			for(String filter: filterList){
+				k++;
+				if(k==1) {
+					Attribute = Attribute1;
+					textToFilter=textToFilter1;
+				}
+				if(k==2) {
+					Attribute = Attribute2;
+					textToFilter=textToFilter2;
+				}
+				Integer NumOfPrecedingColumns = driver.findElements(By.xpath("//*[text()='"+Attribute+"']//parent::div//parent::div//preceding-sibling::div")).size();
+				Integer CurrentColumn = NumOfPrecedingColumns + 1;
+				outloop:
+					do {
+						try {
+							int NoOfRows = RowsintableExpand.size();
+							for(int i=1 ; i<= NoOfRows ;i++) {
+								WebElement text = driver.findElement(By.xpath("(((//div[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"])//div)["+CurrentColumn+"]"));
+								String valuesInRows = text.getText().toLowerCase();
+								System.out.println(valuesInRows);
+								String SearchInSetLowerCase = textToFilter.toLowerCase();
+								System.out.println(SearchInSetLowerCase);
+								boolean  comp = false;
+								if (filter.equalsIgnoreCase("contains")) {
+									comp = valuesInRows.contains(SearchInSetLowerCase);
+									System.out.println("contains verified");
+								}
+								if (filter.equalsIgnoreCase("equals")) {
+									comp = valuesInRows.equals(SearchInSetLowerCase);
+									System.out.println("equals verified");
+								}
+								assertEquals(comp, true);
+								System.out.println(comp);
+								ExtentTestManager.getTest().log(Status.PASS,  " Row " +i+ " of " +Attribute+" is verified" + " in page " +j+ " for filter "+ k);
+							}
+						}
+						catch (Exception e) {
+							System.out.println("Error in filter verification");
+							throw e;
+						}
+						catch (AssertionError f) {
+							System.out.println("Error in filter functionality");
+							throw f;
+						}
+						try {
+							Thread.sleep(3000);
+							forward.click();
+							j++;
+							scrollIntoView(FirstRowintableExpand);
+						}
+						catch(Exception e){
+							do {
+								try {
+									Thread.sleep(3000);
+									backward.click();
+									j++;
+									scrollIntoView(FirstRowintableExpand);
+								}
+								catch(Exception o) {
+									break outloop;
+								}
+
+							}while(backward.isEnabled());
+							break outloop;
+						}
+					}
+					while(forward.isEnabled()); 
+			}
+		}
+		catch(Exception r){
+			System.out.println("Some problem with forward button");
+			throw r;
+		}
+	}
+
+	public void FilterSet(String SetName, String entityToSelect, String textToSearch, String Attribute, String FilterType, String textToFilter) throws Throwable { 
+		this.createSet(SetName, entityToSelect, textToSearch);	
+		this.Set();
+		WebElement opn = this.openSet(SetName);
+		BasePage.click(opn);
+		ExtentTestManager.getTest().log(Status.PASS, SetName + " is Created");
+		this.expandSet();
+		this.ApplyFilter(Attribute, FilterType, textToFilter);
+		this.verifyAfterFilter(Attribute, FilterType, textToFilter);
+		ExtentTestManager.getTest().log(Status.PASS, "Applied filter is verified");
+	}
+
+	public void FilterSetMulti(String SetName, String entityToSelect, String textToSearch, String Attribute1, String FilterType1, String textToFilter1, String Attribute2, String FilterType2, String textToFilter2) throws Throwable { 
+		this.createSet(SetName, entityToSelect, textToSearch);	
+		this.Set();
+		WebElement opn = this.openSet(SetName);
+		BasePage.click(opn);
+		ExtentTestManager.getTest().log(Status.PASS, SetName + " is Created");
+		this.expandSet();
+		this.ApplyMultipleFilter(Attribute1, FilterType1, textToFilter1, Attribute2, FilterType2, textToFilter2);
+		this.verifyAfterFilterdual(Attribute1,Attribute2,FilterType1,FilterType2,textToFilter1,textToFilter2);
+		ExtentTestManager.getTest().log(Status.PASS, "Applied filters are verified");
 	}
 
 	public void captureScreenshot(String screenShotName) throws IOException

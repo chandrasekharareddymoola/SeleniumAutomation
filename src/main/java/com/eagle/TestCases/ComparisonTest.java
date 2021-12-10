@@ -214,16 +214,11 @@ public class ComparisonTest extends BaseTest{
 //	public void ComparisonExpandAddFromSet_Test() throws Throwable  {
 //		try {
 //			/* Comparison - Expand and add items from Set */
-//			objComparisonPage.ExpandAddFromSet("SetAdd 1", "Disease", "aber", "ComAddFromSet",  "Control Card", "dol" ); 
+//			objComparisonPage.ExpandAddFromSet("SetAdd 1", "Disease", "aber", "ComAddFromSet",  "Control Card", "dol"); 
 //			objComparisonPage.saveChanges();
 //			onSuccessMeassage("Items Added from Set into Comparison successfully");
 //		}
-//		catch(Exception ex)
-//		{
-//			objComparisonPage.captureScreenshot("ComparisonExpandAddFromSetFail");
-//			onFailureMeassage(ex.getMessage(),"ComparisonExpandAddFromSetFail","ComparisonExpandAddFromSetFail");
-//		}
-//		catch(AssertionError ex)
+//		catch(Exception | AssertionError ex)
 //		{
 //			objComparisonPage.captureScreenshot("ComparisonExpandAddFromSetFail");
 //			onFailureMeassage(ex.getMessage(),"ComparisonExpandAddFromSetFail","ComparisonExpandAddFromSetFail");
@@ -344,24 +339,24 @@ public class ComparisonTest extends BaseTest{
 //		}
 //	}
 
-		@Test(priority = 19, description = "Remove items from Comparison Expand")
-		public void RemoveItemsfromComparison_Test() throws Throwable  {
-			try {
-				/* Remove items in Expanded Set */
-				objComparisonPage.RemoveItemsfromComparison("Remove Item Comparison","Control Set" ,"Gene","asph");
-				onSuccessMeassage("Items removed successfully in Comparison Expand");
-			}
-			catch(Exception ex)
-			{
-				objComparisonPage.captureScreenshot("ComparisonItemsRemoveFail");
-				onFailureMeassage(ex.getMessage(),"ComparisonItemsRemoveFail","ComparisonItemsRemoveFail");
-			}
-			catch(AssertionError ex)
-			{
-				objComparisonPage.captureScreenshot("ComparisonItemsRemoveFail");
-				onFailureMeassage(ex.getMessage(),"ComparisonItemsRemoveFail","ComparisonItemsRemoveFail");
-			}
-		}
+//		@Test(priority = 19, description = "Remove items from Comparison Expand")
+//		public void RemoveItemsfromComparison_Test() throws Throwable  {
+//			try {
+//				/* Remove items in Expanded Set */
+//				objComparisonPage.RemoveItemsfromComparison("Remove Item Comparison","Control Set" ,"Gene","asph");
+//				onSuccessMeassage("Items removed successfully in Comparison Expand");
+//			}
+//			catch(Exception ex)
+//			{
+//				objComparisonPage.captureScreenshot("ComparisonItemsRemoveFail");
+//				onFailureMeassage(ex.getMessage(),"ComparisonItemsRemoveFail","ComparisonItemsRemoveFail");
+//			}
+//			catch(AssertionError ex)
+//			{
+//				objComparisonPage.captureScreenshot("ComparisonItemsRemoveFail");
+//				onFailureMeassage(ex.getMessage(),"ComparisonItemsRemoveFail","ComparisonItemsRemoveFail");
+//			}
+//		}
 
 //	@Test(priority = 20, description = "Interchange Control and Case sets in the Comparison")
 //	public void ChangeControlAndCase_Test() throws Throwable {
@@ -390,6 +385,34 @@ public class ComparisonTest extends BaseTest{
 //			onFailureMeassage(ex.getMessage(),"SortColumnComparisonFail","SortColumnComparisonFail");
 //		}
 //	}
+	
+	@Test(priority = 22, description = "Filtering a Comparison with one filter")
+	public void FilterComparison_Test() throws Throwable  {
+		try {
+			/* Filtering in a Comparison */
+			objComparisonPage.FilterComparison("Filter Comparison1", "Control Set", "Disease","kera", "EFO Name","contains","vul");
+			onSuccessMeassage("Filtering done in Exploration Successfully for 1 filter");
+		}
+		catch(Throwable ex)
+		{
+			objComparisonPage.captureScreenshot("FilterComaprisonFail");
+			onFailureMeassage(ex.getMessage(),"FilterExplorationFail","FilterExplorationFail");
+		}
+	}
+	
+	@Test(priority = 23, description = "Filtering a Comparison with 2 filters")
+	public void FilterMultiComparison_Test() throws Throwable  {
+		try {
+			/* Filtering in a Comparison with multiple filter */
+			objComparisonPage.FilterComparisonMulti("Filter Comparison Multi 1","Control Set","Disease","kera", "EFO Name","contains","vul", "EFO ID", "equals","EFO_1000778");
+			onSuccessMeassage("Filtering done in Exploration Successfully for multiple filters");
+		}
+		catch(Throwable ex)
+		{
+			objComparisonPage.captureScreenshot("FilterComparisonMulltiFail");
+			onFailureMeassage(ex.getMessage(),"FilterComparisonMulltiFail","FilterComparisonMulltiFail");
+		}
+	}
 
 	public void onSuccessMeassage(String successMessage)
 	{

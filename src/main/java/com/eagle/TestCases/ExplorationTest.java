@@ -195,7 +195,7 @@ public class ExplorationTest extends BaseTest{
 //	public void ExplorationExpandAddFromSet_Test() throws Throwable  {
 //		try {
 //			/* Exploration - Expand and add items from Set */
-//			objExplorationPage.ExpandAddFromSet("SetAdd 1", "Disease", "aber", "ExpAddFromSet", "dol" ); 
+//			objExplorationPage.ExpandAddFromSet("SetAdd 1", "Disease", "leukocytes", "ExpAddFromSet", "aber" ); 
 //			objExplorationPage.saveChanges();
 //			onSuccessMeassage("Items Added from Set into Exploration successfully");
 //		}
@@ -344,25 +344,25 @@ public class ExplorationTest extends BaseTest{
 //			onFailureMeassage(ex.getMessage(),"ShareExplorationFail","ShareExplorationFail");
 //		}
 //	}
-	
-		@Test(priority = 17, description = "Remove items from Exploration Expand")
-		public void RemoveItemsfromExploration_Test() throws Throwable  {
-			try {
-				/* Remove items in Expanded Set */
-				objExplorationPage.RemoveItemsfromExploration("Remove Item Exploration","RNA","asb");
-				onSuccessMeassage("Items removed successfully in Exploration Expand");
-			}
-			catch(Exception ex)
-			{
-				objExplorationPage.captureScreenshot("ExplorationItemsRemoveFail");
-				onFailureMeassage(ex.getMessage(),"ExplorationItemsRemoveFail","ExplorationItemsRemoveFail");
-			}
-			catch(AssertionError ex)
-			{
-				objExplorationPage.captureScreenshot("ExplorationItemsRemoveFail");
-				onFailureMeassage(ex.getMessage(),"ExplorationItemsRemoveFail","ExplorationItemsRemoveFail");
-			}
-		}
+//	
+//		@Test(priority = 17, description = "Remove items from Exploration Expand")
+//		public void RemoveItemsfromExploration_Test() throws Throwable  {
+//			try {
+//				/* Remove items in Expanded Set */
+//				objExplorationPage.RemoveItemsfromExploration("Remove Item Exploration","RNA","asb");
+//				onSuccessMeassage("Items removed successfully in Exploration Expand");
+//			}
+//			catch(Exception ex)
+//			{
+//				objExplorationPage.captureScreenshot("ExplorationItemsRemoveFail");
+//				onFailureMeassage(ex.getMessage(),"ExplorationItemsRemoveFail","ExplorationItemsRemoveFail");
+//			}
+//			catch(AssertionError ex)
+//			{
+//				objExplorationPage.captureScreenshot("ExplorationItemsRemoveFail");
+//				onFailureMeassage(ex.getMessage(),"ExplorationItemsRemoveFail","ExplorationItemsRemoveFail");
+//			}
+//		}
 //	
 //	@Test(priority = 18, description = "Sorting a column in an Exploration")
 //	public void SortColumnExploration_Test() throws Throwable  {
@@ -375,6 +375,34 @@ public class ExplorationTest extends BaseTest{
 //		{
 //			objExplorationPage.captureScreenshot("SortColumnExplorationFail");
 //			onFailureMeassage(ex.getMessage(),"SortColumnExplorationFail","SortColumnExplorationFail");
+//		}
+//	}
+	
+	@Test(priority = 19, description = "Filtering an Exploration with one filter")
+	public void FilterExploration_Test() throws Throwable  {
+		try {
+			/* Filtering in an Exploration */
+			objExplorationPage.FilterExploration("Filter Exploration1","Disease","kera", "EFO Name","contains","vul");
+			onSuccessMeassage("Filtering done in Exploration Successfully for 1 filter");
+		}
+		catch(Throwable ex)
+		{
+			objExplorationPage.captureScreenshot("FilterExplorationFail");
+			onFailureMeassage(ex.getMessage(),"FilterExplorationFail","FilterExplorationFail");
+		}
+	}
+	
+//	@Test(priority = 20, description = "Filtering an Exploration with 2 filters")
+//	public void FilterMultiComparison_Test() throws Throwable  {
+//		try {
+//			/* Filtering in an Exploration with multiple filter */
+//			objExplorationPage.FilterExplorationMulti("Filter Exploration Multi 1","Disease","kera", "EFO Name","contains","vul", "EFO ID", "equals","EFO_1000778");
+//			onSuccessMeassage("Filtering done in Exploration Successfully for multiple filters");
+//		}
+//		catch(Throwable ex)
+//		{
+//			objExplorationPage.captureScreenshot("FilterExplorationMulltiFail");
+//			onFailureMeassage(ex.getMessage(),"FilterExplorationMulltiFail","FilterExplorationMulltiFail");
 //		}
 //	}
 

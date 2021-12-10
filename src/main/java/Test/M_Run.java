@@ -6,6 +6,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import com.eagle.ConfigUtils.ReadObject;
 import com.eagle.pages.BasePage;
 import com.eagle.selenium.data_scientist.ReadObject111;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -34,20 +37,31 @@ public class M_Run {
 	public static void main(String[]args) throws InterruptedException,
 	IOException, AWTException {
 
-		System.setProperty("webdriver.chrome.driver", "./Resources/chromedriver.exe");
-		webdriver = new ChromeDriver();
-		wait = new WebDriverWait(webdriver,60);
-		//		ChromeOptions option = new ChromeOptions();
-		//        option.addArguments("diable-extensions");
-		//        option.setExperimentalOption("useAutomationExtension",false);
-		//        option.addArguments("--start-maximized");   
-
-
-		webdriver.manage().window().maximize();
+//		System.setProperty("webdriver.chrome.driver", "./Resources/chromedriver.exe");
+//		webdriver = new ChromeDriver();
+//		wait = new WebDriverWait(webdriver,60);
+//				ChromeOptions option = new ChromeOptions();
+//		        option.addArguments("diable-extensions");
+//		        option.setExperimentalOption("useAutomationExtension",false);
+//		        option.addArguments("--start-maximized");   
+//
+//
+//		webdriver.manage().window().maximize();
+		
+		WebDriverManager.chromedriver().setup();
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("start-maximized"); 
+		options.addArguments("enable-automation"); 
+		options.addArguments("--no-sandbox"); 
+		options.addArguments("--disable-infobars");
+		options.addArguments("--disable-dev-shm-usage");
+		options.addArguments("--disable-browser-side-navigation"); 
+		options.addArguments("--disable-gpu"); 
+		webdriver = new ChromeDriver(options); 
 
 		ReadObject object = new ReadObject(); 
 		Properties configObject =  object.getObjectRepositoty();
-
+		wait = new WebDriverWait(webdriver,60);
 
 		webdriver.get("https://ediscover-qa.edatascientist.com/");
 
@@ -65,6 +79,7 @@ public class M_Run {
 		Thread.sleep(5000);
 
 		WebElement Home = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@data-icon-name='Home']")));
+		
 		WebElement myData = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@data-icon-name='DocumentSet']")));
 
 		//		myData.click();
@@ -73,8 +88,73 @@ public class M_Run {
 //		WebElement setAdd =	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div//span[contains(text(),'Set')]"))); setAdd.click();
 //		WebElement setUncategorized = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div//span[contains(text(),'Uncategorized')]")));
 //		WebElement setName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div//input[@type='text']")));
-//
-//		customclick(setName); 
+		
+		WebElement setName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='ESFIle 1']")));
+		customclick(setName); 
+		
+		WebElement expand = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@data-icon-name='MiniExpand']")));
+		customclick(expand);
+		Thread.sleep(30000);
+		WebElement edit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@data-icon-name='Edit']")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@data-icon-name='Edit']")));
+//		customclick(edit);
+		
+//		WebElement searchBox = webdriver.findElement(By.xpath("//*[@type='text']"));
+//		searchBox.click();
+//		searchBox.sendKeys("due");
+//		Thread.sleep(5000);
+//		
+//		List <WebElement>  Rows = webdriver.findElements(By.xpath("//*[@class='TableRowDefault__bodyRow___1_m1h']"));
+//		int NoOfRows = Rows.size();
+//		System.out.println(NoOfRows);
+//		for(int i=1 ; i< NoOfRows ;i++) {
+//		WebElement tableRows = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"]")));
+//		System.out.println(tableRows.getText());
+//		System.out.println(tableRows.getText().contains("due"));
+		
+		
+		WebElement Filter = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-icon-name='Filter']")));
+		
+		Filter.click();
+		
+		WebElement EditFilterText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Edit filters']")));
+		
+		WebElement SelectAnAttribute = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@role='option' and text()='Select an attribute']")));
+		
+		WebElement SelectFilterType = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@role='option' and text()='Select filter type']")));
+		
+		WebElement Value = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@role='gridcell']//*[@type='text']")));
+		
+		SelectAnAttribute.click();
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@type='button']//*[text()='EFO Name']"))).click();
+		
+		SelectFilterType.click();
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@type='button']//*[text()='Contains']"))).click();
+		
+		Value.click();
+		
+		Value.sendKeys("vul");
+		
+		WebElement Add = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-icon-name='Add']")));
+		
+		WebElement Done = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Done']")));
+		
+		Done.click();
+				
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 //		Thread.sleep(2000); 
 //		setName.sendKeys(Keys.CONTROL + "a");
 //		setName.sendKeys(Keys.DELETE); 
@@ -94,58 +174,58 @@ public class M_Run {
 //		searchBox.sendKeys(searchTextTobeEntered);
 		
 
-		Thread.sleep(4000);
-
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='NAME']")));
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(("(//*[@class='PaginationControls__message___Zodph'])[2]//b[2]"))));
-
-		String noOfPages = webdriver.findElement(By.xpath( ("(//*[@class='PaginationControls__message___Zodph'])[2]//b[2]"))).getText();
-		System.out.println(noOfPages);
-		
-
-		if (webdriver.findElements(By.xpath("//*[text()='"+ configObject.getProperty("setToDelete")+"']")).size() != 0) {
-		WebElement a = webdriver.findElement(By.xpath("//*[text()='"+ configObject.getProperty("setToDelete")+"']"));
-		((JavascriptExecutor)webdriver).executeScript("arguments[0].scrollIntoView();", a);
-		System.out.println(noOfPages);
-		WebElement threeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+ configObject.getProperty("setToDelete")+"']//parent::div//parent::div//child::button")));
-		threeButton.click();
-		System.out.println(noOfPages);
-		WebElement clickDelete = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Delete']")));
-		clickDelete.click();
-		System.out.println(noOfPages);
-		WebElement cancelDelete = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Cancel']")));
-		WebElement confirmDelete = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Delete']")));
-		confirmDelete.click();
-		}
-
-		else if (webdriver.findElements(By.xpath("//*[text()='"+ configObject.getProperty("setToDelete")+"']")).size()== 0) {
-
-		for (int i=0; i<Integer.valueOf(noOfPages);i++) {
-
-		if (webdriver.findElements(By.xpath("//*[text()='"+ configObject.getProperty("setToDelete")+"']")).size() != 0) {
-			
-			WebElement a = webdriver.findElement(By.xpath("//*[text()='"+ configObject.getProperty("setToDelete")+"']"));
-			((JavascriptExecutor)webdriver).executeScript("arguments[0].scrollIntoView();", a);
-			
-			WebElement threeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+ configObject.getProperty("setToDelete")+"']//parent::div//parent::div//child::button")));
-			threeButton.click();
-			WebElement clickDelete = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Delete']")));
-			clickDelete.click();
-			WebElement cancelDelete = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Cancel']")));
-			WebElement confirmDelete = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Delete']")));
-			confirmDelete.click();
-			break;
-		}
-		else {
-			webdriver.findElement(By.xpath("//*[@data-icon-name='Forward']")).click();
-			Thread.sleep(2000);
-		}
-		}
-		}
-		else  {
-
-		System.out.print("The set to be deleted is not found");
-		}
+//		Thread.sleep(4000);
+//
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='NAME']")));
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(("(//*[@class='PaginationControls__message___Zodph'])[2]//b[2]"))));
+//
+//		String noOfPages = webdriver.findElement(By.xpath( ("(//*[@class='PaginationControls__message___Zodph'])[2]//b[2]"))).getText();
+//		System.out.println(noOfPages);
+//		
+//
+//		if (webdriver.findElements(By.xpath("//*[text()='"+ configObject.getProperty("setToDelete")+"']")).size() != 0) {
+//		WebElement a = webdriver.findElement(By.xpath("//*[text()='"+ configObject.getProperty("setToDelete")+"']"));
+//		((JavascriptExecutor)webdriver).executeScript("arguments[0].scrollIntoView();", a);
+//		System.out.println(noOfPages);
+//		WebElement threeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+ configObject.getProperty("setToDelete")+"']//parent::div//parent::div//child::button")));
+//		threeButton.click();
+//		System.out.println(noOfPages);
+//		WebElement clickDelete = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Delete']")));
+//		clickDelete.click();
+//		System.out.println(noOfPages);
+//		WebElement cancelDelete = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Cancel']")));
+//		WebElement confirmDelete = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Delete']")));
+//		confirmDelete.click();
+//		}
+//
+//		else if (webdriver.findElements(By.xpath("//*[text()='"+ configObject.getProperty("setToDelete")+"']")).size()== 0) {
+//
+//		for (int i=0; i<Integer.valueOf(noOfPages);i++) {
+//
+//		if (webdriver.findElements(By.xpath("//*[text()='"+ configObject.getProperty("setToDelete")+"']")).size() != 0) {
+//			
+//			WebElement a = webdriver.findElement(By.xpath("//*[text()='"+ configObject.getProperty("setToDelete")+"']"));
+//			((JavascriptExecutor)webdriver).executeScript("arguments[0].scrollIntoView();", a);
+//			
+//			WebElement threeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+ configObject.getProperty("setToDelete")+"']//parent::div//parent::div//child::button")));
+//			threeButton.click();
+//			WebElement clickDelete = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Delete']")));
+//			clickDelete.click();
+//			WebElement cancelDelete = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Cancel']")));
+//			WebElement confirmDelete = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Delete']")));
+//			confirmDelete.click();
+//			break;
+//		}
+//		else {
+//			webdriver.findElement(By.xpath("//*[@data-icon-name='Forward']")).click();
+//			Thread.sleep(2000);
+//		}
+//		}
+//		}
+//		else  {
+//
+//		System.out.print("The set to be deleted is not found");
+//		}
 
 
 //		WebElement addAll = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div//span[contains(text(),'Add all items')]"))); 

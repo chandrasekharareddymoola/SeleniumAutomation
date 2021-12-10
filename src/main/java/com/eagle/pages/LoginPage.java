@@ -22,7 +22,16 @@ public class LoginPage extends BasePage{
 	public WebElement password;
 
 	@FindBy(name = "submit")
-	public WebElement submit;		
+	public WebElement submit;	
+
+	@FindBy(xpath = "//*[@role='heading' and text()='Enter password']")
+	public WebElement MicrosoftPassText;	
+
+	@FindBy(xpath = "//*[@name='passwd']")
+	public WebElement MicrosoftPass;
+
+	@FindBy(xpath = "//*[@type='submit']")
+	public WebElement SignIn;	
 
 	@FindBy(xpath = "//div//label[contains(text(),'Copyright')]")
 	public WebElement copyRightIdentifier;		
@@ -32,6 +41,8 @@ public class LoginPage extends BasePage{
 
 	@FindBy(name = "//*[text()='Error while initializing catalog']")
 	public WebElement catalogInitializeError;
+
+
 
 
 	public LoginPage(){ 		 
@@ -64,30 +75,31 @@ public class LoginPage extends BasePage{
 	public void loginTo() throws Throwable{
 		try {
 			this.setCredentials();
-			this.clickLogin();	     
+			this.clickLogin();
 			boolean iden = true;
-			outerloop:
-			do
-			{
-				try {	    		  
-					BasePage.click(copyRightIdentifier);
-					iden = false;	  
-				}
-				catch(Exception ex) {
-					Thread.sleep(5000);
-					if(catalogInitializeError.isDisplayed()) {
-						throw new InterruptedException ("Error while initializing catalog");
-						}
-					try {
-						if (catalogInitializeError.isDisplayed()) {
-							break outerloop;
-						}
+//			outerloop:
+				do
+				{
+					try {	    		  
+						BasePage.click(copyRightIdentifier);
+						iden = false;	  
 					}
-					catch (Exception et){
-						Thread.sleep(5000);}	 
-				}
-			}	 
-			while(iden);	         
+					catch(Exception ex) {
+						Thread.sleep(5000);
+						if(catalogInitializeError.isDisplayed()) {
+							throw new InterruptedException ("Error while initializing catalog");
+						}
+						//						try {
+						//							if (catalogInitializeError.isDisplayed()) {
+						//								break outerloop;
+						//							}
+						//						}
+						//						catch (Exception et){
+						//							Thread.sleep(5000);
+						//						}	
+					}
+				}	 
+				while(iden);	         
 		}
 		catch(Exception ex)
 		{

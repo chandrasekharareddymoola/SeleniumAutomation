@@ -72,6 +72,7 @@ public class BaseTest {
 		}
 	}
 
+
 	public static void LoadConfigurationValues() throws IOException                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
 	{
 		ReadExcelFile rd = new ReadExcelFile();	
@@ -90,6 +91,7 @@ public class BaseTest {
         }
 	}
 	
+
 	public void closeBroswer()
 	{
 		webdriver.quit();
