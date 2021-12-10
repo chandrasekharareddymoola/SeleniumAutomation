@@ -28,14 +28,14 @@ public class InvestigationTest extends BaseTest {
 		
 		try {
 			/* To initiate the creation of Investigation */		
-			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();	
+			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();				
 			
-			System.out.print(functionName);
 			String value = this.getConfiguration().get(functionName);
 			String[] invParameters =value.split(",");
-			String invName = invParameters[0]+dtText;
+			String invName = invParameters[0].trim()+dtText;
+			String invDescription = invParameters[1].trim();
 			
-			objInvestigationPage.createInvestigation(invName,invParameters[1]);
+			objInvestigationPage.createInvestigation(invName,invDescription);
 			onSuccessMeassage("Investigation is successfully created");
 		}
 		catch(Exception ex)
