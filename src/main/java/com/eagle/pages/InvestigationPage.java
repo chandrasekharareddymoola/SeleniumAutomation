@@ -101,8 +101,10 @@ public class InvestigationPage extends BasePage{
 	public WebElement suggestedUsers;
 
 	@FindBy(xpath = "//i[@data-icon-name='Share']")
-	public WebElement share;
+	public WebElement share;	
 
+	@FindBy(xpath = "//*[@class='ms-List' and @role='presentation']")
+	public WebElement investigationList;
 
 	public InvestigationPage(){ 		 
 		PageFactory.initElements(driver, this); 
@@ -149,15 +151,18 @@ public class InvestigationPage extends BasePage{
 	}  
 
 
-	public void openItemFromList(String inv)
+	public void openItemFromList(String investigationName)
 	{
-		try {	    		
+		try {	
+			outerloop:
 			do{ 
+				BasePage.waitforAnElement(investigationList);
 				for (WebElement element : invGridItems) {
 					if(element.isDisplayed() == false)  {scrollIntoView(element);}	    				
 					String textFromGrid = element.getText();	    				
-					if(inv.equals(textFromGrid)) {		    					
+					if(investigationName.equals(textFromGrid)) {		    					
 						BasePage.click(element);	
+						break outerloop;
 					}		    				
 				}
 				BasePage.click(forward); 
@@ -167,19 +172,19 @@ public class InvestigationPage extends BasePage{
 		catch(Exception ex) {}
 	}
 
-	public void selectItemForDeletion(String inv)
+	public void selectItemFortheList(String investigationName)
 	{
 		try {	
 			outerloop:
 				do{ 
-					for (WebElement element : invGridRows) { 
+					for (WebElement element : invGridItems) { 
 						if(element.isDisplayed() == false)  {scrollIntoView(element);}	    				
 						String textFromGrid = element.getText();	    				
-						if(textFromGrid.contains(inv)) {
-							//WebElement parent = (WebElement) ((JavascriptExecutor) driver).executeScript(
-							//"return arguments[0].parentNode;", element);
-							WebElement deleteOption = element.findElement(By.tagName("button"));	    					
-							deleteOption.click();
+						if(textFromGrid.equals(investigationName)) {
+							WebElement parent = (WebElement) ((JavascriptExecutor) driver).executeScript(
+							"return arguments[0].parentNode;", element);
+							WebElement threeDot = parent.findElement(By.tagName("button"));	    					
+							threeDot.click();
 							break outerloop;
 						}
 					}
@@ -206,8 +211,8 @@ public class InvestigationPage extends BasePage{
 	public void editInvestigation(String inv, String invTitle, String invDescription) throws InterruptedException, AWTException{
 		this.clickInvestigationIcon();	  
 		this.openItemFromList(inv);	    	
-		modifyTitle(invTitle);	    	
-		modifyDescription(invDescription);	    	
+		this.modifyTitle(invTitle);	    	
+		this.modifyDescription(invDescription);	    	
 	}	
 
 	public void viewInvestigation(String inv) throws InterruptedException, AWTException{
@@ -256,7 +261,7 @@ public class InvestigationPage extends BasePage{
 
 	public void deleteInvestigation(String invToBeDeleted) throws Exception {
 		this.clickInvestigationIcon();	 
-		selectItemForDeletion(invToBeDeleted);
+		selectItemFortheList(invToBeDeleted);
 		BasePage.click(deleteIcon);
 		BasePage.click(deleteIcon);	 
 		//Add code to confirm deletion is happened or not	    	
@@ -265,7 +270,7 @@ public class InvestigationPage extends BasePage{
 
 	public void shareInvestigation(String invToBeShared, String personToBeShared) throws Exception{
 		this.clickInvestigationIcon();	 
-		selectItemForDeletion(invToBeShared);
+		selectItemFortheList(invToBeShared);
 		BasePage.click(shareIcon);
 		BasePage.enterText(selectPersonToShare,personToBeShared);	
 		BasePage.click(suggestedUsers);

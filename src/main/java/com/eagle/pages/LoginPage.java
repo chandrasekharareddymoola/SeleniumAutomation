@@ -42,9 +42,6 @@ public class LoginPage extends BasePage{
 	@FindBy(name = "//*[text()='Error while initializing catalog']")
 	public WebElement catalogInitializeError;
 
-
-
-
 	public LoginPage(){ 		 
 		PageFactory.initElements(driver, this); 
 	}
@@ -77,7 +74,6 @@ public class LoginPage extends BasePage{
 			this.setCredentials();
 			this.clickLogin();
 			boolean iden = true;
-//			outerloop:
 				do
 				{
 					try {	    		  
@@ -89,14 +85,6 @@ public class LoginPage extends BasePage{
 						if(catalogInitializeError.isDisplayed()) {
 							throw new InterruptedException ("Error while initializing catalog");
 						}
-						//						try {
-						//							if (catalogInitializeError.isDisplayed()) {
-						//								break outerloop;
-						//							}
-						//						}
-						//						catch (Exception et){
-						//							Thread.sleep(5000);
-						//						}	
 					}
 				}	 
 				while(iden);	         

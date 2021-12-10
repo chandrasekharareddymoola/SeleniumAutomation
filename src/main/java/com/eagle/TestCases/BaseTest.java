@@ -4,6 +4,9 @@ import java.awt.AWTException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Properties;
 
@@ -33,14 +36,26 @@ public class BaseTest {
 
 	private static WebDriver webdriver;
 	protected static BasePage basePage;
+	private static String dtTime;
 	private static LinkedHashMap<String, String> keywordValues = new LinkedHashMap<String, String>();
 
 	public WebDriver getDriver() {
 		return webdriver;
 	}
 	
+	public String getDateTime() {
+		return dtTime;
+	}
+	
     public LinkedHashMap<String, String> getConfiguration(){return keywordValues;}
 
+    public static void getCurrentDate()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+	{
+	    Date dt = new Date();
+		DateFormat dtFrmt = new SimpleDateFormat("ddMMMyyyyHHmmss");
+		dtTime = dtFrmt.format(dt);
+	}
+	
 
 	@BeforeClass
 	public static void launchApplication() throws IOException, InterruptedException, AWTException{
@@ -68,6 +83,7 @@ public class BaseTest {
 			basePage.setWebDriver(webdriver);	
 			basePage.setUserName(email);
 			basePage.setPassword(emailPass);
+			getCurrentDate();
 			LoadConfigurationValues();
 		}
 	}

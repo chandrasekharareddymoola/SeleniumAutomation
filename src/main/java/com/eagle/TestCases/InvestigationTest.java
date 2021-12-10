@@ -13,11 +13,7 @@ import com.eagle.pages.InvestigationPage;
 public class InvestigationTest extends BaseTest {
 	
 	InvestigationPage objInvestigationPage;	
-	
-	Date dt = new Date();
-	DateFormat dtFrmt = new SimpleDateFormat("ddMMMyyyyHHmmss");
-	String dtText = dtFrmt.format(dt);
-	
+
 	@BeforeClass
 	public void beforeClass()  {	
 			objInvestigationPage = new InvestigationPage();		
@@ -32,7 +28,7 @@ public class InvestigationTest extends BaseTest {
 			
 			String value = this.getConfiguration().get(functionName);
 			String[] invParameters =value.split(",");
-			String invName = invParameters[0].trim()+dtText;
+			String invName = invParameters[0].trim() + this.getDateTime();
 			String invDescription = invParameters[1].trim();
 			
 			objInvestigationPage.createInvestigation(invName,invDescription);
@@ -50,7 +46,11 @@ public class InvestigationTest extends BaseTest {
 	public void ViewInvestigation_Test() throws InterruptedException, IOException  {
 		try {
 			 /* To view the Investigation */
-			 objInvestigationPage.viewInvestigation("Investigation 1");
+			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();		
+			String value = this.getConfiguration().get(functionName);			
+			String invName = value.trim();
+				
+			 objInvestigationPage.viewInvestigation(invName);
 			 onSuccessMeassage("Investigation is successfully opened");
 		}
 		catch(Exception ex)
@@ -59,13 +59,19 @@ public class InvestigationTest extends BaseTest {
 			onFailureMeassage(ex.getMessage(),"viewInvFail");
 		}
 	}
-		
 		 
 	@Test(priority = 2, description = "Edit Investigation")
 	public void EditInvestigation_Test() throws InterruptedException, IOException  {
 		try {
 			 /* To edit the Investigation */
-			 objInvestigationPage.editInvestigation("Investigation 1","Modified title","modified description");
+			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();		
+			String value = this.getConfiguration().get(functionName);
+			String[] invParameters =value.split(",");
+			String olvInvName = invParameters[0].trim();
+			String newInvName = invParameters[1].trim() + this.getDateTime();
+			String invDescription = invParameters[2].trim();
+			
+			 objInvestigationPage.editInvestigation(olvInvName,newInvName,invDescription);
 			 onSuccessMeassage("Investigation is successfully modified");
 		}
 		catch(Exception ex)
@@ -78,8 +84,14 @@ public class InvestigationTest extends BaseTest {
 	@Test(priority = 3, description = "Link Set With Investigation")
 	public void LinkSetWithInvestigation_Test() throws InterruptedException, IOException  {
 		try {                                              
-			 /* To Link set to an Investigation */
-			  objInvestigationPage.linkSettoInvestigation("Modified title" ,"UntitledSet-20 Oct 2021");
+			 /* To Link set to an Investigation */		
+			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();		
+			String value = this.getConfiguration().get(functionName);
+			String[] invParameters =value.split(",");
+			String invName = invParameters[0].trim();
+			String setTobeLinked = invParameters[1].trim();
+			
+			  objInvestigationPage.linkSettoInvestigation(invName ,setTobeLinked);
 			  onSuccessMeassage("Investigation is successfully linked with set");
 		}
 		catch(Exception ex)
@@ -90,12 +102,17 @@ public class InvestigationTest extends BaseTest {
 	}
 	
 	
-	@Test(priority = 4, description = "Link Exploration With Investigation")
+	@Test(priority = 0, description = "Link Exploration With Investigation")
 	public void LinkExplorationWithInvestigation_Test() throws InterruptedException, IOException  {                                                   
 		try {
 			/* To Link exploration to an Investigation */
+			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();		
+			String value = this.getConfiguration().get(functionName);
+			String[] invParameters =value.split(",");
+			String invName = invParameters[0].trim();
+			String expTobeLinked = invParameters[1].trim();
 			   //ERROR //		  
-			  //objInvestigationPage.linkExplorationtoInvestigation("Modified title","");
+			  objInvestigationPage.linkExplorationtoInvestigation(invName,expTobeLinked);
 			  onSuccessMeassage("Investigation is successfully linked with Exploration");
 			}
 		catch(Exception ex)
@@ -109,7 +126,13 @@ public class InvestigationTest extends BaseTest {
 	public void LinkComparisonWithInvestigation_Test() throws InterruptedException, IOException  {
 		try {
 		   /* To Link Comparison to an Investigation */
-		  //objInvestigationPage.linkComparisontoInvestigation("Modified title","Unique");  
+			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();		
+			String value = this.getConfiguration().get(functionName);
+			String[] invParameters =value.split(",");
+			String invName = invParameters[0].trim();
+			String compTobeLinked = invParameters[1].trim();
+			
+		  objInvestigationPage.linkComparisontoInvestigation(invName,compTobeLinked);  
 			 onSuccessMeassage("Investigation is successfully linked with Comparison");
 		}
 		catch(Exception ex)
@@ -125,7 +148,13 @@ public class InvestigationTest extends BaseTest {
 	public void ShareInvestigation_Test() throws InterruptedException, IOException  {
 		try {
 			/* To share the Investigation */
-			objInvestigationPage.shareInvestigation("Investigation 11", "divya.devanathan@eaglegenomics.com");
+			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();		
+			String value = this.getConfiguration().get(functionName);
+			String[] invParameters =value.split(",");
+			String invName = invParameters[0].trim();
+			String toBeSharedWith = invParameters[1].trim();
+			
+			objInvestigationPage.shareInvestigation(invName,toBeSharedWith);
 			 onSuccessMeassage("Investigation is successfully shared with user");
 		}
 		catch(Exception ex)
@@ -142,8 +171,11 @@ public class InvestigationTest extends BaseTest {
 		try 
 	  	{
 			/* To delete the Investigation */
-			//objInvestigationPage.deleteInvestigation("Investigation By DevTeam");	
-			objInvestigationPage.deleteInvestigation("uu");	
+			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();		
+			String value = this.getConfiguration().get(functionName);			
+			String invName =value.trim();
+			
+			objInvestigationPage.deleteInvestigation(invName);	
 			onSuccessMeassage("Investigation is successfully deleted from the list");
 		}
 		catch(Exception ex)
