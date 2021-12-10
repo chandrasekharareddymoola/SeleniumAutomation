@@ -89,7 +89,7 @@ public class M_Run {
 //		WebElement setUncategorized = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div//span[contains(text(),'Uncategorized')]")));
 //		WebElement setName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div//input[@type='text']")));
 		
-		WebElement setName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Remove Item Set']")));
+		WebElement setName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='ESFIle 1']")));
 		customclick(setName); 
 		
 		WebElement expand = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@data-icon-name='MiniExpand']")));
@@ -99,20 +99,50 @@ public class M_Run {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@data-icon-name='Edit']")));
 //		customclick(edit);
 		
-		WebElement searchBox = webdriver.findElement(By.xpath("//*[@type='text']"));
-		searchBox.click();
-		searchBox.sendKeys("due");
-		Thread.sleep(5000);
+//		WebElement searchBox = webdriver.findElement(By.xpath("//*[@type='text']"));
+//		searchBox.click();
+//		searchBox.sendKeys("due");
+//		Thread.sleep(5000);
+//		
+//		List <WebElement>  Rows = webdriver.findElements(By.xpath("//*[@class='TableRowDefault__bodyRow___1_m1h']"));
+//		int NoOfRows = Rows.size();
+//		System.out.println(NoOfRows);
+//		for(int i=1 ; i< NoOfRows ;i++) {
+//		WebElement tableRows = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"]")));
+//		System.out.println(tableRows.getText());
+//		System.out.println(tableRows.getText().contains("due"));
 		
-		List <WebElement>  Rows = webdriver.findElements(By.xpath("//*[@class='TableRowDefault__bodyRow___1_m1h']"));
-		int NoOfRows = Rows.size();
-		System.out.println(NoOfRows);
-		for(int i=1 ; i< NoOfRows ;i++) {
-		WebElement tableRows = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"]")));
-		System.out.println(tableRows.getText());
-		System.out.println(tableRows.getText().contains("due"));
-		}
 		
+		WebElement Filter = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-icon-name='Filter']")));
+		
+		Filter.click();
+		
+		WebElement EditFilterText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Edit filters']")));
+		
+		WebElement SelectAnAttribute = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@role='option' and text()='Select an attribute']")));
+		
+		WebElement SelectFilterType = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@role='option' and text()='Select filter type']")));
+		
+		WebElement Value = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@role='gridcell']//*[@type='text']")));
+		
+		SelectAnAttribute.click();
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@type='button']//*[text()='EFO Name']"))).click();
+		
+		SelectFilterType.click();
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@type='button']//*[text()='Contains']"))).click();
+		
+		Value.click();
+		
+		Value.sendKeys("vul");
+		
+		WebElement Add = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-icon-name='Add']")));
+		
+		WebElement Done = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Done']")));
+		
+		Done.click();
+				
 		
 		
 		

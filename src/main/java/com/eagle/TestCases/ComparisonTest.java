@@ -225,25 +225,25 @@ public class ComparisonTest extends BaseTest{
 //		}
 //	}
 //
-	@Test(priority = 12, description = "Comparison - Expand and add items from File")
-	public void ComparisonExpandAddFromFile_Test() throws Throwable  {
-		try {
-			/* Comparison - Expand and add items from File */
-			objComparisonPage.ExpandAddFromFile("ComAddfromFile 1","Control Card", "Disease","kera","Disease", "C:\\Users\\MugunthRaman\\git\\EagleAutomation\\Resources\\Q4 - Upload file - 1 (2).xlsx", "Q4 - Upload file - 1 (2).xlsx");
-			objComparisonPage.saveChanges();
-			onSuccessMeassage("Items Added from File into Comparison successfully");
-		}
-		catch(Exception ex)
-		{
-			objComparisonPage.captureScreenshot("ComparisonExpandAddFromFileFail");
-			onFailureMeassage(ex.getMessage(),"ComparisonExpandAddFromFileFail","ComparisonExpandAddFromFileFail");
-		}
-		catch(AssertionError ex)
-		{
-			objComparisonPage.captureScreenshot("ComparisonExpandAddFromFileFail");
-			onFailureMeassage(ex.getMessage(),"ComparisonExpandAddFromFileFail","ComparisonExpandAddFromFileFail");
-		}
-	}
+//	@Test(priority = 12, description = "Comparison - Expand and add items from File")
+//	public void ComparisonExpandAddFromFile_Test() throws Throwable  {
+//		try {
+//			/* Comparison - Expand and add items from File */
+//			objComparisonPage.ExpandAddFromFile("ComAddfromFile 1","Control Card", "Disease","kera","Disease", "C:\\Users\\MugunthRaman\\git\\EagleAutomation\\Resources\\Q4 - Upload file - 1 (2).xlsx", "Q4 - Upload file - 1 (2).xlsx");
+//			objComparisonPage.saveChanges();
+//			onSuccessMeassage("Items Added from File into Comparison successfully");
+//		}
+//		catch(Exception ex)
+//		{
+//			objComparisonPage.captureScreenshot("ComparisonExpandAddFromFileFail");
+//			onFailureMeassage(ex.getMessage(),"ComparisonExpandAddFromFileFail","ComparisonExpandAddFromFileFail");
+//		}
+//		catch(AssertionError ex)
+//		{
+//			objComparisonPage.captureScreenshot("ComparisonExpandAddFromFileFail");
+//			onFailureMeassage(ex.getMessage(),"ComparisonExpandAddFromFileFail","ComparisonExpandAddFromFileFail");
+//		}
+//	}
 //
 //	@Test(priority = 13, description = "Comparison - Create with multiple Case Cards")
 //	public void ComparisonCreateMultipleCaseCards_Test() throws Throwable  {
@@ -385,6 +385,34 @@ public class ComparisonTest extends BaseTest{
 //			onFailureMeassage(ex.getMessage(),"SortColumnComparisonFail","SortColumnComparisonFail");
 //		}
 //	}
+	
+	@Test(priority = 22, description = "Filtering a Comparison with one filter")
+	public void FilterComparison_Test() throws Throwable  {
+		try {
+			/* Filtering in a Comparison */
+			objComparisonPage.FilterComparison("Filter Comparison1", "Control Set", "Disease","kera", "EFO Name","contains","vul");
+			onSuccessMeassage("Filtering done in Exploration Successfully for 1 filter");
+		}
+		catch(Throwable ex)
+		{
+			objComparisonPage.captureScreenshot("FilterComaprisonFail");
+			onFailureMeassage(ex.getMessage(),"FilterExplorationFail","FilterExplorationFail");
+		}
+	}
+	
+	@Test(priority = 23, description = "Filtering a Comparison with 2 filters")
+	public void FilterMultiComparison_Test() throws Throwable  {
+		try {
+			/* Filtering in a Comparison with multiple filter */
+			objComparisonPage.FilterComparisonMulti("Filter Comparison Multi 1","Control Set","Disease","kera", "EFO Name","contains","vul", "EFO ID", "equals","EFO_1000778");
+			onSuccessMeassage("Filtering done in Exploration Successfully for multiple filters");
+		}
+		catch(Throwable ex)
+		{
+			objComparisonPage.captureScreenshot("FilterComparisonMulltiFail");
+			onFailureMeassage(ex.getMessage(),"FilterComparisonMulltiFail","FilterComparisonMulltiFail");
+		}
+	}
 
 	public void onSuccessMeassage(String successMessage)
 	{

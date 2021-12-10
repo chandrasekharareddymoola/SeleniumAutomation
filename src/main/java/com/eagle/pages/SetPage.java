@@ -137,6 +137,9 @@ public class SetPage extends BasePage{
 	@FindBy(xpath = "//i[@data-icon-name='Forward']")
 	public WebElement forward;
 
+	@FindBy(xpath = "//i[@data-icon-name='Back']")
+	public WebElement backward;
+
 	@FindBy(xpath = "//span[contains(text(),'Add items from a set')]")
 	public WebElement addFromSet;	
 
@@ -235,10 +238,35 @@ public class SetPage extends BasePage{
 
 	@FindBy(xpath = "//*[@class='CatalogSearchResults__itemName___1PfVJ']")
 	public List <WebElement> ItemsInFile;
-	
+
 	@FindBy(xpath = "//*[@data-automationid='DetailsList']")
 	public WebElement FileDataList;
+
+	@FindBy(xpath = "//*[@data-icon-name='Filter']")
+	public WebElement FilterIconInExpand;
+
+	@FindBy(xpath = "//*[text()='Edit filters']")
+	public WebElement EditFilterText;
+
+	@FindBy(xpath = "//*[@role='option' and text()='Select an attribute']")
+	public WebElement SelectAnAttribute;
+
+	@FindBy(xpath = "//*[@role='option' and text()='Select filter type']")
+	public WebElement SelectFilterType;
+
+	@FindBy(xpath = "(//*[@role='gridcell']//*[@type='text'])[1]")
+	public WebElement valueForFilter;
 	
+	@FindBy(xpath = "(//*[@role='gridcell']//*[@type='text'])[2]")
+	public WebElement valueForFilter2;
+
+	@FindBy(xpath = "(//*[@data-icon-name='Add'])[1]")
+	public WebElement AddFilter;
+	
+	@FindBy(xpath = "//*[text()='Done']")
+	public WebElement DoneButton;
+
+
 
 	//Page level functions on the objects
 	WebDriverWait wait = new WebDriverWait(driver, 5);
@@ -758,7 +786,7 @@ public class SetPage extends BasePage{
 			List <String> FileItems = getItemsWhileAddingFromFile();
 			BasePage.click(addAll);
 			ExtentTestManager.getTest().log(Status.PASS, "Added from file");
-			
+
 			return FileItems;
 		}
 		catch (Exception addFromFileFail) {
@@ -1061,7 +1089,7 @@ public class SetPage extends BasePage{
 				do {
 					try {
 						int NoOfRows = RowsintableExpand.size();
-						for(int i=1 ; i< NoOfRows ;i++) {
+						for(int i=1 ; i<= NoOfRows ;i++) {
 							WebElement tableRows = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"]")));
 							String valuesInRows = tableRows.getText().toLowerCase();
 							String SearchInSetLowerCase = SearchInSet.toLowerCase();				
@@ -1092,6 +1120,8 @@ public class SetPage extends BasePage{
 		}
 	}
 
+
+
 	public List<String> getItemsWhileCreatingSet() throws InterruptedException, AWTException { 
 		try {
 			int NoOfItems = ItemsInSet.size();
@@ -1110,7 +1140,7 @@ public class SetPage extends BasePage{
 		}
 	}
 
-	
+
 	public List<String> getItemsWhileAddingFromCatalog() throws InterruptedException, AWTException { 
 		try {
 			int NoOfItems = ItemsInCatalog.size();
@@ -1128,7 +1158,7 @@ public class SetPage extends BasePage{
 			throw w;
 		}
 	}
-	
+
 	public List<String> getItemsWhileAddingFromFile() throws InterruptedException, AWTException { 
 		try {
 			int NoOfItems = ItemsInFile.size();
@@ -1207,7 +1237,6 @@ public class SetPage extends BasePage{
 			throw r;
 		}
 	}
-
 
 	public void searchInSetExpand(String setToCreate, String entityToSelect, String textToSearch, String SearchInSet) throws Throwable { 
 		try {
@@ -1538,6 +1567,262 @@ public class SetPage extends BasePage{
 		else{
 			System.out.println("Set shared failed");
 		}
+	}
+
+	public void ApplyFilter(String Attribute, String FilterType, String textToFilter) throws Throwable { 
+		try {
+		BasePage.click(FilterIconInExpand);
+		BasePage.waitforAnElement(EditFilterText);
+		BasePage.click(SelectAnAttribute);
+		WebElement AttributeToSelect = driver.findElement(By.xpath("//*[@type='button']//*[text()='"+Attribute+"']"));
+		BasePage.click(AttributeToSelect);
+		BasePage.click(SelectFilterType);
+		WebElement FilterTypeToApply = null;
+		if (FilterType.equalsIgnoreCase("Contains")) {
+			FilterTypeToApply = driver.findElement(By.xpath("//*[@type='button']//*[text()='Contains']"));
+		}
+		if (FilterType.equalsIgnoreCase("Equals")) {
+			FilterTypeToApply = driver.findElement(By.xpath("//*[@type='button']//*[text()='Equals']"));
+		}
+		BasePage.click(FilterTypeToApply);
+		BasePage.click(valueForFilter);
+		valueForFilter.sendKeys(textToFilter);
+		BasePage.click(AddFilter);
+		ExtentTestManager.getTest().log(Status.PASS, "Filter is applied with "+ Attribute+" --> "+ FilterType+"\""+textToFilter+"\"");
+		BasePage.click(DoneButton);
+		}
+		catch(Exception Ex){
+			ExtentTestManager.getTest().log(Status.FAIL, "Error in applying filter");
+			throw Ex;
+		}
+	}
+
+	public void ApplyMultipleFilter(String Attribute1, String FilterType1, String textToFilter1, String Attribute2, String FilterType2, String textToFilter2) throws Throwable { 
+		BasePage.click(FilterIconInExpand);
+		BasePage.waitforAnElement(EditFilterText);
+		for (int i=1; i<=2; i++) {
+			if(i==1){
+				BasePage.click(SelectAnAttribute);
+				WebElement AttributeToSelect = driver.findElement(By.xpath("//*[@type='button']//*[text()='"+Attribute1+"']"));
+				BasePage.click(AttributeToSelect);
+				BasePage.click(SelectFilterType);
+				WebElement FilterTypeToApply = null;
+				if (FilterType1.equalsIgnoreCase("Contains")) {
+					FilterTypeToApply = driver.findElement(By.xpath("//*[@type='button']//*[text()='Contains']"));
+				}
+				if (FilterType1.equalsIgnoreCase("Equals")) {
+					FilterTypeToApply = driver.findElement(By.xpath("//*[@type='button']//*[text()='Equals']"));
+				}
+				BasePage.click(FilterTypeToApply);
+				BasePage.click(valueForFilter);
+				valueForFilter.sendKeys(textToFilter1);
+				BasePage.click(AddFilter);
+				ExtentTestManager.getTest().log(Status.PASS, "Filter is applied with "+ Attribute1+" --> "+ FilterType1+"\""+textToFilter1+"\"");
+			}
+			if(i==2) {
+				BasePage.click(SelectAnAttribute);
+				WebElement AttributeToSelect = driver.findElement(By.xpath("//*[@type='button']//*[text()='"+Attribute2+"']"));
+				BasePage.click(AttributeToSelect);
+				BasePage.click(SelectFilterType);
+				WebElement FilterTypeToApply = null;
+				if (FilterType2.equalsIgnoreCase("Contains")) {
+					FilterTypeToApply = driver.findElement(By.xpath("//*[@type='button']//*[text()='Contains']"));
+				}
+				if (FilterType2.equalsIgnoreCase("Equals")) {
+					FilterTypeToApply = driver.findElement(By.xpath("//*[@type='button']//*[text()='Equals']"));
+				}
+				BasePage.click(FilterTypeToApply);
+				BasePage.click(valueForFilter2);
+				valueForFilter2.sendKeys(textToFilter2);
+				ExtentTestManager.getTest().log(Status.PASS, "Filter is applied with "+ Attribute2+" --> "+ FilterType2+"\""+textToFilter2+"\"");
+			}
+		}
+		BasePage.click(DoneButton);
+	}
+
+	public void moveToFirstPage(String textToFilter) throws InterruptedException, AWTException { 
+		try {
+			outloop:
+				do {
+					try {
+						Thread.sleep(1000);
+						backward.click();
+						scrollIntoView(FirstRowintableExpand);
+					}
+					catch(Exception e){
+						break outloop;
+					}
+				}
+				while(backward.isEnabled());
+		}
+		catch(Exception e) {
+			System.out.println("Some problem with backward click");
+			throw e;
+		}
+	}
+
+	public void verifyAfterFilter(String Attribute,String FilterType,String textToFilter) throws InterruptedException, AWTException { 
+		try {
+			Integer NumOfPrecedingColumns = driver.findElements(By.xpath("//*[text()='"+Attribute+"']//parent::div//parent::div//preceding-sibling::div")).size();
+			Integer CurrentColumn = NumOfPrecedingColumns + 1;
+			int j=1;
+			outloop:
+				do {
+					try {
+						int NoOfRows = RowsintableExpand.size();
+						for(int i=1 ; i<= NoOfRows ;i++) {
+							WebElement text = driver.findElement(By.xpath("(((//div[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"])//div)["+CurrentColumn+"]"));
+							String valuesInRows = text.getText().toLowerCase();
+							String SearchInSetLowerCase = textToFilter.toLowerCase();
+							boolean  comp = false;
+							if (FilterType.equalsIgnoreCase("contains")) {
+								comp = valuesInRows.contains(SearchInSetLowerCase);
+							}
+							if (FilterType.equalsIgnoreCase("euqals")) {
+								comp = valuesInRows.equals(SearchInSetLowerCase);
+							}
+							assertEquals(comp, true);
+							ExtentTestManager.getTest().log(Status.PASS,  " Row " +i+ " of " +Attribute+" is verified" + " in page " +j );
+						}
+					}
+					catch (Exception e) {
+						System.out.println("Error in filter verification");
+						throw e;
+					}
+					catch (AssertionError f) {
+						System.out.println("Error in filter functionality");
+						throw f;
+					}
+					try {
+						Thread.sleep(3000);
+						forward.click();
+						j++;
+						scrollIntoView(FirstRowintableExpand);
+					}
+					catch(Exception e){
+						break outloop;
+					}
+				}
+				while(forward.isEnabled()); 
+		}
+		catch(Exception | AssertionError r){
+			System.out.println("Some problem with forward button");
+			throw r;
+		}
+	}
+	
+	public void verifyAfterFilterdual(String Attribute1, String Attribute2, String FilterType1, String FilterType2, String textToFilter1,String textToFilter2) throws InterruptedException, AWTException { 
+		try {
+			int j =1 ;
+			List <String> filterList = new ArrayList<String>();
+			filterList.add(FilterType1);
+			filterList.add(FilterType2);
+			List <String> attributeList = new ArrayList<String>();
+			attributeList.add(Attribute1);
+			attributeList.add(Attribute2);
+			List <String> textToFilterList = new ArrayList<String>();
+			textToFilterList.add(textToFilter1);
+			textToFilterList.add(textToFilter2);
+			int k = 0;
+			String Attribute = null;
+			String textToFilter = null;
+			for(String filter: filterList){
+				k++;
+				if(k==1) {
+					Attribute = Attribute1;
+					textToFilter=textToFilter1;
+				}
+				if(k==2) {
+					Attribute = Attribute2;
+					textToFilter=textToFilter2;
+				}
+				Integer NumOfPrecedingColumns = driver.findElements(By.xpath("//*[text()='"+Attribute+"']//parent::div//parent::div//preceding-sibling::div")).size();
+				Integer CurrentColumn = NumOfPrecedingColumns + 1;
+				outloop:
+					do {
+						try {
+							int NoOfRows = RowsintableExpand.size();
+							for(int i=1 ; i<= NoOfRows ;i++) {
+								WebElement text = driver.findElement(By.xpath("(((//div[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"])//div)["+CurrentColumn+"]"));
+								String valuesInRows = text.getText().toLowerCase();
+								System.out.println(valuesInRows);
+								String SearchInSetLowerCase = textToFilter.toLowerCase();
+								System.out.println(SearchInSetLowerCase);
+								boolean  comp = false;
+								if (filter.equalsIgnoreCase("contains")) {
+									comp = valuesInRows.contains(SearchInSetLowerCase);
+									System.out.println("contains verified");
+								}
+								if (filter.equalsIgnoreCase("equals")) {
+									comp = valuesInRows.equals(SearchInSetLowerCase);
+									System.out.println("equals verified");
+								}
+								assertEquals(comp, true);
+								System.out.println(comp);
+								ExtentTestManager.getTest().log(Status.PASS,  " Row " +i+ " of " +Attribute+" is verified" + " in page " +j+ " for filter "+ k);
+							}
+						}
+						catch (Exception e) {
+							System.out.println("Error in filter verification");
+							throw e;
+						}
+						catch (AssertionError f) {
+							System.out.println("Error in filter functionality");
+							throw f;
+						}
+						try {
+							Thread.sleep(3000);
+							forward.click();
+							j++;
+							scrollIntoView(FirstRowintableExpand);
+						}
+						catch(Exception e){
+							do {
+								try {
+									Thread.sleep(3000);
+									backward.click();
+									j++;
+									scrollIntoView(FirstRowintableExpand);
+								}
+								catch(Exception o) {
+									break outloop;
+								}
+
+							}while(backward.isEnabled());
+							break outloop;
+						}
+					}
+					while(forward.isEnabled()); 
+			}
+		}
+		catch(Exception r){
+			System.out.println("Some problem with forward button");
+			throw r;
+		}
+	}
+
+	public void FilterSet(String SetName, String entityToSelect, String textToSearch, String Attribute, String FilterType, String textToFilter) throws Throwable { 
+		this.createSet(SetName, entityToSelect, textToSearch);	
+		this.Set();
+		WebElement opn = this.openSet(SetName);
+		BasePage.click(opn);
+		ExtentTestManager.getTest().log(Status.PASS, SetName + " is Created");
+		this.expandSet();
+		this.ApplyFilter(Attribute, FilterType, textToFilter);
+		this.verifyAfterFilter(Attribute, FilterType, textToFilter);
+		ExtentTestManager.getTest().log(Status.PASS, "Applied filter is verified");
+	}
+
+	public void FilterSetMulti(String SetName, String entityToSelect, String textToSearch, String Attribute1, String FilterType1, String textToFilter1, String Attribute2, String FilterType2, String textToFilter2) throws Throwable { 
+		this.createSet(SetName, entityToSelect, textToSearch);	
+		this.Set();
+		WebElement opn = this.openSet(SetName);
+		BasePage.click(opn);
+		ExtentTestManager.getTest().log(Status.PASS, SetName + " is Created");
+		this.expandSet();
+		this.ApplyMultipleFilter(Attribute1, FilterType1, textToFilter1, Attribute2, FilterType2, textToFilter2);
+		this.verifyAfterFilterdual(Attribute1,Attribute2,FilterType1,FilterType2,textToFilter1,textToFilter2);
+		ExtentTestManager.getTest().log(Status.PASS, "Applied filters are verified");
 	}
 
 	public void captureScreenshot(String screenShotName) throws IOException

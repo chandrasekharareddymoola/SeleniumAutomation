@@ -210,26 +210,26 @@ public class ExplorationTest extends BaseTest{
 //			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromSetFail","ExplorationExpandAddFromSetFail");
 //		}
 //	}
-
-	@Test(priority = 10, description = "Exploration - Expand and add items from File")
-	public void ExplorationExpandAddFromFile_Test() throws Throwable  {
-		try {
-			/* Exploration - Expand and add items from File */
-			objExplorationPage.ExpandAddFromFile("ExpAddfromFile 1","Disease","kera","Disease", "C:\\Users\\MugunthRaman\\git\\EagleAutomation\\Resources\\Q4 - Upload file - 1 (2).xlsx", "Q4 - Upload file - 1 (2).xlsx");
-			objExplorationPage.saveChanges();
-			onSuccessMeassage("Items Added from File into Exploration successfully");
-		}
-		catch(Exception ex)
-		{
-			objExplorationPage.captureScreenshot("ExplorationExpandAddFromFileFail");
-			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromFileFail","ExplorationExpandAddFromFileFail");
-		}
-		catch(AssertionError ex)
-		{
-			objExplorationPage.captureScreenshot("ExplorationExpandAddFromFileFail");
-			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromFileFail","ExplorationExpandAddFromFileFail");
-		}
-	}
+//
+//	@Test(priority = 10, description = "Exploration - Expand and add items from File")
+//	public void ExplorationExpandAddFromFile_Test() throws Throwable  {
+//		try {
+//			/* Exploration - Expand and add items from File */
+//			objExplorationPage.ExpandAddFromFile("ExpAddfromFile 1","Disease","kera","Disease", "C:\\Users\\MugunthRaman\\git\\EagleAutomation\\Resources\\Q4 - Upload file - 1 (2).xlsx", "Q4 - Upload file - 1 (2).xlsx");
+//			objExplorationPage.saveChanges();
+//			onSuccessMeassage("Items Added from File into Exploration successfully");
+//		}
+//		catch(Exception ex)
+//		{
+//			objExplorationPage.captureScreenshot("ExplorationExpandAddFromFileFail");
+//			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromFileFail","ExplorationExpandAddFromFileFail");
+//		}
+//		catch(AssertionError ex)
+//		{
+//			objExplorationPage.captureScreenshot("ExplorationExpandAddFromFileFail");
+//			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromFileFail","ExplorationExpandAddFromFileFail");
+//		}
+//	}
 //
 //	@Test(priority = 11, description = "Exploration - Create with one additional relation Card")
 //	public void ExplorationCreateARelationCard_Test() throws Throwable  {
@@ -375,6 +375,34 @@ public class ExplorationTest extends BaseTest{
 //		{
 //			objExplorationPage.captureScreenshot("SortColumnExplorationFail");
 //			onFailureMeassage(ex.getMessage(),"SortColumnExplorationFail","SortColumnExplorationFail");
+//		}
+//	}
+	
+	@Test(priority = 19, description = "Filtering an Exploration with one filter")
+	public void FilterExploration_Test() throws Throwable  {
+		try {
+			/* Filtering in an Exploration */
+			objExplorationPage.FilterExploration("Filter Exploration1","Disease","kera", "EFO Name","contains","vul");
+			onSuccessMeassage("Filtering done in Exploration Successfully for 1 filter");
+		}
+		catch(Throwable ex)
+		{
+			objExplorationPage.captureScreenshot("FilterExplorationFail");
+			onFailureMeassage(ex.getMessage(),"FilterExplorationFail","FilterExplorationFail");
+		}
+	}
+	
+//	@Test(priority = 20, description = "Filtering an Exploration with 2 filters")
+//	public void FilterMultiComparison_Test() throws Throwable  {
+//		try {
+//			/* Filtering in an Exploration with multiple filter */
+//			objExplorationPage.FilterExplorationMulti("Filter Exploration Multi 1","Disease","kera", "EFO Name","contains","vul", "EFO ID", "equals","EFO_1000778");
+//			onSuccessMeassage("Filtering done in Exploration Successfully for multiple filters");
+//		}
+//		catch(Throwable ex)
+//		{
+//			objExplorationPage.captureScreenshot("FilterExplorationMulltiFail");
+//			onFailureMeassage(ex.getMessage(),"FilterExplorationMulltiFail","FilterExplorationMulltiFail");
 //		}
 //	}
 
