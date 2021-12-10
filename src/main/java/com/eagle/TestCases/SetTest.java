@@ -32,7 +32,7 @@ public class SetTest extends BaseTest{
 	//	}
 
 	@Test(priority = 0, description = "Create Set")
-	public void CreateSet_Test() throws InterruptedException, IOException {
+	public void CreateSet_Test() throws Throwable {
 		try {
 			/* To initiate the creation of Set */		 
 			objSetPage.createSet("Create Set1","Disease","kera");	
@@ -70,7 +70,7 @@ public class SetTest extends BaseTest{
 	}
 
 	@Test(priority = 2, description = "Create Set From File")
-	public void CreateSetFromFile_Test() throws InterruptedException, IOException  {
+	public void CreateSetFromFile_Test() throws Throwable  {
 		try {
 			/* To Create a Set From File */
 			objSetPage.CreateSetFromFile("Set From File 1","Disease", "C:\\Users\\MugunthRaman\\git\\EagleAutomation\\Resources\\Q4 - Upload file - 1 (2).xlsx");
@@ -89,7 +89,7 @@ public class SetTest extends BaseTest{
 	}
 
 	@Test(priority = 3, description = "Create Set From Another Set")
-	public void CreateSetFromSet_Test() throws InterruptedException, IOException  {
+	public void CreateSetFromSet_Test() throws Throwable  {
 		try {
 			/* To Create a Set From Another Set */
 			objSetPage.CreateSetFromSet("Base Set 1","Disease","Kera","Set From Set 1"); 
@@ -239,7 +239,7 @@ public class SetTest extends BaseTest{
 	}
 
 	@Test(priority = 11, description = "Create And Delete A Set")
-	public void CreateAndDeleteSet_Test() throws InterruptedException, IOException  {
+	public void CreateAndDeleteSet_Test() throws Throwable  {
 		try {
 			/* Create And Delete A Set */
 			objSetPage.createAndDeleteSet("Delete Set1","Disease","kera");
@@ -258,7 +258,7 @@ public class SetTest extends BaseTest{
 	}
 
 	@Test(priority = 12, description = "Create And Share A Set")
-	public void CreateAndShareSet_Test() throws InterruptedException, IOException  {
+	public void CreateAndShareSet_Test() throws Throwable  {
 		try {
 			/* Create And Share A Set */
 			objSetPage.createAndShareSet("Share Set1","Disease","kera","mugunth.raman@eaglegenomics.com");
@@ -296,7 +296,7 @@ public class SetTest extends BaseTest{
 	}
 
 	@Test(priority = 14, description = "Sharing A Set")
-	public void ShareSet_Test() throws InterruptedException, IOException  {
+	public void ShareSet_Test() throws Throwable  {
 		try {
 			/* Sharing An Existing Set */
 			objSetPage.ShareSet("GridSet","mugunth.raman@eaglegenomics.com");

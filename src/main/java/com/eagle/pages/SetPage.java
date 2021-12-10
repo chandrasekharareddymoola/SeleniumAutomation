@@ -265,6 +265,12 @@ public class SetPage extends BasePage{
 	
 	@FindBy(xpath = "//*[text()='Done']")
 	public WebElement DoneButton;
+	
+	@FindBy(xpath = "//*[text()='Nothing to show']")
+	public WebElement notingToShowText;
+
+	@FindBy(xpath = "//*[text()='An error occured. Please contact your administrator.']")
+	public WebElement contactAdminErrorMainPage;
 
 
 
@@ -290,6 +296,34 @@ public class SetPage extends BasePage{
 	public void Set() throws InterruptedException, AWTException{ 	
 		BasePage.click(setIcon);
 		action.moveToElement(TermsOfUse).perform();
+	}
+	
+	public void waitForSet() throws Throwable{
+		try {  
+			boolean iden = true;
+			do
+			{
+				try {	    	
+					columnHeaderFirstPage.isDisplayed();
+					iden = false;	  
+				}
+				catch(Exception ex) {
+					if(notingToShowText.isDisplayed()) {
+						throw	ex;
+					}
+					if(contactAdminErrorMainPage.isDisplayed()) {
+						throw	ex;
+					}
+
+					Thread.sleep(5000);
+				}	 
+			}
+			while(iden);	         
+		}
+		catch(Exception | AssertionError ex)
+		{
+			throw ex;
+		}
 	}
 
 	public void verifySetHomePage(String stringToVerify) throws InterruptedException, AWTException, AssertionError{    	
@@ -379,9 +413,9 @@ public class SetPage extends BasePage{
 		BasePage.click(accept);
 	}
 
-	public void createCheck(String SetToCheck) throws InterruptedException, AWTException{	    	
+	public void createCheck(String SetToCheck) throws Throwable{	    	
 		this.Set();
-		BasePage.waitforAnElement(columnHeaderFirstPage);
+		this.waitForSet();
 		try {
 			Assert.assertEquals(SetToCheck, FirstItem.getText());
 			ExtentTestManager.getTest().log(Status.PASS, "Set is present in the list and verified");
@@ -392,7 +426,7 @@ public class SetPage extends BasePage{
 		}
 	}   	
 
-	public void createSet(String SetName,String entityToSelect, String textToSearch) throws InterruptedException, AWTException, AssertionError{	    	
+	public void createSet(String SetName,String entityToSelect, String textToSearch) throws Throwable{	    	
 		try {
 			this.Set();
 			this.addSet();
@@ -413,7 +447,7 @@ public class SetPage extends BasePage{
 	}   	
 
 
-	public List <String> createSetforAdd(String SetName,String entityToSelect, String textToSearch) throws InterruptedException, AWTException, AssertionError{	    	
+	public List <String> createSetforAdd(String SetName,String entityToSelect, String textToSearch) throws Throwable{	    	
 		try {
 			this.Set();
 			this.addSet();
@@ -560,7 +594,7 @@ public class SetPage extends BasePage{
 		ExtentTestManager.getTest().log(Status.PASS, existingSetName + " Set is Added to this Set");
 	}
 
-	public void CreateSetFromFile(String setToCreate, String entityToSelect, String FileName) throws InterruptedException, AWTException, AssertionError { 
+	public void CreateSetFromFile(String setToCreate, String entityToSelect, String FileName) throws Throwable { 
 		try {
 			this.Set();
 			this.addSet();
@@ -582,7 +616,7 @@ public class SetPage extends BasePage{
 		}
 	}
 
-	public void CreateSetFromSet(String existingSetName, String entityToSelect, String textToSearch, String setToCreate) throws Exception, AssertionError { 
+	public void CreateSetFromSet(String existingSetName, String entityToSelect, String textToSearch, String setToCreate) throws Throwable { 
 		try {
 			this.createSet(existingSetName, entityToSelect, textToSearch);
 			this.addSet();
@@ -1400,7 +1434,7 @@ public class SetPage extends BasePage{
 	}
 
 
-	public void createAndDeleteSet(String SetName, String entityToSelect, String textToSearch) throws InterruptedException, AWTException{
+	public void createAndDeleteSet(String SetName, String entityToSelect, String textToSearch) throws Throwable{
 		try {
 			this.createSet(SetName, entityToSelect, textToSearch);	
 			ExtentTestManager.getTest().log(Status.PASS, SetName + " is Created");
@@ -1412,10 +1446,10 @@ public class SetPage extends BasePage{
 		}
 	}
 
-	public void ShareSet(String SetToShare, String personToBeShared) throws InterruptedException, AWTException{
+	public void ShareSet(String SetToShare, String personToBeShared) throws Throwable{
 		try {
 			this.Set();
-			BasePage.waitforAnElement(columnHeaderFirstPage);
+			this.waitForSet();
 			selectMenuOptionInList(SetToShare);
 			Thread.sleep(3000);
 			BasePage.click(shareIcon);
@@ -1432,7 +1466,7 @@ public class SetPage extends BasePage{
 		}
 	}
 
-	public void createAndShareSet(String SetName, String entityToSelect, String textToSearch, String personToBeShared) throws InterruptedException, AWTException{
+	public void createAndShareSet(String SetName, String entityToSelect, String textToSearch, String personToBeShared) throws Throwable{
 		this.createSet(SetName, entityToSelect, textToSearch);	
 		ExtentTestManager.getTest().log(Status.PASS, SetName + " is Created");
 		this.ShareSet(SetName, personToBeShared);

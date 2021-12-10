@@ -342,6 +342,12 @@ public class ComparisonPage extends BasePage{
 	@FindBy(xpath = "//*[text()='Done']")
 	public WebElement DoneButton;
 	
+	@FindBy(xpath = "//*[text()='Nothing to show']")
+	public WebElement notingToShowText;
+
+	@FindBy(xpath = "//*[text()='An error occured. Please contact your administrator.']")
+	public WebElement contactAdminErrorMainPage;
+	
 
 	public WebElement openComparison(String name) {
 		return driver.findElement(By.xpath("//div[@class='ms-List']//div[@role='rowheader' and @aria-colindex='1']//div[@title='"+ name +"']"));   		
@@ -475,7 +481,16 @@ public class ComparisonPage extends BasePage{
 					columnHeaderFirstPage.isDisplayed();
 					iden = false;	  
 				}
-				catch(Exception ex) {Thread.sleep(5000);}	 
+				catch(Exception ex) {
+					if(notingToShowText.isDisplayed()) {
+						throw	ex;
+					}
+					if(contactAdminErrorMainPage.isDisplayed()) {
+						throw	ex;
+					}
+
+					Thread.sleep(5000);
+				}	 
 			}
 			while(iden);	         
 		}
