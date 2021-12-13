@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
@@ -151,7 +152,7 @@ public class InvestigationPage extends BasePage{
 	}  
 
 
-	public void openItemFromList(String investigationName)
+	public void openItemFromList(String investigationName) throws Exception
 	{
 		try {	
 			outerloop:
@@ -169,14 +170,17 @@ public class InvestigationPage extends BasePage{
 			}
 			while(forward.isEnabled());  
 		}	    	
-		catch(Exception ex) {}
+		catch(Exception ex) {
+			throw ex;
+		}
 	}
-
+	
 	public void selectItemFortheList(String investigationName)
 	{
 		try {	
 			outerloop:
 				do{ 
+					BasePage.waitforAnElement(investigationList);
 					for (WebElement element : invGridItems) { 
 						if(element.isDisplayed() == false)  {scrollIntoView(element);}	    				
 						String textFromGrid = element.getText();	    				
@@ -208,16 +212,16 @@ public class InvestigationPage extends BasePage{
 		}
 	}	
 
-	public void editInvestigation(String inv, String invTitle, String invDescription) throws InterruptedException, AWTException{
+	public void editInvestigation(String inv, String invTitle, String invDescription) throws Exception{
 		this.clickInvestigationIcon();	  
 		this.openItemFromList(inv);	    	
 		this.modifyTitle(invTitle);	    	
 		this.modifyDescription(invDescription);	    	
 	}	
 
-	public void viewInvestigation(String inv) throws InterruptedException, AWTException{
+	public void viewInvestigation(String inv) throws Exception{		
 		this.clickInvestigationIcon();	  
-		this.openItemFromList(inv);	    	
+		this.openItemFromList(inv);	 
 	}
 
 	public void linkSettoInvestigation(String invName, String setTobeLinked) throws IOException
@@ -230,6 +234,7 @@ public class InvestigationPage extends BasePage{
 			BasePage.click(linkSet);
 			BasePage.click(selectASet);
 			this.openItemFromList(setTobeLinked);
+			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		}
 		catch(Exception ex)
 		{
@@ -237,7 +242,7 @@ public class InvestigationPage extends BasePage{
 		}
 	}  
 
-	public void linkExplorationtoInvestigation(String invName, String explorationTobeLinked) throws InterruptedException, AWTException
+	public void linkExplorationtoInvestigation(String invName, String explorationTobeLinked) throws Exception
 	{
 		this.clickInvestigationIcon();
 		this.openItemFromList(invName);		    	
@@ -246,9 +251,10 @@ public class InvestigationPage extends BasePage{
 		BasePage.click(linkExploration);
 		BasePage.click(selectAnExploration);
 		this.openItemFromList(explorationTobeLinked);	
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 	}
 
-	public void linkComparisontoInvestigation(String invName, String comparisonTobeLinked) throws InterruptedException, AWTException
+	public void linkComparisontoInvestigation(String invName, String comparisonTobeLinked) throws Exception
 	{
 		this.clickInvestigationIcon();
 		this.openItemFromList(invName);	
@@ -256,15 +262,16 @@ public class InvestigationPage extends BasePage{
 		this.addAction();
 		BasePage.click(linkComparison);
 		BasePage.click(selectAComparison);
-		this.openItemFromList(comparisonTobeLinked);		    	
+		this.openItemFromList(comparisonTobeLinked);
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		Thread.sleep(3000);
 	}	    
 
 	public void deleteInvestigation(String invToBeDeleted) throws Exception {
 		this.clickInvestigationIcon();	 
 		selectItemFortheList(invToBeDeleted);
 		BasePage.click(deleteIcon);
-		BasePage.click(deleteIcon);	 
-		//Add code to confirm deletion is happened or not	    	
+		BasePage.click(deleteIcon);	 		    	
 	}
 
 

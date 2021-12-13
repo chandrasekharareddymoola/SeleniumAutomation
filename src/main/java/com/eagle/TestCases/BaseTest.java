@@ -60,7 +60,7 @@ public class BaseTest {
 	@BeforeClass
 	public static void launchApplication() throws IOException, InterruptedException, AWTException{
 		if(webdriver==null) {		
-
+			
 			WebDriverManager.chromedriver().setup();
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("start-maximized"); 
@@ -101,7 +101,7 @@ public class BaseTest {
               if (row.getCell(0) != null && row.getCell(0).toString().length() != 0) {
 
                    String functionName =  row.getCell(1).toString();
-                   String inputValue =  row.getCell(4).toString();
+                   String inputValue =  row.getCell(4)!=null? row.getCell(4).toString():"";
                    keywordValues.put(functionName,inputValue);
               }
         }

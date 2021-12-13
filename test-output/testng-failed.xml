@@ -9,8 +9,12 @@
       <class name="com.eagle.TestCases.InvestigationTest">
         <methods>
           <include name="launchApplication"/>
+          <include name="ViewInvestigation_Test"/>
+          <include name="CreateInvestigation_Test"/>
+          <include name="LinkSetWithInvestigation_Test"/>
           <include name="DeleteInvestigation_Test"/>
           <include name="beforeClass"/>
+          <include name="ShareInvestigation_Test"/>
         </methods>
       </class> <!-- com.eagle.TestCases.InvestigationTest -->
     </classes>
