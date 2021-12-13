@@ -559,7 +559,7 @@ public class SetPage extends BasePage{
 		BasePage.click(saveChanges);
 	}
 
-	public void RemoveItemsfromSet(String SetToCreate, String entityToSelect, String textToSearch) throws Throwable
+	public void RemoveItemsfromSet(String SetToCreate, String entityToSelect, String textToSearch,String removeItem1 ,String removeItem2 , String removeItem3) throws Throwable
 	{
 		try {
 			this.createSet(SetToCreate, entityToSelect, textToSearch);	 
@@ -570,9 +570,9 @@ public class SetPage extends BasePage{
 			this.editSet();	  
 			String NoOfRecordsInitial = ItemCountInExpand.getText();
 			List<String>  myAlist = new ArrayList<String>();
-			myAlist.add("Orphanet_79173");
-			myAlist.add("EFO_0007864");
-			myAlist.add("MONDO_0056803");
+			myAlist.add(removeItem1);
+			myAlist.add(removeItem2);
+			myAlist.add(removeItem3);
 			this.selectItems(myAlist);	  
 			this.removeItems();	 
 			this.waitForEditAndDelete();

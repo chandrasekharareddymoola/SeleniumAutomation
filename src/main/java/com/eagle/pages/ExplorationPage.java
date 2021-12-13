@@ -670,7 +670,7 @@ public class ExplorationPage extends BasePage{
 		}
 	}	
 
-	public void RemoveItemsfromExploration(String ExplorationToCreate, String entityToSelect, String textToSearch) throws Throwable
+	public void RemoveItemsfromExploration(String ExplorationToCreate, String entityToSelect, String textToSearch, String removeItems1, String removeItems2,String removeItems3) throws Throwable
 	{
 		this.createExploration(ExplorationToCreate, entityToSelect, textToSearch);	 
 		this.Exploration();
@@ -683,9 +683,9 @@ public class ExplorationPage extends BasePage{
 		this.editCard();	
 		String NoOfRecordsInitial = ItemCountInExpand.getText();
 		List<String>  myAlist = new ArrayList<String>();
-		myAlist.add("AL160411.1");
-		myAlist.add("AC060814.4");
-		myAlist.add("AL022100.1");
+		myAlist.add(removeItems1);
+		myAlist.add(removeItems2);
+		myAlist.add(removeItems3);
 		this.selectItems(myAlist);	  
 		this.removeItems();	 
 		this.waitForEditAndDelete();

@@ -976,7 +976,7 @@ public class ComparisonPage extends BasePage{
 		}
 	}	
 
-	public void RemoveItemsfromComparison(String ComparisonToCreate, String ControlSetName, String entityToSelect, String textToSearch) throws Throwable
+	public void RemoveItemsfromComparison(String ComparisonToCreate, String ControlSetName, String entityToSelect, String textToSearch, String removeItem1 , String removeItem2 , String removeItem3) throws Throwable
 	{
 		this.createComparisonControl(ComparisonToCreate,ControlSetName, entityToSelect, textToSearch);	 
 		this.Comparison();
@@ -989,9 +989,9 @@ public class ComparisonPage extends BasePage{
 		this.editCard();	
 		String NoOfRecordsInitial = ItemCountInExpand.getText();
 		List<String>  myAlist = new ArrayList<String>();
-		myAlist.add("72112780");
-		myAlist.add("20981360");
-		myAlist.add("147670524");
+		myAlist.add(removeItem1);
+		myAlist.add(removeItem2);
+		myAlist.add(removeItem3);
 		this.selectItems(myAlist);	  
 		this.removeItems();	 
 		this.waitForEditAndDelete();

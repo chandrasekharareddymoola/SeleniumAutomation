@@ -197,7 +197,7 @@ public class HomePage extends BasePage{
     	try {
     		BasePage.click(searchIcon);
     		BasePage.click(viewSavedSearches);
-    		this.openItemFromList("virus");    		
+    		this.openItemFromList("pax");    		
     	}
     	catch(Exception ex)    	{
     		
