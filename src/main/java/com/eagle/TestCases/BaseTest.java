@@ -20,6 +20,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -42,25 +43,25 @@ public class BaseTest {
 	public WebDriver getDriver() {
 		return webdriver;
 	}
-	
+
 	public String getDateTime() {
 		return dtTime;
 	}
-	
-    public LinkedHashMap<String, String> getConfiguration(){return keywordValues;}
 
-    public static void getCurrentDate()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+	public LinkedHashMap<String, String> getConfiguration(){return keywordValues;}
+
+	public static void getCurrentDate()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 	{
-	    Date dt = new Date();
+		Date dt = new Date();
 		DateFormat dtFrmt = new SimpleDateFormat("ddMMMyyyyHHmmss");
 		dtTime = dtFrmt.format(dt);
 	}
-	
+
 
 	@BeforeClass
 	public static void launchApplication() throws IOException, InterruptedException, AWTException{
 		if(webdriver==null) {		
-			
+
 			WebDriverManager.chromedriver().setup();
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("start-maximized"); 
@@ -88,30 +89,34 @@ public class BaseTest {
 		}
 	}
 
+	@AfterSuite
+	public static void closeApplication() throws IOException, InterruptedException, AWTException{
+		webdriver.quit();
+	}
 
 	public static void LoadConfigurationValues() throws IOException                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
 	{
 		ReadExcelFile rd = new ReadExcelFile();	
 		Sheet guru99Sheet = rd.readExcel(System.getProperty("user.dir") + "//Resources//Configuration.xlsx","Config");
-        int rowCount = guru99Sheet.getLastRowNum() - guru99Sheet.getFirstRowNum();
-        
-        for (int i = 1; i < rowCount + 1; i++) {
-             
-        	Row row = guru99Sheet.getRow(i);              
-              if (row.getCell(0) != null && row.getCell(0).toString().length() != 0) {
+		int rowCount = guru99Sheet.getLastRowNum() - guru99Sheet.getFirstRowNum();
 
-                   String functionName =  row.getCell(1).toString();
-                   String inputValue =  row.getCell(4)!=null? row.getCell(4).toString():"";
-                   keywordValues.put(functionName,inputValue);
-              }
-        }
+		for (int i = 1; i < rowCount + 1; i++) {
+
+			Row row = guru99Sheet.getRow(i);              
+			if (row.getCell(0) != null && row.getCell(0).toString().length() != 0) {
+
+				String functionName =  row.getCell(1).toString();
+				String inputValue =  row.getCell(4)!=null? row.getCell(4).toString():"";
+				keywordValues.put(functionName,inputValue);
+			}
+		}
 	}
-	
+
 
 	public void closeBroswer()
 	{
 		webdriver.quit();
 	}
-		
+
 }
 

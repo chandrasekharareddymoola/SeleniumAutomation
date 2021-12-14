@@ -1,35 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
+<testng-results ignored="1" total="3" passed="2" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2021-12-14T19:42:02 IST" name="SmokeTestingSuite" finished-at="2021-12-14T19:43:20 IST" duration-ms="77845">
+  <suite started-at="2021-12-14T20:32:29 IST" name="SmokeTestingSuite" finished-at="2021-12-14T20:33:50 IST" duration-ms="81814">
     <groups>
     </groups>
-    <test started-at="2021-12-14T19:42:02 IST" name="Smoke Test cases" finished-at="2021-12-14T19:43:20 IST" duration-ms="77845">
+    <test started-at="2021-12-14T20:32:29 IST" name="Smoke Test cases" finished-at="2021-12-14T20:33:50 IST" duration-ms="81814">
       <class name="com.eagle.TestCases.LoginTest">
-        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.LoginTest@3e11f9e9]" started-at="2021-12-14T19:42:02 IST" name="launchApplication" finished-at="2021-12-14T19:42:10 IST" duration-ms="7357" status="PASS">
+        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.LoginTest@2c1b194a]" started-at="2021-12-14T20:32:29 IST" name="launchApplication" finished-at="2021-12-14T20:32:36 IST" duration-ms="7458" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchApplication -->
-        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.LoginTest@3e11f9e9]" started-at="2021-12-14T19:42:10 IST" name="beforeClass" finished-at="2021-12-14T19:42:10 IST" duration-ms="41" status="PASS">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.LoginTest@2c1b194a]" started-at="2021-12-14T20:32:36 IST" name="beforeClass" finished-at="2021-12-14T20:32:36 IST" duration-ms="19" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeClass -->
-        <test-method signature="VerifyLoginPage_Test()[pri:0, instance:com.eagle.TestCases.LoginTest@3e11f9e9]" started-at="2021-12-14T19:42:10 IST" name="VerifyLoginPage_Test" description="Login with valid credentials" finished-at="2021-12-14T19:42:38 IST" duration-ms="28509" status="PASS">
+        <test-method signature="VerifyLoginPage_Test()[pri:0, instance:com.eagle.TestCases.LoginTest@2c1b194a]" started-at="2021-12-14T20:32:36 IST" name="VerifyLoginPage_Test" description="Login with valid credentials" finished-at="2021-12-14T20:33:07 IST" duration-ms="31046" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- VerifyLoginPage_Test -->
+        <test-method is-config="true" signature="closeApplication()[pri:0, instance:com.eagle.TestCases.LoginTest@2c1b194a]" started-at="2021-12-14T20:33:51 IST" name="closeApplication" finished-at="2021-12-14T20:33:51 IST" duration-ms="682" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeApplication -->
       </class> <!-- com.eagle.TestCases.LoginTest -->
       <class name="com.eagle.TestCases.SetTest">
-        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.SetTest@53aac487]" started-at="2021-12-14T19:42:38 IST" name="launchApplication" finished-at="2021-12-14T19:42:38 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.SetTest@73e9cf30]" started-at="2021-12-14T20:33:07 IST" name="launchApplication" finished-at="2021-12-14T20:33:07 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchApplication -->
-        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.SetTest@53aac487]" started-at="2021-12-14T19:42:38 IST" name="beforeClass" finished-at="2021-12-14T19:42:39 IST" duration-ms="516" status="PASS">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.SetTest@73e9cf30]" started-at="2021-12-14T20:33:07 IST" name="beforeClass" finished-at="2021-12-14T20:33:07 IST" duration-ms="421" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeClass -->
-        <test-method signature="CreateSet_Test()[pri:0, instance:com.eagle.TestCases.SetTest@53aac487]" started-at="2021-12-14T19:42:39 IST" name="CreateSet_Test" description="Create Set" finished-at="2021-12-14T19:43:20 IST" duration-ms="41372" status="PASS">
+        <test-method signature="CreateSet_Test()[pri:0, instance:com.eagle.TestCases.SetTest@73e9cf30]" started-at="2021-12-14T20:33:07 IST" name="CreateSet_Test" description="Create Set" finished-at="2021-12-14T20:33:50 IST" duration-ms="42841" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CreateSet_Test -->
