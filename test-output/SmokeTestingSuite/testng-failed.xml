@@ -6,60 +6,6 @@
   </listeners>
   <test thread-count="5" name="Smoke Test cases(failed)">
     <classes>
-      <class name="com.eagle.TestCases.ComparisonTest">
-        <methods>
-          <include name="DeleteComparisonSecondCard_Test"/>
-          <include name="CreateComparisonWithContolandCase_Test"/>
-          <include name="FilterComparison_Test"/>
-          <include name="SortColumnComparison_Test"/>
-          <include name="ComparisonCreateMultipleCaseCardsRunComparison_Test"/>
-          <include name="CreateComparisonFromFile_Test"/>
-          <include name="ShareComparison_Test"/>
-          <include name="launchApplication"/>
-          <include name="ChangeControlAndCase_Test"/>
-          <include name="ComparisonExpandAddFromSet_Test"/>
-          <include name="CreateComparisonFromSet_Test"/>
-          <include name="CreateAndShareComparison_Test"/>
-          <include name="SearchInComparisonExpand_Test"/>
-          <include name="DeleteCardInComparisonExpand_Test"/>
-          <include name="createComparisonWithControlandCaseRunComparison_Test"/>
-          <include name="FilterMultiComparison_Test"/>
-          <include name="DeleteComparison_Test"/>
-          <include name="ComparisonExpandAddFromFile_Test"/>
-          <include name="CreateAndDeleteComparison_Test"/>
-          <include name="beforeClass"/>
-          <include name="ComparisonExpandAddFromCatalog_Test"/>
-          <include name="ComparisonCreateMultipleCaseCards_Test"/>
-          <include name="CreateComparisonWithContol_Test"/>
-          <include name="updateComparisonWithCaseCard_Test"/>
-          <include name="RemoveItemsfromComparison_Test"/>
-          <include name="DeleteComparisonFirstCard_Test"/>
-        </methods>
-      </class> <!-- com.eagle.TestCases.ComparisonTest -->
-      <class name="com.eagle.TestCases.SetTest">
-        <methods>
-          <include name="FilterMultiSet_Test"/>
-          <include name="FilterSet_Test"/>
-          <include name="SearchInSetExpand_Test"/>
-          <include name="CreateAndShareSet_Test"/>
-          <include name="beforeClass"/>
-          <include name="SetExpandAddFromFile_Test"/>
-          <include name="SetExpandAddFromSet_Test"/>
-          <include name="SortColumnSet_Test"/>
-          <include name="ViewSet_Test"/>
-          <include name="CreateSet_Test"/>
-          <include name="GridChangesInSet_Test"/>
-          <include name="launchApplication"/>
-          <include name="CreateAndDeleteSet_Test"/>
-          <include name="DeleteSet_Test"/>
-          <include name="RemoveItemsfromSet_Test"/>
-          <include name="ShareSet_Test"/>
-          <include name="SetExpandAddFromCatalog_Test"/>
-          <include name="DeleteCardInSetExpand_Test"/>
-          <include name="CreateSetFromFile_Test"/>
-          <include name="CreateSetFromSet_Test"/>
-        </methods>
-      </class> <!-- com.eagle.TestCases.SetTest -->
       <class name="com.eagle.TestCases.ExplorationTest">
         <methods>
           <include name="CreateExplorationFromFile_Test"/>

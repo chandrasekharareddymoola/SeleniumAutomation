@@ -1,7 +1,9 @@
 package com.eagle.Reports;
 
 import java.io.File;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -16,8 +18,12 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 
 public class ExtentManager {
 
+	static Date dt = new Date();
+	static DateFormat dtFrmt = new SimpleDateFormat("dd-MMM-YY_HH:mm:ss-");
+	static String dtText = dtFrmt.format(dt);
+	
 	private static ExtentReports extent;
-    private static String reportFileName = "Test-Automaton-Report"+".html";
+    private static String reportFileName = "Test-Automaton-Report.html";
     private static String fileSeperator = System.getProperty("file.separator");
     private static String reportFilepath = "./Resources" +fileSeperator+ "TestReport";
     private static String reportFileLocation =  reportFilepath +fileSeperator+ reportFileName;

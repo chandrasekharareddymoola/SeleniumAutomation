@@ -9,8 +9,11 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -298,39 +301,45 @@ public class SetPage extends BasePage{
 		action.moveToElement(TermsOfUse).perform();
 	}
 
-	public void waitForSet() throws Throwable{
+
+	public void waitForSet() throws Throwable{	
 		try {  
 			boolean iden = true;
-			do
-			{
-				try {	    	
-					columnHeaderFirstPage.isDisplayed();
-					iden = false;	  
-				}
-				catch(Exception ex) {
-					try {
+			Date dt = new Date();
+			DateFormat dtFrmt = new SimpleDateFormat("_HHmmss");
+			String dtText = dtFrmt.format(dt);
+			outerloop:
+				do
+				{
+					try {	    	
+						columnHeaderFirstPage.isDisplayed();
+						iden = false;	  
+					}
+					catch(Exception ex) {
 						try {
 							if(notingToShowText.isDisplayed()) {
-								throw	ex;
+								String screenshotname = "notingToShowText"+dtText;
+								this.captureScreenshot(screenshotname);
+								ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/"+screenshotname+".png");
+								break outerloop;
 							}
 						}
-						catch(Exception ey) {
+						catch (Exception ey) {
 							try {
 								if(contactAdminErrorMainPage.isDisplayed()) {
-									throw	ex;
+									String screenshotname = "notingToShowText"+dtText;
+									this.captureScreenshot(screenshotname);
+									ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/"+screenshotname+".png");
+									break outerloop;
 								}
 							}
 							catch(Exception ez) {
-								throw ez;
+								Thread.sleep(5000);	 
 							}
 						}
 					}
-					catch(Exception ez) {
-						Thread.sleep(5000);	 
-					}
 				}
-			}
-			while(iden);	         
+				while(iden);	         
 		}
 		catch(Exception | AssertionError ex)
 		{

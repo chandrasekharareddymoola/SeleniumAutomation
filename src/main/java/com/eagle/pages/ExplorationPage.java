@@ -9,8 +9,11 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -35,6 +38,7 @@ import com.eagle.pages.SetPage;
 public class ExplorationPage extends BasePage{
 
 	SetPage objSetPage; 
+
 
 	//Page level objects
 
@@ -406,39 +410,44 @@ public class ExplorationPage extends BasePage{
 	}
 
 
-	public void waitForExploration() throws Throwable{
+	public void waitForExploration() throws Throwable{	
 		try {  
 			boolean iden = true;
-			do
-			{
-				try {	    	
-					columnHeaderFirstPage.isDisplayed();
-					iden = false;	  
-				}
-				catch(Exception ex) {
-					try {
+			Date dt = new Date();
+			DateFormat dtFrmt = new SimpleDateFormat("_HHmmss");
+			String dtText = dtFrmt.format(dt);
+			outerloop:
+				do
+				{
+					try {	    	
+						columnHeaderFirstPage.isDisplayed();
+						iden = false;	  
+					}
+					catch(Exception ex) {
 						try {
 							if(notingToShowText.isDisplayed()) {
-								throw	ex;
+								String screenshotname = "notingToShowText"+dtText;
+								this.captureScreenshot(screenshotname);
+								ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/"+screenshotname+".png");
+								break outerloop;
 							}
 						}
-						catch(Exception ey) {
+						catch (Exception ey) {
 							try {
 								if(contactAdminErrorMainPage.isDisplayed()) {
-									throw	ex;
+									String screenshotname = "notingToShowText"+dtText;
+									this.captureScreenshot(screenshotname);
+									ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/"+screenshotname+".png");
+									break outerloop;
 								}
 							}
 							catch(Exception ez) {
-								throw ez;
+								Thread.sleep(5000);	 
 							}
 						}
 					}
-					catch(Exception ez) {
-						Thread.sleep(5000);	 
-					}
 				}
-			}
-			while(iden);	         
+				while(iden);	         
 		}
 		catch(Exception | AssertionError ex)
 		{
@@ -502,6 +511,9 @@ public class ExplorationPage extends BasePage{
 			throw ex;
 		}
 	}
+
+
+
 
 	public void waitForExplorationTitle() throws Throwable{
 		try {  
@@ -1099,6 +1111,7 @@ public class ExplorationPage extends BasePage{
 			this.verifyExplorationHomePage("Uncategorized");
 			BasePage.CompareAttributeText("Value", ExplorationToCreate, titleExploration); //Exploration page
 			ExtentTestManager.getTest().log(Status.PASS, "Removal verified");
+
 		}
 		catch(Exception ex) {
 			throw ex;
@@ -1887,8 +1900,6 @@ public class ExplorationPage extends BasePage{
 		this.verifyAfterFilterdual(Attribute1,Attribute2,FilterType1,FilterType2,textToFilter1,textToFilter2);
 		ExtentTestManager.getTest().log(Status.PASS, "Applied filters are verified");
 	}
-
-
 
 	public void captureScreenshot(String screenShotName) throws IOException
 	{

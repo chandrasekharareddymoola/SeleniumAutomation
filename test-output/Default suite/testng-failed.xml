@@ -3,13 +3,17 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.eagle.TestCases.SetTest">
+      <class name="com.eagle.TestCases.ExplorationTest">
         <methods>
           <include name="launchApplication"/>
-          <include name="FilterMultiSet_Test"/>
+          <include name="CreateExplorationFromFile_Test"/>
+          <include name="DeleteCardInExplorationExpand_Test"/>
+          <include name="DeleteExplorationSecondCard_Test"/>
+          <include name="ExplorationExpandAddFromFile_Test"/>
           <include name="beforeClass"/>
+          <include name="DeleteExplorationFirstCard_Test"/>
         </methods>
-      </class> <!-- com.eagle.TestCases.SetTest -->
+      </class> <!-- com.eagle.TestCases.ExplorationTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
