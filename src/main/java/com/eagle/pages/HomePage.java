@@ -70,6 +70,16 @@ public class HomePage extends BasePage{
 	
 	@FindBy(xpath = "//div[contains(@class,'ms-Dropdown-container')]")
 	public WebElement searchFiter;	
+	
+	@FindBy(xpath = "//label[text()='Saved searches']")
+	public WebElement savedSearchesLabel;	
+	
+	@FindBy(xpath = "//label[text()='Saved searches']//parent::div//*[@data-icon-name='Cancel']")
+	public WebElement savedSearchCancelButton;	
+	
+	@FindBy(xpath = "//div[@role='columnheader']")
+	public WebElement columnHeader;
+	
 		
 	public WebElement selectFilter(String entityName) {
 		return this.driver.findElement(By.xpath("//div[@title='"+ entityName +"']"));   		
@@ -99,22 +109,31 @@ public class HomePage extends BasePage{
     	return searchIcon.getText();
     }
     
-    public void openItemFromList(String inv)
+    public void openItemFromList(String inv) throws Exception
 	{
-		try {	    		
+		try {	
+			outloop:
 			do{ 
 				for (WebElement element : searchGridItems) {
 					if(element.isDisplayed() == false)  {scrollIntoView(element);}	    				
 					String textFromGrid = element.getText();	    				
 					if(inv.equals(textFromGrid)) {		    					
-						BasePage.click(element);	
+						BasePage.click(element);
+						break outloop;
 					}		    				
 				}
-				BasePage.click(forward); 
+				try {
+					Thread.sleep(3000);
+					System.out.println("check before forward click");
+					forward.click();
+				}
+				catch(Exception e){
+					break outloop;
+				}
 			}
 			while(forward.isEnabled());  
 		}	    	
-		catch(Exception ex) {}
+		catch(Exception ex) {throw ex;}
 	}
     
     public void verifyLogoVisibility()
@@ -172,7 +191,7 @@ public class HomePage extends BasePage{
     	} 
     }
     
-    public void createGlobalSearch()
+    public void createGlobalSearch() throws Exception
     {
     	try {
     		BasePage.click(searchIcon);
@@ -187,20 +206,23 @@ public class HomePage extends BasePage{
     		BasePage.click(saveButton);    		
     	}
     	catch(Exception ex) 	{
-    		
+    		throw ex;
     	}
     	
     }
     
-    public void verifySavedSearches()
+    public void verifySavedSearches() throws Exception
     {
     	try {
     		BasePage.click(searchIcon);
     		BasePage.click(viewSavedSearches);
+    		BasePage.waitforAnElement(savedSearchesLabel);
+    		BasePage.waitforAnElement(columnHeader);
     		this.openItemFromList("pax");    		
     	}
     	catch(Exception ex)    	{
-    		
+    		BasePage.click(savedSearchCancelButton);
+    		throw ex;
     	}
     	
     }    
@@ -221,7 +243,7 @@ public class HomePage extends BasePage{
     {
         TakesScreenshot ts = (TakesScreenshot)driver;
         File source = ts.getScreenshotAs(OutputType.FILE);
-        String dest = "./Resources/ErrorScreenshots/"+screenShotName+".jpeg";
+        String dest = "./Resources/ErrorScreenshots/"+screenShotName+".png";
         File destination = new File(dest);
         try {
             FileUtils.copyFile(source, destination);
