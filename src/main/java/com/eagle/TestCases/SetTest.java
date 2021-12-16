@@ -119,10 +119,10 @@ public class SetTest extends BaseTest{
 			String[] setParameters =value.split(",");
 			String setName = setParameters[0].trim()+dtText;
 			String entity = setParameters[1].trim();
-			String fileName = setParameters[2].trim();
+			String fileLocation = setParameters[2].trim();
 			
 			/* To Create a Set From File */
-			objSetPage.CreateSetFromFile(setName,entity,fileName);
+			objSetPage.CreateSetFromFile(setName,entity,fileLocation);
 //			objSetPage.CreateSetFromFile("Set From File 1","Disease", "C:\\Users\\MugunthRaman\\git\\EagleAutomation\\Resources\\Q4 - Upload file - 1 (2).xlsx");
 			onSuccessMeassage("Set is successfully Created from File");
 		}
