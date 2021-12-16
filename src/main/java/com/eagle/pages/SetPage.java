@@ -883,7 +883,8 @@ public class SetPage extends BasePage{
 			ExtentTestManager.getTest().log(Status.PASS, "Set - Added from file in expand");
 		}
 		catch (Exception ExpandAddFromFileFail) {
-			if(dialogBoxClose.isDisplayed()) {     
+			if(dialogBoxClose.isDisplayed()) { 
+				ExtentTestManager.getTest().log(Status.FAIL, "Add to Grid button is not displayed");
 				BasePage.click(dialogBoxClose);
 			}
 			throw ExpandAddFromFileFail;

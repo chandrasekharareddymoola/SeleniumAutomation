@@ -1075,6 +1075,7 @@ public class ExplorationPage extends BasePage{
 		}
 		catch (Exception ExpandAddFromFileFail) {
 			if(dialogBoxClose.isDisplayed()) {
+				ExtentTestManager.getTest().log(Status.FAIL, "Add to Grid button is not displayed");
 				BasePage.click(dialogBoxClose);
 			}
 			throw ExpandAddFromFileFail;

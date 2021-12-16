@@ -450,7 +450,7 @@ public class ComparisonPage extends BasePage{
 		Thread.sleep(20000);
 		BasePage.waitforAnElement(columnHeaderFirstPage);
 		try {
-			Assert.assertEquals(ComparisonToCheck, FirstItem.getText());
+			Assert.assertEquals(FirstItem.getText(),ComparisonToCheck);
 			ExtentTestManager.getTest().log(Status.PASS, ComparisonToCheck + " Comparison is present in the list");
 			Thread.sleep(5000);
 		}
@@ -715,12 +715,13 @@ public class ComparisonPage extends BasePage{
 
 	public void createComparisonWithControlandMultipleCase(String ComparisonName,String ControlSetName, String EntitytoSelect, String ItemtoSearchControl , Integer NumberOfCaseSets) throws Throwable{	    	
 		try {
+			int j;
 			this.createComparisonControl(ComparisonName,ControlSetName, EntitytoSelect, ItemtoSearchControl);
 			for(int i=0; i<NumberOfCaseSets; i++) {
 				this.waitForaddCard();
 				this.addCard();
 				Thread.sleep(3000);
-				int j=i+1;
+				j=i+1;
 				this.NameforCard("Case Set "+ j);
 				Thread.sleep(3000);
 				BasePage.verifyPage(EntitytoSelect, caseCardEntity);
@@ -729,7 +730,7 @@ public class ComparisonPage extends BasePage{
 				this.AddandAccept();  
 				Thread.sleep(3000);
 				BasePage.waitforAnElement(LastComparisonList);
-				ExtentTestManager.getTest().log(Status.PASS, ComparisonName + " Comparison added with " + i + " Case Set(s)" );
+				ExtentTestManager.getTest().log(Status.PASS, ComparisonName + " Comparison added with " + j + " Case Set(s)" );
 			}
 			this.createCheck(ComparisonName);
 			ExtentTestManager.getTest().log(Status.PASS, "Created Comparison is verified");
@@ -1375,6 +1376,13 @@ public class ComparisonPage extends BasePage{
 			ExtentTestManager.getTest().log(Status.PASS, "Comparison - Items added from File in expand");
 		}
 		catch (Exception ExpandAddFromFileFail) {
+			if(dialogBoxClose.isDisplayed()) {
+				ExtentTestManager.getTest().log(Status.FAIL, "Add to Grid button is not displayed");
+				BasePage.click(dialogBoxClose);
+			}
+			throw ExpandAddFromFileFail;
+		}
+		catch (AssertionError ExpandAddFromFileFail) {
 			if(dialogBoxClose.isDisplayed()) {
 				BasePage.click(dialogBoxClose);
 			}
