@@ -1237,9 +1237,11 @@ public class ExplorationPage extends BasePage{
 			ExtentTestManager.getTest().log(Status.PASS, ExplorationToShare + " Exploration is Shared");
 		}
 		catch(Exception ex) {
+			BasePage.click(dialogBoxClose);
 			throw ex;
 		}
 		catch (AssertionError ex) {
+			BasePage.click(dialogBoxClose);
 			throw ex;
 		}
 

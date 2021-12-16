@@ -65,14 +65,6 @@
           <include name="CreateAndShareExploration_Test"/>
         </methods>
       </class> <!-- com.eagle.TestCases.ExplorationTest -->
-      <class name="com.eagle.TestCases.HomeTest">
-        <methods>
-          <include name="launchApplication"/>
-          <include name="VerifyLogoVisibility_Test"/>
-          <include name="closeApplication"/>
-          <include name="beforeClass"/>
-        </methods>
-      </class> <!-- com.eagle.TestCases.HomeTest -->
     </classes>
   </test> <!-- Smoke Test cases(failed) -->
 </suite> <!-- Failed suite [SmokeTestingSuite] -->

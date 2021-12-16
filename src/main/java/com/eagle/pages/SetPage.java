@@ -1449,7 +1449,7 @@ public class SetPage extends BasePage{
 			Assert.assertEquals(DeleteConfirm, "Delete Set?");
 			BasePage.click(deleteIcon);	
 		}
-		catch (Exception DeleteSetFail){
+		catch (Exception|AssertionError DeleteSetFail){
 			throw DeleteSetFail;
 		}
 	}
@@ -1482,7 +1482,8 @@ public class SetPage extends BasePage{
 			ExtentTestManager.getTest().log(Status.PASS, SetToShare + " is shared to user "+personToBeShared );
 			BasePage.waitforAnElement(ShareSuccess);
 		}
-		catch (Exception ShareSetFail){
+		catch (Exception| AssertionError ShareSetFail){
+			BasePage.click(dialogBoxClose);
 			throw ShareSetFail;
 		}
 	}

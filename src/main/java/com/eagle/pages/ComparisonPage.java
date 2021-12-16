@@ -1484,9 +1484,11 @@ public class ComparisonPage extends BasePage{
 			ExtentTestManager.getTest().log(Status.PASS, ComparisonToShare + " Comparison is Shared");
 		}
 		catch(Exception ex) {
+			BasePage.click(dialogBoxClose);
 			throw ex;
 		}
 		catch (AssertionError ex) {
+			BasePage.click(dialogBoxClose);
 			throw ex;
 		}
 
