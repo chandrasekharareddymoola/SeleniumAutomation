@@ -150,6 +150,12 @@ public class ComparisonPage extends BasePage{
 	@FindBy(xpath = "//i[@data-icon-name='Forward']")
 	public WebElement forward;
 
+	@FindBy(xpath = "//i[@data-icon-name='Forward']//parent::span//parent::button[@data-is-focusable='true']")
+	public WebElement forwardenabled;
+
+	@FindBy(xpath = "//i[@data-icon-name='Forward']//parent::span//parent::button[@data-is-focusable='false']")
+	public WebElement forwarddisabled;
+
 	@FindBy(xpath = "//i[@data-icon-name='Back']")
 	public WebElement backward;
 
@@ -416,28 +422,41 @@ public class ComparisonPage extends BasePage{
 		BasePage.click(entitytoSelect);
 	}
 
-	public void viewComparison(String ComparisonName) throws InterruptedException, AWTException{
+	public void viewComparison(String ComparisonName) throws Exception{
 		this.Comparison();	  
+		waitforAnElement(columnHeaderFirstPage);
 		this.openItemFromList(ComparisonName);	    
 		ExtentTestManager.getTest().log(Status.PASS, ComparisonName +" is opened");
 	}
 
-	public void openItemFromList(String Item)
+	public void openItemFromList(String Item) throws Exception
 	{
-		try {	    		
+		try {	 
+			outerloop:
 			do{ 
 				for (WebElement element : GridItems) {
 					if(element.isDisplayed() == false)  {scrollIntoView(element);}	    				
 					String textFromGrid = element.getText();	    				
 					if(Item.equals(textFromGrid)) {		    					
 						BasePage.click(element);	
+						break outerloop;
 					}		    				
 				}
-				BasePage.click(forward); 
+				try {
+					forwardenabled.click(); 
+				}
+				catch(Exception e) {
+					if (forwarddisabled.isDisplayed()) {
+					ExtentTestManager.getTest().log(Status.FAIL, " Comparison is not present in the list");
+					throw e;
+					}
+				}
 			}
 			while(forward.isEnabled());  
-		}	    	
-		catch(Exception ex) {}
+		}
+		catch(Exception ex) {
+			throw ex;
+		}
 	}
 
 	public void searchItems(String ItemtoSearch) throws AWTException, InterruptedException{
@@ -716,6 +735,9 @@ public class ComparisonPage extends BasePage{
 	public void createComparisonWithControlandMultipleCase(String ComparisonName,String ControlSetName, String EntitytoSelect, String ItemtoSearchControl , Integer NumberOfCaseSets) throws Throwable{	    	
 		try {
 			int j;
+			List <String> stext = new ArrayList<String>();
+			stext.add("eve");
+			stext.add("rot");
 			this.createComparisonControl(ComparisonName,ControlSetName, EntitytoSelect, ItemtoSearchControl);
 			for(int i=0; i<NumberOfCaseSets; i++) {
 				this.waitForaddCard();
@@ -725,7 +747,8 @@ public class ComparisonPage extends BasePage{
 				this.NameforCard("Case Set "+ j);
 				Thread.sleep(3000);
 				BasePage.verifyPage(EntitytoSelect, caseCardEntity);
-				String ItemtoSearchCase = generateRandomWord(3);
+				//				String ItemtoSearchCase = generateRandomWord(2);
+				String ItemtoSearchCase = stext.get(i);
 				this.searchItems(ItemtoSearchCase); 
 				this.AddandAccept();  
 				Thread.sleep(3000);
@@ -753,16 +776,22 @@ public class ComparisonPage extends BasePage{
 
 	public void createComparisonControlandMultipleCase(String ComparisonName,String ControlSetName, String EntitytoSelect, String ItemtoSearchControl , Integer NumberOfCaseSets) throws Throwable{	    	
 		try {
+			int j;
+			List <String> stext = new ArrayList<String>();
+			stext.add("eve");
+			stext.add("rot");
+			stext.add("sot");
 			this.createComparisonControl(ComparisonName,ControlSetName, EntitytoSelect, ItemtoSearchControl);
 			for(int i=0; i<NumberOfCaseSets; i++) {
 				this.waitForaddCard();
 				this.addCard();
 				Thread.sleep(3000);
-				int j=i+1;
+				j=i+1;
 				this.NameforCard("Case Set "+ j);
 				Thread.sleep(3000);
 				BasePage.verifyPage(EntitytoSelect, caseCardEntity);
-				String ItemtoSearchCase = generateRandomWord(3);
+				//				String ItemtoSearchCase = generateRandomWord(2);
+				String ItemtoSearchCase = stext.get(i);
 				this.searchItems(ItemtoSearchCase); 
 				this.AddandAccept();  
 				BasePage.waitforAnElement(LastComparisonList);
@@ -852,6 +881,7 @@ public class ComparisonPage extends BasePage{
 	public void updateComparisonWithCaseCard(String ComparisonName,String EntitytoSelect,String CaseSetName,String ItemtoSearchCase) throws Throwable{	    	
 		try {
 			this.viewComparison(ComparisonName);
+			BasePage.waitforAnElement(runComparison);
 			this.waitForaddCard();
 			this.addCard();
 			Thread.sleep(3000);
@@ -1011,6 +1041,11 @@ public class ComparisonPage extends BasePage{
 		int Difference = Integer.parseInt(NoOfRecordsInitial)-Integer.parseInt(NoOfRecordsFinal);
 		assertEquals(Difference, myAlist.size());
 		ExtentTestManager.getTest().log(Status.PASS, "Decrease in count is verified");
+	}
+
+	public void addItemsFromFileOld(String filePath) {	    
+		fileUpload.sendKeys(filePath);	
+		ExtentTestManager.getTest().log(Status.PASS, "File uploaded successfully");
 	}
 
 	public void addItemsFromFile(String filePath) throws AWTException, InterruptedException {	    
@@ -1301,10 +1336,10 @@ public class ComparisonPage extends BasePage{
 		try {
 			this.fileSelectDropdown();
 			BasePage.click(driver.findElement(By.xpath("//*[@title='"+CategoryName+"']")));
-			BasePage.click(clickUpload);
+			//			BasePage.click(clickUpload);
 		}
 		catch (Exception ex){
-			BasePage.click(clickUpload);
+			//			BasePage.click(clickUpload);
 		}
 	}	
 
@@ -1334,7 +1369,8 @@ public class ComparisonPage extends BasePage{
 			Thread.sleep(3000);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from a File']")));
 			this.FileuploadCategory(CategoryName);
-			this.FileUploadFormExplorer(Filelocation);
+			addItemsFromFileOld(Filelocation);
+			//			this.FileUploadFormExplorer(Filelocation);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Searching in ']")));
 			BasePage.verifyPage(FileName, uploadedFileName);
 			BasePage.waitforAnElement(FileDataList);

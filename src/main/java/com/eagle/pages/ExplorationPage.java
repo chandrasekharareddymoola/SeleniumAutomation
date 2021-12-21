@@ -710,6 +710,11 @@ public class ExplorationPage extends BasePage{
 		ExtentTestManager.getTest().log(Status.PASS, "Decrease in count is verified");
 	}
 
+	public void addItemsFromFileOld(String filePath) {	    
+		fileUpload.sendKeys(filePath);	
+		ExtentTestManager.getTest().log(Status.PASS, "File uploaded successfully");
+	}
+	
 	public void addItemsFromFile(String filePath) throws AWTException, InterruptedException {	    
 		BasePage.click(addItemsFromAFile);
 		this.FileUploadFormExplorer(filePath);
@@ -1002,7 +1007,7 @@ public class ExplorationPage extends BasePage{
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Drag files here']")));
 		this.fileSelectDropdown();
 		BasePage.click(driver.findElement(By.xpath("//*[@title='"+CategoryName+"']")));
-		BasePage.click(clickUpload);
+//		BasePage.click(clickUpload);
 	}	
 
 
@@ -1032,7 +1037,8 @@ public class ExplorationPage extends BasePage{
 			Thread.sleep(3000);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from a File']")));
 			this.FileuploadCategory(CategoryName);
-			this.FileUploadFormExplorer(Filelocation);
+			addItemsFromFileOld(Filelocation);
+//			this.FileUploadFormExplorer(Filelocation);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Searching in ']")));
 			BasePage.verifyPage(FileName, uploadedFileName);
 			BasePage.waitforAnElement(FileDataList);
@@ -1493,11 +1499,13 @@ public class ExplorationPage extends BasePage{
 	}
 
 	public WebElement RelationEntity(String RelationCardType) {
-		return driver.findElement(By.xpath("//*[@type='button']//*[text()='"+RelationCardType+"']"));   		
+		return driver.findElement(By.xpath("//*[@type='button']//*[text()='"+RelationCardType+"']//ancestor::button[@data-is-focusable='true']"));
+//		return driver.findElement(By.xpath("//*[@type='button']//*[text()='"+RelationCardType+"']"));     		
 	}
 
 	public WebElement RelationEntityinDropdown(String RelationCardType) {
-		return driver.findElement(By.xpath("//*[@role='presentation']//*[text()='"+RelationCardType+"']"));   		
+		return driver.findElement(By.xpath("//*[@role='presentation']//*[text()='"+RelationCardType+"']")); 	
+//		return driver.findElement(By.xpath("//*[@role='presentation']//*[text()='"+RelationCardType+"']"));   		
 	}
 
 	public void Relationclick(String RelationCardType) throws AWTException, InterruptedException { 
@@ -1556,7 +1564,8 @@ public class ExplorationPage extends BasePage{
 		WebElement LastCard = driver.findElement(By.xpath("(//*[@scraper-tag='SetCardContent'])["+NoOfCards+"]"));
 		BasePage.waitforAnElement(LastCard);	
 
-		WebElement ActualElementType = driver.findElement(By.xpath("(//*[@class='ms-Label SetCardCategorySelector__categoryName___OkSRM root-82'])["+NoOfCards+"]"));
+		WebElement ActualElementType = driver.findElement(By.xpath("((//*[@scraper-tag='SetCardContent'])["+NoOfCards+"]//parent::div//label)[1]"));
+//		WebElement ActualElementType = driver.findElement(By.xpath("(//*[@class='ms-Label SetCardCategorySelector__categoryName___OkSRM root-82'])["+NoOfCards+"]"));
 		String ActualElementName = ActualElementType.getText();
 		Assert.assertEquals(ActualElementName, RelationCardType);
 	}

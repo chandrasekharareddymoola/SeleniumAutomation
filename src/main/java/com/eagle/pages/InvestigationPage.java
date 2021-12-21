@@ -288,7 +288,7 @@ public class InvestigationPage extends BasePage{
 	{
 		TakesScreenshot ts = (TakesScreenshot)driver;
 		File source = ts.getScreenshotAs(OutputType.FILE);
-		String dest = System.getProperty("user.dir") + "./Resources/ErrorScreenshots/"+screenShotName+".jpeg";
+		String dest = System.getProperty("user.dir") + "./Resources/ErrorScreenshots/"+screenShotName+".png";
 		File destination = new File(dest);
 		try {
 			FileUtils.copyFile(source, destination);

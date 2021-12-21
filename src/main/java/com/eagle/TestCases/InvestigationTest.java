@@ -215,7 +215,7 @@ public class InvestigationTest extends BaseTest {
 	{
 		ExtentTestManager.getTest().log(Status.FAIL, "Test Failed");
 		ExtentTestManager.getTest().log(Status.FAIL, failureMessage);
-		ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir") + "./Resources/ErrorScreenshots/"+screenShotName+".jpeg");		
+		ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir") + "./Resources/ErrorScreenshots/"+screenShotName+".png");		
 	}
 	
 	

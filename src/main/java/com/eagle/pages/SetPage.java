@@ -804,7 +804,7 @@ public class SetPage extends BasePage{
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Drag files here']")));
 		this.fileSelectDropdown();
 		BasePage.click(driver.findElement(By.xpath("//*[@title='"+CategoryName+"']")));
-		BasePage.click(clickUpload);
+//		BasePage.click(clickUpload);
 	}	
 
 
@@ -834,7 +834,8 @@ public class SetPage extends BasePage{
 			Thread.sleep(3000);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from a File']")));
 			this.FileuploadCategory(CategoryName);
-			this.FileUploadFormExplorer(Filelocation);
+			addItemsFromFile(Filelocation);   // new item added
+//			this.FileUploadFormExplorer(Filelocation);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Searching in ']")));
 			BasePage.verifyPage(FileName, uploadedFileName);
 			BasePage.waitforAnElement(FileDataList);
@@ -872,7 +873,7 @@ public class SetPage extends BasePage{
 			String NoOfRecordsInitial = ItemCountInExpand.getText();
 			this.addItemsExpand();
 			Thread.sleep(3000);
-			List <String> FileItems = this.addFromFile(CategoryName, Filelocation, FileName); 
+			List <String> FileItems = this.addFromFile(CategoryName, Filelocation, FileName);  
 			this.addToGrid();          
 			this.waitForSaveChanges();
 			waitforAnElement(ItemCountInExpand);
