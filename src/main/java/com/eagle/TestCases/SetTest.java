@@ -25,17 +25,7 @@ public class SetTest extends BaseTest{
 	DateFormat dtFrmt = new SimpleDateFormat("_HHmmss");
 	String dtText = dtFrmt.format(dt);
 	
-	@BeforeMethod
-	public void getValueFromExcel() throws Throwable {
-			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
-			String value = this.getConfiguration().get(functionName);
-			System.out.println("1");
-			System.out.println(functionName);
-			System.out.println("2");
-			System.out.println(value);
-	}
-	
-	
+
 	@BeforeClass
 	public void beforeClass() throws InterruptedException, IOException, AWTException  {	
 		objSetPage = new SetPage();	

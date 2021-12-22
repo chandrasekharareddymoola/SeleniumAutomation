@@ -212,7 +212,13 @@ public class ExplorationPage extends BasePage{
 
 	@FindBy(xpath = "(//*[@class='ms-List' and @role='presentation'])[2]")
 	public WebElement ExplorationList2;
-
+	
+	@FindBy(xpath = "(//*[@data-icon-name='StatusCircleCheckmark']//parent::div//parent::div[@role='checkbox'])")
+	public WebElement ExplorationList2circle;
+	
+	@FindBy(xpath = "(//i[@data-icon-name='ShareIOS'])[2]//ancestor::button[@data-is-focusable='true']")
+	public WebElement shareIcon2;	
+	
 	@FindBy(xpath = "//*[@data-icon-name='Trash']")
 	public WebElement DeleteinCard;
 
@@ -379,7 +385,7 @@ public class ExplorationPage extends BasePage{
 
 	public void createCheck(String ExplorationToCheck) throws AWTException, InterruptedException,AssertionError{	    	
 		this.Exploration();
-//		Thread.sleep(20000);
+		//		Thread.sleep(20000);
 		BasePage.waitforAnElement(columnHeaderFirstPage);
 		try {
 			Assert.assertEquals(ExplorationToCheck, FirstItem.getText());
@@ -714,7 +720,7 @@ public class ExplorationPage extends BasePage{
 		fileUpload.sendKeys(filePath);	
 		ExtentTestManager.getTest().log(Status.PASS, "File uploaded successfully");
 	}
-	
+
 	public void addItemsFromFile(String filePath) throws AWTException, InterruptedException {	    
 		BasePage.click(addItemsFromAFile);
 		this.FileUploadFormExplorer(filePath);
@@ -1007,7 +1013,7 @@ public class ExplorationPage extends BasePage{
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Drag files here']")));
 		this.fileSelectDropdown();
 		BasePage.click(driver.findElement(By.xpath("//*[@title='"+CategoryName+"']")));
-//		BasePage.click(clickUpload);
+		//		BasePage.click(clickUpload);
 	}	
 
 
@@ -1038,7 +1044,7 @@ public class ExplorationPage extends BasePage{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from a File']")));
 			this.FileuploadCategory(CategoryName);
 			addItemsFromFileOld(Filelocation);
-//			this.FileUploadFormExplorer(Filelocation);
+			//			this.FileUploadFormExplorer(Filelocation);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Searching in ']")));
 			BasePage.verifyPage(FileName, uploadedFileName);
 			BasePage.waitforAnElement(FileDataList);
@@ -1096,7 +1102,7 @@ public class ExplorationPage extends BasePage{
 
 
 	public void DeleteCardExpand() throws AWTException, InterruptedException { 
-//		Thread.sleep(10000);
+		//		Thread.sleep(10000);
 		BasePage.click(deleteCardExpand);
 	}
 
@@ -1262,7 +1268,7 @@ public class ExplorationPage extends BasePage{
 
 	public void searchInExpand(String SearchInExploration) throws InterruptedException, AWTException, AssertionError { 
 		try {
-//			Thread.sleep(20000);
+			//			Thread.sleep(20000);
 			BasePage.click(serachBoxExpand);
 			serachBoxExpand.sendKeys(SearchInExploration);
 			Thread.sleep(2000);
@@ -1500,16 +1506,17 @@ public class ExplorationPage extends BasePage{
 
 	public WebElement RelationEntity(String RelationCardType) {
 		return driver.findElement(By.xpath("//*[@type='button']//*[text()='"+RelationCardType+"']//ancestor::button[@data-is-focusable='true']"));
-//		return driver.findElement(By.xpath("//*[@type='button']//*[text()='"+RelationCardType+"']"));     		
+		//		return driver.findElement(By.xpath("//*[@type='button']//*[text()='"+RelationCardType+"']"));     		
 	}
 
 	public WebElement RelationEntityinDropdown(String RelationCardType) {
 		return driver.findElement(By.xpath("//*[@role='presentation']//*[text()='"+RelationCardType+"']")); 	
-//		return driver.findElement(By.xpath("//*[@role='presentation']//*[text()='"+RelationCardType+"']"));   		
+		//		return driver.findElement(By.xpath("//*[@role='presentation']//*[text()='"+RelationCardType+"']"));   		
 	}
 
 	public void Relationclick(String RelationCardType) throws AWTException, InterruptedException { 
-		BasePage.click(this.RelationEntity(RelationCardType));
+//		BasePage.click(this.RelationEntity(RelationCardType));
+		this.RelationEntity(RelationCardType).click();
 	}
 
 	public void RelationdropdownClick(String RelationCardType) throws AWTException, InterruptedException { 
@@ -1544,7 +1551,8 @@ public class ExplorationPage extends BasePage{
 			this.Relationclick(RelationCardType);
 		}
 		catch (Exception NoSuchElement) {
-			BasePage.click(addRelationCategory);
+//			BasePage.click(addRelationCategory);
+			addRelationCategory.click();;
 			try{
 				this.RelationEntityinDropdown(RelationCardType).isDisplayed();
 				this.RelationdropdownClick(RelationCardType);
@@ -1565,7 +1573,7 @@ public class ExplorationPage extends BasePage{
 		BasePage.waitforAnElement(LastCard);	
 
 		WebElement ActualElementType = driver.findElement(By.xpath("((//*[@scraper-tag='SetCardContent'])["+NoOfCards+"]//parent::div//label)[1]"));
-//		WebElement ActualElementType = driver.findElement(By.xpath("(//*[@class='ms-Label SetCardCategorySelector__categoryName___OkSRM root-82'])["+NoOfCards+"]"));
+		//		WebElement ActualElementType = driver.findElement(By.xpath("(//*[@class='ms-Label SetCardCategorySelector__categoryName___OkSRM root-82'])["+NoOfCards+"]"));
 		String ActualElementName = ActualElementType.getText();
 		Assert.assertEquals(ActualElementName, RelationCardType);
 	}
@@ -1580,8 +1588,10 @@ public class ExplorationPage extends BasePage{
 
 	public void SelectItemsInExplorationCard(String NumberOfItemsToSelect) throws InterruptedException, AWTException { 
 		try {
-//			Thread.sleep(60000);
+			Thread.sleep(10000);
 			for (int i=1; i<= Integer.parseInt(NumberOfItemsToSelect) ; i++) {
+				WebElement item = driver.findElement(By.xpath("((//*[@data-icon-name='StatusCircleCheckmark']//parent::div//parent::div[@role='checkbox' ])//parent::div//parent::div[@data-is-focusable='true'])["+i+"]"));
+				waitforAnElement(item);
 				WebElement SelectItemabove = driver.findElement(By.xpath("(//*[@data-icon-name='StatusCircleCheckmark']//parent::div//parent::div[@role='checkbox'])["+i+"]"));
 				BasePage.waitforAnElementtoBeClicked(SelectItemabove);
 				BasePage.click(SelectItemabove);
@@ -1627,18 +1637,26 @@ public class ExplorationPage extends BasePage{
 	}
 
 	public void createRelationCardMulti(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch, String RelationCardType, String RelationCardType2, String NumberOfItemsToSelect) throws Throwable { 
-		this.createExploration(ExplorationToCreate, EntitytoSelect, ItemtoSearch);
-		this.createRelationFirst(RelationCardType);
-		ExtentTestManager.getTest().log(Status.PASS, "First Relation card created of type : "+ RelationCardType);
-		this.CheckRelationCreated(RelationCardType);
-		ExtentTestManager.getTest().log(Status.PASS, "Created first relation card verified");
-		BasePage.waitforAnElement(ExplorationList2);
-		this.SelectItemsInExplorationCard(NumberOfItemsToSelect);
-//		ExtentTestManager.getTest().log(Status.PASS, NumberOfItemsToSelect + " Items selected in First Relation card");
-		this.createRelationLater(RelationCardType2);
-		ExtentTestManager.getTest().log(Status.PASS, "Second Relation card created of type : "+ RelationCardType2);
-		this.CheckRelationCreated(RelationCardType2);
-		ExtentTestManager.getTest().log(Status.PASS, "Created second relation card verified");
+		try {
+			this.createExploration(ExplorationToCreate, EntitytoSelect, ItemtoSearch);
+			this.createRelationFirst(RelationCardType);
+			ExtentTestManager.getTest().log(Status.PASS, "First Relation card created of type : "+ RelationCardType);
+			this.CheckRelationCreated(RelationCardType);
+			ExtentTestManager.getTest().log(Status.PASS, "Created first relation card verified");
+			BasePage.waitforAnElement(shareIcon2);
+			BasePage.waitforAnElement(ExplorationList2);
+			Thread.sleep(5000);
+//			BasePage.waitforAnElement(ExplorationList2circle);
+			this.SelectItemsInExplorationCard(NumberOfItemsToSelect);
+	//		ExtentTestManager.getTest().log(Status.PASS, NumberOfItemsToSelect + " Items selected in First Relation card");
+			this.createRelationLater(RelationCardType2);
+			ExtentTestManager.getTest().log(Status.PASS, "Second Relation card created of type : "+ RelationCardType2);
+			this.CheckRelationCreated(RelationCardType2);
+			ExtentTestManager.getTest().log(Status.PASS, "Created second relation card verified");
+		}
+		catch(Exception f) {
+			throw f;
+		}
 	}
 
 

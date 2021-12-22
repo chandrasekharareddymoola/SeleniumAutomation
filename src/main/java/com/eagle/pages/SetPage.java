@@ -438,7 +438,7 @@ public class SetPage extends BasePage{
 		this.Set();
 		this.waitForSet();
 		try {
-			Assert.assertEquals(SetToCheck, FirstItem.getText());
+			Assert.assertEquals(FirstItem.getText(), SetToCheck);
 			ExtentTestManager.getTest().log(Status.PASS, "Set is present in the list and verified");
 			Thread.sleep(3000);
 		}
