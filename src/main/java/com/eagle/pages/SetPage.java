@@ -440,7 +440,7 @@ public class SetPage extends BasePage{
 		try {
 			Assert.assertEquals(SetToCheck, FirstItem.getText());
 			ExtentTestManager.getTest().log(Status.PASS, "Set is present in the list and verified");
-			Thread.sleep(5000);
+			Thread.sleep(3000);
 		}
 		catch (Exception setNotPresent){
 			System.out.println("Set is not present in the list");
@@ -455,7 +455,7 @@ public class SetPage extends BasePage{
 			this.setTitle(SetName);
 			this.selectEntity(entityToSelect);
 			this.searchItems(textToSearch); 
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			this.AddandAccept(); 	
 			BasePage.waitforAnElement(editCardIcon);
 			ExtentTestManager.getTest().log(Status.PASS, "Set "+ SetName +" is Created");
@@ -476,7 +476,7 @@ public class SetPage extends BasePage{
 			this.setTitle(SetName);
 			this.selectEntity(entityToSelect);
 			this.searchItems(textToSearch); 
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			this.AddandAccept(); 	
 			List <String> setItems = this.getItemsWhileCreatingSet();
 			BasePage.waitforAnElement(editCardIcon);
@@ -548,7 +548,7 @@ public class SetPage extends BasePage{
 						}
 					}
 					try {
-						Thread.sleep(3000);
+						Thread.sleep(2000);
 						forward.click();
 						scrollIntoView(FirstRowintableExpand);
 					}
@@ -747,7 +747,7 @@ public class SetPage extends BasePage{
 		BasePage.click(addFromExpandCatalog);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from the Catalog']")));
 		this.searchCatalog(TextToSearch);
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		List <String> CatalogItems = this.getItemsWhileAddingFromCatalog();
 		BasePage.click(addAll);
 		ExtentTestManager.getTest().log(Status.PASS, "Added From Catalog");
@@ -831,7 +831,7 @@ public class SetPage extends BasePage{
 	public List<String> addFromFile(String CategoryName, String Filelocation, String FileName) throws AWTException, InterruptedException, AssertionError {	    
 		try {
 			BasePage.click(addFromFile);	
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from a File']")));
 			this.FileuploadCategory(CategoryName);
 			addItemsFromFile(Filelocation);   // new item added
@@ -872,7 +872,7 @@ public class SetPage extends BasePage{
 			this.editSet();
 			String NoOfRecordsInitial = ItemCountInExpand.getText();
 			this.addItemsExpand();
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			List <String> FileItems = this.addFromFile(CategoryName, Filelocation, FileName);  
 			this.addToGrid();          
 			this.waitForSaveChanges();
@@ -1092,7 +1092,7 @@ public class SetPage extends BasePage{
 							}
 						}
 						catch (Exception et){
-							Thread.sleep(5000);}	 
+							Thread.sleep(3000);}	 
 					}
 				}
 				while(iden);	         
@@ -1121,7 +1121,7 @@ public class SetPage extends BasePage{
 							}
 						}
 						catch (Exception et){
-							Thread.sleep(5000);}	 
+							Thread.sleep(3000);}	 
 					}
 				}
 				while(iden);	         
@@ -1497,53 +1497,53 @@ public class SetPage extends BasePage{
 		ExtentTestManager.getTest().log(Status.PASS, SetName + " is Shared");
 	}
 
-	public void SharetLoop(String SetToShare, String SharedUser) throws InterruptedException, AWTException { 
-		Integer NoofPages = this.NoOfPagesInSetPage();
-		WebElement SS = driver.findElement(By.xpath("//*[text()='"+SetToShare+"']"));
-		WebElement threeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+SetToShare+"']//parent::div//parent::div//child::button")));
-
-		List<WebElement> SDs = driver.findElements(By.xpath("//*[text()='"+SetToShare+"']"));
-		if (SDs.size() != 0) {
-			BasePage.scrollIntoView(SS);
-			BasePage.click(threeButton);
-			BasePage.click(ShareAction);
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@role='heading' and text()='Share']")));
-			BasePage.click(ShareTextBox);
-			ShareTextBox.sendKeys(SharedUser);
-			WebElement UserToShare = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+SharedUser+"')]")));
-			BasePage.click(UserToShare);
-			BasePage.click(ShareButton);
-		}
-		else if (SDs.size()== 0) {
-
-			for (int i=0; i<NoofPages;i++) {
-
-				if (SDs.size() != 0) {
-					BasePage.scrollIntoView(SS);
-					BasePage.click(threeButton);
-					BasePage.click(ShareAction);
-					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@role='heading' and text()='Share']")));
-					BasePage.click(ShareTextBox);
-					ShareTextBox.sendKeys(SharedUser);
-					WebElement UserToShare = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+SharedUser+"')]")));
-					BasePage.click(UserToShare);
-					BasePage.click(ShareButton);
-					break;
-				}
-				else {
-					BasePage.click(NextPage);
-					Thread.sleep(2000);
-				}
-			}
-		}
-		else if (!NextPage.isEnabled()) {		
-			System.out.print("The set to be deleted is not found");
-		}
-
-		else {				
-			System.out.print("The set to be deleted is not found");
-		}
-	}
+//	public void SharetLoop(String SetToShare, String SharedUser) throws InterruptedException, AWTException { 
+//		Integer NoofPages = this.NoOfPagesInSetPage();
+//		WebElement SS = driver.findElement(By.xpath("//*[text()='"+SetToShare+"']"));
+//		WebElement threeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+SetToShare+"']//parent::div//parent::div//child::button")));
+//
+//		List<WebElement> SDs = driver.findElements(By.xpath("//*[text()='"+SetToShare+"']"));
+//		if (SDs.size() != 0) {
+//			BasePage.scrollIntoView(SS);
+//			BasePage.click(threeButton);
+//			BasePage.click(ShareAction);
+//			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@role='heading' and text()='Share']")));
+//			BasePage.click(ShareTextBox);
+//			ShareTextBox.sendKeys(SharedUser);
+//			WebElement UserToShare = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+SharedUser+"')]")));
+//			BasePage.click(UserToShare);
+//			BasePage.click(ShareButton);
+//		}
+//		else if (SDs.size()== 0) {
+//
+//			for (int i=0; i<NoofPages;i++) {
+//
+//				if (SDs.size() != 0) {
+//					BasePage.scrollIntoView(SS);
+//					BasePage.click(threeButton);
+//					BasePage.click(ShareAction);
+//					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@role='heading' and text()='Share']")));
+//					BasePage.click(ShareTextBox);
+//					ShareTextBox.sendKeys(SharedUser);
+//					WebElement UserToShare = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+SharedUser+"')]")));
+//					BasePage.click(UserToShare);
+//					BasePage.click(ShareButton);
+//					break;
+//				}
+//				else {
+//					BasePage.click(NextPage);
+//					Thread.sleep(2000);
+//				}
+//			}
+//		}
+//		else if (!NextPage.isEnabled()) {		
+//			System.out.print("The set to be deleted is not found");
+//		}
+//
+//		else {				
+//			System.out.print("The set to be deleted is not found");
+//		}
+//	}
 
 	public void verifySortAscending(String ColumnToBeSorted) throws Throwable{
 		Integer NumOfPrecedingColumns = driver.findElements(By.xpath("//*[text()='"+ColumnToBeSorted+"']//parent::div//parent::div//preceding-sibling::div")).size();
@@ -1586,7 +1586,7 @@ public class SetPage extends BasePage{
 			ExtentTestManager.getTest().log(Status.PASS, SetName + " is Created");
 			this.expandSet();
 			WebElement SortColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+ColumnToBeSorted+"']")));
-			Thread.sleep(3000);
+//			Thread.sleep(3000);
 			WebElement NextColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+ColumnToBeSorted+"']//parent::div//parent::div/following-sibling::div")));
 			scrollIntoView(NextColumnname);
 			BasePage.click(SortColumnname);

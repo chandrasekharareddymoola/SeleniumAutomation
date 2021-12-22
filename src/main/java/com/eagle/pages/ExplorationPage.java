@@ -359,7 +359,7 @@ public class ExplorationPage extends BasePage{
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Select a Set']")));
 		this.searchExpandEnterName(setToAdd);
 		this.clickSetInExpand(setToAdd);
-		Thread.sleep(10000);
+		Thread.sleep(5000);
 	}
 
 	public void ExplorationTitle(String textTitle) throws AWTException, InterruptedException{    	
@@ -379,12 +379,12 @@ public class ExplorationPage extends BasePage{
 
 	public void createCheck(String ExplorationToCheck) throws AWTException, InterruptedException,AssertionError{	    	
 		this.Exploration();
-		Thread.sleep(20000);
+//		Thread.sleep(20000);
 		BasePage.waitforAnElement(columnHeaderFirstPage);
 		try {
 			Assert.assertEquals(ExplorationToCheck, FirstItem.getText());
 			System.out.println("Exploration is present in the list");
-			Thread.sleep(5000);
+			Thread.sleep(3000);
 		}
 		catch (Exception ExplorationNotPresent){
 			System.out.println("Exploration is not present in the list");
@@ -442,7 +442,7 @@ public class ExplorationPage extends BasePage{
 								}
 							}
 							catch(Exception ez) {
-								Thread.sleep(5000);	 
+								Thread.sleep(3000);	 
 							}
 						}
 					}
@@ -472,7 +472,7 @@ public class ExplorationPage extends BasePage{
 							}
 						}
 						catch (Exception et){
-							Thread.sleep(5000);}	 
+							Thread.sleep(3000);}	 
 					}
 				}
 				while(iden);	         
@@ -501,7 +501,7 @@ public class ExplorationPage extends BasePage{
 							}
 						}
 						catch (Exception et){
-							Thread.sleep(5000);}	 
+							Thread.sleep(3000);}	 
 					}
 				}
 				while(iden);	         
@@ -524,7 +524,7 @@ public class ExplorationPage extends BasePage{
 					titleExploration.isDisplayed();
 					iden = false;	  
 				}
-				catch(Exception ex) {Thread.sleep(5000);}	 
+				catch(Exception ex) {Thread.sleep(3000);}	 
 			}
 			while(iden);	         
 		}
@@ -691,7 +691,7 @@ public class ExplorationPage extends BasePage{
 		BasePage.click(opn);
 		this.expandExploration();
 		this.GridPrimaryColumnAlone("Name");
-		Thread.sleep(5000);
+		Thread.sleep(3000);
 		this.editCard();	
 		String NoOfRecordsInitial = ItemCountInExpand.getText();
 		List<String>  myAlist = new ArrayList<String>();
@@ -1096,7 +1096,7 @@ public class ExplorationPage extends BasePage{
 
 
 	public void DeleteCardExpand() throws AWTException, InterruptedException { 
-		Thread.sleep(10000);
+//		Thread.sleep(10000);
 		BasePage.click(deleteCardExpand);
 	}
 
@@ -1262,7 +1262,7 @@ public class ExplorationPage extends BasePage{
 
 	public void searchInExpand(String SearchInExploration) throws InterruptedException, AWTException, AssertionError { 
 		try {
-			Thread.sleep(20000);
+//			Thread.sleep(20000);
 			BasePage.click(serachBoxExpand);
 			serachBoxExpand.sendKeys(SearchInExploration);
 			Thread.sleep(2000);
@@ -1580,13 +1580,14 @@ public class ExplorationPage extends BasePage{
 
 	public void SelectItemsInExplorationCard(String NumberOfItemsToSelect) throws InterruptedException, AWTException { 
 		try {
-			Thread.sleep(60000);
+//			Thread.sleep(60000);
 			for (int i=1; i<= Integer.parseInt(NumberOfItemsToSelect) ; i++) {
 				WebElement SelectItemabove = driver.findElement(By.xpath("(//*[@data-icon-name='StatusCircleCheckmark']//parent::div//parent::div[@role='checkbox'])["+i+"]"));
 				BasePage.waitforAnElementtoBeClicked(SelectItemabove);
 				BasePage.click(SelectItemabove);
 				BasePage.CompareAttributeText("aria-checked","true",SelectItemabove);
 			}
+			ExtentTestManager.getTest().log(Status.PASS, NumberOfItemsToSelect + " Items selected in First Relation card");
 		}
 		catch (Exception e){
 			ExtentTestManager.getTest().log(Status.FAIL, "Not able to click element");
@@ -1633,7 +1634,7 @@ public class ExplorationPage extends BasePage{
 		ExtentTestManager.getTest().log(Status.PASS, "Created first relation card verified");
 		BasePage.waitforAnElement(ExplorationList2);
 		this.SelectItemsInExplorationCard(NumberOfItemsToSelect);
-		ExtentTestManager.getTest().log(Status.PASS, NumberOfItemsToSelect + " Items selected in First Relation card");
+//		ExtentTestManager.getTest().log(Status.PASS, NumberOfItemsToSelect + " Items selected in First Relation card");
 		this.createRelationLater(RelationCardType2);
 		ExtentTestManager.getTest().log(Status.PASS, "Second Relation card created of type : "+ RelationCardType2);
 		this.CheckRelationCreated(RelationCardType2);

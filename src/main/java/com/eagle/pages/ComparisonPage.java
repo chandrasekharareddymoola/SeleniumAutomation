@@ -466,12 +466,12 @@ public class ComparisonPage extends BasePage{
 
 	public void createCheck(String ComparisonToCheck) throws AWTException, InterruptedException,AssertionError{	    	
 		this.Comparison();
-		Thread.sleep(20000);
+//		Thread.sleep(20000);
 		BasePage.waitforAnElement(columnHeaderFirstPage);
 		try {
 			Assert.assertEquals(FirstItem.getText(),ComparisonToCheck);
 			ExtentTestManager.getTest().log(Status.PASS, ComparisonToCheck + " Comparison is present in the list");
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 		}
 		catch (Exception | AssertionError ComparisonNotPresent){
 			throw ComparisonNotPresent;
@@ -526,7 +526,7 @@ public class ComparisonPage extends BasePage{
 								}
 							}
 							catch(Exception ez) {
-								Thread.sleep(5000);	 
+								Thread.sleep(3000);	 
 							}
 						}
 					}
@@ -548,7 +548,7 @@ public class ComparisonPage extends BasePage{
 					titleComparison.isDisplayed();
 					iden = false;	  
 				}
-				catch(Exception ex) {Thread.sleep(5000);}	 
+				catch(Exception ex) {Thread.sleep(3000);}	 
 			}
 			while(iden);	         
 		}
@@ -575,7 +575,7 @@ public class ComparisonPage extends BasePage{
 							}
 						}
 						catch (Exception et){
-							Thread.sleep(5000);}	 
+							Thread.sleep(3000);}	 
 					}
 				}
 				while(iden);	         
@@ -595,7 +595,7 @@ public class ComparisonPage extends BasePage{
 					BasePage.CompareAttributeText("data-is-focusable", "true", addCard);
 					iden = false;	  
 				}
-				catch(Exception | AssertionError ex) {Thread.sleep(5000);}	 
+				catch(Exception | AssertionError ex) {Thread.sleep(3000);}	 
 			}
 			while(iden);	         
 		}
@@ -622,7 +622,7 @@ public class ComparisonPage extends BasePage{
 							}
 						}
 						catch (Exception et){
-							Thread.sleep(5000);}	 
+							Thread.sleep(3000);}	 
 					}
 				}
 				while(iden);	         
@@ -1024,7 +1024,7 @@ public class ComparisonPage extends BasePage{
 		BasePage.click(opn);
 		this.expandComparison();
 		this.GridPrimaryColumnAlone("End");
-		Thread.sleep(5000);
+		Thread.sleep(3000);
 		this.editCard();	
 		String NoOfRecordsInitial = ItemCountInExpand.getText();
 		List<String>  myAlist = new ArrayList<String>();
@@ -1097,9 +1097,9 @@ public class ComparisonPage extends BasePage{
 			this.waitForComparison();
 			this.addComparison();
 			this.ComparisonTitle(ComparisonName);
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			this.NameforCard(CardName);
-			Thread.sleep(3000);		
+			Thread.sleep(2000);		
 			this.verifyComparisonHomePage("Uncategorized");
 			this.selectEntity(entityToSelect);
 			this.addItemsFromSet(SetName); 
@@ -1428,7 +1428,7 @@ public class ComparisonPage extends BasePage{
 
 
 	public void DeleteCardExpand() throws AWTException, InterruptedException { 
-		Thread.sleep(10000);
+//		Thread.sleep(10000);
 		BasePage.click(deleteCardExpand);
 	}
 
@@ -1546,7 +1546,7 @@ public class ComparisonPage extends BasePage{
 
 	public void searchInExpand(String SearchInComparison) throws InterruptedException, AWTException, AssertionError { 
 		try {
-			Thread.sleep(20000);
+//			Thread.sleep(20000);
 			BasePage.click(serachBoxExpand);
 			serachBoxExpand.sendKeys(SearchInComparison);
 			Thread.sleep(2000);
