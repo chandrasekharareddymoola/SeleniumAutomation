@@ -502,41 +502,43 @@ public class ComparisonPage extends BasePage{
 			outerloop:
 				do
 				{ 
-					while(i<=20) {
-						try {	    	
-							columnHeaderFirstPage.isDisplayed();
-							iden = false;	  
+					//					while(i<=20) {
+					try {	    	
+						columnHeaderFirstPage.isDisplayed();
+						iden = false;	  
+						break outerloop;
+					}
+					catch(Exception ex) {
+						try {
+							if(notingToShowText.isDisplayed()) {
+								String screenshotname = "notingToShowText"+dtText;
+								this.captureScreenshot(screenshotname);
+								ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/"+screenshotname+".png");
+								break outerloop;
+							}
 						}
-						catch(Exception ex) {
+						catch (Exception ey) {
 							try {
-								if(notingToShowText.isDisplayed()) {
+								if(contactAdminErrorMainPage.isDisplayed()) {
 									String screenshotname = "notingToShowText"+dtText;
 									this.captureScreenshot(screenshotname);
 									ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/"+screenshotname+".png");
 									break outerloop;
 								}
 							}
-							catch (Exception ey) {
-								try {
-									if(contactAdminErrorMainPage.isDisplayed()) {
-										String screenshotname = "notingToShowText"+dtText;
-										this.captureScreenshot(screenshotname);
-										ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/"+screenshotname+".png");
-										break outerloop;
-									}
-								}
-								catch(Exception ez) {
-									Thread.sleep(3000);	 
-									i++;
-									if(i==20) {
-										break outerloop;
-									}
+							catch(Exception ez) {
+								Thread.sleep(3000);	 
+								i++;
+								if(i==20) {
+									break outerloop;
 								}
 							}
 						}
 					}
+					//					}
 				}
-				while(iden);	         
+				while(i<=20);
+			//				while(iden);	         
 		}
 		catch(Exception | AssertionError ex)
 		{
@@ -551,21 +553,23 @@ public class ComparisonPage extends BasePage{
 			outerloop:
 				do
 				{
-					while(i<=20) {
-						try {	    	
-							titleComparison.isDisplayed();
-							iden = false;	  
-						}
-						catch(Exception ex) {
-							Thread.sleep(3000);
-							i++;
-							if(i==20) {
-								break outerloop;
-							}
-						}	 
+					//					while(i<=20) {
+					try {	    	
+						titleComparison.isDisplayed();
+						iden = false;	
+						break outerloop;
 					}
+					catch(Exception ex) {
+						Thread.sleep(3000);
+						i++;
+						if(i==20) {
+							break outerloop;
+						}
+					}	 
+					//					}
 				}
-				while(iden);	         
+				while(i<=20);
+			//				while(iden);	         
 		}
 		catch(Exception | AssertionError ex)
 		{
@@ -580,10 +584,11 @@ public class ComparisonPage extends BasePage{
 			outerloop:
 				do
 				{
-					while(i<=20);
+					//					while(i<=20);
 					try {	    	
 						edit.isDisplayed();
-						iden = false;	  
+						iden = false;	 
+						break outerloop;
 					}
 					catch(Exception ex) {
 						try {
@@ -602,7 +607,8 @@ public class ComparisonPage extends BasePage{
 						}	 
 					}
 				}
-				while(iden);	         
+				while(i<=20);
+			//				while(iden);	         
 		}
 		catch(Exception | AssertionError ex)
 		{
@@ -617,10 +623,11 @@ public class ComparisonPage extends BasePage{
 			outerloop:
 				do
 				{ 
-					while(i<=20) {
+//					while(i<=20) {
 						try {	    	
 							BasePage.CompareAttributeText("data-is-focusable", "true", addCard);
-							iden = false;	  
+							iden = false;	 
+							break outerloop;
 						}
 						catch(Exception | AssertionError ex) {
 							Thread.sleep(3000);
@@ -629,9 +636,10 @@ public class ComparisonPage extends BasePage{
 							}
 
 						}	 
-					}
+//					}
 				}
-				while(iden);	         
+				while(i<=20);
+//				while(iden);	         
 		}
 		catch(Exception | AssertionError ex)
 		{
@@ -646,10 +654,11 @@ public class ComparisonPage extends BasePage{
 			outerloop:
 				do
 				{
-					while(i<=20) {
+//					while(i<=20) {
 						try {	    	
 							saveChanges.isDisplayed();
-							iden = false;	  
+							iden = false;	
+							break outerloop;
 						}
 						catch(Exception ex) {
 							try {
@@ -663,10 +672,11 @@ public class ComparisonPage extends BasePage{
 									break outerloop;
 								}
 							}	 
-						}
+//						}
 					}
 				}
-				while(iden);	         
+				while(i<=20);
+//				while(iden);	         
 		}
 		catch(Exception | AssertionError ex)
 		{

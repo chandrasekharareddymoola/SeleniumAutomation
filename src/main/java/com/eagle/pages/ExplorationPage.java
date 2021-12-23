@@ -424,40 +424,42 @@ public class ExplorationPage extends BasePage{
 			outerloop:
 				do
 				{
-					while(i<=20) {
-						try {	    	
-							columnHeaderFirstPage.isDisplayed();
-							iden = false;	  
+					//					while(i<=20) {
+					try {	    	
+						columnHeaderFirstPage.isDisplayed();
+						iden = false;	  
+						break outerloop;
+					}
+					catch(Exception ex) {
+						try {
+							if(notingToShowText.isDisplayed()) {
+								String screenshotname = "notingToShowText"+dtText;
+								this.captureScreenshot(screenshotname);
+								ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/"+screenshotname+".png");
+								break outerloop;
+							}
 						}
-						catch(Exception ex) {
+						catch (Exception ey) {
 							try {
-								if(notingToShowText.isDisplayed()) {
+								if(contactAdminErrorMainPage.isDisplayed()) {
 									String screenshotname = "notingToShowText"+dtText;
 									this.captureScreenshot(screenshotname);
 									ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/"+screenshotname+".png");
 									break outerloop;
 								}
 							}
-							catch (Exception ey) {
-								try {
-									if(contactAdminErrorMainPage.isDisplayed()) {
-										String screenshotname = "notingToShowText"+dtText;
-										this.captureScreenshot(screenshotname);
-										ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/"+screenshotname+".png");
-										break outerloop;
-									}
-								}
-								catch(Exception ez) {
-									Thread.sleep(3000);	
-									if(i==20) {
-										break outerloop;
-									}
+							catch(Exception ez) {
+								Thread.sleep(3000);	
+								if(i==20) {
+									break outerloop;
 								}
 							}
 						}
 					}
+					//					}
 				}
-				while(iden);	         
+				while(i<=20);
+			//				while(iden);	         
 		}
 		catch(Exception | AssertionError ex)
 		{
@@ -472,30 +474,32 @@ public class ExplorationPage extends BasePage{
 			outerloop:
 				do
 				{
-					while(i<=20) {
-						try {	    	
-							edit.isDisplayed();
-							iden = false;	  
-						}
-						catch(Exception ex) {
-							try {
-								if (fetchFailed.isDisplayed()) {
-									break outerloop;
-								}
-								if (notingToShowText.isDisplayed()) {
-									break outerloop;
-								}
+					//					while(i<=20) {
+					try {	    	
+						edit.isDisplayed();
+						iden = false;	
+						break outerloop;
+					}
+					catch(Exception ex) {
+						try {
+							if (fetchFailed.isDisplayed()) {
+								break outerloop;
 							}
-							catch (Exception et){
-								Thread.sleep(3000);
-								if(i==20) {
-									break outerloop;
-								}
-							}	 
+							if (notingToShowText.isDisplayed()) {
+								break outerloop;
+							}
 						}
+						catch (Exception et){
+							Thread.sleep(3000);
+							if(i==20) {
+								break outerloop;
+							}
+						}	 
+						//						}
 					}
 				}
-				while(iden);	         
+				while(i<=20);
+			//				while(iden);	         
 		}
 		catch(Exception | AssertionError ex)
 		{
@@ -511,27 +515,29 @@ public class ExplorationPage extends BasePage{
 			outerloop:
 				do
 				{
-					while(i<20) {
-						try {	    	
-							saveChanges.isDisplayed();
-							iden = false;	  
-						}
-						catch(Exception ex) {
-							try {
-								if (fetchFailed.isDisplayed()) {
-									break outerloop;
-								}
-							}
-							catch (Exception et){
-								Thread.sleep(3000);
-								if(i==20) {
-									break outerloop;
-								}
-							}	 
-						}
+					//					while(i<20) {
+					try {	    	
+						saveChanges.isDisplayed();
+						iden = false;	
+						break outerloop;
 					}
+					catch(Exception ex) {
+						try {
+							if (fetchFailed.isDisplayed()) {
+								break outerloop;
+							}
+						}
+						catch (Exception et){
+							Thread.sleep(3000);
+							if(i==20) {
+								break outerloop;
+							}
+						}	 
+					}
+					//					}
 				}
-				while(iden);	         
+				while(i<=20);
+			//				while(iden);	         
 		}
 		catch(Exception | AssertionError ex)
 		{
@@ -547,22 +553,24 @@ public class ExplorationPage extends BasePage{
 			boolean iden = true;
 			int i=0;
 			outerloop:
-			do
-			{
-				while(i<=20) {
-				try {	    	
-					titleExploration.isDisplayed();
-					iden = false;	  
-				}
-				catch(Exception ex) {
-					Thread.sleep(3000);
-					if(i==20) {
+				do
+				{
+					//				while(i<=20) {
+					try {	    	
+						titleExploration.isDisplayed();
+						iden = false;	
 						break outerloop;
-					}	
-				}	 
-			}
-			}
-			while(iden);	         
+					}
+					catch(Exception ex) {
+						Thread.sleep(3000);
+						if(i==20) {
+							break outerloop;
+						}	
+					}	 
+					//			}
+				}
+				while(i<=20);
+			//			while(iden);	         
 		}
 		catch(Exception | AssertionError ex)
 		{

@@ -9,21 +9,716 @@
 <table>
 <tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
 <tr><th colspan="8">SmokeTestingSuite</th></tr>
-<tr><td><a href="#t0">Smoke Test cases</a></td><td class="num">12</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">857,949</td><td></td><td></td></tr>
+<tr><td><a href="#t0">Smoke Test cases</a></td><td class="num">0</td><td class="num attn">64</td><td class="num">0</td><td class="num attn">15</td><td class="num">4,336</td><td></td><td></td></tr>
 </table>
-<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">SmokeTestingSuite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Smoke Test cases &#8212; passed</th></tr><tr class="passedeven"><td rowspan="2">com.eagle.TestCases.ComparisonTest</td><td><a href="#m0">ComparisonCreateMultipleCaseCardsRunComparison_Test</a></td><td rowspan="1">1640240709147</td><td rowspan="1">116801</td></tr><tr class="passedeven"><td><a href="#m1">ComparisonCreateMultipleCaseCards_Test</a></td><td rowspan="1">1640240620039</td><td rowspan="1">89107</td></tr><tr class="passedodd"><td rowspan="3">com.eagle.TestCases.ExplorationTest</td><td><a href="#m2">ExplorationCreateARelationCard_Test</a></td><td rowspan="1">1640240562091</td><td rowspan="1">57650</td></tr><tr class="passedodd"><td><a href="#m3">ExplorationExpandAddFromFile_Test</a></td><td rowspan="1">1640240408873</td><td rowspan="1">153217</td></tr><tr class="passedodd"><td><a href="#m4">ExplorationExpandAddFromSet_Test</a></td><td rowspan="1">1640240313082</td><td rowspan="1">95790</td></tr><tr class="passedeven"><td rowspan="1">com.eagle.TestCases.LoginTest</td><td><a href="#m5">VerifyLoginPage_Test</a></td><td rowspan="1">1640239984730</td><td rowspan="1">27675</td></tr><tr class="passedodd"><td rowspan="1">com.eagle.TestCases.LogoutTest</td><td><a href="#m6">VerifyLogout_Test</a></td><td rowspan="1">1640240825952</td><td rowspan="1">4896</td></tr><tr class="passedeven"><td rowspan="5">com.eagle.TestCases.SetTest</td><td><a href="#m7">CreateAndDeleteSet_Test</a></td><td rowspan="1">1640240228336</td><td rowspan="1">35951</td></tr><tr class="passedeven"><td><a href="#m8">CreateAndShareSet_Test</a></td><td rowspan="1">1640240264288</td><td rowspan="1">48536</td></tr><tr class="passedeven"><td><a href="#m9">CreateSetFromSet_Test</a></td><td rowspan="1">1640240046239</td><td rowspan="1">57621</td></tr><tr class="passedeven"><td><a href="#m10">CreateSet_Test</a></td><td rowspan="1">1640240012905</td><td rowspan="1">33332</td></tr><tr class="passedeven"><td><a href="#m11">SearchInSetExpand_Test</a></td><td rowspan="1">1640240103863</td><td rowspan="1">124471</td></tr></tbody>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">SmokeTestingSuite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Smoke Test cases &#8212; failed (configuration methods)</th></tr><tr class="failedeven"><td rowspan="1">com.eagle.TestCases.ComparisonTest</td><td><a href="#m0">beforeClass</a></td><td rowspan="1">1640245307724</td><td rowspan="1">3</td></tr><tr class="failedodd"><td rowspan="1">com.eagle.TestCases.ExplorationTest</td><td><a href="#m1">beforeClass</a></td><td rowspan="1">1640245307666</td><td rowspan="1">2</td></tr><tr class="failedeven"><td rowspan="1">com.eagle.TestCases.LoginTest</td><td><a href="#m2">launchApplication</a></td><td rowspan="1">1640245304042</td><td rowspan="1">3337</td></tr><tr class="failedodd"><td rowspan="1">com.eagle.TestCases.SetTest</td><td><a href="#m3">beforeClass</a></td><td rowspan="1">1640245307610</td><td rowspan="1">3</td></tr><tr><th colspan="4">Smoke Test cases &#8212; failed</th></tr><tr class="failedeven"><td rowspan="6">com.eagle.TestCases.HomeTest</td><td><a href="#m4">CreateGlobalSearch_Test</a></td><td rowspan="1">1640245307604</td><td rowspan="1">2</td></tr><tr class="failedeven"><td><a href="#m5">VerifyCopyRights</a></td><td rowspan="1">1640245307602</td><td rowspan="1">1</td></tr><tr class="failedeven"><td><a href="#m6">VerifyDashboard_Test</a></td><td rowspan="1">1640245307594</td><td rowspan="1">0</td></tr><tr class="failedeven"><td><a href="#m7">VerifyLogoVisibility_Test</a></td><td rowspan="1">1640245307589</td><td rowspan="1">2</td></tr><tr class="failedeven"><td><a href="#m8">VerifySavedSearches_Test</a></td><td rowspan="1">1640245307608</td><td rowspan="1">1</td></tr><tr class="failedeven"><td><a href="#m9">VerifyUserProfile</a></td><td rowspan="1">1640245307596</td><td rowspan="1">4</td></tr><tr class="failedodd"><td rowspan="8">com.eagle.TestCases.InvestigationTest</td><td><a href="#m10">CreateInvestigation_Test</a></td><td rowspan="1">1640245307791</td><td rowspan="1">2</td></tr><tr class="failedodd"><td><a href="#m11">DeleteInvestigation_Test</a></td><td rowspan="1">1640245307805</td><td rowspan="1">1</td></tr><tr class="failedodd"><td><a href="#m12">EditInvestigation_Test</a></td><td rowspan="1">1640245307796</td><td rowspan="1">1</td></tr><tr class="failedodd"><td><a href="#m13">LinkComparisonWithInvestigation_Test</a></td><td rowspan="1">1640245307801</td><td rowspan="1">1</td></tr><tr class="failedodd"><td><a href="#m14">LinkExplorationWithInvestigation_Test</a></td><td rowspan="1">1640245307799</td><td rowspan="1">1</td></tr><tr class="failedodd"><td><a href="#m15">LinkSetWithInvestigation_Test</a></td><td rowspan="1">1640245307798</td><td rowspan="1">0</td></tr><tr class="failedodd"><td><a href="#m16">ShareInvestigation_Test</a></td><td rowspan="1">1640245307802</td><td rowspan="1">2</td></tr><tr class="failedodd"><td><a href="#m17">ViewInvestigation_Test</a></td><td rowspan="1">1640245307794</td><td rowspan="1">1</td></tr><tr class="failedeven"><td rowspan="1">com.eagle.TestCases.LogoutTest</td><td><a href="#m18">VerifyLogout_Test</a></td><td rowspan="1">1640245307808</td><td rowspan="1">1</td></tr><tr><th colspan="4">Smoke Test cases &#8212; skipped (configuration methods)</th></tr><tr class="skippedeven"><td rowspan="2">com.eagle.TestCases.LoginTest</td><td><a href="#m19">beforeClass</a></td><td rowspan="1">1640245307400</td><td rowspan="1">-1640245307400</td></tr><tr class="skippedeven"><td><a href="#m20">closeApplication</a></td><td rowspan="1">1640245308748</td><td rowspan="1">-1640245308748</td></tr><tr><th colspan="4">Smoke Test cases &#8212; skipped</th></tr><tr class="skippedeven"><td rowspan="24">com.eagle.TestCases.ComparisonTest</td><td><a href="#m21">ChangeControlAndCase_Test</a></td><td rowspan="1">1640245307777</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m22">ComparisonCreateMultipleCaseCardsRunComparison_Test</a></td><td rowspan="1">1640245307762</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m23">ComparisonCreateMultipleCaseCards_Test</a></td><td rowspan="1">1640245307759</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m24">ComparisonExpandAddFromCatalog_Test</a></td><td rowspan="1">1640245307750</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m25">ComparisonExpandAddFromFile_Test</a></td><td rowspan="1">1640245307755</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m26">ComparisonExpandAddFromSet_Test</a></td><td rowspan="1">1640245307753</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m27">CreateAndDeleteComparison_Test</a></td><td rowspan="1">1640245307765</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m28">CreateAndShareComparison_Test</a></td><td rowspan="1">1640245307768</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m29">CreateComparisonFromFile_Test</a></td><td rowspan="1">1640245307731</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m30">CreateComparisonFromSet_Test</a></td><td rowspan="1">1640245307729</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m31">CreateComparisonWithContol_Test</a></td><td rowspan="1">1640245307728</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m32">CreateComparisonWithContolandCase_Test</a></td><td rowspan="1">1640245307733</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m33">DeleteCardInComparisonExpand_Test</a></td><td rowspan="1">1640245307742</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m34">DeleteComparisonFirstCard_Test</a></td><td rowspan="1">1640245307745</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m35">DeleteComparisonSecondCard_Test</a></td><td rowspan="1">1640245307747</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m36">DeleteComparison_Test</a></td><td rowspan="1">1640245307770</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m37">FilterComparison_Test</a></td><td rowspan="1">1640245307782</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m38">FilterMultiComparison_Test</a></td><td rowspan="1">1640245307783</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m39">RemoveItemsfromComparison_Test</a></td><td rowspan="1">1640245307776</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m40">SearchInComparisonExpand_Test</a></td><td rowspan="1">1640245307740</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m41">ShareComparison_Test</a></td><td rowspan="1">1640245307774</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m42">SortColumnComparison_Test</a></td><td rowspan="1">1640245307779</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m43">createComparisonWithControlandCaseRunComparison_Test</a></td><td rowspan="1">1640245307735</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m44">updateComparisonWithCaseCard_Test</a></td><td rowspan="1">1640245307738</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td rowspan="21">com.eagle.TestCases.ExplorationTest</td><td><a href="#m45">CreateAndDeleteExploration_Test</a></td><td rowspan="1">1640245307708</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m46">CreateAndShareExploration_Test</a></td><td rowspan="1">1640245307710</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m47">CreateExplorationFromFile_Test</a></td><td rowspan="1">1640245307678</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m48">CreateExplorationFromSearch_Test</a></td><td rowspan="1">1640245307669</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m49">CreateExplorationFromSetInitally_Test</a></td><td rowspan="1">1640245307672</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m50">CreateExplorationFromSet_Test</a></td><td rowspan="1">1640245307675</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m51">DeleteCardInExplorationExpand_Test</a></td><td rowspan="1">1640245307684</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m52">DeleteExplorationFirstCard_Test</a></td><td rowspan="1">1640245307685</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m53">DeleteExplorationSecondCard_Test</a></td><td rowspan="1">1640245307688</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m54">DeleteExploration_Test</a></td><td rowspan="1">1640245307712</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m55">ExplorationCreateARelationCard_Test</a></td><td rowspan="1">1640245307700</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m56">ExplorationCreateTwoRelationCard_Test</a></td><td rowspan="1">1640245307704</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m57">ExplorationExpandAddFromCatalog_Test</a></td><td rowspan="1">1640245307692</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m58">ExplorationExpandAddFromFile_Test</a></td><td rowspan="1">1640245307698</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m59">ExplorationExpandAddFromSet_Test</a></td><td rowspan="1">1640245307695</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m60">FilterExploration_Test</a></td><td rowspan="1">1640245307720</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m61">FilterMultiExploration_Test</a></td><td rowspan="1">1640245307722</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m62">RemoveItemsfromExploration_Test</a></td><td rowspan="1">1640245307716</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m63">SearchInExplorationExpand_Test</a></td><td rowspan="1">1640245307681</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m64">ShareExploration_Test</a></td><td rowspan="1">1640245307714</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m65">SortColumnExploration_Test</a></td><td rowspan="1">1640245307718</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td rowspan="1">com.eagle.TestCases.LoginTest</td><td><a href="#m66">VerifyLoginPage_Test</a></td><td rowspan="1">1640245307427</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td rowspan="18">com.eagle.TestCases.SetTest</td><td><a href="#m67">CreateAndDeleteSet_Test</a></td><td rowspan="1">1640245307646</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m68">CreateAndShareSet_Test</a></td><td rowspan="1">1640245307649</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m69">CreateSetFromFile_Test</a></td><td rowspan="1">1640245307619</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m70">CreateSetFromSet_Test</a></td><td rowspan="1">1640245307622</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m71">CreateSet_Test</a></td><td rowspan="1">1640245307614</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m72">DeleteCardInSetExpand_Test</a></td><td rowspan="1">1640245307638</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m73">DeleteSet_Test</a></td><td rowspan="1">1640245307652</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m74">FilterMultiSet_Test</a></td><td rowspan="1">1640245307664</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m75">FilterSet_Test</a></td><td rowspan="1">1640245307662</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m76">GridChangesInSet_Test</a></td><td rowspan="1">1640245307644</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m77">RemoveItemsfromSet_Test</a></td><td rowspan="1">1640245307642</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m78">SearchInSetExpand_Test</a></td><td rowspan="1">1640245307626</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m79">SetExpandAddFromCatalog_Test</a></td><td rowspan="1">1640245307629</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m80">SetExpandAddFromFile_Test</a></td><td rowspan="1">1640245307635</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m81">SetExpandAddFromSet_Test</a></td><td rowspan="1">1640245307632</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m82">ShareSet_Test</a></td><td rowspan="1">1640245307655</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m83">SortColumnSet_Test</a></td><td rowspan="1">1640245307658</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td><a href="#m84">ViewSet_Test</a></td><td rowspan="1">1640245307617</td><td rowspan="1">0</td></tr></tbody>
 </table>
-<h2>Smoke Test cases</h2><h3 id="m0">com.eagle.TestCases.ComparisonTest#ComparisonCreateMultipleCaseCardsRunComparison_Test</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m1">com.eagle.TestCases.ComparisonTest#ComparisonCreateMultipleCaseCards_Test</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m2">com.eagle.TestCases.ExplorationTest#ExplorationCreateARelationCard_Test</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m3">com.eagle.TestCases.ExplorationTest#ExplorationExpandAddFromFile_Test</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m4">com.eagle.TestCases.ExplorationTest#ExplorationExpandAddFromSet_Test</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m5">com.eagle.TestCases.LoginTest#VerifyLoginPage_Test</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m6">com.eagle.TestCases.LogoutTest#VerifyLogout_Test</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m7">com.eagle.TestCases.SetTest#CreateAndDeleteSet_Test</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m8">com.eagle.TestCases.SetTest#CreateAndShareSet_Test</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m9">com.eagle.TestCases.SetTest#CreateSetFromSet_Test</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m10">com.eagle.TestCases.SetTest#CreateSet_Test</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m11">com.eagle.TestCases.SetTest#SearchInSetExpand_Test</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h2>Smoke Test cases</h2><h3 id="m0">com.eagle.TestCases.ComparisonTest#beforeClass</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ComparisonPage.&lt;init&gt;(ComparisonPage.java:363)
+	at com.eagle.TestCases.ComparisonTest.beforeClass(ComparisonTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m1">com.eagle.TestCases.ExplorationTest#beforeClass</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ExplorationPage.&lt;init&gt;(ExplorationPage.java:325)
+	at com.eagle.TestCases.ExplorationTest.beforeClass(ExplorationTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m2">com.eagle.TestCases.LoginTest#launchApplication</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.openqa.selenium.WebDriverException: unknown error: cannot determine loading status
+from disconnected: received Inspector.detached event
+  (Session info: chrome=96.0.4664.110)
+Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:17:03&apos;
+System info: host: &apos;MUGUNTH-DESKTOP&apos;, ip: &apos;172.17.200.17&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;15.0.2&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.110, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: C:\Users\MUGUNT~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:58885}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 3ee98751277903ecd0ffe4a7c17f05e7
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+	at org.openqa.selenium.remote.RemoteWebDriver.get(RemoteWebDriver.java:277)
+	at com.eagle.TestCases.BaseTest.launchApplication(BaseTest.java:82)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 30 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m3">com.eagle.TestCases.SetTest#beforeClass</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.SetPage.&lt;init&gt;(SetPage.java:279)
+	at com.eagle.TestCases.SetTest.beforeClass(SetTest.java:28)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m4">com.eagle.TestCases.HomeTest#CreateGlobalSearch_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException: Cannot invoke &quot;org.openqa.selenium.TakesScreenshot.getScreenshotAs(org.openqa.selenium.OutputType)&quot; because &quot;ts&quot; is null
+	at com.eagle.pages.HomePage.captureScreenshot(HomePage.java:245)
+	at com.eagle.TestCases.HomeTest.CreateGlobalSearch_Test(HomeTest.java:76)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 27 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m5">com.eagle.TestCases.HomeTest#VerifyCopyRights</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException: Cannot invoke &quot;org.openqa.selenium.TakesScreenshot.getScreenshotAs(org.openqa.selenium.OutputType)&quot; because &quot;ts&quot; is null
+	at com.eagle.pages.HomePage.captureScreenshot(HomePage.java:245)
+	at com.eagle.TestCases.HomeTest.VerifyCopyRights(HomeTest.java:64)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 27 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m6">com.eagle.TestCases.HomeTest#VerifyDashboard_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException: Cannot invoke &quot;org.openqa.selenium.TakesScreenshot.getScreenshotAs(org.openqa.selenium.OutputType)&quot; because &quot;ts&quot; is null
+	at com.eagle.pages.HomePage.captureScreenshot(HomePage.java:245)
+	at com.eagle.TestCases.HomeTest.VerifyDashboard_Test(HomeTest.java:40)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 27 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m7">com.eagle.TestCases.HomeTest#VerifyLogoVisibility_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException: Cannot invoke &quot;org.openqa.selenium.TakesScreenshot.getScreenshotAs(org.openqa.selenium.OutputType)&quot; because &quot;ts&quot; is null
+	at com.eagle.pages.HomePage.captureScreenshot(HomePage.java:245)
+	at com.eagle.TestCases.HomeTest.VerifyLogoVisibility_Test(HomeTest.java:28)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 27 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m8">com.eagle.TestCases.HomeTest#VerifySavedSearches_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException: Cannot invoke &quot;org.openqa.selenium.TakesScreenshot.getScreenshotAs(org.openqa.selenium.OutputType)&quot; because &quot;ts&quot; is null
+	at com.eagle.pages.HomePage.captureScreenshot(HomePage.java:245)
+	at com.eagle.TestCases.HomeTest.VerifySavedSearches_Test(HomeTest.java:88)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 27 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m9">com.eagle.TestCases.HomeTest#VerifyUserProfile</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException: Cannot invoke &quot;org.openqa.selenium.TakesScreenshot.getScreenshotAs(org.openqa.selenium.OutputType)&quot; because &quot;ts&quot; is null
+	at com.eagle.pages.HomePage.captureScreenshot(HomePage.java:245)
+	at com.eagle.TestCases.HomeTest.VerifyUserProfile(HomeTest.java:52)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 27 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m10">com.eagle.TestCases.InvestigationTest#CreateInvestigation_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException: Cannot invoke &quot;org.openqa.selenium.TakesScreenshot.getScreenshotAs(org.openqa.selenium.OutputType)&quot; because &quot;ts&quot; is null
+	at com.eagle.pages.InvestigationPage.captureScreenshot(InvestigationPage.java:290)
+	at com.eagle.TestCases.InvestigationTest.CreateInvestigation_Test(InvestigationTest.java:46)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 27 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m11">com.eagle.TestCases.InvestigationTest#DeleteInvestigation_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException: Cannot invoke &quot;org.openqa.selenium.TakesScreenshot.getScreenshotAs(org.openqa.selenium.OutputType)&quot; because &quot;ts&quot; is null
+	at com.eagle.pages.InvestigationPage.captureScreenshot(InvestigationPage.java:290)
+	at com.eagle.TestCases.InvestigationTest.DeleteInvestigation_Test(InvestigationTest.java:202)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 27 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m12">com.eagle.TestCases.InvestigationTest#EditInvestigation_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException: Cannot invoke &quot;org.openqa.selenium.TakesScreenshot.getScreenshotAs(org.openqa.selenium.OutputType)&quot; because &quot;ts&quot; is null
+	at com.eagle.pages.InvestigationPage.captureScreenshot(InvestigationPage.java:290)
+	at com.eagle.TestCases.InvestigationTest.EditInvestigation_Test(InvestigationTest.java:87)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 27 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m13">com.eagle.TestCases.InvestigationTest#LinkComparisonWithInvestigation_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException: Cannot invoke &quot;org.openqa.selenium.TakesScreenshot.getScreenshotAs(org.openqa.selenium.OutputType)&quot; because &quot;ts&quot; is null
+	at com.eagle.pages.InvestigationPage.captureScreenshot(InvestigationPage.java:290)
+	at com.eagle.TestCases.InvestigationTest.LinkComparisonWithInvestigation_Test(InvestigationTest.java:158)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 27 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m14">com.eagle.TestCases.InvestigationTest#LinkExplorationWithInvestigation_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException: Cannot invoke &quot;org.openqa.selenium.TakesScreenshot.getScreenshotAs(org.openqa.selenium.OutputType)&quot; because &quot;ts&quot; is null
+	at com.eagle.pages.InvestigationPage.captureScreenshot(InvestigationPage.java:290)
+	at com.eagle.TestCases.InvestigationTest.LinkExplorationWithInvestigation_Test(InvestigationTest.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 27 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m15">com.eagle.TestCases.InvestigationTest#LinkSetWithInvestigation_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException: Cannot invoke &quot;org.openqa.selenium.TakesScreenshot.getScreenshotAs(org.openqa.selenium.OutputType)&quot; because &quot;ts&quot; is null
+	at com.eagle.pages.InvestigationPage.captureScreenshot(InvestigationPage.java:290)
+	at com.eagle.TestCases.InvestigationTest.LinkSetWithInvestigation_Test(InvestigationTest.java:110)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 27 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m16">com.eagle.TestCases.InvestigationTest#ShareInvestigation_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException: Cannot invoke &quot;org.openqa.selenium.TakesScreenshot.getScreenshotAs(org.openqa.selenium.OutputType)&quot; because &quot;ts&quot; is null
+	at com.eagle.pages.InvestigationPage.captureScreenshot(InvestigationPage.java:290)
+	at com.eagle.TestCases.InvestigationTest.ShareInvestigation_Test(InvestigationTest.java:181)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 27 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m17">com.eagle.TestCases.InvestigationTest#ViewInvestigation_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException: Cannot invoke &quot;org.openqa.selenium.TakesScreenshot.getScreenshotAs(org.openqa.selenium.OutputType)&quot; because &quot;ts&quot; is null
+	at com.eagle.pages.InvestigationPage.captureScreenshot(InvestigationPage.java:290)
+	at com.eagle.TestCases.InvestigationTest.ViewInvestigation_Test(InvestigationTest.java:65)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 27 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m18">com.eagle.TestCases.LogoutTest#VerifyLogout_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException: Cannot invoke &quot;org.openqa.selenium.TakesScreenshot.getScreenshotAs(org.openqa.selenium.OutputType)&quot; because &quot;ts&quot; is null
+	at com.eagle.pages.HomePage.captureScreenshot(HomePage.java:245)
+	at com.eagle.TestCases.LogoutTest.VerifyLogout_Test(LogoutTest.java:29)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 27 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m19">com.eagle.TestCases.LoginTest#beforeClass</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m20">com.eagle.TestCases.LoginTest#closeApplication</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m21">com.eagle.TestCases.ComparisonTest#ChangeControlAndCase_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ComparisonPage.&lt;init&gt;(ComparisonPage.java:363)
+	at com.eagle.TestCases.ComparisonTest.beforeClass(ComparisonTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m22">com.eagle.TestCases.ComparisonTest#ComparisonCreateMultipleCaseCardsRunComparison_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ComparisonPage.&lt;init&gt;(ComparisonPage.java:363)
+	at com.eagle.TestCases.ComparisonTest.beforeClass(ComparisonTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m23">com.eagle.TestCases.ComparisonTest#ComparisonCreateMultipleCaseCards_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ComparisonPage.&lt;init&gt;(ComparisonPage.java:363)
+	at com.eagle.TestCases.ComparisonTest.beforeClass(ComparisonTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m24">com.eagle.TestCases.ComparisonTest#ComparisonExpandAddFromCatalog_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ComparisonPage.&lt;init&gt;(ComparisonPage.java:363)
+	at com.eagle.TestCases.ComparisonTest.beforeClass(ComparisonTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m25">com.eagle.TestCases.ComparisonTest#ComparisonExpandAddFromFile_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ComparisonPage.&lt;init&gt;(ComparisonPage.java:363)
+	at com.eagle.TestCases.ComparisonTest.beforeClass(ComparisonTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m26">com.eagle.TestCases.ComparisonTest#ComparisonExpandAddFromSet_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ComparisonPage.&lt;init&gt;(ComparisonPage.java:363)
+	at com.eagle.TestCases.ComparisonTest.beforeClass(ComparisonTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m27">com.eagle.TestCases.ComparisonTest#CreateAndDeleteComparison_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ComparisonPage.&lt;init&gt;(ComparisonPage.java:363)
+	at com.eagle.TestCases.ComparisonTest.beforeClass(ComparisonTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m28">com.eagle.TestCases.ComparisonTest#CreateAndShareComparison_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ComparisonPage.&lt;init&gt;(ComparisonPage.java:363)
+	at com.eagle.TestCases.ComparisonTest.beforeClass(ComparisonTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m29">com.eagle.TestCases.ComparisonTest#CreateComparisonFromFile_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ComparisonPage.&lt;init&gt;(ComparisonPage.java:363)
+	at com.eagle.TestCases.ComparisonTest.beforeClass(ComparisonTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m30">com.eagle.TestCases.ComparisonTest#CreateComparisonFromSet_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ComparisonPage.&lt;init&gt;(ComparisonPage.java:363)
+	at com.eagle.TestCases.ComparisonTest.beforeClass(ComparisonTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m31">com.eagle.TestCases.ComparisonTest#CreateComparisonWithContol_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ComparisonPage.&lt;init&gt;(ComparisonPage.java:363)
+	at com.eagle.TestCases.ComparisonTest.beforeClass(ComparisonTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m32">com.eagle.TestCases.ComparisonTest#CreateComparisonWithContolandCase_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ComparisonPage.&lt;init&gt;(ComparisonPage.java:363)
+	at com.eagle.TestCases.ComparisonTest.beforeClass(ComparisonTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m33">com.eagle.TestCases.ComparisonTest#DeleteCardInComparisonExpand_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ComparisonPage.&lt;init&gt;(ComparisonPage.java:363)
+	at com.eagle.TestCases.ComparisonTest.beforeClass(ComparisonTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m34">com.eagle.TestCases.ComparisonTest#DeleteComparisonFirstCard_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ComparisonPage.&lt;init&gt;(ComparisonPage.java:363)
+	at com.eagle.TestCases.ComparisonTest.beforeClass(ComparisonTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m35">com.eagle.TestCases.ComparisonTest#DeleteComparisonSecondCard_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ComparisonPage.&lt;init&gt;(ComparisonPage.java:363)
+	at com.eagle.TestCases.ComparisonTest.beforeClass(ComparisonTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m36">com.eagle.TestCases.ComparisonTest#DeleteComparison_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ComparisonPage.&lt;init&gt;(ComparisonPage.java:363)
+	at com.eagle.TestCases.ComparisonTest.beforeClass(ComparisonTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m37">com.eagle.TestCases.ComparisonTest#FilterComparison_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ComparisonPage.&lt;init&gt;(ComparisonPage.java:363)
+	at com.eagle.TestCases.ComparisonTest.beforeClass(ComparisonTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m38">com.eagle.TestCases.ComparisonTest#FilterMultiComparison_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ComparisonPage.&lt;init&gt;(ComparisonPage.java:363)
+	at com.eagle.TestCases.ComparisonTest.beforeClass(ComparisonTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m39">com.eagle.TestCases.ComparisonTest#RemoveItemsfromComparison_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ComparisonPage.&lt;init&gt;(ComparisonPage.java:363)
+	at com.eagle.TestCases.ComparisonTest.beforeClass(ComparisonTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m40">com.eagle.TestCases.ComparisonTest#SearchInComparisonExpand_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ComparisonPage.&lt;init&gt;(ComparisonPage.java:363)
+	at com.eagle.TestCases.ComparisonTest.beforeClass(ComparisonTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m41">com.eagle.TestCases.ComparisonTest#ShareComparison_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ComparisonPage.&lt;init&gt;(ComparisonPage.java:363)
+	at com.eagle.TestCases.ComparisonTest.beforeClass(ComparisonTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m42">com.eagle.TestCases.ComparisonTest#SortColumnComparison_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ComparisonPage.&lt;init&gt;(ComparisonPage.java:363)
+	at com.eagle.TestCases.ComparisonTest.beforeClass(ComparisonTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m43">com.eagle.TestCases.ComparisonTest#createComparisonWithControlandCaseRunComparison_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ComparisonPage.&lt;init&gt;(ComparisonPage.java:363)
+	at com.eagle.TestCases.ComparisonTest.beforeClass(ComparisonTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m44">com.eagle.TestCases.ComparisonTest#updateComparisonWithCaseCard_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ComparisonPage.&lt;init&gt;(ComparisonPage.java:363)
+	at com.eagle.TestCases.ComparisonTest.beforeClass(ComparisonTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m45">com.eagle.TestCases.ExplorationTest#CreateAndDeleteExploration_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ExplorationPage.&lt;init&gt;(ExplorationPage.java:325)
+	at com.eagle.TestCases.ExplorationTest.beforeClass(ExplorationTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m46">com.eagle.TestCases.ExplorationTest#CreateAndShareExploration_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ExplorationPage.&lt;init&gt;(ExplorationPage.java:325)
+	at com.eagle.TestCases.ExplorationTest.beforeClass(ExplorationTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m47">com.eagle.TestCases.ExplorationTest#CreateExplorationFromFile_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ExplorationPage.&lt;init&gt;(ExplorationPage.java:325)
+	at com.eagle.TestCases.ExplorationTest.beforeClass(ExplorationTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m48">com.eagle.TestCases.ExplorationTest#CreateExplorationFromSearch_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ExplorationPage.&lt;init&gt;(ExplorationPage.java:325)
+	at com.eagle.TestCases.ExplorationTest.beforeClass(ExplorationTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m49">com.eagle.TestCases.ExplorationTest#CreateExplorationFromSetInitally_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ExplorationPage.&lt;init&gt;(ExplorationPage.java:325)
+	at com.eagle.TestCases.ExplorationTest.beforeClass(ExplorationTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m50">com.eagle.TestCases.ExplorationTest#CreateExplorationFromSet_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ExplorationPage.&lt;init&gt;(ExplorationPage.java:325)
+	at com.eagle.TestCases.ExplorationTest.beforeClass(ExplorationTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m51">com.eagle.TestCases.ExplorationTest#DeleteCardInExplorationExpand_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ExplorationPage.&lt;init&gt;(ExplorationPage.java:325)
+	at com.eagle.TestCases.ExplorationTest.beforeClass(ExplorationTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m52">com.eagle.TestCases.ExplorationTest#DeleteExplorationFirstCard_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ExplorationPage.&lt;init&gt;(ExplorationPage.java:325)
+	at com.eagle.TestCases.ExplorationTest.beforeClass(ExplorationTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m53">com.eagle.TestCases.ExplorationTest#DeleteExplorationSecondCard_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ExplorationPage.&lt;init&gt;(ExplorationPage.java:325)
+	at com.eagle.TestCases.ExplorationTest.beforeClass(ExplorationTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m54">com.eagle.TestCases.ExplorationTest#DeleteExploration_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ExplorationPage.&lt;init&gt;(ExplorationPage.java:325)
+	at com.eagle.TestCases.ExplorationTest.beforeClass(ExplorationTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m55">com.eagle.TestCases.ExplorationTest#ExplorationCreateARelationCard_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ExplorationPage.&lt;init&gt;(ExplorationPage.java:325)
+	at com.eagle.TestCases.ExplorationTest.beforeClass(ExplorationTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m56">com.eagle.TestCases.ExplorationTest#ExplorationCreateTwoRelationCard_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ExplorationPage.&lt;init&gt;(ExplorationPage.java:325)
+	at com.eagle.TestCases.ExplorationTest.beforeClass(ExplorationTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m57">com.eagle.TestCases.ExplorationTest#ExplorationExpandAddFromCatalog_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ExplorationPage.&lt;init&gt;(ExplorationPage.java:325)
+	at com.eagle.TestCases.ExplorationTest.beforeClass(ExplorationTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m58">com.eagle.TestCases.ExplorationTest#ExplorationExpandAddFromFile_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ExplorationPage.&lt;init&gt;(ExplorationPage.java:325)
+	at com.eagle.TestCases.ExplorationTest.beforeClass(ExplorationTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m59">com.eagle.TestCases.ExplorationTest#ExplorationExpandAddFromSet_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ExplorationPage.&lt;init&gt;(ExplorationPage.java:325)
+	at com.eagle.TestCases.ExplorationTest.beforeClass(ExplorationTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m60">com.eagle.TestCases.ExplorationTest#FilterExploration_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ExplorationPage.&lt;init&gt;(ExplorationPage.java:325)
+	at com.eagle.TestCases.ExplorationTest.beforeClass(ExplorationTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m61">com.eagle.TestCases.ExplorationTest#FilterMultiExploration_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ExplorationPage.&lt;init&gt;(ExplorationPage.java:325)
+	at com.eagle.TestCases.ExplorationTest.beforeClass(ExplorationTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m62">com.eagle.TestCases.ExplorationTest#RemoveItemsfromExploration_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ExplorationPage.&lt;init&gt;(ExplorationPage.java:325)
+	at com.eagle.TestCases.ExplorationTest.beforeClass(ExplorationTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m63">com.eagle.TestCases.ExplorationTest#SearchInExplorationExpand_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ExplorationPage.&lt;init&gt;(ExplorationPage.java:325)
+	at com.eagle.TestCases.ExplorationTest.beforeClass(ExplorationTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m64">com.eagle.TestCases.ExplorationTest#ShareExploration_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ExplorationPage.&lt;init&gt;(ExplorationPage.java:325)
+	at com.eagle.TestCases.ExplorationTest.beforeClass(ExplorationTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m65">com.eagle.TestCases.ExplorationTest#SortColumnExploration_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.ExplorationPage.&lt;init&gt;(ExplorationPage.java:325)
+	at com.eagle.TestCases.ExplorationTest.beforeClass(ExplorationTest.java:25)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m66">com.eagle.TestCases.LoginTest#VerifyLoginPage_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.openqa.selenium.WebDriverException: unknown error: cannot determine loading status
+from disconnected: received Inspector.detached event
+  (Session info: chrome=96.0.4664.110)
+Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:17:03&apos;
+System info: host: &apos;MUGUNTH-DESKTOP&apos;, ip: &apos;172.17.200.17&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;15.0.2&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.110, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: C:\Users\MUGUNT~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:58885}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 3ee98751277903ecd0ffe4a7c17f05e7
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+	at org.openqa.selenium.remote.RemoteWebDriver.get(RemoteWebDriver.java:277)
+	at com.eagle.TestCases.BaseTest.launchApplication(BaseTest.java:82)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 30 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m67">com.eagle.TestCases.SetTest#CreateAndDeleteSet_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.SetPage.&lt;init&gt;(SetPage.java:279)
+	at com.eagle.TestCases.SetTest.beforeClass(SetTest.java:28)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m68">com.eagle.TestCases.SetTest#CreateAndShareSet_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.SetPage.&lt;init&gt;(SetPage.java:279)
+	at com.eagle.TestCases.SetTest.beforeClass(SetTest.java:28)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m69">com.eagle.TestCases.SetTest#CreateSetFromFile_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.SetPage.&lt;init&gt;(SetPage.java:279)
+	at com.eagle.TestCases.SetTest.beforeClass(SetTest.java:28)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m70">com.eagle.TestCases.SetTest#CreateSetFromSet_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.SetPage.&lt;init&gt;(SetPage.java:279)
+	at com.eagle.TestCases.SetTest.beforeClass(SetTest.java:28)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m71">com.eagle.TestCases.SetTest#CreateSet_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.SetPage.&lt;init&gt;(SetPage.java:279)
+	at com.eagle.TestCases.SetTest.beforeClass(SetTest.java:28)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m72">com.eagle.TestCases.SetTest#DeleteCardInSetExpand_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.SetPage.&lt;init&gt;(SetPage.java:279)
+	at com.eagle.TestCases.SetTest.beforeClass(SetTest.java:28)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m73">com.eagle.TestCases.SetTest#DeleteSet_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.SetPage.&lt;init&gt;(SetPage.java:279)
+	at com.eagle.TestCases.SetTest.beforeClass(SetTest.java:28)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m74">com.eagle.TestCases.SetTest#FilterMultiSet_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.SetPage.&lt;init&gt;(SetPage.java:279)
+	at com.eagle.TestCases.SetTest.beforeClass(SetTest.java:28)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m75">com.eagle.TestCases.SetTest#FilterSet_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.SetPage.&lt;init&gt;(SetPage.java:279)
+	at com.eagle.TestCases.SetTest.beforeClass(SetTest.java:28)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m76">com.eagle.TestCases.SetTest#GridChangesInSet_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.SetPage.&lt;init&gt;(SetPage.java:279)
+	at com.eagle.TestCases.SetTest.beforeClass(SetTest.java:28)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m77">com.eagle.TestCases.SetTest#RemoveItemsfromSet_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.SetPage.&lt;init&gt;(SetPage.java:279)
+	at com.eagle.TestCases.SetTest.beforeClass(SetTest.java:28)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m78">com.eagle.TestCases.SetTest#SearchInSetExpand_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.SetPage.&lt;init&gt;(SetPage.java:279)
+	at com.eagle.TestCases.SetTest.beforeClass(SetTest.java:28)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m79">com.eagle.TestCases.SetTest#SetExpandAddFromCatalog_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.SetPage.&lt;init&gt;(SetPage.java:279)
+	at com.eagle.TestCases.SetTest.beforeClass(SetTest.java:28)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m80">com.eagle.TestCases.SetTest#SetExpandAddFromFile_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.SetPage.&lt;init&gt;(SetPage.java:279)
+	at com.eagle.TestCases.SetTest.beforeClass(SetTest.java:28)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m81">com.eagle.TestCases.SetTest#SetExpandAddFromSet_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.SetPage.&lt;init&gt;(SetPage.java:279)
+	at com.eagle.TestCases.SetTest.beforeClass(SetTest.java:28)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m82">com.eagle.TestCases.SetTest#ShareSet_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.SetPage.&lt;init&gt;(SetPage.java:279)
+	at com.eagle.TestCases.SetTest.beforeClass(SetTest.java:28)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m83">com.eagle.TestCases.SetTest#SortColumnSet_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.SetPage.&lt;init&gt;(SetPage.java:279)
+	at com.eagle.TestCases.SetTest.beforeClass(SetTest.java:28)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m84">com.eagle.TestCases.SetTest#ViewSet_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.support.ui.FluentWait.&lt;init&gt;(FluentWait.java:115)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:102)
+	at org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(WebDriverWait.java:45)
+	at com.eagle.pages.SetPage.&lt;init&gt;(SetPage.java:279)
+	at com.eagle.TestCases.SetTest.beforeClass(SetTest.java:28)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
 </body>
 </html>

@@ -311,10 +311,11 @@ public class SetPage extends BasePage{
 			outerloop:		
 				do
 				{
-					while(i<=20) {
+//					while(i<=20) {
 						try {	    	
 							columnHeaderFirstPage.isDisplayed();
-							iden = false;	  
+							iden = false;
+							break outerloop;
 						}
 						catch(Exception ex) {
 							try {
@@ -343,9 +344,10 @@ public class SetPage extends BasePage{
 								}
 							}
 						}
-					}
+//					}
 				}
-				while(iden);	         
+				while(i<=20);
+//				while(iden);	         
 		}
 		catch(Exception | AssertionError ex)
 		{
@@ -1089,10 +1091,11 @@ public class SetPage extends BasePage{
 			outerloop:
 				do
 				{
-					while(i<=20) {
+//					while(i<=20) {
 						try {	    	
 							edit.isDisplayed();
-							iden = false;	  
+							iden = false;	
+							break outerloop;
 						}
 						catch(Exception ex) {
 							try {
@@ -1110,10 +1113,11 @@ public class SetPage extends BasePage{
 									break outerloop;
 								}	
 							}	 
-						}
+//						}
 					}
 				}
-				while(iden);	         
+				while(i<=20);
+//				while(iden);	         
 		}
 		catch(Exception | AssertionError ex)
 		{
@@ -1129,10 +1133,11 @@ public class SetPage extends BasePage{
 			outerloop:
 				do
 				{
-					while (i<=20) {
+//					while (i<=20) {
 						try {	    	
 							saveChanges.isDisplayed();
-							iden = false;	  
+							iden = false;	
+							break outerloop;
 						}
 						catch(Exception ex) {
 							try {
@@ -1148,9 +1153,10 @@ public class SetPage extends BasePage{
 								}	
 							}	 
 						}
-					}
+//					}
 				}
-				while(iden);	         
+				while(i<=20);
+//				while(iden);	         
 		}
 		catch(Exception | AssertionError ex)
 		{

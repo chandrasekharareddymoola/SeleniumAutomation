@@ -6,6 +6,21 @@
   </listeners>
   <test thread-count="5" name="Smoke Test cases(failed)">
     <classes>
+      <class name="com.eagle.TestCases.InvestigationTest">
+        <methods>
+          <include name="EditInvestigation_Test"/>
+          <include name="launchApplication"/>
+          <include name="ViewInvestigation_Test"/>
+          <include name="closeApplication"/>
+          <include name="LinkExplorationWithInvestigation_Test"/>
+          <include name="CreateInvestigation_Test"/>
+          <include name="LinkSetWithInvestigation_Test"/>
+          <include name="DeleteInvestigation_Test"/>
+          <include name="beforeClass"/>
+          <include name="LinkComparisonWithInvestigation_Test"/>
+          <include name="ShareInvestigation_Test"/>
+        </methods>
+      </class> <!-- com.eagle.TestCases.InvestigationTest -->
       <class name="com.eagle.TestCases.ComparisonTest">
         <methods>
           <include name="DeleteComparisonSecondCard_Test"/>
@@ -37,6 +52,15 @@
           <include name="DeleteComparisonFirstCard_Test"/>
         </methods>
       </class> <!-- com.eagle.TestCases.ComparisonTest -->
+      <class name="com.eagle.TestCases.LogoutTest">
+        <methods>
+          <include name="beforeClass"/>
+          <include name="launchApplication"/>
+          <include name="VerifyLogout_Test"/>
+          <include name="closeApplication"/>
+          <include name="afterClass"/>
+        </methods>
+      </class> <!-- com.eagle.TestCases.LogoutTest -->
       <class name="com.eagle.TestCases.SetTest">
         <methods>
           <include name="FilterMultiSet_Test"/>
@@ -62,19 +86,14 @@
           <include name="CreateSetFromSet_Test"/>
         </methods>
       </class> <!-- com.eagle.TestCases.SetTest -->
-      <class name="com.eagle.TestCases.HomeTest">
+      <class name="com.eagle.TestCases.LoginTest">
         <methods>
           <include name="launchApplication"/>
-          <include name="VerifyLogoVisibility_Test"/>
-          <include name="VerifyCopyRights"/>
           <include name="closeApplication"/>
-          <include name="CreateGlobalSearch_Test"/>
-          <include name="VerifyDashboard_Test"/>
-          <include name="VerifySavedSearches_Test"/>
           <include name="beforeClass"/>
-          <include name="VerifyUserProfile"/>
+          <include name="VerifyLoginPage_Test"/>
         </methods>
-      </class> <!-- com.eagle.TestCases.HomeTest -->
+      </class> <!-- com.eagle.TestCases.LoginTest -->
       <class name="com.eagle.TestCases.ExplorationTest">
         <methods>
           <include name="CreateExplorationFromFile_Test"/>
@@ -103,38 +122,19 @@
           <include name="CreateAndShareExploration_Test"/>
         </methods>
       </class> <!-- com.eagle.TestCases.ExplorationTest -->
-      <class name="com.eagle.TestCases.LogoutTest">
-        <methods>
-          <include name="beforeClass"/>
-          <include name="launchApplication"/>
-          <include name="VerifyLogout_Test"/>
-          <include name="closeApplication"/>
-          <include name="afterClass"/>
-        </methods>
-      </class> <!-- com.eagle.TestCases.LogoutTest -->
-      <class name="com.eagle.TestCases.LoginTest">
+      <class name="com.eagle.TestCases.HomeTest">
         <methods>
           <include name="launchApplication"/>
+          <include name="VerifyLogoVisibility_Test"/>
+          <include name="VerifyCopyRights"/>
           <include name="closeApplication"/>
+          <include name="CreateGlobalSearch_Test"/>
+          <include name="VerifyDashboard_Test"/>
+          <include name="VerifySavedSearches_Test"/>
           <include name="beforeClass"/>
-          <include name="VerifyLoginPage_Test"/>
+          <include name="VerifyUserProfile"/>
         </methods>
-      </class> <!-- com.eagle.TestCases.LoginTest -->
-      <class name="com.eagle.TestCases.InvestigationTest">
-        <methods>
-          <include name="EditInvestigation_Test"/>
-          <include name="launchApplication"/>
-          <include name="ViewInvestigation_Test"/>
-          <include name="closeApplication"/>
-          <include name="LinkExplorationWithInvestigation_Test"/>
-          <include name="CreateInvestigation_Test"/>
-          <include name="LinkSetWithInvestigation_Test"/>
-          <include name="DeleteInvestigation_Test"/>
-          <include name="beforeClass"/>
-          <include name="LinkComparisonWithInvestigation_Test"/>
-          <include name="ShareInvestigation_Test"/>
-        </methods>
-      </class> <!-- com.eagle.TestCases.InvestigationTest -->
+      </class> <!-- com.eagle.TestCases.HomeTest -->
     </classes>
   </test> <!-- Smoke Test cases(failed) -->
 </suite> <!-- Failed suite [SmokeTestingSuite] -->
