@@ -24,7 +24,7 @@ public class HomeTest extends BaseTest{
     	  	objHome.verifyLogoVisibility();	
 		    onSuccessMeassage("Home logo is successfully verified");
     	}
-      	catch(Exception ex){
+      	catch(Exception | AssertionError ex){
       		objHome.captureScreenshot("homeLogoFail");
 			onFailreMeassage(ex.getMessage(),"homeLogoFail");					
 		}
@@ -36,7 +36,7 @@ public class HomeTest extends BaseTest{
     	  	objHome.verifyDashboardComponents();
 		    onSuccessMeassage("DashBoard displays all the components");
     	}
-      	catch(Exception ex){
+      	catch(Exception | AssertionError ex){
       		objHome.captureScreenshot("dashboardFail");
 			onFailreMeassage(ex.getMessage(),"dashboardFail");					
 		}
@@ -48,7 +48,7 @@ public class HomeTest extends BaseTest{
     	  	objHome.verifyUserProfiles();
 		    onSuccessMeassage("User profile is successfully verified");
     	}
-      	catch(Exception ex){
+      	catch(Exception | AssertionError ex){
       		objHome.captureScreenshot("profileFail");
 			onFailreMeassage(ex.getMessage(),"profileFail");					
 		}
@@ -60,7 +60,7 @@ public class HomeTest extends BaseTest{
     	  	objHome.verifyCopyRights();
 		    onSuccessMeassage("CopyRight details are present");
     	}
-      	catch(Exception ex){
+      	catch(Exception | AssertionError ex){
       		objHome.captureScreenshot("CopyRightsFail");
 			onFailreMeassage(ex.getMessage(),"CopyRightsFail");					
 		}
@@ -72,7 +72,7 @@ public class HomeTest extends BaseTest{
     	  	objHome.createGlobalSearch();
 		    onSuccessMeassage("Search is successfully created and saved");
     	}
-      	catch(Exception ex){
+      	catch(Exception | AssertionError ex){
       		objHome.captureScreenshot("SavesearchFail");
 			onFailreMeassage(ex.getMessage(),"SavesearchFail");					
 		}
@@ -84,7 +84,7 @@ public class HomeTest extends BaseTest{
     	  	objHome.verifySavedSearches();
 		    onSuccessMeassage("Search is successfully created and saved");
     	}
-      	catch(Exception ex){
+      	catch(Exception | AssertionError ex){
       		objHome.captureScreenshot("SavesearchFail");
 			onFailreMeassage(ex.getMessage(),"SavesearchFail");					
 		}

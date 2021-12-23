@@ -18,6 +18,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.aventstack.extentreports.Status;
+import com.eagle.Reports.ExtentTestManager;
+
 
 public class InvestigationPage extends BasePage{
 
@@ -116,7 +119,6 @@ public class InvestigationPage extends BasePage{
 		Actions action = new Actions(driver);
 		//Performing the mouse hover action on the target element.	    	
 		action.moveToElement(copyRightIdentifier).perform();
-
 	}
 
 	public void addInvestigation() throws InterruptedException, AWTException{    	
@@ -156,25 +158,25 @@ public class InvestigationPage extends BasePage{
 	{
 		try {	
 			outerloop:
-			do{ 
-				BasePage.waitforAnElement(investigationList);
-				for (WebElement element : invGridItems) {
-					if(element.isDisplayed() == false)  {scrollIntoView(element);}	    				
-					String textFromGrid = element.getText();	    				
-					if(investigationName.equals(textFromGrid)) {		    					
-						BasePage.click(element);	
-						break outerloop;
-					}		    				
+				do{ 
+					BasePage.waitforAnElement(investigationList);
+					for (WebElement element : invGridItems) {
+						if(element.isDisplayed() == false)  {scrollIntoView(element);}	    				
+						String textFromGrid = element.getText();	    				
+						if(investigationName.equals(textFromGrid)) {		    					
+							BasePage.click(element);	
+							break outerloop;
+						}		    				
+					}
+					BasePage.click(forward); 
 				}
-				BasePage.click(forward); 
-			}
-			while(forward.isEnabled());  
+				while(forward.isEnabled());  
 		}	    	
 		catch(Exception ex) {
 			throw ex;
 		}
 	}
-	
+
 	public void selectItemFortheList(String investigationName)
 	{
 		try {	
@@ -186,7 +188,7 @@ public class InvestigationPage extends BasePage{
 						String textFromGrid = element.getText();	    				
 						if(textFromGrid.equals(investigationName)) {
 							WebElement parent = (WebElement) ((JavascriptExecutor) driver).executeScript(
-							"return arguments[0].parentNode;", element);
+									"return arguments[0].parentNode;", element);
 							WebElement threeDot = parent.findElement(By.tagName("button"));	    					
 							threeDot.click();
 							break outerloop;
@@ -206,6 +208,7 @@ public class InvestigationPage extends BasePage{
 			this.setTitle(invTitle);
 			this.setDescription(invDesc);
 			this.clickSave();   
+			ExtentTestManager.getTest().log(Status.PASS,invTitle +  " - Investigation is created");
 		}
 		catch(Exception ex) {
 			throw ex;
@@ -213,18 +216,32 @@ public class InvestigationPage extends BasePage{
 	}	
 
 	public void editInvestigation(String inv, String invTitle, String invDescription) throws Exception{
-		this.clickInvestigationIcon();	  
-		this.openItemFromList(inv);	    	
-		this.modifyTitle(invTitle);	    	
-		this.modifyDescription(invDescription);	    	
+		try
+		{			
+			this.clickInvestigationIcon();	  
+			this.openItemFromList(inv);	    	
+			this.modifyTitle(invTitle);	    	
+			this.modifyDescription(invDescription);	 
+			ExtentTestManager.getTest().log(Status.PASS,inv +  " Investigation is editted");
+		}
+		catch(Exception ex) {
+			throw ex;
+		}
 	}	
 
-	public void viewInvestigation(String inv) throws Exception{		
-		this.clickInvestigationIcon();	  
-		this.openItemFromList(inv);	 
+	public void viewInvestigation(String inv) throws Throwable{		
+		try {
+			this.clickInvestigationIcon();	  
+			this.openItemFromList(inv);	 
+			ExtentTestManager.getTest().log(Status.PASS,inv +  " - Investigation is opened");
+		}
+		catch (Exception|AssertionError ex) {
+			throw ex;
+		}
+
 	}
 
-	public void linkSettoInvestigation(String invName, String setTobeLinked) throws IOException
+	public void linkSettoInvestigation(String invName, String setTobeLinked) throws Exception
 	{
 		try {  
 			this.clickInvestigationIcon();
@@ -235,10 +252,11 @@ public class InvestigationPage extends BasePage{
 			BasePage.click(selectASet);
 			this.openItemFromList(setTobeLinked);
 			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+			ExtentTestManager.getTest().log(Status.PASS,setTobeLinked +  " is linked to " + invName);
 		}
 		catch(Exception ex)
 		{
-
+			throw ex;
 		}
 	}  
 
@@ -252,6 +270,7 @@ public class InvestigationPage extends BasePage{
 		BasePage.click(selectAnExploration);
 		this.openItemFromList(explorationTobeLinked);	
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		ExtentTestManager.getTest().log(Status.PASS,explorationTobeLinked +  " is linked to " + invName);
 	}
 
 	public void linkComparisontoInvestigation(String invName, String comparisonTobeLinked) throws Exception
@@ -265,13 +284,15 @@ public class InvestigationPage extends BasePage{
 		this.openItemFromList(comparisonTobeLinked);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		Thread.sleep(3000);
+		ExtentTestManager.getTest().log(Status.PASS,comparisonTobeLinked +  " is linked to " + invName);
 	}	    
 
 	public void deleteInvestigation(String invToBeDeleted) throws Exception {
 		this.clickInvestigationIcon();	 
 		selectItemFortheList(invToBeDeleted);
 		BasePage.click(deleteIcon);
-		BasePage.click(deleteIcon);	 		    	
+		BasePage.click(deleteIcon);	
+		ExtentTestManager.getTest().log(Status.PASS,invToBeDeleted +  " Investigation is deleted");
 	}
 
 
@@ -281,7 +302,8 @@ public class InvestigationPage extends BasePage{
 		BasePage.click(shareIcon);
 		BasePage.enterText(selectPersonToShare,personToBeShared);	
 		BasePage.click(suggestedUsers);
-		BasePage.click(share);		    	
+		BasePage.click(share);	
+		ExtentTestManager.getTest().log(Status.PASS,invToBeShared +  " Investigation is shared");
 	}
 
 	public String captureScreenshot(String screenShotName) throws IOException

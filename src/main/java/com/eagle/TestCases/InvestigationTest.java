@@ -16,10 +16,20 @@ import com.eagle.pages.SetPage;
 
 public class InvestigationTest extends BaseTest {
 	
-	InvestigationPage objInvestigationPage;	SetPage objSetPage;
-	ExplorationPage objExplorationPage; ComparisonPage objComparisonPage;
-	String investigationName, functionName, value; String[] invParameters;
-	String entity = "Disease"; String searchText = "fever";String compSetName = "setName";
+	InvestigationPage objInvestigationPage;	
+	SetPage objSetPage;
+	ExplorationPage objExplorationPage; 
+	ComparisonPage objComparisonPage;
+	String investigationName, functionName, value; 
+	String[] invParameters;
+	String entity = "Disease"; 
+	String searchText = "fever";
+	String compSetName = "setName";
+	
+	
+	Date dt = new Date();
+	DateFormat dtFrmt = new SimpleDateFormat("_HHmmss");
+	String dtText = dtFrmt.format(dt);
 
 	@BeforeClass
 	public void beforeClass() throws InterruptedException, AWTException  {	
@@ -35,7 +45,8 @@ public class InvestigationTest extends BaseTest {
 			
 			value = this.getConfiguration().get(functionName);
 			invParameters = value.split(",");
-			investigationName = invParameters[0].trim() + this.getDateTime();
+//			investigationName = invParameters[0].trim() + this.getDateTime();
+			investigationName = invParameters[0].trim() + dtText;
 			String invDescription = invParameters[1].trim();
 			
 			objInvestigationPage.createInvestigation(investigationName,invDescription);
@@ -50,12 +61,13 @@ public class InvestigationTest extends BaseTest {
 	}
 	
 	@Test(priority = 1, description = "View Investigation")
-	public void ViewInvestigation_Test() throws InterruptedException, IOException  {
+	public void ViewInvestigation_Test() throws Throwable  {
 		try {
 			 /* To view the Investigation */
 			functionName = new Object(){}.getClass().getEnclosingMethod().getName();		
 			value = this.getConfiguration().get(functionName);			
-			investigationName = value.trim();
+//			investigationName = invParameters[0].trim() + this.getDateTime();
+			investigationName = invParameters[0].trim();
 			
 			objInvestigationPage.viewInvestigation(investigationName);
 			onSuccessMeassage("Investigation is successfully opened");
@@ -74,8 +86,10 @@ public class InvestigationTest extends BaseTest {
 			functionName = new Object(){}.getClass().getEnclosingMethod().getName();		
 			value = this.getConfiguration().get(functionName);
 			invParameters =value.split(",");
-			investigationName = invParameters[0].trim() + this.getDateTime();
-			String newInvName = invParameters[1].trim() + this.getDateTime();
+//			investigationName = invParameters[0].trim() + this.getDateTime();
+//			String newInvName = invParameters[1].trim() + this.getDateTime();
+			investigationName = invParameters[0].trim() + dtText;
+			String newInvName = invParameters[1].trim() + dtText;
 			String invDescription = invParameters[2].trim();
 			
 			objInvestigationPage.createInvestigation(investigationName,investigationName);
@@ -96,8 +110,10 @@ public class InvestigationTest extends BaseTest {
 			functionName = new Object(){}.getClass().getEnclosingMethod().getName();		
 			value = this.getConfiguration().get(functionName);
 			invParameters =value.split(",");
-			investigationName = invParameters[0].trim() + this.getDateTime();
-			String setTobeLinked = invParameters[1].trim()+ this.getDateTime();
+//			investigationName = invParameters[0].trim() + this.getDateTime();
+//			String setTobeLinked = invParameters[1].trim()+ this.getDateTime();
+			investigationName = invParameters[0].trim() + dtText;
+			String setTobeLinked = invParameters[1].trim()+ dtText;
 			
 			objInvestigationPage.createInvestigation(investigationName,investigationName);
 			objSetPage = new SetPage();					
@@ -120,8 +136,10 @@ public class InvestigationTest extends BaseTest {
 			functionName = new Object(){}.getClass().getEnclosingMethod().getName();		
 			value = this.getConfiguration().get(functionName);
 			invParameters =value.split(",");				
-			investigationName = invParameters[0].trim() + this.getDateTime();
-			String expTobeLinked = invParameters[1].trim()+ this.getDateTime();
+//			investigationName = invParameters[0].trim() + this.getDateTime();
+//			String expTobeLinked = invParameters[1].trim()+ this.getDateTime();
+			investigationName = invParameters[0].trim() + dtText;
+			String expTobeLinked = invParameters[1].trim()+ dtText;
 			   //ERROR //
 			objInvestigationPage.createInvestigation(investigationName,investigationName);
 			objExplorationPage = new ExplorationPage();				
@@ -143,15 +161,17 @@ public class InvestigationTest extends BaseTest {
 			functionName = new Object(){}.getClass().getEnclosingMethod().getName();		
 			value = this.getConfiguration().get(functionName);
 			invParameters =value.split(",");
-			String invName = invParameters[0].trim();
-			investigationName = invParameters[0].trim() + this.getDateTime();
-			String compTobeLinked = invParameters[1].trim()+ this.getDateTime();
+//			String invName = invParameters[0].trim();
+//			investigationName = invParameters[0].trim() + this.getDateTime();
+//			String compTobeLinked = invParameters[1].trim()+ this.getDateTime();
+			investigationName = invParameters[0].trim() +dtText;
+			String compTobeLinked = invParameters[1].trim()+dtText;
 			
 			objInvestigationPage.createInvestigation(investigationName,investigationName);
 			objComparisonPage = new ComparisonPage();	
 			objComparisonPage.createComparisonControl(compTobeLinked, compSetName, entity, searchText);
-		  objInvestigationPage.linkComparisontoInvestigation(invName,compTobeLinked);  
-			 onSuccessMeassage("Investigation is successfully linked with Comparison");
+			objInvestigationPage.linkComparisontoInvestigation(investigationName,compTobeLinked);  
+			onSuccessMeassage("Investigation is successfully linked with Comparison");
 		}
 		catch(Exception ex)
 		{
@@ -169,12 +189,13 @@ public class InvestigationTest extends BaseTest {
 			functionName = new Object(){}.getClass().getEnclosingMethod().getName();		
 			value = this.getConfiguration().get(functionName);
 			invParameters =value.split(",");
-			investigationName = invParameters[0].trim() + this.getDateTime();
+//			investigationName = invParameters[0].trim() + this.getDateTime();
+			investigationName = invParameters[0].trim() + dtText;
 			String toBeSharedWith = invParameters[1].trim();
 			
 			objInvestigationPage.createInvestigation(investigationName,investigationName);
 			objInvestigationPage.shareInvestigation(investigationName,toBeSharedWith);
-			 onSuccessMeassage("Investigation is successfully shared with user");
+			onSuccessMeassage("Investigation is successfully shared with user");
 		}
 		catch(Exception ex)
 		{
@@ -191,7 +212,8 @@ public class InvestigationTest extends BaseTest {
 			/* To delete the Investigation */
 			functionName = new Object(){}.getClass().getEnclosingMethod().getName();		
 			value = this.getConfiguration().get(functionName);			
-			investigationName =value + this.getDateTime();
+//			investigationName =value + this.getDateTime();
+			investigationName = invParameters[0].trim() + dtText;
 			
 			objInvestigationPage.createInvestigation(investigationName,investigationName);
 			objInvestigationPage.deleteInvestigation(investigationName);	
