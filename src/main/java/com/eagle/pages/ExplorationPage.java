@@ -15,14 +15,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -33,7 +31,6 @@ import org.testng.Assert;
 
 import com.aventstack.extentreports.Status;
 import com.eagle.Reports.ExtentTestManager;
-import com.eagle.pages.SetPage;
 
 public class ExplorationPage extends BasePage{
 
@@ -212,13 +209,13 @@ public class ExplorationPage extends BasePage{
 
 	@FindBy(xpath = "(//*[@class='ms-List' and @role='presentation'])[2]")
 	public WebElement ExplorationList2;
-	
+
 	@FindBy(xpath = "(//*[@data-icon-name='StatusCircleCheckmark']//parent::div//parent::div[@role='checkbox'])")
 	public WebElement ExplorationList2circle;
-	
+
 	@FindBy(xpath = "(//i[@data-icon-name='ShareIOS'])[2]//ancestor::button[@data-is-focusable='true']")
 	public WebElement shareIcon2;	
-	
+
 	@FindBy(xpath = "//*[@data-icon-name='Trash']")
 	public WebElement DeleteinCard;
 
@@ -422,33 +419,40 @@ public class ExplorationPage extends BasePage{
 			Date dt = new Date();
 			DateFormat dtFrmt = new SimpleDateFormat("_HHmmss");
 			String dtText = dtFrmt.format(dt);
+			Thread.sleep(3000);
+			int i=0;
 			outerloop:
 				do
 				{
-					try {	    	
-						columnHeaderFirstPage.isDisplayed();
-						iden = false;	  
-					}
-					catch(Exception ex) {
-						try {
-							if(notingToShowText.isDisplayed()) {
-								String screenshotname = "notingToShowText"+dtText;
-								this.captureScreenshot(screenshotname);
-								ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/"+screenshotname+".png");
-								break outerloop;
-							}
+					while(i<=20) {
+						try {	    	
+							columnHeaderFirstPage.isDisplayed();
+							iden = false;	  
 						}
-						catch (Exception ey) {
+						catch(Exception ex) {
 							try {
-								if(contactAdminErrorMainPage.isDisplayed()) {
+								if(notingToShowText.isDisplayed()) {
 									String screenshotname = "notingToShowText"+dtText;
 									this.captureScreenshot(screenshotname);
 									ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/"+screenshotname+".png");
 									break outerloop;
 								}
 							}
-							catch(Exception ez) {
-								Thread.sleep(3000);	 
+							catch (Exception ey) {
+								try {
+									if(contactAdminErrorMainPage.isDisplayed()) {
+										String screenshotname = "notingToShowText"+dtText;
+										this.captureScreenshot(screenshotname);
+										ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/"+screenshotname+".png");
+										break outerloop;
+									}
+								}
+								catch(Exception ez) {
+									Thread.sleep(3000);	
+									if(i==20) {
+										break outerloop;
+									}
+								}
 							}
 						}
 					}
@@ -464,21 +468,31 @@ public class ExplorationPage extends BasePage{
 	public void waitForEditAndDelete() throws Throwable{
 		try {  
 			boolean iden = true;
+			int i=0;
 			outerloop:
 				do
 				{
-					try {	    	
-						edit.isDisplayed();
-						iden = false;	  
-					}
-					catch(Exception ex) {
-						try {
-							if (fetchFailed.isDisplayed()) {
-								break outerloop;
-							}
+					while(i<=20) {
+						try {	    	
+							edit.isDisplayed();
+							iden = false;	  
 						}
-						catch (Exception et){
-							Thread.sleep(3000);}	 
+						catch(Exception ex) {
+							try {
+								if (fetchFailed.isDisplayed()) {
+									break outerloop;
+								}
+								if (notingToShowText.isDisplayed()) {
+									break outerloop;
+								}
+							}
+							catch (Exception et){
+								Thread.sleep(3000);
+								if(i==20) {
+									break outerloop;
+								}
+							}	 
+						}
 					}
 				}
 				while(iden);	         
@@ -493,21 +507,28 @@ public class ExplorationPage extends BasePage{
 	public void waitForSaveChanges() throws Throwable{
 		try {  
 			boolean iden = true;
+			int i=0;
 			outerloop:
 				do
 				{
-					try {	    	
-						saveChanges.isDisplayed();
-						iden = false;	  
-					}
-					catch(Exception ex) {
-						try {
-							if (fetchFailed.isDisplayed()) {
-								break outerloop;
-							}
+					while(i<20) {
+						try {	    	
+							saveChanges.isDisplayed();
+							iden = false;	  
 						}
-						catch (Exception et){
-							Thread.sleep(3000);}	 
+						catch(Exception ex) {
+							try {
+								if (fetchFailed.isDisplayed()) {
+									break outerloop;
+								}
+							}
+							catch (Exception et){
+								Thread.sleep(3000);
+								if(i==20) {
+									break outerloop;
+								}
+							}	 
+						}
 					}
 				}
 				while(iden);	         
@@ -524,13 +545,22 @@ public class ExplorationPage extends BasePage{
 	public void waitForExplorationTitle() throws Throwable{
 		try {  
 			boolean iden = true;
+			int i=0;
+			outerloop:
 			do
 			{
+				while(i<=20) {
 				try {	    	
 					titleExploration.isDisplayed();
 					iden = false;	  
 				}
-				catch(Exception ex) {Thread.sleep(3000);}	 
+				catch(Exception ex) {
+					Thread.sleep(3000);
+					if(i==20) {
+						break outerloop;
+					}	
+				}	 
+			}
 			}
 			while(iden);	         
 		}
@@ -614,6 +644,7 @@ public class ExplorationPage extends BasePage{
 
 	public void editCard() throws AWTException, InterruptedException{
 		BasePage.click(edit);
+		Thread.sleep(2000);
 	}
 
 	public void accept()throws AWTException, InterruptedException{
@@ -697,7 +728,7 @@ public class ExplorationPage extends BasePage{
 		BasePage.click(opn);
 		this.expandExploration();
 		this.GridPrimaryColumnAlone("Name");
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		this.editCard();	
 		String NoOfRecordsInitial = ItemCountInExpand.getText();
 		List<String>  myAlist = new ArrayList<String>();
@@ -1515,7 +1546,7 @@ public class ExplorationPage extends BasePage{
 	}
 
 	public void Relationclick(String RelationCardType) throws AWTException, InterruptedException { 
-//		BasePage.click(this.RelationEntity(RelationCardType));
+		//		BasePage.click(this.RelationEntity(RelationCardType));
 		this.RelationEntity(RelationCardType).click();
 	}
 
@@ -1551,7 +1582,7 @@ public class ExplorationPage extends BasePage{
 			this.Relationclick(RelationCardType);
 		}
 		catch (Exception NoSuchElement) {
-//			BasePage.click(addRelationCategory);
+			//			BasePage.click(addRelationCategory);
 			addRelationCategory.click();;
 			try{
 				this.RelationEntityinDropdown(RelationCardType).isDisplayed();
@@ -1646,9 +1677,9 @@ public class ExplorationPage extends BasePage{
 			BasePage.waitforAnElement(shareIcon2);
 			BasePage.waitforAnElement(ExplorationList2);
 			Thread.sleep(5000);
-//			BasePage.waitforAnElement(ExplorationList2circle);
+			//			BasePage.waitforAnElement(ExplorationList2circle);
 			this.SelectItemsInExplorationCard(NumberOfItemsToSelect);
-	//		ExtentTestManager.getTest().log(Status.PASS, NumberOfItemsToSelect + " Items selected in First Relation card");
+			//		ExtentTestManager.getTest().log(Status.PASS, NumberOfItemsToSelect + " Items selected in First Relation card");
 			this.createRelationLater(RelationCardType2);
 			ExtentTestManager.getTest().log(Status.PASS, "Second Relation card created of type : "+ RelationCardType2);
 			this.CheckRelationCreated(RelationCardType2);

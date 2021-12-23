@@ -16,14 +16,12 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -34,7 +32,6 @@ import org.testng.Assert;
 
 import com.aventstack.extentreports.Status;
 import com.eagle.Reports.ExtentTestManager;
-import com.eagle.pages.SetPage;
 
 public class ComparisonPage extends BasePage{
 
@@ -433,26 +430,26 @@ public class ComparisonPage extends BasePage{
 	{
 		try {	 
 			outerloop:
-			do{ 
-				for (WebElement element : GridItems) {
-					if(element.isDisplayed() == false)  {scrollIntoView(element);}	    				
-					String textFromGrid = element.getText();	    				
-					if(Item.equals(textFromGrid)) {		    					
-						BasePage.click(element);	
-						break outerloop;
-					}		    				
-				}
-				try {
-					forwardenabled.click(); 
-				}
-				catch(Exception e) {
-					if (forwarddisabled.isDisplayed()) {
-					ExtentTestManager.getTest().log(Status.FAIL, " Comparison is not present in the list");
-					throw e;
+				do{ 
+					for (WebElement element : GridItems) {
+						if(element.isDisplayed() == false)  {scrollIntoView(element);}	    				
+						String textFromGrid = element.getText();	    				
+						if(Item.equals(textFromGrid)) {		    					
+							BasePage.click(element);	
+							break outerloop;
+						}		    				
+					}
+					try {
+						forwardenabled.click(); 
+					}
+					catch(Exception e) {
+						if (forwarddisabled.isDisplayed()) {
+							ExtentTestManager.getTest().log(Status.FAIL, " Comparison is not present in the list");
+							throw e;
+						}
 					}
 				}
-			}
-			while(forward.isEnabled());  
+				while(forward.isEnabled());  
 		}
 		catch(Exception ex) {
 			throw ex;
@@ -466,7 +463,7 @@ public class ComparisonPage extends BasePage{
 
 	public void createCheck(String ComparisonToCheck) throws AWTException, InterruptedException,AssertionError{	    	
 		this.Comparison();
-//		Thread.sleep(20000);
+		//		Thread.sleep(20000);
 		BasePage.waitforAnElement(columnHeaderFirstPage);
 		try {
 			Assert.assertEquals(FirstItem.getText(),ComparisonToCheck);
@@ -500,33 +497,41 @@ public class ComparisonPage extends BasePage{
 			Date dt = new Date();
 			DateFormat dtFrmt = new SimpleDateFormat("_HHmmss");
 			String dtText = dtFrmt.format(dt);
+			Thread.sleep(3000);
+			int i=0;
 			outerloop:
 				do
-				{
-					try {	    	
-						columnHeaderFirstPage.isDisplayed();
-						iden = false;	  
-					}
-					catch(Exception ex) {
-						try {
-							if(notingToShowText.isDisplayed()) {
-								String screenshotname = "notingToShowText"+dtText;
-								this.captureScreenshot(screenshotname);
-								ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/"+screenshotname+".png");
-								break outerloop;
-							}
+				{ 
+					while(i<=20) {
+						try {	    	
+							columnHeaderFirstPage.isDisplayed();
+							iden = false;	  
 						}
-						catch (Exception ey) {
+						catch(Exception ex) {
 							try {
-								if(contactAdminErrorMainPage.isDisplayed()) {
+								if(notingToShowText.isDisplayed()) {
 									String screenshotname = "notingToShowText"+dtText;
 									this.captureScreenshot(screenshotname);
 									ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/"+screenshotname+".png");
 									break outerloop;
 								}
 							}
-							catch(Exception ez) {
-								Thread.sleep(3000);	 
+							catch (Exception ey) {
+								try {
+									if(contactAdminErrorMainPage.isDisplayed()) {
+										String screenshotname = "notingToShowText"+dtText;
+										this.captureScreenshot(screenshotname);
+										ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/"+screenshotname+".png");
+										break outerloop;
+									}
+								}
+								catch(Exception ez) {
+									Thread.sleep(3000);	 
+									i++;
+									if(i==20) {
+										break outerloop;
+									}
+								}
 							}
 						}
 					}
@@ -542,15 +547,25 @@ public class ComparisonPage extends BasePage{
 	public void waitForComparisonTitle() throws Throwable{
 		try {  
 			boolean iden = true;
-			do
-			{
-				try {	    	
-					titleComparison.isDisplayed();
-					iden = false;	  
+			int i=0;
+			outerloop:
+				do
+				{
+					while(i<=20) {
+						try {	    	
+							titleComparison.isDisplayed();
+							iden = false;	  
+						}
+						catch(Exception ex) {
+							Thread.sleep(3000);
+							i++;
+							if(i==20) {
+								break outerloop;
+							}
+						}	 
+					}
 				}
-				catch(Exception ex) {Thread.sleep(3000);}	 
-			}
-			while(iden);	         
+				while(iden);	         
 		}
 		catch(Exception | AssertionError ex)
 		{
@@ -561,9 +576,11 @@ public class ComparisonPage extends BasePage{
 	public void waitForEditAndDelete() throws Throwable{
 		try {  
 			boolean iden = true;
+			int i=0;
 			outerloop:
 				do
 				{
+					while(i<=20);
 					try {	    	
 						edit.isDisplayed();
 						iden = false;	  
@@ -573,9 +590,16 @@ public class ComparisonPage extends BasePage{
 							if (fetchFailed.isDisplayed()) {
 								break outerloop;
 							}
+							if (notingToShowText.isDisplayed()) {
+								break outerloop;
+							}
 						}
 						catch (Exception et){
-							Thread.sleep(3000);}	 
+							Thread.sleep(3000);
+							if(i==20) {
+								break outerloop;
+							}
+						}	 
 					}
 				}
 				while(iden);	         
@@ -589,15 +613,25 @@ public class ComparisonPage extends BasePage{
 	public void waitForaddCard() throws Throwable{
 		try {  
 			boolean iden = true;
-			do
-			{
-				try {	    	
-					BasePage.CompareAttributeText("data-is-focusable", "true", addCard);
-					iden = false;	  
+			int i=0;
+			outerloop:
+				do
+				{ 
+					while(i<=20) {
+						try {	    	
+							BasePage.CompareAttributeText("data-is-focusable", "true", addCard);
+							iden = false;	  
+						}
+						catch(Exception | AssertionError ex) {
+							Thread.sleep(3000);
+							if(i==20) {
+								break outerloop;
+							}
+
+						}	 
+					}
 				}
-				catch(Exception | AssertionError ex) {Thread.sleep(3000);}	 
-			}
-			while(iden);	         
+				while(iden);	         
 		}
 		catch(Exception | AssertionError ex)
 		{
@@ -608,21 +642,28 @@ public class ComparisonPage extends BasePage{
 	public void waitForSaveChanges() throws Throwable{
 		try {  
 			boolean iden = true;
+			int i=0;
 			outerloop:
 				do
 				{
-					try {	    	
-						saveChanges.isDisplayed();
-						iden = false;	  
-					}
-					catch(Exception ex) {
-						try {
-							if (fetchFailed.isDisplayed()) {
-								break outerloop;
-							}
+					while(i<=20) {
+						try {	    	
+							saveChanges.isDisplayed();
+							iden = false;	  
 						}
-						catch (Exception et){
-							Thread.sleep(3000);}	 
+						catch(Exception ex) {
+							try {
+								if (fetchFailed.isDisplayed()) {
+									break outerloop;
+								}
+							}
+							catch (Exception et){
+								Thread.sleep(3000);
+								if(i==20) {
+									break outerloop;
+								}
+							}	 
+						}
 					}
 				}
 				while(iden);	         
@@ -955,6 +996,7 @@ public class ComparisonPage extends BasePage{
 
 	public void editCard() throws AWTException, InterruptedException{
 		BasePage.click(edit);
+		Thread.sleep(2000);
 	}
 
 	public void accept()throws AWTException, InterruptedException{
@@ -1024,7 +1066,7 @@ public class ComparisonPage extends BasePage{
 		BasePage.click(opn);
 		this.expandComparison();
 		this.GridPrimaryColumnAlone("End");
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		this.editCard();	
 		String NoOfRecordsInitial = ItemCountInExpand.getText();
 		List<String>  myAlist = new ArrayList<String>();
@@ -1428,7 +1470,7 @@ public class ComparisonPage extends BasePage{
 
 
 	public void DeleteCardExpand() throws AWTException, InterruptedException { 
-//		Thread.sleep(10000);
+		//		Thread.sleep(10000);
 		BasePage.click(deleteCardExpand);
 	}
 
@@ -1546,7 +1588,7 @@ public class ComparisonPage extends BasePage{
 
 	public void searchInExpand(String SearchInComparison) throws InterruptedException, AWTException, AssertionError { 
 		try {
-//			Thread.sleep(20000);
+			//			Thread.sleep(20000);
 			BasePage.click(serachBoxExpand);
 			serachBoxExpand.sendKeys(SearchInComparison);
 			Thread.sleep(2000);

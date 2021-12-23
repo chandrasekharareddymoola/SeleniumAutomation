@@ -15,14 +15,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -308,33 +306,41 @@ public class SetPage extends BasePage{
 			Date dt = new Date();
 			DateFormat dtFrmt = new SimpleDateFormat("_HHmmss");
 			String dtText = dtFrmt.format(dt);
-			outerloop:
+			Thread.sleep(3000);
+			int i=0;
+			outerloop:		
 				do
 				{
-					try {	    	
-						columnHeaderFirstPage.isDisplayed();
-						iden = false;	  
-					}
-					catch(Exception ex) {
-						try {
-							if(notingToShowText.isDisplayed()) {
-								String screenshotname = "notingToShowText"+dtText;
-								this.captureScreenshot(screenshotname);
-								ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/"+screenshotname+".png");
-								break outerloop;
-							}
+					while(i<=20) {
+						try {	    	
+							columnHeaderFirstPage.isDisplayed();
+							iden = false;	  
 						}
-						catch (Exception ey) {
+						catch(Exception ex) {
 							try {
-								if(contactAdminErrorMainPage.isDisplayed()) {
+								if(notingToShowText.isDisplayed()) {
 									String screenshotname = "notingToShowText"+dtText;
 									this.captureScreenshot(screenshotname);
 									ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/"+screenshotname+".png");
 									break outerloop;
 								}
 							}
-							catch(Exception ez) {
-								Thread.sleep(5000);	 
+							catch (Exception ey) {
+								try {
+									if(contactAdminErrorMainPage.isDisplayed()) {
+										String screenshotname = "notingToShowText"+dtText;
+										this.captureScreenshot(screenshotname);
+										ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/"+screenshotname+".png");
+										break outerloop;
+									}
+								}
+								catch(Exception ez) {
+									Thread.sleep(3000);	
+									i++;
+									if(i==20) {
+										break outerloop;
+									}
+								}
 							}
 						}
 					}
@@ -503,6 +509,7 @@ public class SetPage extends BasePage{
 
 	public void editSet() throws InterruptedException, AWTException{
 		BasePage.click(edit);
+		Thread.sleep(2000);
 	}
 
 	public void accept() throws InterruptedException, AWTException{
@@ -804,7 +811,7 @@ public class SetPage extends BasePage{
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Drag files here']")));
 		this.fileSelectDropdown();
 		BasePage.click(driver.findElement(By.xpath("//*[@title='"+CategoryName+"']")));
-//		BasePage.click(clickUpload);
+		//		BasePage.click(clickUpload);
 	}	
 
 
@@ -835,7 +842,7 @@ public class SetPage extends BasePage{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from a File']")));
 			this.FileuploadCategory(CategoryName);
 			addItemsFromFile(Filelocation);   // new item added
-//			this.FileUploadFormExplorer(Filelocation);
+			//			this.FileUploadFormExplorer(Filelocation);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Searching in ']")));
 			BasePage.verifyPage(FileName, uploadedFileName);
 			BasePage.waitforAnElement(FileDataList);
@@ -1078,21 +1085,32 @@ public class SetPage extends BasePage{
 	public void waitForEditAndDelete() throws Throwable{
 		try {  
 			boolean iden = true;
+			int i=0;
 			outerloop:
 				do
 				{
-					try {	    	
-						edit.isDisplayed();
-						iden = false;	  
-					}
-					catch(Exception ex) {
-						try {
-							if (fetchFailed.isDisplayed()) {
-								break outerloop;
-							}
+					while(i<=20) {
+						try {	    	
+							edit.isDisplayed();
+							iden = false;	  
 						}
-						catch (Exception et){
-							Thread.sleep(3000);}	 
+						catch(Exception ex) {
+							try {
+								if (fetchFailed.isDisplayed()) {
+									break outerloop;
+								}
+								if (notingToShowText.isDisplayed()) {
+									break outerloop;
+								}
+							}
+							catch (Exception et){
+								Thread.sleep(3000);
+								i++;
+								if(i==20) {
+									break outerloop;
+								}	
+							}	 
+						}
 					}
 				}
 				while(iden);	         
@@ -1107,21 +1125,29 @@ public class SetPage extends BasePage{
 	public void waitForSaveChanges() throws Throwable{
 		try {  
 			boolean iden = true;
+			int i=0;
 			outerloop:
 				do
 				{
-					try {	    	
-						saveChanges.isDisplayed();
-						iden = false;	  
-					}
-					catch(Exception ex) {
-						try {
-							if (fetchFailed.isDisplayed()) {
-								break outerloop;
-							}
+					while (i<=20) {
+						try {	    	
+							saveChanges.isDisplayed();
+							iden = false;	  
 						}
-						catch (Exception et){
-							Thread.sleep(3000);}	 
+						catch(Exception ex) {
+							try {
+								if (fetchFailed.isDisplayed()) {
+									break outerloop;
+								}
+							}
+							catch (Exception et){
+								Thread.sleep(3000);
+								i++;
+								if(i==20) {
+									break outerloop;
+								}	
+							}	 
+						}
 					}
 				}
 				while(iden);	         
@@ -1497,53 +1523,53 @@ public class SetPage extends BasePage{
 		ExtentTestManager.getTest().log(Status.PASS, SetName + " is Shared");
 	}
 
-//	public void SharetLoop(String SetToShare, String SharedUser) throws InterruptedException, AWTException { 
-//		Integer NoofPages = this.NoOfPagesInSetPage();
-//		WebElement SS = driver.findElement(By.xpath("//*[text()='"+SetToShare+"']"));
-//		WebElement threeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+SetToShare+"']//parent::div//parent::div//child::button")));
-//
-//		List<WebElement> SDs = driver.findElements(By.xpath("//*[text()='"+SetToShare+"']"));
-//		if (SDs.size() != 0) {
-//			BasePage.scrollIntoView(SS);
-//			BasePage.click(threeButton);
-//			BasePage.click(ShareAction);
-//			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@role='heading' and text()='Share']")));
-//			BasePage.click(ShareTextBox);
-//			ShareTextBox.sendKeys(SharedUser);
-//			WebElement UserToShare = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+SharedUser+"')]")));
-//			BasePage.click(UserToShare);
-//			BasePage.click(ShareButton);
-//		}
-//		else if (SDs.size()== 0) {
-//
-//			for (int i=0; i<NoofPages;i++) {
-//
-//				if (SDs.size() != 0) {
-//					BasePage.scrollIntoView(SS);
-//					BasePage.click(threeButton);
-//					BasePage.click(ShareAction);
-//					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@role='heading' and text()='Share']")));
-//					BasePage.click(ShareTextBox);
-//					ShareTextBox.sendKeys(SharedUser);
-//					WebElement UserToShare = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+SharedUser+"')]")));
-//					BasePage.click(UserToShare);
-//					BasePage.click(ShareButton);
-//					break;
-//				}
-//				else {
-//					BasePage.click(NextPage);
-//					Thread.sleep(2000);
-//				}
-//			}
-//		}
-//		else if (!NextPage.isEnabled()) {		
-//			System.out.print("The set to be deleted is not found");
-//		}
-//
-//		else {				
-//			System.out.print("The set to be deleted is not found");
-//		}
-//	}
+	//	public void SharetLoop(String SetToShare, String SharedUser) throws InterruptedException, AWTException { 
+	//		Integer NoofPages = this.NoOfPagesInSetPage();
+	//		WebElement SS = driver.findElement(By.xpath("//*[text()='"+SetToShare+"']"));
+	//		WebElement threeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+SetToShare+"']//parent::div//parent::div//child::button")));
+	//
+	//		List<WebElement> SDs = driver.findElements(By.xpath("//*[text()='"+SetToShare+"']"));
+	//		if (SDs.size() != 0) {
+	//			BasePage.scrollIntoView(SS);
+	//			BasePage.click(threeButton);
+	//			BasePage.click(ShareAction);
+	//			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@role='heading' and text()='Share']")));
+	//			BasePage.click(ShareTextBox);
+	//			ShareTextBox.sendKeys(SharedUser);
+	//			WebElement UserToShare = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+SharedUser+"')]")));
+	//			BasePage.click(UserToShare);
+	//			BasePage.click(ShareButton);
+	//		}
+	//		else if (SDs.size()== 0) {
+	//
+	//			for (int i=0; i<NoofPages;i++) {
+	//
+	//				if (SDs.size() != 0) {
+	//					BasePage.scrollIntoView(SS);
+	//					BasePage.click(threeButton);
+	//					BasePage.click(ShareAction);
+	//					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@role='heading' and text()='Share']")));
+	//					BasePage.click(ShareTextBox);
+	//					ShareTextBox.sendKeys(SharedUser);
+	//					WebElement UserToShare = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+SharedUser+"')]")));
+	//					BasePage.click(UserToShare);
+	//					BasePage.click(ShareButton);
+	//					break;
+	//				}
+	//				else {
+	//					BasePage.click(NextPage);
+	//					Thread.sleep(2000);
+	//				}
+	//			}
+	//		}
+	//		else if (!NextPage.isEnabled()) {		
+	//			System.out.print("The set to be deleted is not found");
+	//		}
+	//
+	//		else {				
+	//			System.out.print("The set to be deleted is not found");
+	//		}
+	//	}
 
 	public void verifySortAscending(String ColumnToBeSorted) throws Throwable{
 		Integer NumOfPrecedingColumns = driver.findElements(By.xpath("//*[text()='"+ColumnToBeSorted+"']//parent::div//parent::div//preceding-sibling::div")).size();
@@ -1586,7 +1612,7 @@ public class SetPage extends BasePage{
 			ExtentTestManager.getTest().log(Status.PASS, SetName + " is Created");
 			this.expandSet();
 			WebElement SortColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+ColumnToBeSorted+"']")));
-//			Thread.sleep(3000);
+			//			Thread.sleep(3000);
 			WebElement NextColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+ColumnToBeSorted+"']//parent::div//parent::div/following-sibling::div")));
 			scrollIntoView(NextColumnname);
 			BasePage.click(SortColumnname);

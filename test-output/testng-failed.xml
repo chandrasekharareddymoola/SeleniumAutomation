@@ -37,6 +37,104 @@
           <include name="DeleteComparisonFirstCard_Test"/>
         </methods>
       </class> <!-- com.eagle.TestCases.ComparisonTest -->
+      <class name="com.eagle.TestCases.SetTest">
+        <methods>
+          <include name="FilterMultiSet_Test"/>
+          <include name="FilterSet_Test"/>
+          <include name="SearchInSetExpand_Test"/>
+          <include name="CreateAndShareSet_Test"/>
+          <include name="beforeClass"/>
+          <include name="SetExpandAddFromFile_Test"/>
+          <include name="SetExpandAddFromSet_Test"/>
+          <include name="SortColumnSet_Test"/>
+          <include name="ViewSet_Test"/>
+          <include name="CreateSet_Test"/>
+          <include name="GridChangesInSet_Test"/>
+          <include name="launchApplication"/>
+          <include name="CreateAndDeleteSet_Test"/>
+          <include name="DeleteSet_Test"/>
+          <include name="RemoveItemsfromSet_Test"/>
+          <include name="ShareSet_Test"/>
+          <include name="closeApplication"/>
+          <include name="SetExpandAddFromCatalog_Test"/>
+          <include name="DeleteCardInSetExpand_Test"/>
+          <include name="CreateSetFromFile_Test"/>
+          <include name="CreateSetFromSet_Test"/>
+        </methods>
+      </class> <!-- com.eagle.TestCases.SetTest -->
+      <class name="com.eagle.TestCases.HomeTest">
+        <methods>
+          <include name="launchApplication"/>
+          <include name="VerifyLogoVisibility_Test"/>
+          <include name="VerifyCopyRights"/>
+          <include name="closeApplication"/>
+          <include name="CreateGlobalSearch_Test"/>
+          <include name="VerifyDashboard_Test"/>
+          <include name="VerifySavedSearches_Test"/>
+          <include name="beforeClass"/>
+          <include name="VerifyUserProfile"/>
+        </methods>
+      </class> <!-- com.eagle.TestCases.HomeTest -->
+      <class name="com.eagle.TestCases.ExplorationTest">
+        <methods>
+          <include name="CreateExplorationFromFile_Test"/>
+          <include name="DeleteCardInExplorationExpand_Test"/>
+          <include name="ExplorationExpandAddFromCatalog_Test"/>
+          <include name="CreateExplorationFromSet_Test"/>
+          <include name="DeleteExploration_Test"/>
+          <include name="DeleteExplorationFirstCard_Test"/>
+          <include name="CreateExplorationFromSetInitally_Test"/>
+          <include name="ShareExploration_Test"/>
+          <include name="launchApplication"/>
+          <include name="RemoveItemsfromExploration_Test"/>
+          <include name="SearchInExplorationExpand_Test"/>
+          <include name="ExplorationCreateTwoRelationCard_Test"/>
+          <include name="closeApplication"/>
+          <include name="DeleteExplorationSecondCard_Test"/>
+          <include name="FilterMultiExploration_Test"/>
+          <include name="SortColumnExploration_Test"/>
+          <include name="ExplorationExpandAddFromFile_Test"/>
+          <include name="beforeClass"/>
+          <include name="FilterExploration_Test"/>
+          <include name="CreateAndDeleteExploration_Test"/>
+          <include name="ExplorationCreateARelationCard_Test"/>
+          <include name="ExplorationExpandAddFromSet_Test"/>
+          <include name="CreateExplorationFromSearch_Test"/>
+          <include name="CreateAndShareExploration_Test"/>
+        </methods>
+      </class> <!-- com.eagle.TestCases.ExplorationTest -->
+      <class name="com.eagle.TestCases.LogoutTest">
+        <methods>
+          <include name="beforeClass"/>
+          <include name="launchApplication"/>
+          <include name="VerifyLogout_Test"/>
+          <include name="closeApplication"/>
+          <include name="afterClass"/>
+        </methods>
+      </class> <!-- com.eagle.TestCases.LogoutTest -->
+      <class name="com.eagle.TestCases.LoginTest">
+        <methods>
+          <include name="launchApplication"/>
+          <include name="closeApplication"/>
+          <include name="beforeClass"/>
+          <include name="VerifyLoginPage_Test"/>
+        </methods>
+      </class> <!-- com.eagle.TestCases.LoginTest -->
+      <class name="com.eagle.TestCases.InvestigationTest">
+        <methods>
+          <include name="EditInvestigation_Test"/>
+          <include name="launchApplication"/>
+          <include name="ViewInvestigation_Test"/>
+          <include name="closeApplication"/>
+          <include name="LinkExplorationWithInvestigation_Test"/>
+          <include name="CreateInvestigation_Test"/>
+          <include name="LinkSetWithInvestigation_Test"/>
+          <include name="DeleteInvestigation_Test"/>
+          <include name="beforeClass"/>
+          <include name="LinkComparisonWithInvestigation_Test"/>
+          <include name="ShareInvestigation_Test"/>
+        </methods>
+      </class> <!-- com.eagle.TestCases.InvestigationTest -->
     </classes>
   </test> <!-- Smoke Test cases(failed) -->
 </suite> <!-- Failed suite [SmokeTestingSuite] -->
