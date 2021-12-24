@@ -433,7 +433,8 @@ public class SetPage extends BasePage{
 		//wait.until(ExpectedConditions.elementToBeClickable(addAll));
 		while(addAll.isDisplayed()){
 			try
-			{   BasePage.click(addAll);	 
+			{   
+			BasePage.click(addAll);	 
 			wait.until(ExpectedConditions.elementToBeClickable(addAll));
 			}
 			catch(Exception ex){

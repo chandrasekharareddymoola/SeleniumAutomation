@@ -1,6 +1,9 @@
 package com.eagle.TestCases;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -13,6 +16,10 @@ public class HomeTest extends BaseTest{
 	
 	HomePage objHome;
 	
+	Date dt = new Date();
+	DateFormat dtFrmt = new SimpleDateFormat("_HHmmss");
+	String dtText = dtFrmt.format(dt);
+	
 	@BeforeClass
 	public void beforeClass()  {	
 		objHome = new HomePage();	
@@ -20,7 +27,7 @@ public class HomeTest extends BaseTest{
 	
 	@Test(priority = 0, description = "Check the visibility of Logo")
 	public void VerifyLogoVisibility_Test() throws InterruptedException, IOException{
-      try{
+      try{  	  
     	  	objHome.verifyLogoVisibility();	
 		    onSuccessMeassage("Home logo is successfully verified");
     	}
