@@ -19,6 +19,7 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
@@ -311,43 +312,43 @@ public class SetPage extends BasePage{
 			outerloop:		
 				do
 				{
-//					while(i<=20) {
-						try {	    	
-							columnHeaderFirstPage.isDisplayed();
-							iden = false;
-							break outerloop;
+					//					while(i<=20) {
+					try {	    	
+						columnHeaderFirstPage.isDisplayed();
+						iden = false;
+						break outerloop;
+					}
+					catch(Exception ex) {
+						try {
+							if(notingToShowText.isDisplayed()) {
+								String screenshotname = "notingToShowText"+dtText;
+								this.captureScreenshot(screenshotname);
+								ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/"+screenshotname+".png");
+								break outerloop;
+							}
 						}
-						catch(Exception ex) {
+						catch (Exception ey) {
 							try {
-								if(notingToShowText.isDisplayed()) {
+								if(contactAdminErrorMainPage.isDisplayed()) {
 									String screenshotname = "notingToShowText"+dtText;
 									this.captureScreenshot(screenshotname);
 									ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/"+screenshotname+".png");
 									break outerloop;
 								}
 							}
-							catch (Exception ey) {
-								try {
-									if(contactAdminErrorMainPage.isDisplayed()) {
-										String screenshotname = "notingToShowText"+dtText;
-										this.captureScreenshot(screenshotname);
-										ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/"+screenshotname+".png");
-										break outerloop;
-									}
-								}
-								catch(Exception ez) {
-									Thread.sleep(3000);	
-									i++;
-									if(i==20) {
-										break outerloop;
-									}
+							catch(Exception ez) {
+								Thread.sleep(3000);	
+								i++;
+								if(i==20) {
+									break outerloop;
 								}
 							}
 						}
-//					}
+					}
+					//					}
 				}
 				while(i<=20);
-//				while(iden);	         
+			//				while(iden);	         
 		}
 		catch(Exception | AssertionError ex)
 		{
@@ -608,7 +609,8 @@ public class SetPage extends BasePage{
 		}
 	}
 
-	public void addItemsFromFile(String filePath) {	    
+	public void addItemsFromFile(String filePath) throws InterruptedException {	    
+		Thread.sleep(2000);
 		fileUpload.sendKeys(filePath);	
 		ExtentTestManager.getTest().log(Status.PASS, "File uploaded successfully");
 	}
@@ -624,17 +626,17 @@ public class SetPage extends BasePage{
 		ExtentTestManager.getTest().log(Status.PASS, existingSetName + " Set is Added to this Set");
 	}
 
-	public void CreateSetFromFile(String setToCreate, String entityToSelect, String FileName) throws Throwable { 
+	public void CreateSetFromFile(String setToCreate, String entityToSelect, String FileLocation) throws Throwable { 
 		try {
 			this.Set();
 			this.addSet();
 			this.verifySetHomePage("Uncategorized");
 			this.setTitle(setToCreate);
 			this.selectEntity(entityToSelect);
-			this.addItemsFromFile(FileName); 
+			this.addItemsFromFile(FileLocation); 
 			this.AddandAccept();
 			BasePage.waitforAnElement(editCardIcon);
-			ExtentTestManager.getTest().log(Status.PASS, "Set Created from file located in :" + FileName );
+			ExtentTestManager.getTest().log(Status.PASS, "Set Created from file located in :" + FileLocation );
 			this.createCheck(setToCreate);
 			this.Home();
 		}
@@ -673,6 +675,7 @@ public class SetPage extends BasePage{
 	}
 
 	public void saveChanges() throws InterruptedException, AWTException{
+		BasePage.scrollToTop();
 		BasePage.click(saveChanges);
 		ExtentTestManager.getTest().log(Status.PASS, "Changes are Saved");
 		this.Home();
@@ -838,6 +841,7 @@ public class SetPage extends BasePage{
 
 
 	public List<String> addFromFile(String CategoryName, String Filelocation, String FileName) throws AWTException, InterruptedException, AssertionError {	    
+
 		try {
 			BasePage.click(addFromFile);	
 			Thread.sleep(2000);
@@ -868,6 +872,9 @@ public class SetPage extends BasePage{
 
 	//Adding items from File from expand into Set
 	public void ExpandAddFromFile(String setToCreate, String entityToSelect, String textToSearch, String CategoryName, String Filelocation, String FileName) throws Throwable { 
+		Date dt = new Date();
+		DateFormat dtFrmt = new SimpleDateFormat("_HHmmss");
+		String dtText = dtFrmt.format(dt);
 		try {
 			this.Set();
 			this.addSet();
@@ -893,6 +900,14 @@ public class SetPage extends BasePage{
 			ExtentTestManager.getTest().log(Status.PASS, "Set - Added from file in expand");
 		}
 		catch (Exception ExpandAddFromFileFail) {
+			this.captureScreenshot("SetAddToGrid"+dtText);
+			ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/SetAddToGrid"+dtText+".png");
+
+//			for (int i=0;i<2;i++) {
+//				WebElement html = driver.findElement(By.tagName("html"));
+//				html.sendKeys(Keys.chord(Keys.CONTROL, Keys.SUBTRACT));
+//			}
+
 			if(dialogBoxClose.isDisplayed()) { 
 				ExtentTestManager.getTest().log(Status.FAIL, "Add to Grid button is not displayed");
 				BasePage.click(dialogBoxClose);
@@ -900,7 +915,7 @@ public class SetPage extends BasePage{
 			throw ExpandAddFromFileFail;
 		}
 		catch (AssertionError ExpandAddFromFileFail) {
-			if(dialogBoxClose.isDisplayed()) {        
+			if(dialogBoxClose.isDisplayed()) { 
 				BasePage.click(dialogBoxClose);
 			}
 			throw ExpandAddFromFileFail;
@@ -1091,33 +1106,33 @@ public class SetPage extends BasePage{
 			outerloop:
 				do
 				{
-//					while(i<=20) {
-						try {	    	
-							edit.isDisplayed();
-							iden = false;	
-							break outerloop;
-						}
-						catch(Exception ex) {
-							try {
-								if (fetchFailed.isDisplayed()) {
-									break outerloop;
-								}
-								if (notingToShowText.isDisplayed()) {
-									break outerloop;
-								}
+					//					while(i<=20) {
+					try {	    	
+						edit.isDisplayed();
+						iden = false;	
+						break outerloop;
+					}
+					catch(Exception ex) {
+						try {
+							if (fetchFailed.isDisplayed()) {
+								break outerloop;
 							}
-							catch (Exception et){
-								Thread.sleep(3000);
-								i++;
-								if(i==20) {
-									break outerloop;
-								}	
-							}	 
-//						}
+							if (notingToShowText.isDisplayed()) {
+								break outerloop;
+							}
+						}
+						catch (Exception et){
+							Thread.sleep(3000);
+							i++;
+							if(i==20) {
+								break outerloop;
+							}	
+						}	 
+						//						}
 					}
 				}
 				while(i<=20);
-//				while(iden);	         
+			//				while(iden);	         
 		}
 		catch(Exception | AssertionError ex)
 		{
@@ -1133,30 +1148,30 @@ public class SetPage extends BasePage{
 			outerloop:
 				do
 				{
-//					while (i<=20) {
-						try {	    	
-							saveChanges.isDisplayed();
-							iden = false;	
-							break outerloop;
-						}
-						catch(Exception ex) {
-							try {
-								if (fetchFailed.isDisplayed()) {
-									break outerloop;
-								}
+					//					while (i<=20) {
+					try {	    	
+						saveChanges.isDisplayed();
+						iden = false;	
+						break outerloop;
+					}
+					catch(Exception ex) {
+						try {
+							if (fetchFailed.isDisplayed()) {
+								break outerloop;
 							}
-							catch (Exception et){
-								Thread.sleep(3000);
-								i++;
-								if(i==20) {
-									break outerloop;
-								}	
-							}	 
 						}
-//					}
+						catch (Exception et){
+							Thread.sleep(3000);
+							i++;
+							if(i==20) {
+								break outerloop;
+							}	
+						}	 
+					}
+					//					}
 				}
 				while(i<=20);
-//				while(iden);	         
+			//				while(iden);	         
 		}
 		catch(Exception | AssertionError ex)
 		{

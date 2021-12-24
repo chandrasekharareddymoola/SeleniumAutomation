@@ -755,7 +755,8 @@ public class ExplorationPage extends BasePage{
 		ExtentTestManager.getTest().log(Status.PASS, "Decrease in count is verified");
 	}
 
-	public void addItemsFromFileOld(String filePath) {	    
+	public void addItemsFromFileOld(String filePath) throws InterruptedException {	  
+		Thread.sleep(2000);
 		fileUpload.sendKeys(filePath);	
 		ExtentTestManager.getTest().log(Status.PASS, "File uploaded successfully");
 	}
@@ -784,7 +785,7 @@ public class ExplorationPage extends BasePage{
 			this.verifyExplorationHomePage("Uncategorized");
 			this.ExplorationTitle(ExplorationName);
 			this.selectEntity(EntitytoSelect);
-			this.addItemsFromFile(FileLocation); 
+			this.addItemsFromFileOld(FileLocation); 
 			this.AddandStart(); 
 			BasePage.waitforAnElement(ExplorationList);
 			ExtentTestManager.getTest().log(Status.PASS, ExplorationName +" Exploration is created using a file after Search");
@@ -1107,6 +1108,9 @@ public class ExplorationPage extends BasePage{
 
 	//Adding items from File from expand into Exploration
 	public void ExpandAddFromFile(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch , String CategoryName, String Filelocation, String FileName) throws Throwable { 
+		Date dt = new Date();
+		DateFormat dtFrmt = new SimpleDateFormat("_HHmmss");
+		String dtText = dtFrmt.format(dt);		
 		try {
 			this.createExploration(ExplorationToCreate, EntitytoSelect, ItemtoSearch);
 			this.expandExploration();
@@ -1125,6 +1129,8 @@ public class ExplorationPage extends BasePage{
 			ExtentTestManager.getTest().log(Status.PASS, "Exploration - Items added from File in expand");
 		}
 		catch (Exception ExpandAddFromFileFail) {
+			this.captureScreenshot("ExpAddToGrid"+dtText);
+			ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/ExpAddToGrid"+dtText+".png");
 			if(dialogBoxClose.isDisplayed()) {
 				ExtentTestManager.getTest().log(Status.FAIL, "Add to Grid button is not displayed");
 				BasePage.click(dialogBoxClose);
