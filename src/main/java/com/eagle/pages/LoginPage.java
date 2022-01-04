@@ -1,15 +1,23 @@
 package com.eagle.pages;
 
+import static org.testng.Assert.assertEquals;
+
 import java.awt.AWTException;
 import java.io.File;
 import java.io.IOException;
+import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import com.aventstack.extentreports.Status;
+import com.eagle.ConfigUtils.ReadObject;
+import com.eagle.Reports.ExtentTestManager;
 
 public class LoginPage extends BasePage{
 
@@ -42,6 +50,33 @@ public class LoginPage extends BasePage{
 	@FindBy(name = "//*[text()='Error while initializing catalog']")
 	public WebElement catalogInitializeError;
 
+	@FindBy(xpath = "//*[@class='logo' and @alt='Microsoft']")
+	public WebElement microSoftLogo;
+
+	@FindBy(xpath = "//*[text()='Use a verification code from my mobile app']")
+	public WebElement verificationCode;
+
+	@FindBy(xpath = "//input[@aria-label='Code']")
+	public WebElement CodeTextBox;
+
+	@FindBy(xpath = "//*[@value='Yes']")
+	public WebElement yesButton;
+
+	@FindBy(xpath = "//*[@value='Verify']")
+	public WebElement verifyButton;
+
+	@FindBy(xpath = "//*[@data-provider='windows' and @type='button']")
+	public WebElement loginUserButton;
+	
+	@FindBy(xpath = "//input[@type='email']")
+	public WebElement directEmail;
+	
+	@FindBy(xpath = "//input[@type='submit']")
+	public WebElement directSubmit;
+	
+	@FindBy(xpath = "//input[@name='passwd' and @type='password']")
+	public WebElement directPassWord;
+
 	public LoginPage(){ 		 
 		PageFactory.initElements(driver, this); 
 	}
@@ -69,11 +104,122 @@ public class LoginPage extends BasePage{
 		return dest;
 	}
 
+	public void MicrosoftLogin() throws Throwable{
+		try {
+			ReadObject object = new ReadObject();
+			Properties configObject = object.getObjectRepositoty();	     
+			String emailPass = configObject.getProperty("Password");
+			
+			BasePage.CompareAttributeText("alt","Microsoft",microSoftLogo);
+			BasePage.waitforAnElement(MicrosoftPassText);
+			BasePage.click(MicrosoftPass);
+			MicrosoftPass.sendKeys(emailPass);
+			BasePage.click(SignIn);		
+		}
+		catch(Exception ex) {
+			ExtentTestManager.getTest().log(Status.FAIL,"Some problem with Microsoft Login");
+			throw ex;
+		}
+	}
+
+	public void CodeVerification() throws Throwable{
+		try {
+			BasePage.waitforAnElement(verificationCode);
+			BasePage.click(verificationCode);
+			BasePage.waitforAnElement(CodeTextBox);
+			Thread.sleep(10000);
+			//					CodeTextBox.sendKeys("123123");
+			//					BasePage.click(verifyButton);
+			int i=0;
+			while(i<15) {
+				try {
+					BasePage.waitforAnElement(yesButton);
+					BasePage.click(yesButton);
+					break;
+				}
+				catch(Throwable y) {
+					Thread.sleep(10000);
+					i++;
+				}
+			}	
+		}
+		catch(Exception ex) {
+			ExtentTestManager.getTest().log(Status.FAIL,"Some problem with COde Verification");
+			throw ex;
+		}
+	}
+
+	public void directLogin() throws Throwable{
+		try {
+			ReadObject object = new ReadObject();
+			Properties configObject = object.getObjectRepositoty();	     
+			String email = configObject.getProperty("Username");	
+			String emailPass = configObject.getProperty("Password");	
+			
+			waitforAnElement(loginUserButton);
+			click(loginUserButton);
+			waitforAnElement(directEmail);
+			directEmail.sendKeys(email);
+			BasePage.click(directSubmit);
+			waitforAnElement(directPassWord);
+			directPassWord.sendKeys(emailPass);
+			BasePage.click(directSubmit);
+		}
+		catch(Exception ex) {
+			ExtentTestManager.getTest().log(Status.FAIL,"Some problem with Direct Login");
+			throw ex;
+		}
+	}
+
 	public void loginTo() throws Throwable{
 		try {
-			this.setCredentials();
-			this.clickLogin();
-			boolean iden = true;
+			ReadObject object = new ReadObject();
+			Properties configObject = object.getObjectRepositoty();	     
+			String emailPass = configObject.getProperty("Password");
+			try {
+				this.directLogin();
+				this.CodeVerification();
+			}
+			catch(Exception sct) {
+				this.setCredentials();
+				this.clickLogin();
+				Thread.sleep(10000);
+				if(microSoftLogo.isDisplayed()) {			
+					try {
+						this.MicrosoftLogin();
+						this.CodeVerification();
+					}
+					//					BasePage.CompareAttributeText("alt","Microsoft",microSoftLogo);
+					//					BasePage.waitforAnElement(MicrosoftPassText);
+					//					BasePage.click(MicrosoftPass);
+					//					MicrosoftPass.sendKeys(emailPass);
+					//					BasePage.click(SignIn);	
+					//					BasePage.waitforAnElement(verificationCode);
+					//					BasePage.click(verificationCode);
+					//					BasePage.waitforAnElement(CodeTextBox);
+					//					Thread.sleep(10000);
+					//					//					CodeTextBox.sendKeys("123123");
+					//					//					BasePage.click(verifyButton);
+					//					int i=0;
+					//					while(i<15) {
+					//						try {
+					//							BasePage.waitforAnElement(yesButton);
+					//							BasePage.click(yesButton);
+					//							break;
+					//						}
+					//						catch(Throwable y) {
+					//							Thread.sleep(10000);
+					//							i++;
+					//						}
+					//					}
+					//				}
+					catch(Exception o){
+						ExtentTestManager.getTest().log(Status.FAIL,"Some problem with Microsoft Login");
+						throw o;
+					}
+				}
+				boolean iden = true;
+				int i=0;
 				do
 				{
 					try {	    		  
@@ -86,8 +232,11 @@ public class LoginPage extends BasePage{
 							throw new InterruptedException ("Error while initializing catalog");
 						}
 					}
-				}	 
-				while(iden);	         
+					i++;
+				}	
+				while(i<20);
+				//				while(iden);	
+			}
 		}
 		catch(Exception ex)
 		{

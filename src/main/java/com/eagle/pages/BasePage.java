@@ -18,6 +18,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import com.aventstack.extentreports.Status;
+import com.eagle.Reports.ExtentTestManager;
+
 
 public class BasePage{
 
@@ -36,11 +39,18 @@ public class BasePage{
 	}
 
 	public static void enterUserPass(WebElement user, WebElement pass) throws InterruptedException, AWTException {		
-		click(user);	user.sendKeys(userName);
-//		Thread.sleep(1000);
-//		if(pass.isDisplayed()) {
-			click(pass);	pass.sendKeys(passWord);	
-//		}
+		click(user);	
+		user.sendKeys(userName);
+		Thread.sleep(1000);
+		try {
+			if(pass.isDisplayed()) {
+				click(pass);	
+				pass.sendKeys(passWord);	
+			}
+		}
+		catch(Exception r){
+			ExtentTestManager.getTest().log(Status.PASS,"Needs to authenticate through Microsoft page");
+		}
 	}
 
 	public static void click(WebElement element) throws InterruptedException, AWTException {
@@ -75,7 +85,7 @@ public class BasePage{
 		js.executeScript("window.scrollTo(document.body.scrollHeight,0)");
 		js.executeScript("arguments[0].scrollIntoView(true);", element);
 	}
-	
+
 	public static void scrollToTop() {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
