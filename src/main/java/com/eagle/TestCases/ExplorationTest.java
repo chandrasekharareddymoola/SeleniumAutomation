@@ -26,191 +26,191 @@ public class ExplorationTest extends BaseTest{
 		objExplorationPage = new ExplorationPage();		
 	}
 
-//	@Test(priority = 0, description = "Create Exploration From Search")
-//	public void CreateExplorationFromSearch_Test() throws Throwable {
-//		try {
-//
-//			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
-//
-//			System.out.println(functionName);
-//			String value = this.getConfiguration().get(functionName);
-//			String[] expParameters =value.split(",");
-//			String ExpName = expParameters[0].trim()+dtText;
-//			String entity = expParameters[1].trim();
-//			String searchText = expParameters[2].trim();
-//
-//			/* Creates an Exploration From Search */		
-//			objExplorationPage.createExplorationFromSearch(ExpName, entity, searchText);
-//			//			objExplorationPage.createExplorationFromSearch("ExSearch 1", "Disease", "kera");
-//			onSuccessMeassage("Exploration is Created Successfully From Search");
-//		}
-//		catch(Exception ex)
-//		{
-//			objExplorationPage.captureScreenshot("createExplorationFromSearchFail");
-//			onFailureMeassage(ex.getMessage(),"createExplorationFromSearchFail","createExplorationFromSearchFail");
-//		}
-//		catch(AssertionError ex)
-//		{
-//			objExplorationPage.captureScreenshot("createExplorationFromSearchFail");
-//			onFailureMeassage(ex.getMessage(),"createExplorationFromSearchFail","createExplorationFromSearchFail");
-//		}
-//	}	
-//
-//	@Test(priority = 1, description = "Create Exploration From Set Initally")
-//	public void CreateExplorationFromSetInitally_Test() throws Throwable {
-//		try {
-//
-//			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
-//
-//			System.out.println(functionName);
-//			String value = this.getConfiguration().get(functionName);
-//			String[] expParameters =value.split(",");
-//			String BaseSetName = expParameters[0].trim()+dtText;
-//			String entity = expParameters[1].trim();
-//			String searchTextInSet = expParameters[2].trim();
-//			String ExpName = expParameters[3].trim()+dtText;
-//
-//
-//			/* Creates an Exploration From Search - Initial */		
-//			objExplorationPage.createExplorationInitallyFromSet(BaseSetName, entity, searchTextInSet, ExpName);
-//			//			objExplorationPage.createExplorationInitallyFromSet("SetAdd 1", "Disease", "kera", "ExDirect From Set 1");
-//			onSuccessMeassage("Exploration is Created Successfully From Set Initally");
-//		}
-//		catch(Exception ex)
-//		{
-//			objExplorationPage.captureScreenshot("createExplorationFromSetInitalFail");
-//			onFailureMeassage(ex.getMessage(),"createExplorationFromSetInitalFail","createExplorationFromSetInitalFail");
-//		}
-//		catch(AssertionError ex)
-//		{
-//			objExplorationPage.captureScreenshot("createExplorationFromSetInitalFail");
-//			onFailureMeassage(ex.getMessage(),"createExplorationFromSetInitalFail","createExplorationFromSetInitalFail");
-//		}
-//	}
-//
-//	@Test(priority = 2, description = "Create Exploration From Set After clicking From Search")
-//	public void CreateExplorationFromSet_Test() throws Throwable {
-//		try {
-//
-//			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
-//
-//			System.out.println(functionName);
-//			String value = this.getConfiguration().get(functionName);
-//			String[] expParameters =value.split(",");
-//			String BaseSetName = expParameters[0].trim()+dtText;
-//			String entity = expParameters[1].trim();
-//			String searchTextInSet = expParameters[2].trim();
-//			String ExpName = expParameters[3].trim()+dtText;
-//
-//			/* Creates an Exploration From Set - After Search */
-//			objExplorationPage.CreateExplorationFromSet(BaseSetName,entity,searchTextInSet, ExpName);
-//			//			objExplorationPage.CreateExplorationFromSet("SetAdd 2", "Disease", "kera", "ExFrom Set 2");
-//			onSuccessMeassage("Exploration is Created Successfully From Set");
-//		}
-//		catch(Exception ex)
-//		{
-//			objExplorationPage.captureScreenshot("createExplorationFromSetFail");
-//			onFailureMeassage(ex.getMessage(),"createExplorationFromSetFail","createExplorationFromSetFail");
-//		}
-//		catch(AssertionError ex)
-//		{
-//			objExplorationPage.captureScreenshot("createExplorationFromSetFail");
-//			onFailureMeassage(ex.getMessage(),"createExplorationFromSetFail","createExplorationFromSetFail");
-//		}
-//	}
-//
-//	@Test(priority = 3, description = "Create Exploration From File After clicking From Search")
-//	public void CreateExplorationFromFile_Test() throws Throwable {
-//		try {
-//
-//			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
-//
-//			System.out.println(functionName);
-//			String value = this.getConfiguration().get(functionName);
-//			String[] expParameters =value.split(",");
-//			String ExpName = expParameters[0].trim()+dtText;
-//			String entity = expParameters[1].trim();
-//			String fileLocation = expParameters[2].trim();
-//
-//
-//			/* Creates an Exploration From File - After Search */
-//			objExplorationPage.CreateExplorationFromFile(ExpName, entity,fileLocation);
-//			//			objExplorationPage.CreateExplorationFromFile("ExFileUpload", "Disease", "C:\\Users\\MugunthRaman\\git\\EagleAutomation\\Resources\\Q4 - Upload file - 1 (2).xlsx");
-//			onSuccessMeassage("Exploration is Created Successfully From File");
-//		}
-//		catch(Exception ex)
-//		{
-//			objExplorationPage.captureScreenshot("createExplorationFromFileFail");
-//			onFailureMeassage(ex.getMessage(),"createExplorationFromFileFail","createExplorationFromFileFail");
-//		}
-//		catch(AssertionError ex)
-//		{
-//			objExplorationPage.captureScreenshot("createExplorationFromFileFail");
-//			onFailureMeassage(ex.getMessage(),"createExplorationFromFileFail","createExplorationFromFileFail");
-//		}
-//	}
-//
-//	@Test(priority = 4, description = "Search A Text In Exploration Expand")
-//	public void SearchInExplorationExpand_Test() throws Throwable  {
-//		try {
-//
-//			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
-//
-//			System.out.println(functionName);
-//			String value = this.getConfiguration().get(functionName);
-//			String[] expParameters =value.split(",");
-//			String ExpName = expParameters[0].trim()+dtText;
-//			String entity = expParameters[1].trim();
-//			String searchText = expParameters[2].trim();
-//			String searchInExpand = expParameters[3].trim();
-//
-//
-//			/* To Search a Text in Expanded Exploration */
-//			objExplorationPage.searchInExplorationExpand(ExpName,entity,searchText,searchInExpand);
-//			onSuccessMeassage("Search successful in Set Expand");
-//		}
-//		catch(Exception ex)
-//		{
-//			objExplorationPage.captureScreenshot("SearchInSetExpandFail");
-//			onFailureMeassage(ex.getMessage(),"SearchInSetExpandFail","SearchInSetExpandFail");
-//		}
-//		catch(AssertionError ex)
-//		{
-//			objExplorationPage.captureScreenshot("SearchInSetExpandFail");
-//			onFailureMeassage(ex.getMessage(),"SearchInSetExpandFail","SearchInSetExpandFail");
-//		}
-//	}
-//
-//	@Test(priority = 5, description = "Delete Card in Exploration Expand")
-//	public void DeleteCardInExplorationExpand_Test() throws Throwable  {
-//		try {
-//
-//			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
-//
-//			System.out.println(functionName);
-//			String value = this.getConfiguration().get(functionName);
-//			String[] expParameters =value.split(",");
-//			String ExpName = expParameters[0].trim()+dtText;
-//			String entity = expParameters[1].trim();
-//			String searchText = expParameters[2].trim();
-//
-//			/* Delete Set from Expanded Set */
-//			objExplorationPage.DeleteExploraionInExpand(ExpName, entity, searchText);
-//			//			objExplorationPage.DeleteExploraionInExpand("DExploration2", "Disease", "kera");
-//			onSuccessMeassage("Delete Card from Expanded Exploration");
-//		}
-//		catch(Exception ex)
-//		{
-//			objExplorationPage.captureScreenshot("DeleteExplorationInExpandFail");
-//			onFailureMeassage(ex.getMessage(),"DeleteExplorationInExpandFail","DeleteExplorationInExpandFail");
-//		}
-//		catch(AssertionError ex)
-//		{
-//			objExplorationPage.captureScreenshot("DeleteExplorationInExpandFail");
-//			onFailureMeassage(ex.getMessage(),"DeleteExplorationInExpandFail","DeleteExplorationInExpandFail");
-//		}		
-//	}
-//
+	@Test(priority = 0, description = "Create Exploration From Search")
+	public void CreateExplorationFromSearch_Test() throws Throwable {
+		try {
+
+			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+
+			System.out.println(functionName);
+			String value = this.getConfiguration().get(functionName);
+			String[] expParameters =value.split(",");
+			String ExpName = expParameters[0].trim()+dtText;
+			String entity = expParameters[1].trim();
+			String searchText = expParameters[2].trim();
+
+			/* Creates an Exploration From Search */		
+			objExplorationPage.createExplorationFromSearch(ExpName, entity, searchText);
+			//			objExplorationPage.createExplorationFromSearch("ExSearch 1", "Disease", "kera");
+			onSuccessMeassage("Exploration is Created Successfully From Search");
+		}
+		catch(Exception ex)
+		{
+			objExplorationPage.captureScreenshot("createExplorationFromSearchFail");
+			onFailureMeassage(ex.getMessage(),"createExplorationFromSearchFail","createExplorationFromSearchFail");
+		}
+		catch(AssertionError ex)
+		{
+			objExplorationPage.captureScreenshot("createExplorationFromSearchFail");
+			onFailureMeassage(ex.getMessage(),"createExplorationFromSearchFail","createExplorationFromSearchFail");
+		}
+	}	
+
+	@Test(priority = 1, description = "Create Exploration From Set Initally")
+	public void CreateExplorationFromSetInitally_Test() throws Throwable {
+		try {
+
+			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+
+			System.out.println(functionName);
+			String value = this.getConfiguration().get(functionName);
+			String[] expParameters =value.split(",");
+			String BaseSetName = expParameters[0].trim()+dtText;
+			String entity = expParameters[1].trim();
+			String searchTextInSet = expParameters[2].trim();
+			String ExpName = expParameters[3].trim()+dtText;
+
+
+			/* Creates an Exploration From Search - Initial */		
+			objExplorationPage.createExplorationInitallyFromSet(BaseSetName, entity, searchTextInSet, ExpName);
+			//			objExplorationPage.createExplorationInitallyFromSet("SetAdd 1", "Disease", "kera", "ExDirect From Set 1");
+			onSuccessMeassage("Exploration is Created Successfully From Set Initally");
+		}
+		catch(Exception ex)
+		{
+			objExplorationPage.captureScreenshot("createExplorationFromSetInitalFail");
+			onFailureMeassage(ex.getMessage(),"createExplorationFromSetInitalFail","createExplorationFromSetInitalFail");
+		}
+		catch(AssertionError ex)
+		{
+			objExplorationPage.captureScreenshot("createExplorationFromSetInitalFail");
+			onFailureMeassage(ex.getMessage(),"createExplorationFromSetInitalFail","createExplorationFromSetInitalFail");
+		}
+	}
+
+	@Test(priority = 2, description = "Create Exploration From Set After clicking From Search")
+	public void CreateExplorationFromSet_Test() throws Throwable {
+		try {
+
+			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+
+			System.out.println(functionName);
+			String value = this.getConfiguration().get(functionName);
+			String[] expParameters =value.split(",");
+			String BaseSetName = expParameters[0].trim()+dtText;
+			String entity = expParameters[1].trim();
+			String searchTextInSet = expParameters[2].trim();
+			String ExpName = expParameters[3].trim()+dtText;
+
+			/* Creates an Exploration From Set - After Search */
+			objExplorationPage.CreateExplorationFromSet(BaseSetName,entity,searchTextInSet, ExpName);
+			//			objExplorationPage.CreateExplorationFromSet("SetAdd 2", "Disease", "kera", "ExFrom Set 2");
+			onSuccessMeassage("Exploration is Created Successfully From Set");
+		}
+		catch(Exception ex)
+		{
+			objExplorationPage.captureScreenshot("createExplorationFromSetFail");
+			onFailureMeassage(ex.getMessage(),"createExplorationFromSetFail","createExplorationFromSetFail");
+		}
+		catch(AssertionError ex)
+		{
+			objExplorationPage.captureScreenshot("createExplorationFromSetFail");
+			onFailureMeassage(ex.getMessage(),"createExplorationFromSetFail","createExplorationFromSetFail");
+		}
+	}
+
+	@Test(priority = 3, description = "Create Exploration From File After clicking From Search")
+	public void CreateExplorationFromFile_Test() throws Throwable {
+		try {
+
+			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+
+			System.out.println(functionName);
+			String value = this.getConfiguration().get(functionName);
+			String[] expParameters =value.split(",");
+			String ExpName = expParameters[0].trim()+dtText;
+			String entity = expParameters[1].trim();
+			String fileLocation = expParameters[2].trim();
+
+
+			/* Creates an Exploration From File - After Search */
+			objExplorationPage.CreateExplorationFromFile(ExpName, entity,fileLocation);
+			//			objExplorationPage.CreateExplorationFromFile("ExFileUpload", "Disease", "C:\\Users\\MugunthRaman\\git\\EagleAutomation\\Resources\\Q4 - Upload file - 1 (2).xlsx");
+			onSuccessMeassage("Exploration is Created Successfully From File");
+		}
+		catch(Exception ex)
+		{
+			objExplorationPage.captureScreenshot("createExplorationFromFileFail");
+			onFailureMeassage(ex.getMessage(),"createExplorationFromFileFail","createExplorationFromFileFail");
+		}
+		catch(AssertionError ex)
+		{
+			objExplorationPage.captureScreenshot("createExplorationFromFileFail");
+			onFailureMeassage(ex.getMessage(),"createExplorationFromFileFail","createExplorationFromFileFail");
+		}
+	}
+
+	@Test(priority = 4, description = "Search A Text In Exploration Expand")
+	public void SearchInExplorationExpand_Test() throws Throwable  {
+		try {
+
+			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+
+			System.out.println(functionName);
+			String value = this.getConfiguration().get(functionName);
+			String[] expParameters =value.split(",");
+			String ExpName = expParameters[0].trim()+dtText;
+			String entity = expParameters[1].trim();
+			String searchText = expParameters[2].trim();
+			String searchInExpand = expParameters[3].trim();
+
+
+			/* To Search a Text in Expanded Exploration */
+			objExplorationPage.searchInExplorationExpand(ExpName,entity,searchText,searchInExpand);
+			onSuccessMeassage("Search successful in Set Expand");
+		}
+		catch(Exception ex)
+		{
+			objExplorationPage.captureScreenshot("SearchInSetExpandFail");
+			onFailureMeassage(ex.getMessage(),"SearchInSetExpandFail","SearchInSetExpandFail");
+		}
+		catch(AssertionError ex)
+		{
+			objExplorationPage.captureScreenshot("SearchInSetExpandFail");
+			onFailureMeassage(ex.getMessage(),"SearchInSetExpandFail","SearchInSetExpandFail");
+		}
+	}
+
+	@Test(priority = 5, description = "Delete Card in Exploration Expand")
+	public void DeleteCardInExplorationExpand_Test() throws Throwable  {
+		try {
+
+			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+
+			System.out.println(functionName);
+			String value = this.getConfiguration().get(functionName);
+			String[] expParameters =value.split(",");
+			String ExpName = expParameters[0].trim()+dtText;
+			String entity = expParameters[1].trim();
+			String searchText = expParameters[2].trim();
+
+			/* Delete Set from Expanded Set */
+			objExplorationPage.DeleteExploraionInExpand(ExpName, entity, searchText);
+			//			objExplorationPage.DeleteExploraionInExpand("DExploration2", "Disease", "kera");
+			onSuccessMeassage("Delete Card from Expanded Exploration");
+		}
+		catch(Exception ex)
+		{
+			objExplorationPage.captureScreenshot("DeleteExplorationInExpandFail");
+			onFailureMeassage(ex.getMessage(),"DeleteExplorationInExpandFail","DeleteExplorationInExpandFail");
+		}
+		catch(AssertionError ex)
+		{
+			objExplorationPage.captureScreenshot("DeleteExplorationInExpandFail");
+			onFailureMeassage(ex.getMessage(),"DeleteExplorationInExpandFail","DeleteExplorationInExpandFail");
+		}		
+	}
+
 	@Test(priority = 6, description = "Delete The first Card in Exploration")
 	public void DeleteExplorationFirstCard_Test() throws Throwable  {
 		try {
@@ -272,68 +272,68 @@ public class ExplorationTest extends BaseTest{
 		}
 	}
 
-//	@Test(priority = 8, description = "Exploration - Expand and add items from Catalog")
-//	public void ExplorationExpandAddFromCatalog_Test() throws Throwable  {
-//		try {
-//
-//			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
-//
-//			System.out.println(functionName);
-//			String value = this.getConfiguration().get(functionName);
-//			String[] expParameters =value.split(",");
-//			String ExpName = expParameters[0].trim()+dtText;
-//			String entity = expParameters[1].trim();
-//			String searchText = expParameters[2].trim();
-//			String searchTextInCatalog = expParameters[3].trim();
-//
-//			/* Set - Expand and add items from Catalog */
-//			objExplorationPage.ExpandAddFromCatalog(ExpName, entity, searchText,searchTextInCatalog);
-//			//			objExplorationPage.ExpandAddFromCatalog("ExpAddFromCatalog", "Disease", "aber", "dengue");
-//			objExplorationPage.saveChanges();
-//			onSuccessMeassage("Items Added from Catalog into Exploration successfully");
-//		}
-//		catch(Exception | AssertionError ex)
-//		{
-//			BasePage.scrollToTop();
-//			objExplorationPage.captureScreenshot("ExplorationExpandAddFromCatalogFail");
-//			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromCatalogFail","ExplorationExpandAddFromCatalogFail");
-//		}
-//
-//	}
-//
-//	@Test(priority = 9, description = "Exploration - Expand and add items from Set")
-//	public void ExplorationExpandAddFromSet_Test() throws Throwable  {
-//		try {
-//
-//			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
-//
-//			System.out.println(functionName);
-//			String value = this.getConfiguration().get(functionName);
-//			String[] expParameters =value.split(",");
-//			String BasesetName = expParameters[0].trim()+dtText;
-//			String entity = expParameters[1].trim();
-//			String searchTextInSet = expParameters[2].trim();
-//			String ExpName = expParameters[3].trim()+dtText;
-//			String searchTextInExp = expParameters[4].trim();
-//
-//
-//			/* Exploration - Expand and add items from Set */
-//			objExplorationPage.ExpandAddFromSet(BasesetName, entity,searchTextInSet, ExpName, searchTextInExp); 
-//			//			objExplorationPage.ExpandAddFromSet("SetAdd 1", "Disease", "leukocytes", "ExpAddFromSet", "aber" ); 
-//			objExplorationPage.saveChanges();
-//			onSuccessMeassage("Items Added from Set into Exploration successfully");
-//		}
-//		catch(Exception ex)
-//		{
-//			objExplorationPage.captureScreenshot("ExplorationExpandAddFromSetFail");
-//			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromSetFail","ExplorationExpandAddFromSetFail");
-//		}
-//		catch(AssertionError ex)
-//		{
-//			objExplorationPage.captureScreenshot("ExplorationExpandAddFromSetFail");
-//			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromSetFail","ExplorationExpandAddFromSetFail");
-//		}
-//	}
+	@Test(priority = 8, description = "Exploration - Expand and add items from Catalog")
+	public void ExplorationExpandAddFromCatalog_Test() throws Throwable  {
+		try {
+
+			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+
+			System.out.println(functionName);
+			String value = this.getConfiguration().get(functionName);
+			String[] expParameters =value.split(",");
+			String ExpName = expParameters[0].trim()+dtText;
+			String entity = expParameters[1].trim();
+			String searchText = expParameters[2].trim();
+			String searchTextInCatalog = expParameters[3].trim();
+
+			/* Set - Expand and add items from Catalog */
+			objExplorationPage.ExpandAddFromCatalog(ExpName, entity, searchText,searchTextInCatalog);
+			//			objExplorationPage.ExpandAddFromCatalog("ExpAddFromCatalog", "Disease", "aber", "dengue");
+			objExplorationPage.saveChanges();
+			onSuccessMeassage("Items Added from Catalog into Exploration successfully");
+		}
+		catch(Exception | AssertionError ex)
+		{
+			BasePage.scrollToTop();
+			objExplorationPage.captureScreenshot("ExplorationExpandAddFromCatalogFail");
+			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromCatalogFail","ExplorationExpandAddFromCatalogFail");
+		}
+
+	}
+
+	@Test(priority = 9, description = "Exploration - Expand and add items from Set")
+	public void ExplorationExpandAddFromSet_Test() throws Throwable  {
+		try {
+
+			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+
+			System.out.println(functionName);
+			String value = this.getConfiguration().get(functionName);
+			String[] expParameters =value.split(",");
+			String BasesetName = expParameters[0].trim()+dtText;
+			String entity = expParameters[1].trim();
+			String searchTextInSet = expParameters[2].trim();
+			String ExpName = expParameters[3].trim()+dtText;
+			String searchTextInExp = expParameters[4].trim();
+
+
+			/* Exploration - Expand and add items from Set */
+			objExplorationPage.ExpandAddFromSet(BasesetName, entity,searchTextInSet, ExpName, searchTextInExp); 
+			//			objExplorationPage.ExpandAddFromSet("SetAdd 1", "Disease", "leukocytes", "ExpAddFromSet", "aber" ); 
+			objExplorationPage.saveChanges();
+			onSuccessMeassage("Items Added from Set into Exploration successfully");
+		}
+		catch(Exception ex)
+		{
+			objExplorationPage.captureScreenshot("ExplorationExpandAddFromSetFail");
+			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromSetFail","ExplorationExpandAddFromSetFail");
+		}
+		catch(AssertionError ex)
+		{
+			objExplorationPage.captureScreenshot("ExplorationExpandAddFromSetFail");
+			onFailureMeassage(ex.getMessage(),"ExplorationExpandAddFromSetFail","ExplorationExpandAddFromSetFail");
+		}
+	}
 
 	@Test(priority = 10, description = "Exploration - Expand and add items from File")
 	public void ExplorationExpandAddFromFile_Test() throws Throwable  {

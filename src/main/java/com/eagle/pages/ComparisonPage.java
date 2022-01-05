@@ -375,6 +375,7 @@ public class ComparisonPage extends BasePage{
 	}
 
 	public void Comparison() throws AWTException, InterruptedException{ 	
+		BasePage.waitforAnElement(ComparisonIcon);
 		BasePage.click(ComparisonIcon);
 		action.moveToElement(TermsOfUse).perform();
 	}
@@ -623,23 +624,23 @@ public class ComparisonPage extends BasePage{
 			outerloop:
 				do
 				{ 
-//					while(i<=20) {
-						try {	    	
-							BasePage.CompareAttributeText("data-is-focusable", "true", addCard);
-							iden = false;	 
+					//					while(i<=20) {
+					try {	    	
+						BasePage.CompareAttributeText("data-is-focusable", "true", addCard);
+						iden = false;	 
+						break outerloop;
+					}
+					catch(Exception | AssertionError ex) {
+						Thread.sleep(3000);
+						if(i==20) {
 							break outerloop;
 						}
-						catch(Exception | AssertionError ex) {
-							Thread.sleep(3000);
-							if(i==20) {
-								break outerloop;
-							}
 
-						}	 
-//					}
+					}	 
+					//					}
 				}
 				while(i<=20);
-//				while(iden);	         
+			//				while(iden);	         
 		}
 		catch(Exception | AssertionError ex)
 		{
@@ -654,29 +655,29 @@ public class ComparisonPage extends BasePage{
 			outerloop:
 				do
 				{
-//					while(i<=20) {
-						try {	    	
-							saveChanges.isDisplayed();
-							iden = false;	
-							break outerloop;
-						}
-						catch(Exception ex) {
-							try {
-								if (fetchFailed.isDisplayed()) {
-									break outerloop;
-								}
+					//					while(i<=20) {
+					try {	    	
+						saveChanges.isDisplayed();
+						iden = false;	
+						break outerloop;
+					}
+					catch(Exception ex) {
+						try {
+							if (fetchFailed.isDisplayed()) {
+								break outerloop;
 							}
-							catch (Exception et){
-								Thread.sleep(3000);
-								if(i==20) {
-									break outerloop;
-								}
-							}	 
-//						}
+						}
+						catch (Exception et){
+							Thread.sleep(3000);
+							if(i==20) {
+								break outerloop;
+							}
+						}	 
+						//						}
 					}
 				}
 				while(i<=20);
-//				while(iden);	         
+			//				while(iden);	         
 		}
 		catch(Exception | AssertionError ex)
 		{
