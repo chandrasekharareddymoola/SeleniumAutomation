@@ -36,151 +36,151 @@ public class InvestigationTest extends BaseTest {
 			objInvestigationPage = new InvestigationPage();	
 	}
 	
-	@Test(priority = 0, description = "Create Investigation")
-	public void CreateInvestigation_Test() throws InterruptedException, IOException {
-		
-		try {
-			/* To initiate the creation of Investigation */		
-			functionName = new Object(){}.getClass().getEnclosingMethod().getName();				
-			
-			value = this.getConfiguration().get(functionName);
-			invParameters = value.split(",");
-//			investigationName = invParameters[0].trim() + this.getDateTime();
-			investigationName = invParameters[0].trim() + dtText;
-			String invDescription = invParameters[1].trim();
-			
-			objInvestigationPage.createInvestigation(investigationName,invDescription);
-			onSuccessMeassage("Investigation is successfully created");
-		}
-		catch(Exception ex)
-		{
-			objInvestigationPage.captureScreenshot("createInvFail");
-			onFailureMeassage(ex.getMessage(),"createInvFail");
-			
-		}
-	}
-	
-	@Test(priority = 1, description = "View Investigation")
-	public void ViewInvestigation_Test() throws Throwable  {
-		try {
-			 /* To view the Investigation */
-			functionName = new Object(){}.getClass().getEnclosingMethod().getName();		
-			value = this.getConfiguration().get(functionName);			
-//			investigationName = invParameters[0].trim() + this.getDateTime();
-			investigationName = invParameters[0].trim();
-			
-			objInvestigationPage.viewInvestigation(investigationName);
-			onSuccessMeassage("Investigation is successfully opened");
-		}
-		catch(Exception ex)
-		{
-			objInvestigationPage.captureScreenshot("viewInvFail");
-			onFailureMeassage(ex.getMessage(),"viewInvFail");
-		}
-	}
-		 
-	@Test(priority = 2, description = "Edit Investigation")
-	public void EditInvestigation_Test() throws InterruptedException, IOException  {
-		try {
-			 /* To edit the Investigation */
-			functionName = new Object(){}.getClass().getEnclosingMethod().getName();		
-			value = this.getConfiguration().get(functionName);
-			invParameters =value.split(",");
-//			investigationName = invParameters[0].trim() + this.getDateTime();
-//			String newInvName = invParameters[1].trim() + this.getDateTime();
-			investigationName = invParameters[0].trim() + dtText;
-			String newInvName = invParameters[1].trim() + dtText;
-			String invDescription = invParameters[2].trim();
-			
-			objInvestigationPage.createInvestigation(investigationName,investigationName);
-			objInvestigationPage.editInvestigation(investigationName,newInvName,invDescription);
-			onSuccessMeassage("Investigation is successfully modified");
-		}
-		catch(Exception ex)
-		{
-			objInvestigationPage.captureScreenshot("editInvFail");
-			onFailureMeassage(ex.getMessage(),"editInvFail");
-		}
-	}
-	
-	@Test(priority = 3, description = "Link Set With Investigation")
-	public void LinkSetWithInvestigation_Test() throws Throwable  {
-		try {                                              
-			/* To Link set to an Investigation */		
-			functionName = new Object(){}.getClass().getEnclosingMethod().getName();		
-			value = this.getConfiguration().get(functionName);
-			invParameters =value.split(",");
-//			investigationName = invParameters[0].trim() + this.getDateTime();
-//			String setTobeLinked = invParameters[1].trim()+ this.getDateTime();
-			investigationName = invParameters[0].trim() + dtText;
-			String setTobeLinked = invParameters[1].trim()+ dtText;
-			
-			objInvestigationPage.createInvestigation(investigationName,investigationName);
-			objSetPage = new SetPage();					
-			objSetPage.createSet(setTobeLinked,entity,searchText);	
-			objInvestigationPage.linkSettoInvestigation(investigationName ,setTobeLinked);
-			onSuccessMeassage("Investigation is successfully linked with set");
-		}
-		catch(Exception ex)
-		{
-			objInvestigationPage.captureScreenshot("linkSetInvFail");
-			onFailureMeassage(ex.getMessage(),"linkSetInvFail");
-		}
-	}
-	
-	
-	@Test(priority = 4, description = "Link Exploration With Investigation")
-	public void LinkExplorationWithInvestigation_Test() throws Throwable  {                                                   
-		try {
-			/* To Link exploration to an Investigation */
-			functionName = new Object(){}.getClass().getEnclosingMethod().getName();		
-			value = this.getConfiguration().get(functionName);
-			invParameters =value.split(",");				
-//			investigationName = invParameters[0].trim() + this.getDateTime();
-//			String expTobeLinked = invParameters[1].trim()+ this.getDateTime();
-			investigationName = invParameters[0].trim() + dtText;
-			String expTobeLinked = invParameters[1].trim()+ dtText;
-			   //ERROR //
-			objInvestigationPage.createInvestigation(investigationName,investigationName);
-			objExplorationPage = new ExplorationPage();				
-			objExplorationPage.createExploration(expTobeLinked, entity, searchText);
-			 objInvestigationPage.linkExplorationtoInvestigation(investigationName,expTobeLinked);
-			  onSuccessMeassage("Investigation is successfully linked with Exploration");
-			}
-		catch(Exception ex)
-		{
-			objInvestigationPage.captureScreenshot("linkExpInvFail");
-			onFailureMeassage(ex.getMessage(),"linkExpInvFail");
-		}
-	}
-	
-	@Test(priority = 5, description = "Link Comparison With Investigation")
-	public void LinkComparisonWithInvestigation_Test() throws Throwable  {
-		try {
-		   /* To Link Comparison to an Investigation */
-			functionName = new Object(){}.getClass().getEnclosingMethod().getName();		
-			value = this.getConfiguration().get(functionName);
-			invParameters =value.split(",");
-//			String invName = invParameters[0].trim();
-//			investigationName = invParameters[0].trim() + this.getDateTime();
-//			String compTobeLinked = invParameters[1].trim()+ this.getDateTime();
-			investigationName = invParameters[0].trim() +dtText;
-			String compTobeLinked = invParameters[1].trim()+dtText;
-			
-			objInvestigationPage.createInvestigation(investigationName,investigationName);
-			objComparisonPage = new ComparisonPage();	
-			objComparisonPage.createComparisonControl(compTobeLinked, compSetName, entity, searchText);
-			objInvestigationPage.linkComparisontoInvestigation(investigationName,compTobeLinked);  
-			onSuccessMeassage("Investigation is successfully linked with Comparison");
-		}
-		catch(Exception ex)
-		{
-			objInvestigationPage.captureScreenshot("linkCompInvFail");
-			onFailureMeassage(ex.getMessage(),"linkCompInvFail");
-		}
-
-	}
-	
+//	@Test(priority = 0, description = "Create Investigation")
+//	public void CreateInvestigation_Test() throws InterruptedException, IOException {
+//		
+//		try {
+//			/* To initiate the creation of Investigation */		
+//			functionName = new Object(){}.getClass().getEnclosingMethod().getName();				
+//			
+//			value = this.getConfiguration().get(functionName);
+//			invParameters = value.split(",");
+////			investigationName = invParameters[0].trim() + this.getDateTime();
+//			investigationName = invParameters[0].trim() + dtText;
+//			String invDescription = invParameters[1].trim();
+//			
+//			objInvestigationPage.createInvestigation(investigationName,invDescription);
+//			onSuccessMeassage("Investigation is successfully created");
+//		}
+//		catch(Exception ex)
+//		{
+//			objInvestigationPage.captureScreenshot("createInvFail");
+//			onFailureMeassage(ex.getMessage(),"createInvFail");
+//			
+//		}
+//	}
+//	
+//	@Test(priority = 1, description = "View Investigation")
+//	public void ViewInvestigation_Test() throws Throwable  {
+//		try {
+//			 /* To view the Investigation */
+//			functionName = new Object(){}.getClass().getEnclosingMethod().getName();		
+//			value = this.getConfiguration().get(functionName);			
+////			investigationName = invParameters[0].trim() + this.getDateTime();
+//			investigationName = invParameters[0].trim();
+//			
+//			objInvestigationPage.viewInvestigation(investigationName);
+//			onSuccessMeassage("Investigation is successfully opened");
+//		}
+//		catch(Exception ex)
+//		{
+//			objInvestigationPage.captureScreenshot("viewInvFail");
+//			onFailureMeassage(ex.getMessage(),"viewInvFail");
+//		}
+//	}
+//		 
+//	@Test(priority = 2, description = "Edit Investigation")
+//	public void EditInvestigation_Test() throws InterruptedException, IOException  {
+//		try {
+//			 /* To edit the Investigation */
+//			functionName = new Object(){}.getClass().getEnclosingMethod().getName();		
+//			value = this.getConfiguration().get(functionName);
+//			invParameters =value.split(",");
+////			investigationName = invParameters[0].trim() + this.getDateTime();
+////			String newInvName = invParameters[1].trim() + this.getDateTime();
+//			investigationName = invParameters[0].trim() + dtText;
+//			String newInvName = invParameters[1].trim() + dtText;
+//			String invDescription = invParameters[2].trim();
+//			
+//			objInvestigationPage.createInvestigation(investigationName,investigationName);
+//			objInvestigationPage.editInvestigation(investigationName,newInvName,invDescription);
+//			onSuccessMeassage("Investigation is successfully modified");
+//		}
+//		catch(Exception ex)
+//		{
+//			objInvestigationPage.captureScreenshot("editInvFail");
+//			onFailureMeassage(ex.getMessage(),"editInvFail");
+//		}
+//	}
+//	
+//	@Test(priority = 3, description = "Link Set With Investigation")
+//	public void LinkSetWithInvestigation_Test() throws Throwable  {
+//		try {                                              
+//			/* To Link set to an Investigation */		
+//			functionName = new Object(){}.getClass().getEnclosingMethod().getName();		
+//			value = this.getConfiguration().get(functionName);
+//			invParameters =value.split(",");
+////			investigationName = invParameters[0].trim() + this.getDateTime();
+////			String setTobeLinked = invParameters[1].trim()+ this.getDateTime();
+//			investigationName = invParameters[0].trim() + dtText;
+//			String setTobeLinked = invParameters[1].trim()+ dtText;
+//			
+//			objInvestigationPage.createInvestigation(investigationName,investigationName);
+//			objSetPage = new SetPage();					
+//			objSetPage.createSet(setTobeLinked,entity,searchText);	
+//			objInvestigationPage.linkSettoInvestigation(investigationName ,setTobeLinked);
+//			onSuccessMeassage("Investigation is successfully linked with set");
+//		}
+//		catch(Exception ex)
+//		{
+//			objInvestigationPage.captureScreenshot("linkSetInvFail");
+//			onFailureMeassage(ex.getMessage(),"linkSetInvFail");
+//		}
+//	}
+//	
+//	
+//	@Test(priority = 4, description = "Link Exploration With Investigation")
+//	public void LinkExplorationWithInvestigation_Test() throws Throwable  {                                                   
+//		try {
+//			/* To Link exploration to an Investigation */
+//			functionName = new Object(){}.getClass().getEnclosingMethod().getName();		
+//			value = this.getConfiguration().get(functionName);
+//			invParameters =value.split(",");				
+////			investigationName = invParameters[0].trim() + this.getDateTime();
+////			String expTobeLinked = invParameters[1].trim()+ this.getDateTime();
+//			investigationName = invParameters[0].trim() + dtText;
+//			String expTobeLinked = invParameters[1].trim()+ dtText;
+//			   //ERROR //
+//			objInvestigationPage.createInvestigation(investigationName,investigationName);
+//			objExplorationPage = new ExplorationPage();				
+//			objExplorationPage.createExploration(expTobeLinked, entity, searchText);
+//			 objInvestigationPage.linkExplorationtoInvestigation(investigationName,expTobeLinked);
+//			  onSuccessMeassage("Investigation is successfully linked with Exploration");
+//			}
+//		catch(Exception ex)
+//		{
+//			objInvestigationPage.captureScreenshot("linkExpInvFail");
+//			onFailureMeassage(ex.getMessage(),"linkExpInvFail");
+//		}
+//	}
+//	
+//	@Test(priority = 5, description = "Link Comparison With Investigation")
+//	public void LinkComparisonWithInvestigation_Test() throws Throwable  {
+//		try {
+//		   /* To Link Comparison to an Investigation */
+//			functionName = new Object(){}.getClass().getEnclosingMethod().getName();		
+//			value = this.getConfiguration().get(functionName);
+//			invParameters =value.split(",");
+////			String invName = invParameters[0].trim();
+////			investigationName = invParameters[0].trim() + this.getDateTime();
+////			String compTobeLinked = invParameters[1].trim()+ this.getDateTime();
+//			investigationName = invParameters[0].trim() +dtText;
+//			String compTobeLinked = invParameters[1].trim()+dtText;
+//			
+//			objInvestigationPage.createInvestigation(investigationName,investigationName);
+//			objComparisonPage = new ComparisonPage();	
+//			objComparisonPage.createComparisonControl(compTobeLinked, compSetName, entity, searchText);
+//			objInvestigationPage.linkComparisontoInvestigation(investigationName,compTobeLinked);  
+//			onSuccessMeassage("Investigation is successfully linked with Comparison");
+//		}
+//		catch(Exception ex)
+//		{
+//			objInvestigationPage.captureScreenshot("linkCompInvFail");
+//			onFailureMeassage(ex.getMessage(),"linkCompInvFail");
+//		}
+//
+//	}
+//	
 
 	@Test(priority = 6, description = "Share Investigation")
 	public void ShareInvestigation_Test() throws InterruptedException, IOException  {

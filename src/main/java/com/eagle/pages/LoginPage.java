@@ -6,6 +6,7 @@ import java.awt.AWTException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -14,6 +15,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.aventstack.extentreports.Status;
 import com.eagle.ConfigUtils.ReadObject;
@@ -110,8 +113,11 @@ public class LoginPage extends BasePage{
 			Properties configObject = object.getObjectRepositoty();	     
 			String emailPass = configObject.getProperty("Password");
 			
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			
 			BasePage.CompareAttributeText("alt","Microsoft",microSoftLogo);
-			BasePage.waitforAnElement(MicrosoftPassText);
+			wait.until(ExpectedConditions.visibilityOf(MicrosoftPassText));
 			BasePage.click(MicrosoftPass);
 			MicrosoftPass.sendKeys(emailPass);
 			BasePage.click(SignIn);		
@@ -124,9 +130,12 @@ public class LoginPage extends BasePage{
 
 	public void CodeVerification() throws Throwable{
 		try {
-			BasePage.waitforAnElement(verificationCode);
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			
+			wait.until(ExpectedConditions.visibilityOf(verificationCode));
 			BasePage.click(verificationCode);
-			BasePage.waitforAnElement(CodeTextBox);
+			wait.until(ExpectedConditions.visibilityOf(CodeTextBox));
 			Thread.sleep(10000);
 			//					CodeTextBox.sendKeys("123123");
 			//					BasePage.click(verifyButton);
@@ -156,26 +165,25 @@ public class LoginPage extends BasePage{
 			String email = configObject.getProperty("Username");	
 			String emailPass = configObject.getProperty("Password");	
 			
-			waitforAnElement(loginUserButton);
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			
+			wait.until(ExpectedConditions.visibilityOf(loginUserButton));
 			click(loginUserButton);
-			waitforAnElement(directEmail);
+			wait.until(ExpectedConditions.visibilityOf(directEmail));
 			directEmail.sendKeys(email);
 			BasePage.click(directSubmit);
-			waitforAnElement(directPassWord);
+			wait.until(ExpectedConditions.visibilityOf(directPassWord));
 			directPassWord.sendKeys(emailPass);
 			BasePage.click(directSubmit);
 		}
 		catch(Exception ex) {
-			ExtentTestManager.getTest().log(Status.FAIL,"Some problem with Direct Login");
 			throw ex;
 		}
 	}
 
 	public void loginTo() throws Throwable{
 		try {
-			ReadObject object = new ReadObject();
-			Properties configObject = object.getObjectRepositoty();	     
-			String emailPass = configObject.getProperty("Password");
 			try {
 				this.directLogin();
 				this.CodeVerification();

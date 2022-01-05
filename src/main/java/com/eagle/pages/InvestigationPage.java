@@ -110,6 +110,12 @@ public class InvestigationPage extends BasePage{
 	@FindBy(xpath = "//*[@class='ms-List' and @role='presentation']")
 	public WebElement investigationList;
 
+	@FindBy(xpath = "//*[@data-icon-name='Cancel']")
+	public WebElement dialogBoxClose;
+	
+	@FindBy(xpath = "//*[text()='Resource shared successfully']")
+	public WebElement ShareSuccess;	
+
 	public InvestigationPage(){ 		 
 		PageFactory.initElements(driver, this); 
 	}
@@ -297,13 +303,20 @@ public class InvestigationPage extends BasePage{
 
 
 	public void shareInvestigation(String invToBeShared, String personToBeShared) throws Exception{
-		this.clickInvestigationIcon();	 
-		selectItemFortheList(invToBeShared);
-		BasePage.click(shareIcon);
-		BasePage.enterText(selectPersonToShare,personToBeShared);	
-		BasePage.click(suggestedUsers);
-		BasePage.click(share);	
-		ExtentTestManager.getTest().log(Status.PASS,invToBeShared +  " Investigation is shared");
+		try {
+			this.clickInvestigationIcon();	 
+			selectItemFortheList(invToBeShared);
+			BasePage.click(shareIcon);
+			BasePage.enterText(selectPersonToShare,personToBeShared);	
+			BasePage.click(suggestedUsers);
+			BasePage.click(share);	
+			BasePage.waitforAnElement(ShareSuccess);
+			ExtentTestManager.getTest().log(Status.PASS,invToBeShared +  " Investigation is shared");
+		}
+		catch (Exception e) {
+			BasePage.click(dialogBoxClose);
+			throw e;
+		}
 	}
 
 	public String captureScreenshot(String screenShotName) throws IOException

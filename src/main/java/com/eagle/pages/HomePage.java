@@ -89,7 +89,7 @@ public class HomePage extends BasePage{
 	public WebElement columnHeader;
 	
 	@FindBy(xpath = "//h6")
-	public WebElement profileName;
+	public WebElement profileNameactual;
 	
 	@FindBy(xpath = "//*[@role='button' and @aria-haspopup='listbox']/span/div/span")
 	public WebElement filterCount;	
@@ -157,6 +157,7 @@ public class HomePage extends BasePage{
 	public void verifyLogoVisibility() throws Exception
 	{
 		try {
+			waitforAnElement(homeLogo);
 			boolean logoPresent = homeLogo.isDisplayed();
 			Assert.assertTrue(logoPresent);
 			if (logoPresent){		            
@@ -212,15 +213,16 @@ public class HomePage extends BasePage{
 		}    
 	} 
 
-	public void verifyUserProfiles() throws Exception
-	{
+	public void verifyUserProfiles(String ProfileName) throws Exception
+	{		
 		try {
 			BasePage.click(userControl);
 			BasePage.click(profileSettings);
-			ReadObject object = new ReadObject();
-			Properties configObject = object.getObjectRepositoty();	 
-			String expected = configObject.getProperty("Username");
-			String actual = profileName.getText();
+//			ReadObject object = new ReadObject();
+//			Properties configObject = object.getObjectRepositoty();	 
+//			String expected = configObject.getProperty("Username");
+			String expected = ProfileName;
+			String actual = profileNameactual.getText();
 			BasePage.click(profileBack);
 			assertEquals(actual, expected);
 		}catch(Exception | AssertionError ex) {
