@@ -1141,12 +1141,14 @@ public class ExplorationPage extends BasePage{
 			if(dialogBoxClose.isDisplayed()) {
 				ExtentTestManager.getTest().log(Status.FAIL, "Add to Grid button is not displayed");
 				BasePage.click(dialogBoxClose);
+				Thread.sleep(2000);
 			}
 			throw ExpandAddFromFileFail;
 		}
 		catch(AssertionError ex) {
 			if(dialogBoxClose.isDisplayed()) {
 				BasePage.click(dialogBoxClose);
+				Thread.sleep(2000);
 			}
 			throw ex;
 		}

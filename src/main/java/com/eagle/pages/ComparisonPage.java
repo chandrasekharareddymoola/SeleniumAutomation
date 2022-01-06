@@ -1474,12 +1474,14 @@ public class ComparisonPage extends BasePage{
 			if(dialogBoxClose.isDisplayed()) {
 				ExtentTestManager.getTest().log(Status.FAIL, "Add to Grid button is not displayed");
 				BasePage.click(dialogBoxClose);
+				Thread.sleep(2000);
 			}
 			throw ExpandAddFromFileFail;
 		}
 		catch (AssertionError ExpandAddFromFileFail) {
 			if(dialogBoxClose.isDisplayed()) {
 				BasePage.click(dialogBoxClose);
+				Thread.sleep(2000);
 			}
 			throw ExpandAddFromFileFail;
 		}

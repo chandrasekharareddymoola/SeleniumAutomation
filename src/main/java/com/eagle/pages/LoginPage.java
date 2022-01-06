@@ -191,38 +191,14 @@ public class LoginPage extends BasePage{
 			catch(Exception sct) {
 				this.setCredentials();
 				this.clickLogin();
-				Thread.sleep(10000);
+				BasePage.waitforAnElement(microSoftLogo);
 				if(microSoftLogo.isDisplayed()) {			
 					try {
 						this.MicrosoftLogin();
 						this.CodeVerification();
 					}
-					//					BasePage.CompareAttributeText("alt","Microsoft",microSoftLogo);
-					//					BasePage.waitforAnElement(MicrosoftPassText);
-					//					BasePage.click(MicrosoftPass);
-					//					MicrosoftPass.sendKeys(emailPass);
-					//					BasePage.click(SignIn);	
-					//					BasePage.waitforAnElement(verificationCode);
-					//					BasePage.click(verificationCode);
-					//					BasePage.waitforAnElement(CodeTextBox);
-					//					Thread.sleep(10000);
-					//					//					CodeTextBox.sendKeys("123123");
-					//					//					BasePage.click(verifyButton);
-					//					int i=0;
-					//					while(i<15) {
-					//						try {
-					//							BasePage.waitforAnElement(yesButton);
-					//							BasePage.click(yesButton);
-					//							break;
-					//						}
-					//						catch(Throwable y) {
-					//							Thread.sleep(10000);
-					//							i++;
-					//						}
-					//					}
-					//				}
 					catch(Exception o){
-						ExtentTestManager.getTest().log(Status.FAIL,"Some problem with Microsoft Login");
+						ExtentTestManager.getTest().log(Status.FAIL,"Some problem with Login");
 						throw o;
 					}
 				}

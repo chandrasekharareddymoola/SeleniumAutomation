@@ -55,7 +55,7 @@ public class BasePage{
 
 	public static void click(WebElement element) throws InterruptedException, AWTException {
 		WebDriverWait wait = new WebDriverWait(driver, 60);
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		wait.until(ExpectedConditions.visibilityOf(element));
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 		try {
@@ -79,7 +79,7 @@ public class BasePage{
 
 	public static void scrollIntoView(WebElement element) {
 		WebDriverWait wait = new WebDriverWait(driver, 10);
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		wait.until(ExpectedConditions.visibilityOf(element));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollTo(document.body.scrollHeight,0)");
@@ -87,7 +87,7 @@ public class BasePage{
 	}
 
 	public static void scrollToTop() {
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollTo(document.body.scrollHeight,0)");
 	}
