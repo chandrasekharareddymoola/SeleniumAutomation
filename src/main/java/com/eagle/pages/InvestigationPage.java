@@ -3,29 +3,25 @@ package com.eagle.pages;
 import java.awt.AWTException;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import com.aventstack.extentreports.Status;
 import com.eagle.Reports.ExtentTestManager;
 
 
 public class InvestigationPage extends BasePage{
 
-	//WebDriver driver;	
-
+	//Web Elements in page
+	
 	@FindBy(xpath = "//i[@data-icon-name='TestSuite']")
 	public WebElement investigationIcon;
 
@@ -116,50 +112,60 @@ public class InvestigationPage extends BasePage{
 	@FindBy(xpath = "//*[text()='Resource shared successfully']")
 	public WebElement ShareSuccess;	
 
+	
+	//Methods
+	
 	public InvestigationPage(){ 		 
 		PageFactory.initElements(driver, this); 
 	}
-
+	
+	//Click the investigation icon 
 	public void clickInvestigationIcon() throws InterruptedException, AWTException{    	
 		BasePage.click(investigationIcon);
 		Actions action = new Actions(driver);
-		//Performing the mouse hover action on the target element.	    	
+		
+		//Performing the mouse hover action on the target element so that the left drawer closes    	
 		action.moveToElement(copyRightIdentifier).perform();
 	}
 
+	//Click Add an Investigation
 	public void addInvestigation() throws InterruptedException, AWTException{    	
 		BasePage.click(addInvestigation);
 	}
 
-
+	//Click Add
 	public void addAction() throws InterruptedException, AWTException{    	
 		BasePage.click(addAction);
 	}
 
-
+	//Set the title of investigation
 	public void setTitle(String textTitle) throws InterruptedException, AWTException {    	
 		BasePage.enterText(title, textTitle);
 	}   
 
+	//Set the Description of investigation
 	public void setDescription(String textDesc) throws InterruptedException, AWTException{    	
 		BasePage.enterText(description, textDesc);
 	}  
 
+	//Append to the title of investigation
 	public void modifyTitle(String textTitle) throws InterruptedException, AWTException{  
 		BasePage.click(investigationTitle);
 		BasePage.enterText(investigationTitle, textTitle);
 	}
 
+	//Append to the Description of investigation
 	public void modifyDescription(String textDesc) throws InterruptedException, AWTException{    
 		BasePage.click(investigationDesc);
 		BasePage.enterText(investigationDesc, textDesc);
 	} 
 
+	//Click Save to create investigation
 	public void clickSave() throws InterruptedException, AWTException{
 		BasePage.click(saveInvestigation);
 	}  
 
-
+	//Open a particular item (Investigation) from list
 	public void openItemFromList(String investigationName) throws Exception
 	{
 		try {	
@@ -183,6 +189,7 @@ public class InvestigationPage extends BasePage{
 		}
 	}
 
+	//Select the action button for a particular item (Investigation)
 	public void selectItemFortheList(String investigationName)
 	{
 		try {	
@@ -207,6 +214,7 @@ public class InvestigationPage extends BasePage{
 		catch(Exception ex) {}
 	}	    
 
+	//Create an investigation
 	public void createInvestigation(String invTitle, String invDesc) throws Exception{
 		try {
 			this.clickInvestigationIcon();
@@ -221,6 +229,7 @@ public class InvestigationPage extends BasePage{
 		}
 	}	
 
+	//Edit a created investigation
 	public void editInvestigation(String inv, String invTitle, String invDescription) throws Exception{
 		try
 		{			
@@ -235,6 +244,7 @@ public class InvestigationPage extends BasePage{
 		}
 	}	
 
+	//Open an investigation
 	public void viewInvestigation(String inv) throws Throwable{		
 		try {
 			this.clickInvestigationIcon();	  
@@ -247,6 +257,7 @@ public class InvestigationPage extends BasePage{
 
 	}
 
+	//Create and link a set to an investigation
 	public void linkSettoInvestigation(String invName, String setTobeLinked) throws Exception
 	{
 		try {  
@@ -266,6 +277,7 @@ public class InvestigationPage extends BasePage{
 		}
 	}  
 
+	//Create and link an exploration to an investigation
 	public void linkExplorationtoInvestigation(String invName, String explorationTobeLinked) throws Exception
 	{
 		this.clickInvestigationIcon();
@@ -279,6 +291,7 @@ public class InvestigationPage extends BasePage{
 		ExtentTestManager.getTest().log(Status.PASS,explorationTobeLinked +  " is linked to " + invName);
 	}
 
+	//Create and link a comparison to an investigation
 	public void linkComparisontoInvestigation(String invName, String comparisonTobeLinked) throws Exception
 	{
 		this.clickInvestigationIcon();
@@ -293,6 +306,7 @@ public class InvestigationPage extends BasePage{
 		ExtentTestManager.getTest().log(Status.PASS,comparisonTobeLinked +  " is linked to " + invName);
 	}	    
 
+	//Delete a created investigation
 	public void deleteInvestigation(String invToBeDeleted) throws Exception {
 		this.clickInvestigationIcon();	 
 		selectItemFortheList(invToBeDeleted);
@@ -301,7 +315,7 @@ public class InvestigationPage extends BasePage{
 		ExtentTestManager.getTest().log(Status.PASS,invToBeDeleted +  " Investigation is deleted");
 	}
 
-
+	//Share an already created investigation
 	public void shareInvestigation(String invToBeShared, String personToBeShared) throws Exception{
 		try {
 			this.clickInvestigationIcon();	 
@@ -319,6 +333,7 @@ public class InvestigationPage extends BasePage{
 		}
 	}
 
+	//Capture screenshot
 	public String captureScreenshot(String screenShotName) throws IOException
 	{
 		TakesScreenshot ts = (TakesScreenshot)driver;

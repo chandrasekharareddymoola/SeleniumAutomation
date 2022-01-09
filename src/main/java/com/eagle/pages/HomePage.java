@@ -4,29 +4,24 @@ import static org.testng.Assert.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Properties;
-
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-
 import com.aventstack.extentreports.Status;
-import com.eagle.ConfigUtils.ReadObject;
 import com.eagle.Reports.ExtentTestManager;
 
 public class HomePage extends BasePage{
+
+	//Web Elements in page
 
 	@FindBy(xpath = "//i[@data-icon-name='Home']")
 	public WebElement homeIcon;
@@ -87,21 +82,15 @@ public class HomePage extends BasePage{
 
 	@FindBy(xpath = "//div[@role='columnheader']")
 	public WebElement columnHeader;
-	
+
 	@FindBy(xpath = "//h6")
 	public WebElement profileNameactual;
-	
+
 	@FindBy(xpath = "//*[@role='button' and @aria-haspopup='listbox']/span/div/span")
 	public WebElement filterCount;	
-	
+
 	@FindBy(xpath = "//*[@data-icon-name='CalculatorMultiply']/parent::li")
 	public WebElement filterName;	
-	
-
-
-	public WebElement selectFilter(String entityName) {
-		return this.driver.findElement(By.xpath("//div[@title='"+ entityName +"']"));   		
-	}	
 
 	@FindBy(xpath = "//*[text()='Save Search']")
 	public WebElement saveSearch;	
@@ -118,15 +107,39 @@ public class HomePage extends BasePage{
 	@FindBy(xpath = "//div[@class='ms-List']//div[@role='rowheader' and @aria-colindex='1']")
 	public List<WebElement> searchGridItems;
 
+	@FindBy(xpath = "//i[@data-icon-name='LifeSaver']")
+	public WebElement lifeSaverIcon;
+
+	@FindBy(xpath = "//span[text()='Contact Help Desk']")
+	public WebElement contactHelpDesk;
+
+	@FindBy(xpath = "//span[text()='User Manual']")
+	public WebElement userManual;
+
+	@FindBy(xpath = "//span[text()='FAQ']")
+	public WebElement FAQ;
+
+	@FindBy(xpath = "//span[text()='Eagle Genomics Support']")
+	public WebElement EaglegenomicsSupportText;
+
+	@FindBy(xpath = "//h1[text()='Help Desk']")
+	public WebElement HelpDesk;
+	
+	@FindBy(xpath = "//h1[text()='FAQ']")
+	public WebElement FAQtext;
+
+	@FindBy(xpath = "//div[@scraper-tag='UserManual']//iframe[contains(@class,'UserManual__userManualPDF')]")
+	public WebElement userManualPDF;	
+	
+
+	//Methods
 
 	public HomePage(){ 		 
 		PageFactory.initElements(driver, this); 
 	}
 
-	public String getHomePageDashboardUserName(){
-		return searchIcon.getText();
-	}
 
+	//Open a particular item (Search) from list
 	public void openItemFromList(String inv) throws Exception
 	{
 		try {	
@@ -154,6 +167,7 @@ public class HomePage extends BasePage{
 		catch(Exception ex) {throw ex;}
 	}
 
+	//Verify the visibility of logo
 	public void verifyLogoVisibility() throws Exception
 	{
 		try {
@@ -169,6 +183,7 @@ public class HomePage extends BasePage{
 		}    
 	}
 
+	//Verify the components in Dashboard
 	public void verifyDashboardComponents() throws Exception
 	{
 		try {
@@ -213,14 +228,15 @@ public class HomePage extends BasePage{
 		}    
 	} 
 
+	//Verify the components in Dashboard
 	public void verifyUserProfiles(String ProfileName) throws Exception
 	{		
 		try {
 			BasePage.click(userControl);
 			BasePage.click(profileSettings);
-//			ReadObject object = new ReadObject();
-//			Properties configObject = object.getObjectRepositoty();	 
-//			String expected = configObject.getProperty("Username");
+			//			ReadObject object = new ReadObject();											//remove these comments if user mail ID is displayed in Dashboard and comment the ones with Profile name
+			//			Properties configObject = object.getObjectRepositoty();	 
+			//			String expected = configObject.getProperty("Username");						
 			String expected = ProfileName;
 			String actual = profileNameactual.getText();
 			BasePage.click(profileBack);
@@ -230,6 +246,7 @@ public class HomePage extends BasePage{
 		}    
 	}
 
+	//Verify the Copyrights and the text within it
 	public void verifyCopyRights()
 	{
 		try {
@@ -246,6 +263,12 @@ public class HomePage extends BasePage{
 		} 
 	}
 
+	//Select a particular entity as filter for search
+	public WebElement selectFilter(String entityName) {
+		return BasePage.driver.findElement(By.xpath("//div[@title='"+ entityName +"']"));   		
+	}	
+
+	//Verify the Copyrights and the text within it
 	public void createGlobalSearch() throws Exception
 	{
 		try {
@@ -268,9 +291,9 @@ public class HomePage extends BasePage{
 		catch(Exception |AssertionError ex) 	{
 			throw ex;
 		}
-
 	}
 
+	//Open a saved search and verify if it is saved properly
 	public void verifySavedSearches() throws Exception
 	{
 		try {
@@ -291,7 +314,55 @@ public class HomePage extends BasePage{
 
 	}    
 
+	//Click and verify Contact Help Desk
+	public void VerifyContactHelpDesk() throws Exception
+	{
+		try {
+			BasePage.click(lifeSaverIcon);
+			BasePage.click(contactHelpDesk);
+			//Need to add steps to switch active window
+			assertEquals(EaglegenomicsSupportText.getText(), "Eagle Genomics Support");  
+			assertEquals(HelpDesk.getText(), "Help Desk");  
+		}
+		catch(Exception ex)    	{
+			ExtentTestManager.getTest().log(Status.FAIL, "Contact Help Desk verification failed");
+			throw ex;
+		}
+	}  
 
+	//Click and verify user manual
+	public void VerifyUserManual() throws Exception
+	{
+		try {
+			BasePage.click(lifeSaverIcon);
+			BasePage.click(contactHelpDesk);
+			//Need to add steps to switch active window
+			BasePage.waitforAnElement(userManualPDF);
+		}
+		catch(Exception ex)    	{
+			ExtentTestManager.getTest().log(Status.FAIL, "User manual is not present");
+			throw ex;
+		}
+	}  
+
+	//Click and verify FAQ
+	public void VerifyFAQ() throws Exception
+	{
+		try {
+			BasePage.click(lifeSaverIcon);
+			BasePage.click(FAQ);
+			//Need to add steps to switch active window
+			assertEquals(EaglegenomicsSupportText.getText(), "Eagle Genomics Support");  
+			assertEquals(FAQtext.getText(), "FAQ");  
+		}
+		catch(Exception ex)    	{
+			BasePage.click(savedSearchCancelButton);
+			ExtentTestManager.getTest().log(Status.FAIL, "FAQ page is not displayed");
+			throw ex;
+		}
+	}  
+
+	//Logout of the system
 	public void logout() throws Exception
 	{
 		try {
@@ -303,6 +374,7 @@ public class HomePage extends BasePage{
 		}    
 	}  
 
+	//Screenshot method
 	public String captureScreenshot(String screenShotName) throws IOException
 	{
 		TakesScreenshot ts = (TakesScreenshot)driver;
@@ -314,7 +386,6 @@ public class HomePage extends BasePage{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}     
-
 		return dest;
 	}
 

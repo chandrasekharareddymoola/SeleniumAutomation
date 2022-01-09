@@ -1,22 +1,12 @@
 package com.eagle.TestCases;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
 import com.aventstack.extentreports.Status;
-import com.eagle.pages.HomePage;
 import com.eagle.pages.LoginPage;
 import com.eagle.Reports.ExtentTestManager;
-import com.eagle.pages.BasePage;
-import com.eagle.TestCases.BaseTest;
+
 
 public class LoginTest extends BaseTest{  
 	   	 

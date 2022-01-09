@@ -3,10 +3,6 @@ package com.eagle.pages;
 import static org.testng.Assert.assertEquals;
 
 import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -15,11 +11,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
@@ -36,6 +30,8 @@ import com.eagle.Reports.ExtentTestManager;
 public class SetPage extends BasePage{
 
 	//Page level objects
+
+	//Web Elements in page
 
 	@FindBy(xpath = "//i[@data-icon-name='Home']")
 	public WebElement homeIcon;
@@ -60,9 +56,6 @@ public class SetPage extends BasePage{
 
 	@FindBy(xpath = "//div//input[@type='text']")
 	public WebElement titleSet;
-
-	@FindBy(xpath = "//button//span[contains(text(),'Disease')]")
-	public WebElement entitySelected;	
 
 	@FindBy(xpath = "//div//input[@role='searchbox']")
 	public WebElement serachBox;
@@ -277,17 +270,11 @@ public class SetPage extends BasePage{
 
 
 	//Page level functions on the objects
+
+	//Methods
+
 	WebDriverWait wait = new WebDriverWait(driver, 5);
 	Actions action = new Actions(driver);
-
-	public WebElement openSet(String name) {
-		return this.driver.findElement(By.xpath("//div[@class='ms-List']//div[@role='rowheader' and @aria-colindex='1']//div[@title='"+ name +"']"));   		
-	}
-
-	public void Home() throws InterruptedException, AWTException{    	
-		BasePage.click(homeIcon);
-		action.moveToElement(TermsOfUse).perform();
-	}   
 
 	public SetPage() throws InterruptedException, AWTException{ 		 
 		PageFactory.initElements(driver, this); 
@@ -295,15 +282,26 @@ public class SetPage extends BasePage{
 		action.moveToElement(TermsOfUse).perform();
 	}
 
+	//Open a Set from the first page
+	public WebElement openSet(String name) {
+		return BasePage.driver.findElement(By.xpath("//div[@class='ms-List']//div[@role='rowheader' and @aria-colindex='1']//div[@title='"+ name +"']"));   		
+	}
+
+	//Click on Home icon
+	public void Home() throws InterruptedException, AWTException{    	
+		BasePage.click(homeIcon);
+		action.moveToElement(TermsOfUse).perform();
+	}   
+
+	//Click on Set icon
 	public void Set() throws InterruptedException, AWTException{ 	
 		BasePage.click(setIcon);
 		action.moveToElement(TermsOfUse).perform();
 	}
 
-
+	//Wait for set page to load
 	public void waitForSet() throws Throwable{	
 		try {  
-			boolean iden = true;
 			Date dt = new Date();
 			DateFormat dtFrmt = new SimpleDateFormat("_HHmmss");
 			String dtText = dtFrmt.format(dt);
@@ -312,10 +310,8 @@ public class SetPage extends BasePage{
 			outerloop:		
 				do
 				{
-					//					while(i<=20) {
 					try {	    	
 						columnHeaderFirstPage.isDisplayed();
-						iden = false;
 						break outerloop;
 					}
 					catch(Exception ex) {
@@ -345,10 +341,8 @@ public class SetPage extends BasePage{
 							}
 						}
 					}
-					//					}
 				}
-				while(i<=20);
-			//				while(iden);	         
+				while(i<=20);         
 		}
 		catch(Exception | AssertionError ex)
 		{
@@ -356,86 +350,41 @@ public class SetPage extends BasePage{
 		}
 	}
 
-	public void verifySetHomePage(String stringToVerify) throws InterruptedException, AWTException, AssertionError{    	
+	//Verify the entity of the set while creation 
+	public void verifyEntityType(String stringToVerify) throws InterruptedException, AWTException, AssertionError{    	
 		BasePage.verifyPage(stringToVerify, pageIdentifier);
 	}
 
+	//Click Add set
 	public void addSet() throws InterruptedException, AWTException{ 
 		BasePage.click(addSet);
 	}
 
+	//Set the title of Set
 	public void setTitle(String textTitle) throws InterruptedException, AWTException{    	
 		BasePage.enterText(titleSet, textTitle);
 	}   
 
+	//Select entity while creating a Set
 	public void selectEntity(String entityToSelect) throws InterruptedException, AWTException{    	
 		BasePage.click(pageIdentifier);
 		WebElement entity = driver.findElement(By.xpath("//button//span[contains(text(),'"+entityToSelect+"')]"));
 		BasePage.click(entity);
 	}
 
+	//Search a particular text while creating set
 	public void searchItems(String textToSearch) throws InterruptedException, AWTException{
 		BasePage.click(serachBox);
 		BasePage.enterText(serachBox, textToSearch);
 	} 
 
-	public void selectEntity() throws InterruptedException, AWTException{    	
-		BasePage.click(pageIdentifier);
-		BasePage.click(entitySelected);
-	}
-
-	public void searchItems() throws InterruptedException, AWTException{
-		BasePage.click(serachBox);
-		BasePage.enterText(serachBox, "x");
-	}
-
-
-	//	DD method
-	//	public void AddandAccept(){
-	//
-	//		//wait.until(ExpectedConditions.elementToBeClickable(addAll));
-	//		while(addAll.isDisplayed()){
-	//			try
-	//			{   Page.click(addAll);	 
-	//			wait.until(ExpectedConditions.elementToBeClickable(addAll));
-	//			}
-	//			catch(Exception ex){Page.click(accept);}	    		
-	//		}
-	//
-	//		Page.click(accept);
-	//	}
-
-
-	//My method
-	//	public void AddandAccept() throws InterruptedException{
-	//		//wait.until(ExpectedConditions.elementToBeClickable(addAll));
-	//		{
-	//			do
-	//			{   
-	//				Page.click(addAllEnabled);	
-	//				try {
-	//					wait.until(ExpectedConditions.elementToBeClickable(addAllEnabled));
-	//				}
-	//				catch(Exception c){
-	//					Page.click(accept);
-	//				}
-	//
-	//			}while(addAllEnabled.isDisplayed());
-	//			Page.click(accept);
-	//		}	
-	//	}
-
-
-	//}
-
-	//	editCardIcon
+	//Click Add all and then accept till all items are added while creating set
 	public void AddandAccept() throws InterruptedException, AWTException{
-		//wait.until(ExpectedConditions.elementToBeClickable(addAll));
 		while(addAll.isDisplayed()){
 			try
 			{   
-			BasePage.click(addAll);	 
-			wait.until(ExpectedConditions.elementToBeClickable(addAll));
+				BasePage.click(addAll);	 
+				wait.until(ExpectedConditions.elementToBeClickable(addAll));
 			}
 			catch(Exception ex){
 				break;
@@ -444,6 +393,7 @@ public class SetPage extends BasePage{
 		BasePage.click(accept);
 	}
 
+	//Check the created Set in the list
 	public void createCheck(String SetToCheck) throws Throwable{	    	
 		this.Set();
 		this.waitForSet();
@@ -457,11 +407,12 @@ public class SetPage extends BasePage{
 		}
 	}   	
 
+	//Create a Set
 	public void createSet(String SetName,String entityToSelect, String textToSearch) throws Throwable{	    	
 		try {
 			this.Set();
 			this.addSet();
-			this.verifySetHomePage("Uncategorized");
+			this.verifyEntityType("Uncategorized");
 			this.setTitle(SetName);
 			this.selectEntity(entityToSelect);
 			this.searchItems(textToSearch); 
@@ -477,12 +428,12 @@ public class SetPage extends BasePage{
 		}
 	}   	
 
-
+	//Create a Set for that to be added in Expanded view (Returns the list of values in Set)
 	public List <String> createSetforAdd(String SetName,String entityToSelect, String textToSearch) throws Throwable{	    	
 		try {
 			this.Set();
 			this.addSet();
-			this.verifySetHomePage("Uncategorized");
+			this.verifyEntityType("Uncategorized");
 			this.setTitle(SetName);
 			this.selectEntity(entityToSelect);
 			this.searchItems(textToSearch); 
@@ -500,44 +451,86 @@ public class SetPage extends BasePage{
 		}
 	} 
 
+	//Open a Set to be viewed
 	public void viewSet(String SetName) throws InterruptedException, AWTException{
 		this.Set(); 
 		this.openItemFromList(SetName);	    
 		ExtentTestManager.getTest().log(Status.PASS, "Set "+ SetName +" is opened");
 	}
 
+	//Expand a set 
 	public void expandSet() throws Throwable{
 		BasePage.click(expand);
 		this.waitForEditAndDelete();
 	}
 
+	//Click Edit button
 	public void editSet() throws InterruptedException, AWTException{
 		BasePage.click(edit);
 		Thread.sleep(2000);
 	}
 
+	//Click Accept button
 	public void accept() throws InterruptedException, AWTException{
 		BasePage.click(accept);
 	}
 
-	public void addFromSetExpand() throws InterruptedException, AWTException{
-		BasePage.click(accept);
+	//Add from file while creating a Set
+	public void addItemsFromFile(String filePath) throws InterruptedException {	    
+		Thread.sleep(2000);
+		fileUpload.sendKeys(filePath);	
+		ExtentTestManager.getTest().log(Status.PASS, "File uploaded successfully");
 	}
 
+	//Add from another Set while creating a Set
+	public void addItemsFromSet(String existingSetName) throws InterruptedException, AWTException{	    
+		BasePage.click(addFromSet);	    	
+		WebElement opn = this.openSet(existingSetName);
+		BasePage.click(opn); 
+		ExtentTestManager.getTest().log(Status.PASS, existingSetName + " Set is Added to this Set");
+	}
+
+	//Click Add Items button in expanded view
+	public void addItemsExpand() throws InterruptedException, AWTException  {	    
+		BasePage.click(addItemsExpand);	 	
+	}
+
+
+	//Click Add from Set button in Expanded view
+	public void addFromSetExpand(String SetNameToAddFrom) throws InterruptedException, AWTException {	    
+		BasePage.click(addFromSetExpand);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Select a Set']")));
+		this.searchExpandEnterName(SetNameToAddFrom);
+		this.clickSetInExpand(SetNameToAddFrom);
+		ExtentTestManager.getTest().log(Status.PASS, SetNameToAddFrom + " is selected and added ");
+	}	
+
+	//Search a Set while adding from a set
+	public void searchExpandEnterName(String SetNameToAddFrom) throws InterruptedException, AWTException{ 		 
+		BasePage.click(searchSetToAddExpand);
+		searchSetToAddExpand.sendKeys(SetNameToAddFrom);
+	}
+
+	//Click the searched set to be added
+	public void clickSetInExpand(String SelectaSet) throws InterruptedException, AWTException{ 		 
+		WebElement SelectaSetfromExpand = driver.findElement(By.xpath("//*[@title='"+SelectaSet+"']"));
+		BasePage.click(SelectaSetfromExpand);
+		Thread.sleep(3000);
+	}
+
+	//Change the Primary column
 	public void GridPrimaryColumnAlone(String PrimaryColumn) throws Throwable { 
 		try {	
 			this.GridSettings();
 			this.GridPrimaryColumn(PrimaryColumn);
 			BasePage.click(Apply);
 		}
-		catch (Exception ex) {
-			throw ex;
-		}
-		catch (AssertionError ex) {
+		catch (Exception | AssertionError ex) {
 			throw ex;
 		}
 	}
 
+	//Select Items from List
 	public void selectItems(List<String> myAlist) throws Throwable{  
 		try {
 			outloop:
@@ -574,11 +567,13 @@ public class SetPage extends BasePage{
 		}
 	}
 
+	//Click Remove and Save changes
 	public void removeItems() throws InterruptedException, AWTException{	
 		BasePage.click(remove);
 		BasePage.click(saveChanges);
 	}
 
+	//Remove 3 items from a Set in expanded view
 	public void RemoveItemsfromSet(String SetToCreate, String entityToSelect, String textToSearch,String removeItem1 ,String removeItem2 , String removeItem3) throws Throwable
 	{
 		try {
@@ -610,28 +605,12 @@ public class SetPage extends BasePage{
 		}
 	}
 
-	public void addItemsFromFile(String filePath) throws InterruptedException {	    
-		Thread.sleep(2000);
-		fileUpload.sendKeys(filePath);	
-		ExtentTestManager.getTest().log(Status.PASS, "File uploaded successfully");
-	}
-
-	public void addItemsExpand() throws InterruptedException, AWTException  {	    
-		BasePage.click(addItemsExpand);	 	
-	}
-
-	public void addItemsFromSet(String existingSetName) throws InterruptedException, AWTException{	    
-		BasePage.click(addFromSet);	    	
-		WebElement opn = this.openSet(existingSetName);
-		BasePage.click(opn); 
-		ExtentTestManager.getTest().log(Status.PASS, existingSetName + " Set is Added to this Set");
-	}
-
+	//Create a new Set from File
 	public void CreateSetFromFile(String setToCreate, String entityToSelect, String FileLocation) throws Throwable { 
 		try {
 			this.Set();
 			this.addSet();
-			this.verifySetHomePage("Uncategorized");
+			this.verifyEntityType("Uncategorized");
 			this.setTitle(setToCreate);
 			this.selectEntity(entityToSelect);
 			this.addItemsFromFile(FileLocation); 
@@ -649,11 +628,12 @@ public class SetPage extends BasePage{
 		}
 	}
 
+	//Create a new Set from another Set
 	public void CreateSetFromSet(String existingSetName, String entityToSelect, String textToSearch, String setToCreate) throws Throwable { 
 		try {
 			this.createSet(existingSetName, entityToSelect, textToSearch);
 			this.addSet();
-			this.verifySetHomePage("Uncategorized");
+			this.verifyEntityType("Uncategorized");
 			this.setTitle(setToCreate);
 			this.selectEntity(entityToSelect);
 			this.addItemsFromSet(existingSetName); 
@@ -671,10 +651,12 @@ public class SetPage extends BasePage{
 		}
 	}
 
+	// Click Close button
 	public void close() throws InterruptedException, AWTException{	
 		BasePage.click(close);
 	}
 
+	// Click Save Changes button
 	public void saveChanges() throws InterruptedException, AWTException{
 		BasePage.scrollToTop();
 		BasePage.click(saveChanges);
@@ -682,25 +664,7 @@ public class SetPage extends BasePage{
 		this.Home();
 	}
 
-	public void searchExpandEnterName(String SetNameToAddFrom) throws InterruptedException, AWTException{ 		 
-		BasePage.click(searchSetToAddExpand);
-		searchSetToAddExpand.sendKeys(SetNameToAddFrom);
-	}
-
-	public void clickSetInExpand(String SelectaSet) throws InterruptedException, AWTException{ 		 
-		WebElement SelectaSetfromExpand = driver.findElement(By.xpath("//*[@title='"+SelectaSet+"']"));
-		BasePage.click(SelectaSetfromExpand);
-		Thread.sleep(3000);
-	}
-
-	public void addFromSetExpand(String SetNameToAddFrom) throws InterruptedException, AWTException {	    
-		BasePage.click(addFromSetExpand);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Select a Set']")));
-		this.searchExpandEnterName(SetNameToAddFrom);
-		this.clickSetInExpand(SetNameToAddFrom);
-		ExtentTestManager.getTest().log(Status.PASS, SetNameToAddFrom + " is selected and added ");
-	}	
-
+	//Compare two texts
 	public void CompareTwovalues(String Value1, String Value2) throws InterruptedException, AWTException {	    
 		if(Integer.parseInt(Value1)<Integer.parseInt(Value2)){
 			System.out.println("Number of records have increased");
@@ -710,6 +674,7 @@ public class SetPage extends BasePage{
 		}
 	}	
 
+	//Compare if Value 2 is greater than Value 1
 	public void DecreaseCompareTwovalues(String Value1, String Value2) throws InterruptedException, AWTException {	    
 		if(Integer.parseInt(Value2)<Integer.parseInt(Value1)){
 			System.out.println("Number of records have decrease");
@@ -725,7 +690,7 @@ public class SetPage extends BasePage{
 			List <String> setItems = this.createSetforAdd(setToAdd, entityToSelect, textToSearchSet1);
 			this.Set();
 			this.addSet();
-			this.verifySetHomePage("Uncategorized");
+			this.verifyEntityType("Uncategorized");
 			this.setTitle(setToCreate); //Create a set
 			this.selectEntity(entityToSelect);
 			this.searchItems(textToSearchSet2);
@@ -749,6 +714,7 @@ public class SetPage extends BasePage{
 		}
 	}
 
+	//Search value in catalog (Add items in expanded view from Catalog)
 	public void searchCatalog(String SearchInCatalog) throws InterruptedException, AWTException{	    
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from the Catalog']")));
 		BasePage.click(searchCatalog);
@@ -756,6 +722,7 @@ public class SetPage extends BasePage{
 		Thread.sleep(2000);
 	}
 
+	//Add from Catalog expanded view (Returns the values present)
 	public List<String> addFromSetCatalog(String TextToSearch) throws InterruptedException, AWTException {	    
 		BasePage.click(addFromExpandCatalog);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from the Catalog']")));
@@ -767,6 +734,7 @@ public class SetPage extends BasePage{
 		return CatalogItems;
 	}
 
+	//Click the add button
 	public void add() throws InterruptedException, AWTException{	    
 		BasePage.click(Add);
 	}
@@ -776,7 +744,7 @@ public class SetPage extends BasePage{
 		try {
 			this.Set();
 			this.addSet();
-			this.verifySetHomePage("Uncategorized");
+			this.verifyEntityType("Uncategorized");
 			this.setTitle(setToCreate); //Create a set
 			this.selectEntity(entityToSelect);
 			this.searchItems(textToSearch);
@@ -807,49 +775,48 @@ public class SetPage extends BasePage{
 		}
 	}
 
-
+	//Click the entity type during file upload in expanded view 
 	public void fileSelectDropdown() throws InterruptedException, AWTException{	    
 		BasePage.click(fileSelectDropdown);
 	}
 
-
+	//Select an entity type during file upload in expanded view 
 	public void FileuploadCategory(String CategoryName) throws InterruptedException, AWTException {	     
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Drag files here']")));
 		this.fileSelectDropdown();
 		BasePage.click(driver.findElement(By.xpath("//*[@title='"+CategoryName+"']")));
-		//		BasePage.click(clickUpload);
+		//			BasePage.click(clickUpload);
 	}	
 
+	//File upload from explorer using key actions (Do not use - use only as last resort as when system goes to sleep this doesn't work)
+	//	public void FileUploadFormExplorer(String FileLocation) throws AWTException, InterruptedException {	    
+	//		StringSelection ss = new StringSelection(FileLocation);
+	//		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+	//
+	//		//imitate mouse events like ENTER, CTRL+C, CTRL+V
+	//		Robot robot = new Robot();
+	//		robot.delay(250);
+	//		robot.keyPress(KeyEvent.VK_ENTER);
+	//		robot.keyRelease(KeyEvent.VK_ENTER);
+	//		robot.keyPress(KeyEvent.VK_CONTROL);
+	//		robot.keyPress(KeyEvent.VK_V);
+	//		robot.keyRelease(KeyEvent.VK_V);
+	//		robot.keyRelease(KeyEvent.VK_CONTROL);
+	//		robot.keyPress(KeyEvent.VK_ENTER);
+	//		robot.delay(90);
+	//		robot.keyRelease(KeyEvent.VK_ENTER);
+	//		Thread.sleep(5000);
+	//	}	
 
-	public void FileUploadFormExplorer(String FileLocation) throws AWTException, InterruptedException {	    
-		StringSelection ss = new StringSelection(FileLocation);
-		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-
-		//imitate mouse events like ENTER, CTRL+C, CTRL+V
-		Robot robot = new Robot();
-		robot.delay(250);
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.keyRelease(KeyEvent.VK_ENTER);
-		robot.keyPress(KeyEvent.VK_CONTROL);
-		robot.keyPress(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_CONTROL);
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.delay(90);
-		robot.keyRelease(KeyEvent.VK_ENTER);
-		Thread.sleep(5000);
-	}	
-
-
+	//Add from file in expanded view (Returns the list of items)
 	public List<String> addFromFile(String CategoryName, String Filelocation, String FileName) throws AWTException, InterruptedException, AssertionError {	    
-
 		try {
 			BasePage.click(addFromFile);	
 			Thread.sleep(2000);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add Items from a File']")));
 			this.FileuploadCategory(CategoryName);
 			addItemsFromFile(Filelocation);   // new item added
-			//			this.FileUploadFormExplorer(Filelocation);
+			//			this.FileUploadFormExplorer(Filelocation);			//function using the keyboard key press simulation
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Searching in ']")));
 			BasePage.verifyPage(FileName, uploadedFileName);
 			BasePage.waitforAnElement(FileDataList);
@@ -867,6 +834,7 @@ public class SetPage extends BasePage{
 		}
 	}	
 
+	//Click Add to Grid button
 	public void addToGrid() throws InterruptedException, AWTException{	    
 		BasePage.click(AddToGrid);
 	}
@@ -879,7 +847,7 @@ public class SetPage extends BasePage{
 		try {
 			this.Set();
 			this.addSet();
-			this.verifySetHomePage("Uncategorized");
+			this.verifyEntityType("Uncategorized");
 			this.setTitle(setToCreate); //Create a set
 			this.selectEntity(entityToSelect);
 			this.searchItems(textToSearch);
@@ -903,12 +871,6 @@ public class SetPage extends BasePage{
 		catch (Exception ExpandAddFromFileFail) {
 			this.captureScreenshot("SetAddToGrid"+dtText);
 			ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/SetAddToGrid"+dtText+".png");
-
-//			for (int i=0;i<2;i++) {
-//				WebElement html = driver.findElement(By.tagName("html"));
-//				html.sendKeys(Keys.chord(Keys.CONTROL, Keys.SUBTRACT));
-//			}
-
 			if(dialogBoxClose.isDisplayed()) { 
 				ExtentTestManager.getTest().log(Status.FAIL, "Add to Grid button is not displayed");
 				BasePage.click(dialogBoxClose);
@@ -925,20 +887,22 @@ public class SetPage extends BasePage{
 		}
 	}
 
-
+	//Click Delete button in expand
 	public void DeleteCardExpand()throws InterruptedException, AWTException{ 
 		BasePage.click(deleteCardExpand);
 	}
 
+	//Click Delete button
 	public void Delete() throws InterruptedException, AWTException { 
 		BasePage.click(Delete);
 	}
 
+	//Create a set and Delete it in Expanded view
 	public void DeleteCardInExpand(String setToCreate, String entityToSelect, String textToSearch) throws Throwable { 
 		try {
 			this.Set();
 			this.addSet();
-			this.verifySetHomePage("Uncategorized");
+			this.verifyEntityType("Uncategorized");
 			this.setTitle(setToCreate); //Create a set
 			this.selectEntity(entityToSelect);
 			this.searchItems(textToSearch);
@@ -960,101 +924,7 @@ public class SetPage extends BasePage{
 		}
 	}
 
-	public int NoOfPagesInSetPage() throws InterruptedException, AWTException { 
-		String Pagecount = NoOfPagesInSet.getText();
-		Integer n = Integer.valueOf(Pagecount);
-		return n;
-	}
-
-
-	//	public void DeleteSetLoop(String SetToDelete) throws InterruptedException, AWTException { 
-	//		Integer NoofPages = this.NoOfPagesInSetPage();
-	//		WebElement SD = driver.findElement(By.xpath("//*[text()='"+SetToDelete+"']"));
-	//		WebElement threeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+SetToDelete+"']//parent::div//parent::div//child::button")));
-	//
-	//		List<WebElement> SDs = driver.findElements(By.xpath("//*[text()='"+SetToDelete+"']"));
-	//		if (SDs.size() != 0) {
-	//			Page.scrollIntoView(SD);
-	//			Page.click(threeButton);
-	//			Page.click(Delete);
-	//			Thread.sleep(2000);
-	//			Page.click(Delete);
-	//		}
-	//		else if (SDs.size()== 0) {
-	//
-	//			for (int i=0; i<NoofPages;i++) {
-	//
-	//				if (SDs.size() != 0) {
-	//					Page.scrollIntoView(SD);
-	//					Page.click(threeButton);
-	//					Page.click(Delete);
-	//					Thread.sleep(2000);
-	//					Page.click(Delete);
-	//					break;
-	//				}
-	//				else {
-	//					Page.click(NextPage);
-	//					Thread.sleep(2000);
-	//				}
-	//			}
-	//		}
-	//		else if (!NextPage.isEnabled()) {		
-	//			System.out.print("The set to be deleted is not found");
-	//		}
-	//
-	//		else {				
-	//			System.out.print("The set to be deleted is not found");
-	//		}
-	//	}
-	//
-	//
-	//	public void DeleteASet(String setToDelete) throws InterruptedException, AWTException { 
-	//		Page.verifyPage("MY DATA", MyDataTitle); //My Data page
-	//		this.DeleteSetLoop(setToDelete);
-	//	}
-
-	//	public void DeleteSetLoop(String SetToDelete) throws InterruptedException, AWTException { 
-	//		try
-	//		{
-	//			do
-	//			{
-	//				Integer NoofPages = this.NoOfPagesInSetPage();
-	//				WebElement SD = driver.findElement(By.xpath("//*[text()='"+SetToDelete+"']"));
-	//				WebElement threeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+SetToDelete+"']//parent::div//parent::div//child::button")));
-	//
-	//				List<WebElement> SDs = driver.findElements(By.xpath("//*[text()='"+SetToDelete+"']"));
-	//				if (SDs.size() != 0) {
-	//					BasePage.scrollIntoView(SD);
-	//					BasePage.click(threeButton);
-	//					BasePage.click(Delete);
-	//					Thread.sleep(2000);
-	//					BasePage.click(Delete);
-	//				}
-	//				else {
-	//					BasePage.click(NextPage);
-	//					Thread.sleep(2000);
-	//
-	//				}
-	//				BasePage.click(forward); 
-	//			}
-	//			while(forward.isEnabled());  
-	//		}	    	
-	//		catch(Exception ex) {}
-	//	}
-
-	/*
-	 * public void openItemFromList(String SetName) { try { do{ for (WebElement
-	 * element : SetGridItems) { if(element.isDisplayed() == false)
-	 * {scrollIntoView(element);} String textFromGrid = element.getText();
-	 * if(SetName.equals(textFromGrid)) { BasePage.click(element); }
-	 * 
-	 * if (SDs.size() != 0) { BasePage.scrollIntoView(SD);
-	 * BasePage.click(threeButton); BasePage.click(Delete); Thread.sleep(2000);
-	 * BasePage.click(Delete); break; } else { BasePage.click(NextPage);
-	 * Thread.sleep(2000); } BasePage.click(forward); } while(forward.isEnabled());
-	 * } catch(Exception ex) {} }
-	 */
-
+	//Open an item from the list of items
 	public void openItemFromList(String Item)
 	{
 		try {	    		
@@ -1070,9 +940,12 @@ public class SetPage extends BasePage{
 			}
 			while(forward.isEnabled());  
 		}	    	
-		catch(Exception ex) {}
+		catch(Exception ex) {
+
+		}
 	}
 
+	//Select action button in for the item in the list
 	public void selectMenuOptionInList(String SetName)
 	{
 		try {	
@@ -1096,23 +969,15 @@ public class SetPage extends BasePage{
 		catch(Exception ex) {}
 	}
 
-
-	//	public void DeleteASet(String setToDelete) throws InterruptedException, AWTException { 
-	//		BasePage.verifyPage("MY DATA", MyDataTitle); //My Data page
-	//		this.DeleteSetLoop(setToDelete);
-	//	}
-
+	//Wait for the edit button to be displayed after an action as there will be a load time
 	public void waitForEditAndDelete() throws Throwable{
 		try {  
-			boolean iden = true;
 			int i=0;
 			outerloop:
 				do
 				{
-					//					while(i<=20) {
 					try {	    	
-						edit.isDisplayed();
-						iden = false;	
+						edit.isDisplayed();	
 						break outerloop;
 					}
 					catch(Exception ex) {
@@ -1131,11 +996,9 @@ public class SetPage extends BasePage{
 								break outerloop;
 							}	
 						}	 
-						//						}
 					}
 				}
-				while(i<=20);
-			//				while(iden);	         
+				while(i<=20);         
 		}
 		catch(Exception | AssertionError ex)
 		{
@@ -1143,18 +1006,15 @@ public class SetPage extends BasePage{
 		}
 	}
 
-
+	//Wait for the Save changes button to be displayed after an action as there will be a load time
 	public void waitForSaveChanges() throws Throwable{
 		try {  
-			boolean iden = true;
 			int i=0;
 			outerloop:
 				do
 				{
-					//					while (i<=20) {
 					try {	    	
 						saveChanges.isDisplayed();
-						iden = false;	
 						break outerloop;
 					}
 					catch(Exception ex) {
@@ -1171,10 +1031,8 @@ public class SetPage extends BasePage{
 							}	
 						}	 
 					}
-					//					}
 				}
-				while(i<=20);
-			//				while(iden);	         
+				while(i<=20);         
 		}
 		catch(Exception | AssertionError ex)
 		{
@@ -1182,6 +1040,7 @@ public class SetPage extends BasePage{
 		}
 	}
 
+	//Search a text in expanded view
 	public void searchInExpand(String SearchInSet) throws InterruptedException, AWTException { 
 		BasePage.click(serachBox);
 		serachBox.sendKeys(SearchInSet);
@@ -1189,6 +1048,7 @@ public class SetPage extends BasePage{
 		BasePage.CompareAttributeText("value",SearchInSet,serachBoxExpand);
 	}
 
+	//Verify the values after search in expanded view
 	public void verifyAfterSearch(String SearchInSet) throws InterruptedException, AWTException { 
 		try {
 			int j =1 ;
@@ -1227,8 +1087,7 @@ public class SetPage extends BasePage{
 		}
 	}
 
-
-
+	//Returns items while creating a set
 	public List<String> getItemsWhileCreatingSet() throws InterruptedException, AWTException { 
 		try {
 			int NoOfItems = ItemsInSet.size();
@@ -1247,7 +1106,7 @@ public class SetPage extends BasePage{
 		}
 	}
 
-
+	//Returns items while searching from catalog
 	public List<String> getItemsWhileAddingFromCatalog() throws InterruptedException, AWTException { 
 		try {
 			int NoOfItems = ItemsInCatalog.size();
@@ -1266,6 +1125,7 @@ public class SetPage extends BasePage{
 		}
 	}
 
+	//Returns items while creating from file
 	public List<String> getItemsWhileAddingFromFile() throws InterruptedException, AWTException { 
 		try {
 			int NoOfItems = ItemsInFile.size();
@@ -1286,6 +1146,7 @@ public class SetPage extends BasePage{
 		}
 	}
 
+	//Verify the added items in expanded view after addition
 	public void verifyAfterAdd(List<String> Items) throws InterruptedException, AWTException { 
 		try {
 			int k =1 ;
@@ -1345,10 +1206,12 @@ public class SetPage extends BasePage{
 		}
 	}
 
+	//Create a set and search for a text in expand
 	public void searchInSetExpand(String setToCreate, String entityToSelect, String textToSearch, String SearchInSet) throws Throwable { 
 		try {
+			this.Set();
 			this.addSet();
-			this.verifySetHomePage("Uncategorized");
+			this.verifyEntityType("Uncategorized");
 			this.setTitle(setToCreate); //Create a set
 			this.selectEntity(entityToSelect);
 			this.searchItems(textToSearch);
@@ -1364,10 +1227,12 @@ public class SetPage extends BasePage{
 		}
 	}
 
+	//Click Grid settings
 	public void GridSettings() throws InterruptedException, AWTException { 
 		BasePage.click(GridSettingsIcon);
 	}
 
+	//Set no of rows per grid
 	public void GridRows(String RowCount) throws InterruptedException, AWTException{ 
 		BasePage.click(RowsPerPage);
 		WebElement NoofRows = driver.findElement(By.xpath("//*[@title='"+RowCount+"']"));
@@ -1375,6 +1240,7 @@ public class SetPage extends BasePage{
 		ExtentTestManager.getTest().log(Status.PASS, "No. of rows have been set to " + RowCount);
 	}
 
+	//Set Primary column
 	public void GridPrimaryColumn(String PrimaryColumn) throws InterruptedException, AWTException { 
 		BasePage.click(PrimaryColumnDropdown);
 		WebElement PrimarySelect = driver.findElement(By.xpath("//*[@role='option' and @title='"+PrimaryColumn+"']"));
@@ -1382,6 +1248,7 @@ public class SetPage extends BasePage{
 		ExtentTestManager.getTest().log(Status.PASS, "Primary column is set to " + PrimaryColumn);
 	}
 
+	//Set Secondary column
 	public void GridSecondaryColumn(String SecondaryColumn) throws InterruptedException, AWTException { 
 		BasePage.click(SecondaryColumnDropdown);
 		WebElement SecondarySelect = driver.findElement(By.xpath("//*[@role='option' and @title='"+SecondaryColumn+"']"));
@@ -1389,6 +1256,7 @@ public class SetPage extends BasePage{
 		ExtentTestManager.getTest().log(Status.PASS, "Secondary column is set to " + SecondaryColumn);
 	}
 
+	//Verify the Grid changes done
 	public void VerifyGrid(String NoofRows, String PrimaryColumn, String SecondaryColumn) throws InterruptedException, AWTException { 
 		Thread.sleep(5000);
 		List <WebElement> Columns = driver.findElements(By.xpath("//*[@tabindex='0']"));
@@ -1402,11 +1270,12 @@ public class SetPage extends BasePage{
 		Assert.assertEquals(RN, NoofRows);
 	}
 
+	//Create a set and change the grid settings
 	public void GridChanges(String setToCreate, String entityToSelect, String textToSearch, String NoofRows, String PrimaryColumn, String SecondaryColumn) throws Throwable { 
 		try {
 			this.Set();
 			this.addSet();
-			this.verifySetHomePage("Uncategorized");
+			this.verifyEntityType("Uncategorized");
 			this.setTitle(setToCreate); //Create a set
 			this.selectEntity(entityToSelect);
 			this.searchItems(textToSearch);
@@ -1428,68 +1297,7 @@ public class SetPage extends BasePage{
 		}
 	}
 
-
-	//	public void SharetLoop(String SetToShare, String SharedUser) throws InterruptedException, AWTException { 
-	//		Integer NoofPages = this.NoOfPagesInSetPage();
-	//		WebElement SS = driver.findElement(By.xpath("//*[text()='"+SetToShare+"']"));
-	//		WebElement threeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+SetToShare+"']//parent::div//parent::div//child::button")));
-	//
-	//		List<WebElement> SDs = driver.findElements(By.xpath("//*[text()='"+SetToShare+"']"));
-	//		if (SDs.size() != 0) {
-	//			Page.scrollIntoView(SS);
-	//			Page.click(threeButton);
-	//			Page.click(ShareAction);
-	//			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@role='heading' and text()='Share']")));
-	//			Page.click(ShareTextBox);
-	//			ShareTextBox.sendKeys(SharedUser);
-	//			WebElement UserToShare = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+SharedUser+"')]")));
-	//			Page.click(UserToShare);
-	//			Page.click(ShareButton);
-	//		}
-	//		else if (SDs.size()== 0) {
-	//
-	//			for (int i=0; i<NoofPages;i++) {
-	//
-	//				if (SDs.size() != 0) {
-	//					Page.scrollIntoView(SS);
-	//					Page.click(threeButton);
-	//					Page.click(ShareAction);
-	//					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@role='heading' and text()='Share']")));
-	//					Page.click(ShareTextBox);
-	//					ShareTextBox.sendKeys(SharedUser);
-	//					WebElement UserToShare = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+SharedUser+"')]")));
-	//					Page.click(UserToShare);
-	//					Page.click(ShareButton);
-	//					break;
-	//				}
-	//				else {
-	//					Page.click(NextPage);
-	//					Thread.sleep(2000);
-	//				}
-	//			}
-	//		}
-	//		else if (!NextPage.isEnabled()) {		
-	//			System.out.print("The set to be deleted is not found");
-	//		}
-	//
-	//		else {				
-	//			System.out.print("The set to be deleted is not found");
-	//		}
-	//	}
-	//
-	//	public void shareASet(String SetToShare, String SharedUser) throws InterruptedException, AWTException { 
-	//		Page.verifyPage("MY DATA", MyDataTitle); //My Data page
-	//		this.shareASet(SetToShare, SharedUser);
-	//		Boolean a = ShareSuccess.isDisplayed();
-	//		if (a=true) {
-	//			System.out.println("Set shared successfully");
-	//		}
-	//		else{
-	//			System.out.println("Set shared failed");
-	//		}
-	//	}
-
-
+	//Delete a Set
 	public void DeleteSet(String SettoDelete) throws InterruptedException, AWTException{
 		try {
 			this.Set();	
@@ -1506,7 +1314,7 @@ public class SetPage extends BasePage{
 		}
 	}
 
-
+	//Create and Delete a Set
 	public void createAndDeleteSet(String SetName, String entityToSelect, String textToSearch) throws Throwable{
 		try {
 			this.createSet(SetName, entityToSelect, textToSearch);	
@@ -1519,6 +1327,7 @@ public class SetPage extends BasePage{
 		}
 	}
 
+	//Share a Set
 	public void ShareSet(String SetToShare, String personToBeShared) throws Throwable{
 		try {
 			this.Set();
@@ -1540,6 +1349,7 @@ public class SetPage extends BasePage{
 		}
 	}
 
+	//Create and Share a Set
 	public void createAndShareSet(String SetName, String entityToSelect, String textToSearch, String personToBeShared) throws Throwable{
 		this.createSet(SetName, entityToSelect, textToSearch);	
 		ExtentTestManager.getTest().log(Status.PASS, SetName + " is Created");
@@ -1547,54 +1357,7 @@ public class SetPage extends BasePage{
 		ExtentTestManager.getTest().log(Status.PASS, SetName + " is Shared");
 	}
 
-	//	public void SharetLoop(String SetToShare, String SharedUser) throws InterruptedException, AWTException { 
-	//		Integer NoofPages = this.NoOfPagesInSetPage();
-	//		WebElement SS = driver.findElement(By.xpath("//*[text()='"+SetToShare+"']"));
-	//		WebElement threeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+SetToShare+"']//parent::div//parent::div//child::button")));
-	//
-	//		List<WebElement> SDs = driver.findElements(By.xpath("//*[text()='"+SetToShare+"']"));
-	//		if (SDs.size() != 0) {
-	//			BasePage.scrollIntoView(SS);
-	//			BasePage.click(threeButton);
-	//			BasePage.click(ShareAction);
-	//			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@role='heading' and text()='Share']")));
-	//			BasePage.click(ShareTextBox);
-	//			ShareTextBox.sendKeys(SharedUser);
-	//			WebElement UserToShare = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+SharedUser+"')]")));
-	//			BasePage.click(UserToShare);
-	//			BasePage.click(ShareButton);
-	//		}
-	//		else if (SDs.size()== 0) {
-	//
-	//			for (int i=0; i<NoofPages;i++) {
-	//
-	//				if (SDs.size() != 0) {
-	//					BasePage.scrollIntoView(SS);
-	//					BasePage.click(threeButton);
-	//					BasePage.click(ShareAction);
-	//					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@role='heading' and text()='Share']")));
-	//					BasePage.click(ShareTextBox);
-	//					ShareTextBox.sendKeys(SharedUser);
-	//					WebElement UserToShare = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+SharedUser+"')]")));
-	//					BasePage.click(UserToShare);
-	//					BasePage.click(ShareButton);
-	//					break;
-	//				}
-	//				else {
-	//					BasePage.click(NextPage);
-	//					Thread.sleep(2000);
-	//				}
-	//			}
-	//		}
-	//		else if (!NextPage.isEnabled()) {		
-	//			System.out.print("The set to be deleted is not found");
-	//		}
-	//
-	//		else {				
-	//			System.out.print("The set to be deleted is not found");
-	//		}
-	//	}
-
+	//Verify after sorting ascending in expanded view
 	public void verifySortAscending(String ColumnToBeSorted) throws Throwable{
 		Integer NumOfPrecedingColumns = driver.findElements(By.xpath("//*[text()='"+ColumnToBeSorted+"']//parent::div//parent::div//preceding-sibling::div")).size();
 		Integer CurrentColumn = NumOfPrecedingColumns + 1;
@@ -1611,6 +1374,7 @@ public class SetPage extends BasePage{
 		ExtentTestManager.getTest().log(Status.PASS,"Ascending sorting of "+ ColumnToBeSorted + " is verified");
 	}
 
+	//Verify after sorting descending in expanded view
 	public void verifySortDescending(String ColumnToBeSorted) throws Throwable{
 		Integer NumOfPrecedingColumns = driver.findElements(By.xpath("//*[text()='"+ColumnToBeSorted+"']//parent::div//parent::div//preceding-sibling::div")).size();
 		Integer CurrentColumn = NumOfPrecedingColumns + 1;
@@ -1627,6 +1391,7 @@ public class SetPage extends BasePage{
 		ExtentTestManager.getTest().log(Status.PASS,"Descending sorting of "+ ColumnToBeSorted + " is verified");
 	}
 
+	//Create a set and Sort a column of choice in both ascending and descending order
 	public void SortColumnInSet(String SetName, String entityToSelect, String textToSearch, String ColumnToBeSorted) throws Throwable{
 		try {
 			this.createSet(SetName, entityToSelect, textToSearch);	
@@ -1655,28 +1420,19 @@ public class SetPage extends BasePage{
 	}
 
 
-	//	//		WebElement SortColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+configObject.getProperty("SortColumn")+"']")));
-	//	//		Thread.sleep(5000);
-	//	//
-	//	//		WebElement NextColumnname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+configObject.getProperty("SortColumn")+"']//parent::div//parent::div/following-sibling::div")));
-	//	//		scrollIntoView(NextColumnname);
-	//	//		Thread.sleep(5000);
-	//	//
-	//	//		customclick(SortColumnname);
-	//	//		Thread.sleep(5000);
+	//	public void shareASet(String SetToShare, String SharedUser) throws InterruptedException, AWTException { 
+	//		BasePage.verifyPage("MY DATA", MyDataTitle); //My Data page
+	//		this.shareASet(SetToShare, SharedUser);
+	//		Boolean a = ShareSuccess.isDisplayed();
+	//		if (a==true) {
+	//			System.out.println("Set shared successfully");
+	//		}
+	//		else{
+	//			System.out.println("Set shared failed");
+	//		}
+	//	}
 
-	public void shareASet(String SetToShare, String SharedUser) throws InterruptedException, AWTException { 
-		BasePage.verifyPage("MY DATA", MyDataTitle); //My Data page
-		this.shareASet(SetToShare, SharedUser);
-		Boolean a = ShareSuccess.isDisplayed();
-		if (a==true) {
-			System.out.println("Set shared successfully");
-		}
-		else{
-			System.out.println("Set shared failed");
-		}
-	}
-
+	//Apply a filter in expanded view
 	public void ApplyFilter(String Attribute, String FilterType, String textToFilter) throws Throwable { 
 		try {
 			BasePage.click(FilterIconInExpand);
@@ -1705,6 +1461,7 @@ public class SetPage extends BasePage{
 		}
 	}
 
+	//Apply 2 filters in expanded view
 	public void ApplyMultipleFilter(String Attribute1, String FilterType1, String textToFilter1, String Attribute2, String FilterType2, String textToFilter2) throws Throwable { 
 		BasePage.click(FilterIconInExpand);
 		BasePage.waitforAnElement(EditFilterText);
@@ -1748,6 +1505,7 @@ public class SetPage extends BasePage{
 		BasePage.click(DoneButton);
 	}
 
+	//Move to first page of the list
 	public void moveToFirstPage(String textToFilter) throws InterruptedException, AWTException { 
 		try {
 			outloop:
@@ -1769,6 +1527,7 @@ public class SetPage extends BasePage{
 		}
 	}
 
+	//Verify the applied filters (1 Filter)
 	public void verifyAfterFilter(String Attribute,String FilterType,String textToFilter) throws InterruptedException, AWTException { 
 		try {
 			Integer NumOfPrecedingColumns = driver.findElements(By.xpath("//*[text()='"+Attribute+"']//parent::div//parent::div//preceding-sibling::div")).size();
@@ -1819,6 +1578,7 @@ public class SetPage extends BasePage{
 		}
 	}
 
+	//Verify the applied filters (2 Filters)
 	public void verifyAfterFilterdual(String Attribute1, String Attribute2, String FilterType1, String FilterType2, String textToFilter1,String textToFilter2) throws InterruptedException, AWTException { 
 		try {
 			int j =1 ;
@@ -1909,6 +1669,7 @@ public class SetPage extends BasePage{
 		}
 	}
 
+	//Create a set and apply one filter
 	public void FilterSet(String SetName, String entityToSelect, String textToSearch, String Attribute, String FilterType, String textToFilter) throws Throwable { 
 		this.createSet(SetName, entityToSelect, textToSearch);	
 		this.Set();
@@ -1921,6 +1682,7 @@ public class SetPage extends BasePage{
 		ExtentTestManager.getTest().log(Status.PASS, "Applied filter is verified");
 	}
 
+	//Create a Set and apply 2 filters
 	public void FilterSetMulti(String SetName, String entityToSelect, String textToSearch, String Attribute1, String FilterType1, String textToFilter1, String Attribute2, String FilterType2, String textToFilter2) throws Throwable { 
 		this.createSet(SetName, entityToSelect, textToSearch);	
 		this.Set();
@@ -1933,6 +1695,7 @@ public class SetPage extends BasePage{
 		ExtentTestManager.getTest().log(Status.PASS, "Applied filters are verified");
 	}
 
+	//Capture screenshot
 	public void captureScreenshot(String screenShotName) throws IOException
 	{
 		TakesScreenshot scrShot =((TakesScreenshot)driver);
@@ -1944,11 +1707,160 @@ public class SetPage extends BasePage{
 
 }
 
+//public int NoOfPagesInSetPage() throws InterruptedException, AWTException { 
+//String Pagecount = NoOfPagesInSet.getText();
+//Integer n = Integer.valueOf(Pagecount);
+//return n;
+//}
 
-//List <WebElement> Columns = webdriver.findElements(By.xpath("//*[@tabindex='0']"));
-//int NoOfColumns = Columns.size();
-//System.out.println(NoOfColumns);        //getting the number of columns
 
+//	public void DeleteSetLoop(String SetToDelete) throws InterruptedException, AWTException { 
+//		Integer NoofPages = this.NoOfPagesInSetPage();
+//		WebElement SD = driver.findElement(By.xpath("//*[text()='"+SetToDelete+"']"));
+//		WebElement threeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+SetToDelete+"']//parent::div//parent::div//child::button")));
+//
+//		List<WebElement> SDs = driver.findElements(By.xpath("//*[text()='"+SetToDelete+"']"));
+//		if (SDs.size() != 0) {
+//			Page.scrollIntoView(SD);
+//			Page.click(threeButton);
+//			Page.click(Delete);
+//			Thread.sleep(2000);
+//			Page.click(Delete);
+//		}
+//		else if (SDs.size()== 0) {
+//
+//			for (int i=0; i<NoofPages;i++) {
+//
+//				if (SDs.size() != 0) {
+//					Page.scrollIntoView(SD);
+//					Page.click(threeButton);
+//					Page.click(Delete);
+//					Thread.sleep(2000);
+//					Page.click(Delete);
+//					break;
+//				}
+//				else {
+//					Page.click(NextPage);
+//					Thread.sleep(2000);
+//				}
+//			}
+//		}
+//		else if (!NextPage.isEnabled()) {		
+//			System.out.print("The set to be deleted is not found");
+//		}
+//
+//		else {				
+//			System.out.print("The set to be deleted is not found");
+//		}
+//	}
+//
+//
+//	public void DeleteASet(String setToDelete) throws InterruptedException, AWTException { 
+//		Page.verifyPage("MY DATA", MyDataTitle); //My Data page
+//		this.DeleteSetLoop(setToDelete);
+//	}
+
+//	public void DeleteSetLoop(String SetToDelete) throws InterruptedException, AWTException { 
+//		try
+//		{
+//			do
+//			{
+//				Integer NoofPages = this.NoOfPagesInSetPage();
+//				WebElement SD = driver.findElement(By.xpath("//*[text()='"+SetToDelete+"']"));
+//				WebElement threeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+SetToDelete+"']//parent::div//parent::div//child::button")));
+//
+//				List<WebElement> SDs = driver.findElements(By.xpath("//*[text()='"+SetToDelete+"']"));
+//				if (SDs.size() != 0) {
+//					BasePage.scrollIntoView(SD);
+//					BasePage.click(threeButton);
+//					BasePage.click(Delete);
+//					Thread.sleep(2000);
+//					BasePage.click(Delete);
+//				}
+//				else {
+//					BasePage.click(NextPage);
+//					Thread.sleep(2000);
+//
+//				}
+//				BasePage.click(forward); 
+//			}
+//			while(forward.isEnabled());  
+//		}	    	
+//		catch(Exception ex) {}
+//	}
+
+/*
+ * public void openItemFromList(String SetName) { try { do{ for (WebElement
+ * element : SetGridItems) { if(element.isDisplayed() == false)
+ * {scrollIntoView(element);} String textFromGrid = element.getText();
+ * if(SetName.equals(textFromGrid)) { BasePage.click(element); }
+ * 
+ * if (SDs.size() != 0) { BasePage.scrollIntoView(SD);
+ * BasePage.click(threeButton); BasePage.click(Delete); Thread.sleep(2000);
+ * BasePage.click(Delete); break; } else { BasePage.click(NextPage);
+ * Thread.sleep(2000); } BasePage.click(forward); } while(forward.isEnabled());
+ * } catch(Exception ex) {} }
+ */
+
+//	public void SharetLoop(String SetToShare, String SharedUser) throws InterruptedException, AWTException { 
+//		Integer NoofPages = this.NoOfPagesInSetPage();
+//		WebElement SS = driver.findElement(By.xpath("//*[text()='"+SetToShare+"']"));
+//		WebElement threeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+SetToShare+"']//parent::div//parent::div//child::button")));
+//
+//		List<WebElement> SDs = driver.findElements(By.xpath("//*[text()='"+SetToShare+"']"));
+//		if (SDs.size() != 0) {
+//			Page.scrollIntoView(SS);
+//			Page.click(threeButton);
+//			Page.click(ShareAction);
+//			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@role='heading' and text()='Share']")));
+//			Page.click(ShareTextBox);
+//			ShareTextBox.sendKeys(SharedUser);
+//			WebElement UserToShare = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+SharedUser+"')]")));
+//			Page.click(UserToShare);
+//			Page.click(ShareButton);
+//		}
+//		else if (SDs.size()== 0) {
+//
+//			for (int i=0; i<NoofPages;i++) {
+//
+//				if (SDs.size() != 0) {
+//					Page.scrollIntoView(SS);
+//					Page.click(threeButton);
+//					Page.click(ShareAction);
+//					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@role='heading' and text()='Share']")));
+//					Page.click(ShareTextBox);
+//					ShareTextBox.sendKeys(SharedUser);
+//					WebElement UserToShare = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+SharedUser+"')]")));
+//					Page.click(UserToShare);
+//					Page.click(ShareButton);
+//					break;
+//				}
+//				else {
+//					Page.click(NextPage);
+//					Thread.sleep(2000);
+//				}
+//			}
+//		}
+//		else if (!NextPage.isEnabled()) {		
+//			System.out.print("The set to be deleted is not found");
+//		}
+//
+//		else {				
+//			System.out.print("The set to be deleted is not found");
+//		}
+//	}
+//
+//	public void shareASet(String SetToShare, String SharedUser) throws InterruptedException, AWTException { 
+//		Page.verifyPage("MY DATA", MyDataTitle); //My Data page
+//		this.shareASet(SetToShare, SharedUser);
+//		Boolean a = ShareSuccess.isDisplayed();
+//		if (a=true) {
+//			System.out.println("Set shared successfully");
+//		}
+//		else{
+//			System.out.println("Set shared failed");
+//		}
+//	}
 
 
 
