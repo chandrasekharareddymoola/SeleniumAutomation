@@ -1,11 +1,14 @@
 package com.eagle.pages;
 
 import static org.testng.Assert.assertEquals;
-
+import java.awt.AWTException;
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
@@ -13,6 +16,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -124,23 +128,34 @@ public class HomePage extends BasePage{
 
 	@FindBy(xpath = "//h1[text()='Help Desk']")
 	public WebElement HelpDesk;
-	
+
 	@FindBy(xpath = "//h1[text()='FAQ']")
 	public WebElement FAQtext;
 
 	@FindBy(xpath = "//div[@scraper-tag='UserManual']//iframe[contains(@class,'UserManual__userManualPDF')]")
 	public WebElement userManualPDF;	
-	
+
+	@FindBy(xpath = "//*[text()='Terms of Use']")
+	public WebElement TermsOfUse;
+
 
 	//Methods
+
+	Actions action = new Actions(driver);
 
 	public HomePage(){ 		 
 		PageFactory.initElements(driver, this); 
 	}
 
+	//Click Home icon
+	public void Home() throws Throwable{ 	
+		BasePage.waitforAnElement(homeIcon);
+		BasePage.click(homeIcon);
+		action.moveToElement(TermsOfUse).perform();
+	}
 
 	//Open a particular item (Search) from list
-	public void openItemFromList(String inv) throws Exception
+	public void openItemFromList(String inv) throws Throwable
 	{
 		try {	
 			outloop:
@@ -184,7 +199,7 @@ public class HomePage extends BasePage{
 	}
 
 	//Verify the components in Dashboard
-	public void verifyDashboardComponents() throws Exception
+	public void verifyDashboardComponents() throws Throwable
 	{
 		try {
 			boolean btnExploration = explorationButton.isDisplayed();
@@ -229,15 +244,15 @@ public class HomePage extends BasePage{
 	} 
 
 	//Verify the components in Dashboard
-	public void verifyUserProfiles(String ProfileName) throws Exception
+	public void verifyUserProfiles(String ProfileName) throws Throwable
 	{		
 		try {
 			BasePage.click(userControl);
 			BasePage.click(profileSettings);
-			//			ReadObject object = new ReadObject();											//remove these comments if user mail ID is displayed in Dashboard and comment the ones with Profile name
+			//			ReadObject object = new ReadObject();										//remove these comments if user mail ID is displayed in Dashboard and comment the ones with Profile name
 			//			Properties configObject = object.getObjectRepositoty();	 
 			//			String expected = configObject.getProperty("Username");						
-			String expected = ProfileName;
+			String expected = ProfileName;															//comment this if  user mail ID is displayed in Dashboard and comment the ones with Profile name
 			String actual = profileNameactual.getText();
 			BasePage.click(profileBack);
 			assertEquals(actual, expected);
@@ -247,7 +262,7 @@ public class HomePage extends BasePage{
 	}
 
 	//Verify the Copyrights and the text within it
-	public void verifyCopyRights()
+	public void verifyCopyRights() throws Throwable
 	{
 		try {
 			String copyRightsText = copyRights.getText();    	
@@ -269,7 +284,7 @@ public class HomePage extends BasePage{
 	}	
 
 	//Verify the Copyrights and the text within it
-	public void createGlobalSearch() throws Exception
+	public void createGlobalSearch() throws Throwable
 	{
 		try {
 			BasePage.click(searchIcon);
@@ -294,7 +309,7 @@ public class HomePage extends BasePage{
 	}
 
 	//Open a saved search and verify if it is saved properly
-	public void verifySavedSearches() throws Exception
+	public void verifySavedSearches() throws Throwable
 	{
 		try {
 			BasePage.click(searchIcon);
@@ -315,29 +330,60 @@ public class HomePage extends BasePage{
 	}    
 
 	//Click and verify Contact Help Desk
-	public void VerifyContactHelpDesk() throws Exception
+	public void VerifyContactHelpDesk() throws Throwable
 	{
+		Date dt = new Date();
+		DateFormat dtFrmt = new SimpleDateFormat("_HHmmss");
+		String dtText = dtFrmt.format(dt);
 		try {
 			BasePage.click(lifeSaverIcon);
 			BasePage.click(contactHelpDesk);
-			//Need to add steps to switch active window
-			assertEquals(EaglegenomicsSupportText.getText(), "Eagle Genomics Support");  
-			assertEquals(HelpDesk.getText(), "Help Desk");  
+			ExtentTestManager.getTest().log(Status.PASS, "Contact Help Desk is clicked");
+
+			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());			//Get all the tabs currently available	
+			assertEquals(tabs.size(),2); 														//Assert if the number of tabs is 2 (i.e a new tab has been opened)
+			ExtentTestManager.getTest().log(Status.PASS, "2 tabs are present and the link is openend in new tab");
+			driver.switchTo().window(tabs.get(1));                                            	//Switch to the recent tab
+
+			try {
+				BasePage.waitforAnElement(EaglegenomicsSupportText);
+
+				assertEquals(EaglegenomicsSupportText.getText(), "Eagle Genomics Support");  		
+				assertEquals(HelpDesk.getText(), "Help Desk");  									
+
+				driver.close();																	//close the recent tab
+				driver.switchTo().window(tabs.get(0));											//Switch to the original tab
+
+				this.Home();	
+			}
+			catch(Exception|AssertionError er){
+				this.captureScreenshot("ContactHelpDesk1"+dtText);
+				ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/ContactHelpDesk1"+dtText+".png");
+
+				ExtentTestManager.getTest().log(Status.FAIL, "Contact Help Desk verification failed in new tab");
+				driver.close();																	//close the recent tab
+				driver.switchTo().window(tabs.get(0));											//Switch to the original tab
+
+				this.Home();	
+				throw er;
+			}
 		}
-		catch(Exception ex)    	{
-			ExtentTestManager.getTest().log(Status.FAIL, "Contact Help Desk verification failed");
+		catch(Exception| AssertionError ex)    	{
+			ExtentTestManager.getTest().log(Status.FAIL, "Unable to verify Help Desk");
 			throw ex;
 		}
 	}  
 
 	//Click and verify user manual
-	public void VerifyUserManual() throws Exception
+	public void VerifyUserManual() throws Throwable
 	{
 		try {
 			BasePage.click(lifeSaverIcon);
-			BasePage.click(contactHelpDesk);
-			//Need to add steps to switch active window
+			BasePage.click(userManual);
+			ExtentTestManager.getTest().log(Status.PASS, "User manual is clicked");
 			BasePage.waitforAnElement(userManualPDF);
+			ExtentTestManager.getTest().log(Status.PASS, "Presence of user manual is verified");
+			this.Home();
 		}
 		catch(Exception ex)    	{
 			ExtentTestManager.getTest().log(Status.FAIL, "User manual is not present");
@@ -346,24 +392,50 @@ public class HomePage extends BasePage{
 	}  
 
 	//Click and verify FAQ
-	public void VerifyFAQ() throws Exception
+	public void VerifyFAQ() throws Throwable
 	{
+		Date dt = new Date();
+		DateFormat dtFrmt = new SimpleDateFormat("_HHmmss");
+		String dtText = dtFrmt.format(dt);
 		try {
 			BasePage.click(lifeSaverIcon);
 			BasePage.click(FAQ);
-			//Need to add steps to switch active window
-			assertEquals(EaglegenomicsSupportText.getText(), "Eagle Genomics Support");  
-			assertEquals(FAQtext.getText(), "FAQ");  
+			ExtentTestManager.getTest().log(Status.PASS, "FAQ is clicked");
+
+			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());			//Get all the tabs currently available	
+			assertEquals(tabs.size(),2); 														//Assert if the number of tabs is 2 (i.e a new tab has been opened)
+			ExtentTestManager.getTest().log(Status.PASS, "2 tabs are present and the link is openend in new tab");
+			driver.switchTo().window(tabs.get(1));                                            	//Switch to the recent tab
+
+			try {                                        	
+				BasePage.waitforAnElement(EaglegenomicsSupportText);
+				assertEquals(EaglegenomicsSupportText.getText(), "Eagle Genomics Support");  
+				assertEquals(FAQtext.getText(), "FAQ");  
+
+				driver.close();																	//close the recent tab
+				driver.switchTo().window(tabs.get(0));											//Switch to the original tab
+
+				this.Home();													
+			}
+			catch(Exception| AssertionError er)    	{
+				this.captureScreenshot("VerifyFAQ1"+dtText);
+				ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir")+"/Resources/ErrorScreenshots/VerifyFAQ1"+dtText+".png");
+				ExtentTestManager.getTest().log(Status.FAIL, "FAQ verification failed in new tab");
+
+				driver.close();																	//close the recent tab
+				driver.switchTo().window(tabs.get(0));											//Switch to the original tab
+				this.Home();
+				throw er;
+			}
 		}
-		catch(Exception ex)    	{
-			BasePage.click(savedSearchCancelButton);
-			ExtentTestManager.getTest().log(Status.FAIL, "FAQ page is not displayed");
+		catch(Exception| AssertionError ex)    	{
+			ExtentTestManager.getTest().log(Status.FAIL, "Unable to verify FAQ");
 			throw ex;
 		}
-	}  
+	}
 
 	//Logout of the system
-	public void logout() throws Exception
+	public void logout() throws Throwable
 	{
 		try {
 			BasePage.click(userControl);

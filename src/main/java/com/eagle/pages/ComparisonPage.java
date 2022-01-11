@@ -1,7 +1,6 @@
 package com.eagle.pages;
 
 import static org.testng.Assert.assertEquals;
-
 import java.awt.AWTException;
 import java.io.File;
 import java.io.IOException;
@@ -34,7 +33,7 @@ public class ComparisonPage extends BasePage{
 	//Page level objects
 
 	//Web Elements in page
-	
+
 	@FindBy(xpath = "//i[@data-icon-name='Home']")
 	public WebElement homeIcon;
 
@@ -351,11 +350,10 @@ public class ComparisonPage extends BasePage{
 	public WebElement contactAdminErrorMainPage;
 
 
-
 	//Page level functions on the objects
-	
+
 	//Methods
-	
+
 	WebDriverWait wait = new WebDriverWait(driver, 5);
 	Actions action = new Actions(driver);
 
@@ -365,7 +363,7 @@ public class ComparisonPage extends BasePage{
 		BasePage.click(ComparisonIcon);
 		action.moveToElement(TermsOfUse).perform();
 	}
-	
+
 	//Click Home icon
 	public void Home() throws AWTException, InterruptedException{    	
 		BasePage.click(homeIcon);
@@ -383,7 +381,7 @@ public class ComparisonPage extends BasePage{
 	public void verifyEntityType(String stringToVerify) throws AWTException, InterruptedException, AssertionError{    	
 		BasePage.verifyPage(stringToVerify, pageIdentifier);
 	}
-	
+
 	//Open a comparison
 	public WebElement openComparison(String name) {
 		return driver.findElement(By.xpath("//div[@class='ms-List']//div[@role='rowheader' and @aria-colindex='1']//div[@title='"+ name +"']"));   		
@@ -399,7 +397,7 @@ public class ComparisonPage extends BasePage{
 	public void clickStart()throws AWTException, InterruptedException {	    	
 		BasePage.click(startButton);        
 	}   
-	
+
 	//Click Run comparison
 	public void runComparison() throws AWTException, InterruptedException{ 
 		BasePage.click(runComparison);
@@ -817,15 +815,15 @@ public class ComparisonPage extends BasePage{
 	} 
 
 	//Method to generate random word
-//	String generateRandomWord(int wordLength) {
-//		Random r = new Random(); // Intialize a Random Number Generator with SysTime as the seed
-//		StringBuilder sb = new StringBuilder(wordLength);
-//		for(int i = 0; i < wordLength; i++) { // For each letter in the word
-//			char tmp = (char) ('a' + r.nextInt('z' - 'a')); // Generate a letter between a and z
-//			sb.append(tmp); // Add it to the String
-//		}
-//		return sb.toString();
-//	}
+	//	String generateRandomWord(int wordLength) {
+	//		Random r = new Random(); // Intialize a Random Number Generator with SysTime as the seed
+	//		StringBuilder sb = new StringBuilder(wordLength);
+	//		for(int i = 0; i < wordLength; i++) { // For each letter in the word
+	//			char tmp = (char) ('a' + r.nextInt('z' - 'a')); // Generate a letter between a and z
+	//			sb.append(tmp); // Add it to the String
+	//		}
+	//		return sb.toString();
+	//	}
 
 	//Create a comparison with multiple cases
 	public void createComparisonControlandMultipleCase(String ComparisonName,String ControlSetName, String EntitytoSelect, String ItemtoSearchControl , Integer NumberOfCaseSets) throws Throwable{	    	
@@ -992,7 +990,7 @@ public class ComparisonPage extends BasePage{
 		BasePage.click(edit);
 		Thread.sleep(2000);
 	}
-	
+
 	//Click accept button
 	public void accept()throws AWTException, InterruptedException{
 		BasePage.click(accept);
@@ -1087,10 +1085,10 @@ public class ComparisonPage extends BasePage{
 		ExtentTestManager.getTest().log(Status.PASS, "File uploaded successfully");
 	}
 
-//	public void addItemsFromFile(String filePath) throws AWTException, InterruptedException {	    
-//		BasePage.click(addItemsFromAFile);
-//		this.FileUploadFormExplorer(filePath);
-//	}
+	//	public void addItemsFromFile(String filePath) throws AWTException, InterruptedException {	    
+	//		BasePage.click(addItemsFromAFile);
+	//		this.FileUploadFormExplorer(filePath);
+	//	}
 
 	//Click add items in expanded view
 	public void addItemsExpand() throws AWTException, InterruptedException{	    
@@ -1402,24 +1400,24 @@ public class ComparisonPage extends BasePage{
 
 
 	//File upload from explorer using key actions (Do not use - use only as last resort as when system goes to sleep this doesn't work)
-//	public void FileUploadFormExplorer(String FileLocation) throws AWTException, InterruptedException{	    
-//		StringSelection ss = new StringSelection(FileLocation);
-//		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-//
-//		//imitate mouse events like ENTER, CTRL+C, CTRL+V
-//		Robot robot = new Robot();
-//		robot.delay(250);
-//		robot.keyPress(KeyEvent.VK_ENTER);
-//		robot.keyRelease(KeyEvent.VK_ENTER);
-//		robot.keyPress(KeyEvent.VK_CONTROL);
-//		robot.keyPress(KeyEvent.VK_V);
-//		robot.keyRelease(KeyEvent.VK_V);
-//		robot.keyRelease(KeyEvent.VK_CONTROL);
-//		robot.keyPress(KeyEvent.VK_ENTER);
-//		robot.delay(90);
-//		robot.keyRelease(KeyEvent.VK_ENTER);
-//		Thread.sleep(5000);
-//	}	
+	//	public void FileUploadFormExplorer(String FileLocation) throws AWTException, InterruptedException{	    
+	//		StringSelection ss = new StringSelection(FileLocation);
+	//		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+	//
+	//		//imitate mouse events like ENTER, CTRL+C, CTRL+V
+	//		Robot robot = new Robot();
+	//		robot.delay(250);
+	//		robot.keyPress(KeyEvent.VK_ENTER);
+	//		robot.keyRelease(KeyEvent.VK_ENTER);
+	//		robot.keyPress(KeyEvent.VK_CONTROL);
+	//		robot.keyPress(KeyEvent.VK_V);
+	//		robot.keyRelease(KeyEvent.VK_V);
+	//		robot.keyRelease(KeyEvent.VK_CONTROL);
+	//		robot.keyPress(KeyEvent.VK_ENTER);
+	//		robot.delay(90);
+	//		robot.keyRelease(KeyEvent.VK_ENTER);
+	//		Thread.sleep(5000);
+	//	}	
 
 	//Add from file in expanded view (Returns the list of items)
 	public List<String> addFromFile(String CategoryName, String Filelocation, String FileName) throws AWTException, InterruptedException, AssertionError {	    
@@ -2119,7 +2117,7 @@ public class ComparisonPage extends BasePage{
 			throw r;
 		}
 	}
-	
+
 	//Create a comparison and apply one filter
 	public void FilterComparison(String ComparisonToCreate, String ControlSetName, String entityToSelect, String textToSearch, String Attribute, String FilterType, String textToFilter) throws Throwable { 
 		this.createComparisonControl(ComparisonToCreate,ControlSetName, entityToSelect, textToSearch);	 
@@ -2128,7 +2126,7 @@ public class ComparisonPage extends BasePage{
 		this.verifyAfterFilter(Attribute, FilterType, textToFilter);
 		ExtentTestManager.getTest().log(Status.PASS, "Applied filter is verified");
 	}
-	
+
 	//Create a comparison and apply one filter
 	public void FilterComparisonMulti(String ComparisonToCreate, String ControlSetName, String entityToSelect, String textToSearch, String Attribute1, String FilterType1, String textToFilter1, String Attribute2, String FilterType2, String textToFilter2) throws Throwable { 
 		this.createComparisonControl(ComparisonToCreate,ControlSetName, entityToSelect, textToSearch);	 
