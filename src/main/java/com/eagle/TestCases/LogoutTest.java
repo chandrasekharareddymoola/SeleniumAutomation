@@ -20,7 +20,7 @@ public class LogoutTest extends BaseTest{
 	}
 	
 	@Test(priority = 0, description = "Logout functionality verification")
-	public void VerifyLogout_Test() throws InterruptedException, IOException{
+	public void VerifyLogout_Test() throws Throwable{
       try{
     	  	objHome.logout();
 		    onSuccessMeassage("Logout is successfully verified");

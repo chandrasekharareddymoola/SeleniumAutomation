@@ -1,7 +1,6 @@
 package com.eagle.pages;
 
 import static org.testng.Assert.assertEquals;
-import java.awt.AWTException;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
