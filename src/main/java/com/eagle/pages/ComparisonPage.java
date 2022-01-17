@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -509,6 +511,8 @@ public class ComparisonPage extends BasePage{
 
 	//Wait for comparisons page to be displayed after an action as there will be a load time
 	public void waitForComparison() throws Throwable{
+
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		try {  
 			Date dt = new Date();
 			DateFormat dtFrmt = new SimpleDateFormat("_HHmmss");
@@ -560,6 +564,8 @@ public class ComparisonPage extends BasePage{
 
 	//Wait for comparison title to be displayed after an action as there will be a load time
 	public void waitForComparisonTitle() throws Throwable{
+
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		try {  
 			int i=0;
 			outerloop:
@@ -587,6 +593,8 @@ public class ComparisonPage extends BasePage{
 
 	// Wait for edit button to be displayed after an action as there will be a load time
 	public void waitForEditAndDelete() throws Throwable{
+
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		try {  
 			int i=0;
 			outerloop:
@@ -623,6 +631,8 @@ public class ComparisonPage extends BasePage{
 
 	//Wait for adding card button is enabled
 	public void waitForaddCard() throws Throwable{
+
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		try {  
 			int i=0;
 			outerloop:
@@ -649,6 +659,8 @@ public class ComparisonPage extends BasePage{
 
 	// Wait for Save changes to be displayed after an action as there will be a load time
 	public void waitForSaveChanges() throws Throwable{
+
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		try {  
 			int i=0;
 			outerloop:

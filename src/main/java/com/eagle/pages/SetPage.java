@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -302,6 +304,8 @@ public class SetPage extends BasePage{
 	//Wait for set page to load
 	public void waitForSet() throws Throwable{	
 		try {  
+			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			
 			Date dt = new Date();
 			DateFormat dtFrmt = new SimpleDateFormat("_HHmmss");
 			String dtText = dtFrmt.format(dt);
@@ -971,6 +975,7 @@ public class SetPage extends BasePage{
 
 	//Wait for the edit button to be displayed after an action as there will be a load time
 	public void waitForEditAndDelete() throws Throwable{
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		try {  
 			int i=0;
 			outerloop:
@@ -1008,6 +1013,7 @@ public class SetPage extends BasePage{
 
 	//Wait for the Save changes button to be displayed after an action as there will be a load time
 	public void waitForSaveChanges() throws Throwable{
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		try {  
 			int i=0;
 			outerloop:

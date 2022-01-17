@@ -93,7 +93,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">10 methods,   10 passed</span>
+                    <span class="method-stats">11 methods,   11 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -139,6 +139,11 @@
                       <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-SmokeTestingSuite" title="com.eagle.TestCases.LogoutTest" class="method navigator-link" hash-for-method="VerifyLogout_Test">VerifyLogout_Test</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
                         <a href="#" panel-name="suite-SmokeTestingSuite" title="com.eagle.TestCases.HomeTest" class="method navigator-link" hash-for-method="VerifySavedSearches_Test">VerifySavedSearches_Test</a> <!-- method navigator-link -->
                       </span>
                       <br/>
@@ -177,6 +182,23 @@
                   <span class="method-name">VerifyLoginPage_Test</span>
                   <em>
 (Login with valid credentials)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-SmokeTestingSuite-class-passed -->
+          <div class="suite-SmokeTestingSuite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.eagle.TestCases.LogoutTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="VerifyLogout_Test">
+                  </a> <!-- VerifyLogout_Test -->
+                  <span class="method-name">VerifyLogout_Test</span>
+                  <em>
+(Logout functionality verification)                  </em>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -287,6 +309,7 @@
     &lt;classes&gt;
       &lt;class name=&quot;com.eagle.TestCases.LoginTest&quot;/&gt;
       &lt;class name=&quot;com.eagle.TestCases.HomeTest&quot;/&gt;
+      &lt;class name=&quot;com.eagle.TestCases.LogoutTest&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Smoke Test cases --&gt;
 &lt;/suite&gt; &lt;!-- SmokeTestingSuite --&gt;
@@ -300,7 +323,7 @@
           <div class="main-panel-content rounded-window-bottom">
             <ul>
               <li>
-                <span class="test-name">Smoke Test cases (2 classes)</span>
+                <span class="test-name">Smoke Test cases (3 classes)</span>
               </li>
             </ul>
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -326,47 +349,51 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(10);
+data.addRows(11);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'VerifyLoginPage_Test')
 data.setCell(0, 2, 'com.eagle.TestCases.LoginTest')
-data.setCell(0, 3, 76803);
+data.setCell(0, 3, 61183);
 data.setCell(1, 0, 1)
 data.setCell(1, 1, 'VerifyContactHelpDesk_Test')
 data.setCell(1, 2, 'com.eagle.TestCases.HomeTest')
-data.setCell(1, 3, 20037);
+data.setCell(1, 3, 19839);
 data.setCell(2, 0, 2)
 data.setCell(2, 1, 'VerifyFAQ_Test')
 data.setCell(2, 2, 'com.eagle.TestCases.HomeTest')
-data.setCell(2, 3, 17947);
+data.setCell(2, 3, 18830);
 data.setCell(3, 0, 3)
-data.setCell(3, 1, 'CreateGlobalSearch_Test')
-data.setCell(3, 2, 'com.eagle.TestCases.HomeTest')
-data.setCell(3, 3, 6768);
+data.setCell(3, 1, 'VerifyLogout_Test')
+data.setCell(3, 2, 'com.eagle.TestCases.LogoutTest')
+data.setCell(3, 3, 8129);
 data.setCell(4, 0, 4)
-data.setCell(4, 1, 'VerifySavedSearches_Test')
+data.setCell(4, 1, 'CreateGlobalSearch_Test')
 data.setCell(4, 2, 'com.eagle.TestCases.HomeTest')
-data.setCell(4, 3, 5301);
+data.setCell(4, 3, 5995);
 data.setCell(5, 0, 5)
-data.setCell(5, 1, 'VerifyUserProfile')
+data.setCell(5, 1, 'VerifySavedSearches_Test')
 data.setCell(5, 2, 'com.eagle.TestCases.HomeTest')
-data.setCell(5, 3, 772);
+data.setCell(5, 3, 5119);
 data.setCell(6, 0, 6)
 data.setCell(6, 1, 'VerifyUserManual_Test')
 data.setCell(6, 2, 'com.eagle.TestCases.HomeTest')
-data.setCell(6, 3, 627);
+data.setCell(6, 3, 1037);
 data.setCell(7, 0, 7)
-data.setCell(7, 1, 'VerifyDashboard_Test')
+data.setCell(7, 1, 'VerifyUserProfile')
 data.setCell(7, 2, 'com.eagle.TestCases.HomeTest')
-data.setCell(7, 3, 367);
+data.setCell(7, 3, 908);
 data.setCell(8, 0, 8)
-data.setCell(8, 1, 'VerifyCopyRights')
+data.setCell(8, 1, 'VerifyDashboard_Test')
 data.setCell(8, 2, 'com.eagle.TestCases.HomeTest')
-data.setCell(8, 3, 94);
+data.setCell(8, 3, 208);
 data.setCell(9, 0, 9)
-data.setCell(9, 1, 'VerifyLogoVisibility_Test')
+data.setCell(9, 1, 'VerifyCopyRights')
 data.setCell(9, 2, 'com.eagle.TestCases.HomeTest')
-data.setCell(9, 3, 58);
+data.setCell(9, 3, 117);
+data.setCell(10, 0, 10)
+data.setCell(10, 1, 'VerifyLogoVisibility_Test')
+data.setCell(10, 2, 'com.eagle.TestCases.HomeTest')
+data.setCell(10, 3, 85);
 window.suiteTableData['SmokeTestingSuite']= { tableData: data, tableDiv: 'times-div-SmokeTestingSuite'}
 return data;
 }
@@ -386,9 +413,16 @@ return data;
         </div> <!-- panel -->
         <div panel-name="ignored-methods-SmokeTestingSuite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">1 ignored method</span>
+            <span class="header-content">2 ignored methods</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
+            <div class="ignored-class-div">
+              <span class="ignored-class-name">com.eagle.TestCases.LogoutTest</span>
+              <div class="ignored-methods-div">
+                <span class="ignored-method-name">closeApplication</span>
+                <br/>
+              </div> <!-- ignored-methods-div -->
+            </div> <!-- ignored-class-div -->
             <div class="ignored-class-div">
               <span class="ignored-class-name">com.eagle.TestCases.HomeTest</span>
               <div class="ignored-methods-div">
@@ -411,65 +445,84 @@ return data;
               </div> <!-- configuration-class before -->
               <div class="configuration-class before">
                 <span class="method-name">beforeClass</span>
-                <span class="method-start">8350 ms</span>
+                <span class="method-start">9059 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
                 <span class="method-name">VerifyLoginPage_Test</span>
-                <span class="method-start">8465 ms</span>
+                <span class="method-start">9129 ms</span>
               </div> <!-- test-method -->
             </div> <!-- chronological-class -->
             <div class="chronological-class">
               <div class="chronological-class-name">com.eagle.TestCases.HomeTest</div> <!-- chronological-class-name -->
               <div class="configuration-class before">
                 <span class="method-name">launchApplication</span>
-                <span class="method-start">85273 ms</span>
+                <span class="method-start">70320 ms</span>
               </div> <!-- configuration-class before -->
               <div class="configuration-class before">
                 <span class="method-name">beforeClass</span>
-                <span class="method-start">85274 ms</span>
+                <span class="method-start">70321 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
                 <span class="method-name">VerifyLogoVisibility_Test</span>
-                <span class="method-start">85287 ms</span>
+                <span class="method-start">70347 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">VerifyDashboard_Test</span>
-                <span class="method-start">85346 ms</span>
+                <span class="method-start">70435 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">VerifyUserProfile</span>
-                <span class="method-start">85714 ms</span>
+                <span class="method-start">70645 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">VerifyCopyRights</span>
-                <span class="method-start">86488 ms</span>
+                <span class="method-start">71557 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">CreateGlobalSearch_Test</span>
-                <span class="method-start">86584 ms</span>
+                <span class="method-start">71676 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">VerifySavedSearches_Test</span>
-                <span class="method-start">93354 ms</span>
+                <span class="method-start">77676 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">VerifyContactHelpDesk_Test</span>
-                <span class="method-start">98657 ms</span>
+                <span class="method-start">82797 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">VerifyUserManual_Test</span>
-                <span class="method-start">118695 ms</span>
+                <span class="method-start">102638 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">VerifyFAQ_Test</span>
-                <span class="method-start">119324 ms</span>
+                <span class="method-start">103679 ms</span>
               </div> <!-- test-method -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.eagle.TestCases.LogoutTest</div> <!-- chronological-class-name -->
+              <div class="configuration-class before">
+                <span class="method-name">beforeClass</span>
+                <span class="method-start">122511 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="configuration-class before">
+                <span class="method-name">launchApplication</span>
+                <span class="method-start">122511 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="test-method">
+                <span class="method-name">VerifyLogout_Test</span>
+                <span class="method-start">122513 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-class after">
+                <span class="method-name">afterClass</span>
+                <span class="method-start">130645 ms</span>
+              </div> <!-- configuration-class after -->
             </div> <!-- chronological-class -->
             <div class="chronological-class">
               <div class="chronological-class-name">com.eagle.TestCases.LoginTest</div> <!-- chronological-class-name -->
               <div class="configuration-suite after">
                 <span class="method-name">closeApplication</span>
-                <span class="method-start">137884 ms</span>
+                <span class="method-start">131927 ms</span>
               </div> <!-- configuration-suite after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
