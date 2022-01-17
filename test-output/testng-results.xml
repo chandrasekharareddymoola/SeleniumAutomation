@@ -2,70 +2,70 @@
 <testng-results ignored="1" total="11" passed="10" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2022-01-11T18:01:52 IST" name="SmokeTestingSuite" finished-at="2022-01-11T18:03:29 IST" duration-ms="96778">
+  <suite started-at="2022-01-12T12:53:34 IST" name="SmokeTestingSuite" finished-at="2022-01-12T12:55:51 IST" duration-ms="137290">
     <groups>
     </groups>
-    <test started-at="2022-01-11T18:01:52 IST" name="Smoke Test cases" finished-at="2022-01-11T18:03:29 IST" duration-ms="96778">
+    <test started-at="2022-01-12T12:53:34 IST" name="Smoke Test cases" finished-at="2022-01-12T12:55:51 IST" duration-ms="137290">
       <class name="com.eagle.TestCases.LoginTest">
-        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.LoginTest@3cebbb30]" started-at="2022-01-11T18:01:52 IST" name="launchApplication" finished-at="2022-01-11T18:02:00 IST" duration-ms="7773" status="PASS">
+        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.LoginTest@3cebbb30]" started-at="2022-01-12T12:53:34 IST" name="launchApplication" finished-at="2022-01-12T12:53:43 IST" duration-ms="8342" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchApplication -->
-        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.LoginTest@3cebbb30]" started-at="2022-01-11T18:02:00 IST" name="beforeClass" finished-at="2022-01-11T18:02:00 IST" duration-ms="24" status="PASS">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.LoginTest@3cebbb30]" started-at="2022-01-12T12:53:43 IST" name="beforeClass" finished-at="2022-01-12T12:53:43 IST" duration-ms="71" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeClass -->
-        <test-method signature="VerifyLoginPage_Test()[pri:0, instance:com.eagle.TestCases.LoginTest@3cebbb30]" started-at="2022-01-11T18:02:00 IST" name="VerifyLoginPage_Test" description="Login with valid credentials" finished-at="2022-01-11T18:03:00 IST" duration-ms="60110" status="PASS">
+        <test-method signature="VerifyLoginPage_Test()[pri:0, instance:com.eagle.TestCases.LoginTest@3cebbb30]" started-at="2022-01-12T12:53:43 IST" name="VerifyLoginPage_Test" description="Login with valid credentials" finished-at="2022-01-12T12:54:59 IST" duration-ms="76803" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- VerifyLoginPage_Test -->
-        <test-method is-config="true" signature="closeApplication()[pri:0, instance:com.eagle.TestCases.LoginTest@3cebbb30]" started-at="2022-01-11T18:03:29 IST" name="closeApplication" finished-at="2022-01-11T18:03:30 IST" duration-ms="676" status="PASS">
+        <test-method is-config="true" signature="closeApplication()[pri:0, instance:com.eagle.TestCases.LoginTest@3cebbb30]" started-at="2022-01-12T12:55:52 IST" name="closeApplication" finished-at="2022-01-12T12:55:53 IST" duration-ms="744" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeApplication -->
       </class> <!-- com.eagle.TestCases.LoginTest -->
       <class name="com.eagle.TestCases.HomeTest">
-        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.HomeTest@60bd273d]" started-at="2022-01-11T18:03:00 IST" name="beforeClass" finished-at="2022-01-11T18:03:00 IST" duration-ms="9" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- beforeClass -->
-        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.HomeTest@60bd273d]" started-at="2022-01-11T18:03:00 IST" name="launchApplication" finished-at="2022-01-11T18:03:00 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.HomeTest@60bd273d]" started-at="2022-01-12T12:54:59 IST" name="launchApplication" finished-at="2022-01-12T12:54:59 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchApplication -->
-        <test-method signature="VerifyLogoVisibility_Test()[pri:0, instance:com.eagle.TestCases.HomeTest@60bd273d]" started-at="2022-01-11T18:03:00 IST" name="VerifyLogoVisibility_Test" description="Check the visibility of Logo" finished-at="2022-01-11T18:03:00 IST" duration-ms="45" status="PASS">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.HomeTest@60bd273d]" started-at="2022-01-12T12:54:59 IST" name="beforeClass" finished-at="2022-01-12T12:54:59 IST" duration-ms="12" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method signature="VerifyLogoVisibility_Test()[pri:0, instance:com.eagle.TestCases.HomeTest@60bd273d]" started-at="2022-01-12T12:54:59 IST" name="VerifyLogoVisibility_Test" description="Check the visibility of Logo" finished-at="2022-01-12T12:55:00 IST" duration-ms="58" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- VerifyLogoVisibility_Test -->
-        <test-method signature="VerifyDashboard_Test()[pri:1, instance:com.eagle.TestCases.HomeTest@60bd273d]" started-at="2022-01-11T18:03:00 IST" name="VerifyDashboard_Test" description="Check if dashBoard displays all the components" finished-at="2022-01-11T18:03:00 IST" duration-ms="119" status="PASS">
+        <test-method signature="VerifyDashboard_Test()[pri:1, instance:com.eagle.TestCases.HomeTest@60bd273d]" started-at="2022-01-12T12:55:00 IST" name="VerifyDashboard_Test" description="Check if dashBoard displays all the components" finished-at="2022-01-12T12:55:00 IST" duration-ms="367" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- VerifyDashboard_Test -->
-        <test-method signature="VerifyUserProfile()[pri:2, instance:com.eagle.TestCases.HomeTest@60bd273d]" started-at="2022-01-11T18:03:00 IST" name="VerifyUserProfile" description="Check for user information in profile" finished-at="2022-01-11T18:03:01 IST" duration-ms="588" status="PASS">
+        <test-method signature="VerifyUserProfile()[pri:2, instance:com.eagle.TestCases.HomeTest@60bd273d]" started-at="2022-01-12T12:55:00 IST" name="VerifyUserProfile" description="Check for user information in profile" finished-at="2022-01-12T12:55:01 IST" duration-ms="772" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- VerifyUserProfile -->
-        <test-method signature="VerifyCopyRights()[pri:3, instance:com.eagle.TestCases.HomeTest@60bd273d]" started-at="2022-01-11T18:03:01 IST" name="VerifyCopyRights" description="Check for copyright and other links" finished-at="2022-01-11T18:03:01 IST" duration-ms="75" status="PASS">
+        <test-method signature="VerifyCopyRights()[pri:3, instance:com.eagle.TestCases.HomeTest@60bd273d]" started-at="2022-01-12T12:55:01 IST" name="VerifyCopyRights" description="Check for copyright and other links" finished-at="2022-01-12T12:55:01 IST" duration-ms="94" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- VerifyCopyRights -->
-        <test-method signature="CreateGlobalSearch_Test()[pri:4, instance:com.eagle.TestCases.HomeTest@60bd273d]" started-at="2022-01-11T18:03:01 IST" name="CreateGlobalSearch_Test" description="Search and Save the Global search" finished-at="2022-01-11T18:03:05 IST" duration-ms="4508" status="PASS">
+        <test-method signature="CreateGlobalSearch_Test()[pri:4, instance:com.eagle.TestCases.HomeTest@60bd273d]" started-at="2022-01-12T12:55:01 IST" name="CreateGlobalSearch_Test" description="Search and Save the Global search" finished-at="2022-01-12T12:55:08 IST" duration-ms="6768" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CreateGlobalSearch_Test -->
-        <test-method signature="VerifySavedSearches_Test()[pri:5, instance:com.eagle.TestCases.HomeTest@60bd273d]" started-at="2022-01-11T18:03:05 IST" name="VerifySavedSearches_Test" description="Verify Saved Searches" finished-at="2022-01-11T18:03:09 IST" duration-ms="4359" status="PASS">
+        <test-method signature="VerifySavedSearches_Test()[pri:5, instance:com.eagle.TestCases.HomeTest@60bd273d]" started-at="2022-01-12T12:55:08 IST" name="VerifySavedSearches_Test" description="Verify Saved Searches" finished-at="2022-01-12T12:55:13 IST" duration-ms="5301" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- VerifySavedSearches_Test -->
-        <test-method signature="VerifyContactHelpDesk_Test()[pri:6, instance:com.eagle.TestCases.HomeTest@60bd273d]" started-at="2022-01-11T18:03:09 IST" name="VerifyContactHelpDesk_Test" description="Verify Contact help Desk" finished-at="2022-01-11T18:03:28 IST" duration-ms="18235" status="PASS">
+        <test-method signature="VerifyContactHelpDesk_Test()[pri:6, instance:com.eagle.TestCases.HomeTest@60bd273d]" started-at="2022-01-12T12:55:13 IST" name="VerifyContactHelpDesk_Test" description="Verify Contact help Desk" finished-at="2022-01-12T12:55:33 IST" duration-ms="20037" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- VerifyContactHelpDesk_Test -->
-        <test-method signature="VerifyUserManual_Test()[pri:7, instance:com.eagle.TestCases.HomeTest@60bd273d]" started-at="2022-01-11T18:03:28 IST" name="VerifyUserManual_Test" description="Verify User Manual" finished-at="2022-01-11T18:03:28 IST" duration-ms="582" status="PASS">
+        <test-method signature="VerifyUserManual_Test()[pri:7, instance:com.eagle.TestCases.HomeTest@60bd273d]" started-at="2022-01-12T12:55:33 IST" name="VerifyUserManual_Test" description="Verify User Manual" finished-at="2022-01-12T12:55:33 IST" duration-ms="627" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- VerifyUserManual_Test -->
-        <test-method signature="VerifyFAQ_Test()[pri:8, instance:com.eagle.TestCases.HomeTest@60bd273d]" started-at="2022-01-11T18:03:28 IST" name="VerifyFAQ_Test" description="Verify FAQ" finished-at="2022-01-11T18:03:29 IST" duration-ms="309" status="PASS">
+        <test-method signature="VerifyFAQ_Test()[pri:8, instance:com.eagle.TestCases.HomeTest@60bd273d]" started-at="2022-01-12T12:55:34 IST" name="VerifyFAQ_Test" description="Verify FAQ" finished-at="2022-01-12T12:55:51 IST" duration-ms="17947" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- VerifyFAQ_Test -->

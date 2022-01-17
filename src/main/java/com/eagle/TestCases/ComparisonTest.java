@@ -166,8 +166,8 @@ public class ComparisonTest extends BaseTest{
 		}
 		catch(Throwable ex)
 		{
-			objComparisonPage.captureScreenshot("createComparisonWithControlandCase-RunFail");
-			onFailureMeassage(ex.getMessage(),"createComparisonWithControlandCase-ComparisonRunFail","createComparisonWithControlandCase-ComparisonRunFail");
+			objComparisonPage.captureScreenshot("createComparisonWithControlandCaseRunFail");
+			onFailureMeassage(ex.getMessage(),"createComparisonWithControlandCaseRunFail","createComparisonWithControlandCaseRunFail");
 		}
 	}	
 
