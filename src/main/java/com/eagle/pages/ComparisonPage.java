@@ -601,7 +601,7 @@ public class ComparisonPage extends BasePage{
 				do
 				{
 					try {	    	
-						edit.isDisplayed(); 
+						edit.isDisplayed();
 						break outerloop;
 					}
 					catch(Exception ex) {
@@ -609,19 +609,23 @@ public class ComparisonPage extends BasePage{
 							if (fetchFailed.isDisplayed()) {
 								break outerloop;
 							}
-							if (notingToShowText.isDisplayed()) {
-								break outerloop;
-							}
 						}
-						catch (Exception et){
-							Thread.sleep(3000);
-							if(i==20) {
-								break outerloop;
+						catch(Exception ev) {
+							try {
+								if (notingToShowText.isDisplayed()) {
+									break outerloop;
+								}
 							}
-						}	 
+							catch (Exception et){
+								Thread.sleep(3000);
+								if(i==20) {
+									break outerloop;
+								}
+							}	 
+						}
 					}
 				}
-				while(i<=20);	         
+				while(i<=20);         
 		}
 		catch(Exception | AssertionError ex)
 		{

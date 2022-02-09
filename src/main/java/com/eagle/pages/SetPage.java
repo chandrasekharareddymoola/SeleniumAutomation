@@ -586,6 +586,8 @@ public class SetPage extends BasePage{
 			WebElement opn = this.openSet(SetToCreate);
 			BasePage.click(opn);
 			this.expandSet();
+			this.GridPrimaryColumnAlone("EFO ID");
+			Thread.sleep(5000);
 			this.editSet();	  
 			String NoOfRecordsInitial = ItemCountInExpand.getText();
 			List<String>  myAlist = new ArrayList<String>();
@@ -975,6 +977,7 @@ public class SetPage extends BasePage{
 
 	//Wait for the edit button to be displayed after an action as there will be a load time
 	public void waitForEditAndDelete() throws Throwable{
+
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		try {  
 			int i=0;
@@ -982,7 +985,7 @@ public class SetPage extends BasePage{
 				do
 				{
 					try {	    	
-						edit.isDisplayed();	
+						edit.isDisplayed();
 						break outerloop;
 					}
 					catch(Exception ex) {
@@ -990,17 +993,20 @@ public class SetPage extends BasePage{
 							if (fetchFailed.isDisplayed()) {
 								break outerloop;
 							}
-							if (notingToShowText.isDisplayed()) {
-								break outerloop;
-							}
 						}
-						catch (Exception et){
-							Thread.sleep(3000);
-							i++;
-							if(i==20) {
-								break outerloop;
-							}	
-						}	 
+						catch(Exception ev) {
+							try {
+								if (notingToShowText.isDisplayed()) {
+									break outerloop;
+								}
+							}
+							catch (Exception et){
+								Thread.sleep(3000);
+								if(i==20) {
+									break outerloop;
+								}
+							}	 
+						}
 					}
 				}
 				while(i<=20);         

@@ -15,23 +15,15 @@
           <include name="afterClass"/>
         </methods>
       </class> <!-- com.eagle.TestCases.LogoutTest -->
-      <class name="com.eagle.TestCases.LoginTest">
+      <class name="com.eagle.TestCases.AnalysisTest">
         <methods>
           <include name="launchApplication"/>
+          <include name="CreateAnalysis_Test"/>
           <include name="closeApplication"/>
           <include name="beforeClass"/>
-          <include name="VerifyLoginPage_Test"/>
+          <include name="CreateAnalysisMandatoryCheck_Test"/>
         </methods>
-      </class> <!-- com.eagle.TestCases.LoginTest -->
-      <class name="com.eagle.TestCases.ExplorationTest">
-        <methods>
-          <include name="launchApplication"/>
-          <include name="ExplorationCreateTwoRelationCard_Test"/>
-          <include name="closeApplication"/>
-          <include name="beforeClass"/>
-          <include name="ExplorationCreateARelationCard_Test"/>
-        </methods>
-      </class> <!-- com.eagle.TestCases.ExplorationTest -->
+      </class> <!-- com.eagle.TestCases.AnalysisTest -->
     </classes>
   </test> <!-- Smoke Test cases(failed) -->
 </suite> <!-- Failed suite [SmokeTestingSuite] -->

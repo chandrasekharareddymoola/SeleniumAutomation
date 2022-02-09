@@ -499,17 +499,20 @@ public class ExplorationPage extends BasePage{
 							if (fetchFailed.isDisplayed()) {
 								break outerloop;
 							}
-							if (notingToShowText.isDisplayed()) {
-								break outerloop;
-							}
 						}
-						catch (Exception et){
-							Thread.sleep(3000);
-							if(i==20) {
-								break outerloop;
+						catch(Exception ev) {
+							try {
+								if (notingToShowText.isDisplayed()) {
+									break outerloop;
+								}
 							}
-						}	 
-						//						}
+							catch (Exception et){
+								Thread.sleep(3000);
+								if(i==20) {
+									break outerloop;
+								}
+							}	 
+						}
 					}
 				}
 				while(i<=20);         
@@ -519,7 +522,7 @@ public class ExplorationPage extends BasePage{
 			throw ex;
 		}
 	}
-
+	
 	// Wait for Save changes to be displayed after an action as there will be a load time
 	public void waitForSaveChanges() throws Throwable{
 

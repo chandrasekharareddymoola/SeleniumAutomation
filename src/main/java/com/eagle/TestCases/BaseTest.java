@@ -11,16 +11,15 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import com.eagle.ConfigUtils.ReadExcelFile;
 import com.eagle.ConfigUtils.ReadObject;
 import com.eagle.pages.BasePage;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-//import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseTest {
 
@@ -50,6 +49,9 @@ public class BaseTest {
 	@BeforeClass
 	public static void launchApplication() throws IOException, InterruptedException, AWTException{
 		if(webdriver==null) {		
+			
+//			WebDriverManager.firefoxdriver().setup();
+//			webdriver = new FirefoxDriver(); 
 
 			WebDriverManager.chromedriver().setup();
 			ChromeOptions options = new ChromeOptions();
