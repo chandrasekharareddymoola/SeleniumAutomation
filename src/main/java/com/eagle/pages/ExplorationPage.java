@@ -1659,7 +1659,7 @@ public class ExplorationPage extends BasePage{
 		List<String>  OriginalList = new ArrayList<String>();
 		List<String>  TempList = new ArrayList<String>();
 		for(int i=1; i<=NoOfRows; i++) {
-			WebElement text = driver.findElement(By.xpath("(((//div[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"])//div)["+CurrentColumn+"]"));
+			WebElement text = driver.findElement(By.xpath("(((//div[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"])/div)["+CurrentColumn+"]"));
 			OriginalList.add(text.getText());
 			TempList.add(text.getText());
 		}
@@ -1676,7 +1676,7 @@ public class ExplorationPage extends BasePage{
 		List<String>  OriginalList = new ArrayList<String>();
 		List<String>  TempList = new ArrayList<String>();
 		for(int i=1; i<=NoOfRows; i++) {
-			WebElement text = driver.findElement(By.xpath("(((//div[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"])//div)["+CurrentColumn+"]"));
+			WebElement text = driver.findElement(By.xpath("(((//div[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"])/div)["+CurrentColumn+"]"));
 			OriginalList.add(text.getText());
 			TempList.add(text.getText());
 		}

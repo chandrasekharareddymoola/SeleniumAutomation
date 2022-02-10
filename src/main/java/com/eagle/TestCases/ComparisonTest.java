@@ -580,41 +580,41 @@ public class ComparisonTest extends BaseTest{
 //			onFailureMeassage(ex.getMessage(),"ShareComparisonFail","ShareComparisonFail");
 //		}
 //	}
-
-	@Test(priority = 19, description = "Remove items from Comparison Expand")
-	public void RemoveItemsfromComparison_Test() throws Throwable  {
-		try {
-
-			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
-
-			System.out.println(functionName);
-			String value = this.getConfiguration().get(functionName);
-			String[] ComParameters =value.split(",");
-			String ComName = ComParameters[0].trim()+dtText;
-			String ControlSetName = ComParameters[1].trim();
-			String entity = ComParameters[2].trim();
-			String searchTextInControl = ComParameters[3].trim();
-			String removeItem1 = ComParameters[4].trim();
-			String removeItem2 = ComParameters[5].trim();
-			String removeItem3 = ComParameters[6].trim();
-
-			/* Remove items in Expanded Set */
-			objComparisonPage.RemoveItemsfromComparison(ComName,ControlSetName ,entity,searchTextInControl,removeItem1,removeItem2,removeItem3);
-			//				objComparisonPage.RemoveItemsfromComparison("Remove Item Comparison","Control Set" ,"Gene","asph", "72112780","20981360","147670524");
-			onSuccessMeassage("Items removed successfully in Comparison Expand");
-		}
-		catch(Exception ex)
-		{
-			objComparisonPage.captureScreenshot("ComparisonItemsRemoveFail");
-			onFailureMeassage(ex.getMessage(),"ComparisonItemsRemoveFail","ComparisonItemsRemoveFail");
-		}
-		catch(AssertionError ex)
-		{
-			objComparisonPage.captureScreenshot("ComparisonItemsRemoveFail");
-			onFailureMeassage(ex.getMessage(),"ComparisonItemsRemoveFail","ComparisonItemsRemoveFail");
-		}
-	}
-
+//
+//	@Test(priority = 19, description = "Remove items from Comparison Expand")
+//	public void RemoveItemsfromComparison_Test() throws Throwable  {
+//		try {
+//
+//			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+//
+//			System.out.println(functionName);
+//			String value = this.getConfiguration().get(functionName);
+//			String[] ComParameters =value.split(",");
+//			String ComName = ComParameters[0].trim()+dtText;
+//			String ControlSetName = ComParameters[1].trim();
+//			String entity = ComParameters[2].trim();
+//			String searchTextInControl = ComParameters[3].trim();
+//			String removeItem1 = ComParameters[4].trim();
+//			String removeItem2 = ComParameters[5].trim();
+//			String removeItem3 = ComParameters[6].trim();
+//
+//			/* Remove items in Expanded Set */
+//			objComparisonPage.RemoveItemsfromComparison(ComName,ControlSetName ,entity,searchTextInControl,removeItem1,removeItem2,removeItem3);
+//			//				objComparisonPage.RemoveItemsfromComparison("Remove Item Comparison","Control Set" ,"Gene","asph", "72112780","20981360","147670524");
+//			onSuccessMeassage("Items removed successfully in Comparison Expand");
+//		}
+//		catch(Exception ex)
+//		{
+//			objComparisonPage.captureScreenshot("ComparisonItemsRemoveFail");
+//			onFailureMeassage(ex.getMessage(),"ComparisonItemsRemoveFail","ComparisonItemsRemoveFail");
+//		}
+//		catch(AssertionError ex)
+//		{
+//			objComparisonPage.captureScreenshot("ComparisonItemsRemoveFail");
+//			onFailureMeassage(ex.getMessage(),"ComparisonItemsRemoveFail","ComparisonItemsRemoveFail");
+//		}
+//	}
+//
 //	@Test(priority = 20, description = "Interchange Control and Case sets in the Comparison")
 //	public void ChangeControlAndCase_Test() throws Throwable {
 //		try {

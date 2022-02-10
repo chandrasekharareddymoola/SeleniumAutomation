@@ -587,7 +587,7 @@ public class SetPage extends BasePage{
 			BasePage.click(opn);
 			this.expandSet();
 			this.GridPrimaryColumnAlone("EFO ID");
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 			this.editSet();	  
 			String NoOfRecordsInitial = ItemCountInExpand.getText();
 			List<String>  myAlist = new ArrayList<String>();
@@ -1183,6 +1183,8 @@ public class SetPage extends BasePage{
 										{
 											count++;
 											ExtentTestManager.getTest().log(Status.PASS, "Value present in row: " + i + ", column:" + j + " of page " + k);
+											System.out.println(i + valuesInRows);    // need to remove
+											System.out.println(i + ItemsLowerCase);  // need to remove
 											break outloop2;
 										}
 									}
@@ -1377,12 +1379,13 @@ public class SetPage extends BasePage{
 		List<String>  OriginalList = new ArrayList<String>();
 		List<String>  TempList = new ArrayList<String>();
 		for(int i=1; i<=NoOfRows; i++) {
-			WebElement text = driver.findElement(By.xpath("(((//div[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"])//div)["+CurrentColumn+"]"));
+			WebElement text = driver.findElement(By.xpath("(((//div[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"])/div)["+CurrentColumn+"]"));
 			OriginalList.add(text.getText());
 			TempList.add(text.getText());
 		}
 		Collections.sort(TempList);
 		assertEquals(OriginalList, TempList);
+		System.out.println(OriginalList);
 		ExtentTestManager.getTest().log(Status.PASS,"Ascending sorting of "+ ColumnToBeSorted + " is verified");
 	}
 
@@ -1394,7 +1397,7 @@ public class SetPage extends BasePage{
 		List<String>  OriginalList = new ArrayList<String>();
 		List<String>  TempList = new ArrayList<String>();
 		for(int i=1; i<=NoOfRows; i++) {
-			WebElement text = driver.findElement(By.xpath("(((//div[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"])//div)["+CurrentColumn+"]"));
+			WebElement text = driver.findElement(By.xpath("(((//div[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"])/div)["+CurrentColumn+"]"));
 			OriginalList.add(text.getText());
 			TempList.add(text.getText());
 		}

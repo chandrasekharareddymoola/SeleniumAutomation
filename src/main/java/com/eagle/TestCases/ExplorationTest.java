@@ -584,31 +584,31 @@ public class ExplorationTest extends BaseTest{
 		}
 	}
 
-//	@Test(priority = 18, description = "Sorting a column in an Exploration")
-//	public void SortColumnExploration_Test() throws Throwable  {
-//		try {
-//
-//			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
-//
-//			System.out.println(functionName);
-//			String value = this.getConfiguration().get(functionName);
-//			String[] expParameters =value.split(",");
-//			String ExpName = expParameters[0].trim()+dtText;
-//			String entity = expParameters[1].trim();
-//			String searchText = expParameters[2].trim();
-//			String sortColumn = expParameters[3].trim();
-//
-//			/* Sorting column in a Exploration */
-//			objExplorationPage.SortColumnInExploration(ExpName, entity, searchText,sortColumn);
-//			//			objExplorationPage.SortColumnInExploration("SortExploration", "Disease", "Kera", "EFO Name");
-//			onSuccessMeassage("Column in Exploration Sorted Successfully");
-//		}
-//		catch(Exception | AssertionError ex)
-//		{
-//			objExplorationPage.captureScreenshot("SortColumnExplorationFail");
-//			onFailureMeassage(ex.getMessage(),"SortColumnExplorationFail","SortColumnExplorationFail");
-//		}
-//	}
+	@Test(priority = 18, description = "Sorting a column in an Exploration")
+	public void SortColumnExploration_Test() throws Throwable  {
+		try {
+
+			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+
+			System.out.println(functionName);
+			String value = this.getConfiguration().get(functionName);
+			String[] expParameters =value.split(",");
+			String ExpName = expParameters[0].trim()+dtText;
+			String entity = expParameters[1].trim();
+			String searchText = expParameters[2].trim();
+			String sortColumn = expParameters[3].trim();
+
+			/* Sorting column in a Exploration */
+			objExplorationPage.SortColumnInExploration(ExpName, entity, searchText,sortColumn);
+			//			objExplorationPage.SortColumnInExploration("SortExploration", "Disease", "Kera", "EFO Name");
+			onSuccessMeassage("Column in Exploration Sorted Successfully");
+		}
+		catch(Exception | AssertionError ex)
+		{
+			objExplorationPage.captureScreenshot("SortColumnExplorationFail");
+			onFailureMeassage(ex.getMessage(),"SortColumnExplorationFail","SortColumnExplorationFail");
+		}
+	}
 //
 //	@Test(priority = 19, description = "Filtering an Exploration with one filter")
 //	public void FilterExploration_Test() throws Throwable  {
