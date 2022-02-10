@@ -1183,8 +1183,6 @@ public class SetPage extends BasePage{
 										{
 											count++;
 											ExtentTestManager.getTest().log(Status.PASS, "Value present in row: " + i + ", column:" + j + " of page " + k);
-											System.out.println(i + valuesInRows);    // need to remove
-											System.out.println(i + ItemsLowerCase);  // need to remove
 											break outloop2;
 										}
 									}
