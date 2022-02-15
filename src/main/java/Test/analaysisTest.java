@@ -109,6 +109,82 @@ public class analaysisTest {
 		WebElement featureSelect = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='disease']//preceding-sibling::input")));
 		customclick(featureSelect);
 		
+		WebElement categoryListbutton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='disease']//parent::li//i[@data-icon-name='ChevronRight']")));
+		customclick(categoryListbutton);
+		
+		WebElement CategoryAllButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class,'CategoricalSummary')]//li//span[text()='ALL']")));
+		customclick(CategoryAllButton);
+		
+		WebElement Categorylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[contains(@class,'CategoricalSummary')]//li//div[contains(@class,'CategoricalSummary')])//span")));
+		List <WebElement> CategoryListelements =  webdriver.findElements(By.xpath("(//div[contains(@class,'CategoricalSummary')]//li//div[contains(@class,'CategoricalSummary')])//span"));
+		int sizeOfElements = CategoryListelements.size();
+		for (int i=1; i<=sizeOfElements;i++) 
+		{
+			WebElement Listname = webdriver.findElement(By.xpath("(//div[contains(@class,'CategoricalSummary')]//li//div[contains(@class,'CategoricalSummary')]//span)["+i+"]"));
+			String name = Listname.getText();
+			System.out.println(name);
+		}
+		
+//		customclick(Categorylist);
+				
+		WebElement CategoryCancel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='Cancel']")));
+//		customclick(CategoryCancel);
+		
+		WebElement Categoryaddtoselection = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='Add to my selection']")));
+//		customclick(Categoryaddtoselection);
+		
+		WebElement Categoryback = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@data-icon-name='ChevronLeft']")));
+		customclick(Categoryback);
+		
+		
+		
+		
+		
+		WebElement featureSelect2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='body_mass_index']//preceding-sibling::input")));
+		customclick(featureSelect2);
+		
+		WebElement summaryListButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='body_mass_index']//parent::li//i[@data-icon-name='ChevronRight']")));
+		customclick(summaryListButton);
+		
+		WebElement SummaryText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class,'NumericalSummary')]//div//span[text()='SUMMARY']")));
+		customclick(SummaryText);
+		
+		List <WebElement> SummaryListelements =  webdriver.findElements(By.xpath("(//div[contains(@class,'NumericalSummary')]//li)//span[1]"));
+		int sizeOfElements2 = SummaryListelements.size();
+		for (int i=1; i<=sizeOfElements2;i++) 
+		{
+			WebElement Listname2 = webdriver.findElement(By.xpath("(//div[contains(@class,'NumericalSummary')]//li)["+i+"]//span[1]"));
+			String name2 = Listname2.getText();
+			System.out.println(name2);
+		}
+		
+		WebElement RANGEtext = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[contains(@class,'NumericalSummary')])//span[text()='RANGE']")));
+		customclick(RANGEtext);
+		
+		WebElement MinimumValue = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[contains(@class,'NumericalSummary')])//span[contains(text(),'Minimun value')]")));
+		customclick(MinimumValue);
+		
+		WebElement MaximumValue = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[contains(@class,'NumericalSummary')])//span[contains(text(),'Maximum value')]")));
+		customclick(MaximumValue);
+		
+		WebElement EditMin = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='edit_min']")));
+		customclick(EditMin);
+		
+		WebElement EditMax = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='edit_max']")));
+		customclick(EditMax);
+		
+		WebElement CategoryCancel2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='Cancel']")));
+//		customclick(CategoryCancel2);
+		
+		WebElement Categoryaddtoselection2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='Add to my selection']")));
+//		customclick(Categoryaddtoselection2);
+		
+		WebElement Categoryback2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@data-icon-name='ChevronLeft']")));
+		customclick(Categoryback2);
+		
+		WebElement featureminimizeclose = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='disease']//preceding::button//i[@data-icon-name='BackToWindow']")));
+		customclick(featureminimizeclose);
+		
 //		WebElement applyButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Apply']")));
 //		customclick(applyButton);
 		
@@ -148,8 +224,11 @@ public class analaysisTest {
 //		dragAndDrop.perform();
 		
 //		builder.dragAndDrop(fromElement,toElement).perform();
+		
 		dragAndDrop(fromElement,toElement);
 		Thread.sleep(10000);
+		
+		
 		
 		System.out.println("End");
 		

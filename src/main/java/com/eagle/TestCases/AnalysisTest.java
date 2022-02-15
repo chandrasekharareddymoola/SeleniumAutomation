@@ -78,70 +78,94 @@ public class AnalysisTest extends BaseTest{
 //		}
 //	}
 
-	@Test(priority = 2, description = "Edit Analysis Name and Description from List Page")
-	public void AnalysisNameAndDescEditInList_Test() throws Throwable {
-		try {
-
-//			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+//	@Test(priority = 2, description = "Edit Analysis Name and Description from List Page")
+//	public void AnalysisNameAndDescEditInList_Test() throws Throwable {
+//		try {
 //
-//			System.out.println(functionName);
-//			String value = this.getConfiguration().get(functionName);
-//			String[] AnaParameters =value.split(",");
-//			String AnalysisNameInital = AnaParameters[0].trim()+dtText;
-//			String AnalysisDescriptionInital = AnaParameters[1].trim();
-//			String StudyName = AnaParameters[2].trim();
-//			String AnalysisName = AnaParameters[3].trim()+dtText;
-//			String AnalysisDescription = AnaParameters[4].trim();
-
-
-			/* Edit Analysis Name and Description in list page */	 
-//			objAnalysisPage.AnalysisNameAndDescEditInList(AnalysisNameInital, AnalysisDescriptionInital, StudyName, AnalysisName, AnalysisDescription);
-			objAnalysisPage.AnalysisNameAndDescEditInList("Analysis Test","Analysis Description","Galleon","Name of [Analysis>: is changed", "Description of [Analysis>: is changed");
-			onSuccessMeassage("An anlysis is created and the name, description and study are editted successfully");
-		}
-		catch(Exception | AssertionError ex)
-		{
-			objAnalysisPage.captureScreenshot("AnalysisNameAndDescEditInListFail");
-			onFailureMeassage(ex.getMessage(),"AnalysisNameAndDescEditInListFail","AnalysisNameAndDescEditInListFail");
-		}
-	}
-	
-	
-	@Test(priority = 3, description = "Edit Analysis Name and Description from List Page")
-	public void AnalysisNameAndDescEditInList_Test() throws Throwable {
-		try {
-
-//			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+////			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+////
+////			System.out.println(functionName);
+////			String value = this.getConfiguration().get(functionName);
+////			String[] AnaParameters = value.split(",");
+////			String AnalysisNameInital = AnaParameters[0].trim()+dtText;
+////			String AnalysisDescriptionInital = AnaParameters[1].trim();
+////			String StudyName = AnaParameters[2].trim();
+////			String AnalysisName = AnaParameters[3].trim()+dtText;
+////			String AnalysisDescription = AnaParameters[4].trim();
 //
-//			System.out.println(functionName);
-//			String value = this.getConfiguration().get(functionName);
-//			String[] AnaParameters =value.split(",");
-//			String AnalysisNameInital = AnaParameters[0].trim()+dtText;
-//			String AnalysisDescriptionInital = AnaParameters[1].trim();
-//			String StudyName = AnaParameters[2].trim();
-//			String AnalysisName = AnaParameters[3].trim()+dtText;
-//			String AnalysisDescription = AnaParameters[4].trim();
-
-
-			/* Edit Analysis Name and Description in list page */	 
-//			objAnalysisPage.AnalysisNameAndDescEditInList(AnalysisNameInital, AnalysisDescriptionInital, StudyName, AnalysisName, AnalysisDescription);
-			objAnalysisPage.AnalysisNameAndDescEditInList("Analysis Test","Analysis Description","Galleon","Name of [Analysis>: is changed", "Description of [Analysis>: is changed");
-			onSuccessMeassage("An anlysis is created and the name, description and study are editted successfully");
-		}
-		catch(Exception | AssertionError ex)
-		{
-			objAnalysisPage.captureScreenshot("AnalysisNameAndDescEditInListFail");
-			onFailureMeassage(ex.getMessage(),"AnalysisNameAndDescEditInListFail","AnalysisNameAndDescEditInListFail");
-		}
-	}
+//
+//			/* Edit Analysis Name and Description in list page */	 
+////		objAnalysisPage.AnalysisNameAndDescEditInList(AnalysisNameInital, AnalysisDescriptionInital, StudyName, AnalysisName, AnalysisDescription);
+//			objAnalysisPage.AnalysisNameAndDescEditInList("Analysis-3","Analysis Description","Eagle Study A","Name of [Analysis>: is changed", "Description of [Analysis>: is changed");
+//			onSuccessMeassage("An analysis is created and the name, description and study are edited successfully");
+//		}
+//		catch(Exception | AssertionError ex)
+//		{
+//			objAnalysisPage.captureScreenshot("AnalysisNameAndDescEditInListFail");
+//			onFailureMeassage(ex.getMessage(),"AnalysisNameAndDescEditInListFail","AnalysisNameAndDescEditInListFail");
+//		}
+//	}
 	
 	
+//	@Test(priority = 3, description = "Edit Analysis Name and Description from List Page")
+//	public void AnalysisNameAndDescEditInPage_Test() throws Throwable {
+//		try {
+//
+////			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+////
+////			System.out.println(functionName);
+////			String value = this.getConfiguration().get(functionName);
+////			String[] AnaParameters =value.split(",");
+////			String AnalysisNameInital = AnaParameters[0].trim()+dtText;
+////			String AnalysisDescriptionInital = AnaParameters[1].trim();
+////			String StudyName = AnaParameters[2].trim();
+////			String AnalysisName = AnaParameters[3].trim()+dtText;
+////			String AnalysisDescription = AnaParameters[4].trim();
+//
+//
+//			/* Edit Analysis Name and Description in list page */	 
+////			objAnalysisPage.AnalysisNameAndDescEditInList(AnalysisNameInital, AnalysisDescriptionInital, StudyName, AnalysisName, AnalysisDescription);
+//			objAnalysisPage.AnalysisNameAndDescEditInPage("Analysis-4","Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far","Eagle Study A","Name of ()@#$Analysis{}: is changed", "Description small", "Description of ()@#$Analysis{}: is changed");
+//			onSuccessMeassage("An analysis is created and the name, description and study are editted successfully");
+//		}
+//		catch(Exception | AssertionError ex)
+//		{
+//			objAnalysisPage.captureScreenshot("AnalysisNameAndDescEditInPageFail");
+//			onFailureMeassage(ex.getMessage(),"AnalysisNameAndDescEditInPageFail","AnalysisNameAndDescEditInPageFail");
+//		}
+//	}
 	
 		
-	@Test(priority = 4, description = "Create and Delete Analysis")
-	public void CreateAndDeleteAnalysis_Test() throws Throwable {
+//	@Test(priority = 4, description = "Create and Delete Analysis")
+//	public void CreateAndDeleteAnalysis_Test() throws Throwable {
+//		try {
+//
+////			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+////
+////			System.out.println(functionName);
+////			String value = this.getConfiguration().get(functionName);
+////			String[] AnaParameters =value.split(",");
+////			String AnalysisName = AnaParameters[0].trim()+dtText;
+////			String AnalysisDescription = AnaParameters[1].trim();
+////			String StudyName = AnaParameters[2].trim();
+//
+//
+//			/* Edit Analysis Name and Description inside Analysis */	 
+////		objAnalysisPage.CreateAndDeleteAnalysis(AnalysisName,AnalysisDescription,StudyName);
+//			objAnalysisPage.CreateAndDeleteAnalysis("Analysis-5", "Analysis Delete Description with greater than 60 letter text", "Eagle Study A");
+//			onSuccessMeassage("Analysis is Created and Deleted");
+//		}
+//		catch(Exception | AssertionError ex)
+//		{
+//			objAnalysisPage.captureScreenshot("AnalysisCreateandDeleteFail");
+//			onFailureMeassage(ex.getMessage(),"AnalysisCreateandDeleteFail","AnalysisCreateandDeleteFail");
+//		}
+//	}	
+	
+	@Test(priority = 5, description = "Verify a Numerical Value in Analysis")
+	public void VerifyNumericalValueAnalysis_Test() throws Throwable {
 		try {
-
+//
 //			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
 //
 //			System.out.println(functionName);
@@ -150,54 +174,50 @@ public class AnalysisTest extends BaseTest{
 //			String AnalysisName = AnaParameters[0].trim()+dtText;
 //			String AnalysisDescription = AnaParameters[1].trim();
 //			String StudyName = AnaParameters[2].trim();
+//			String EntityName = AnaParameters[3].trim()+dtText;
+//			String FeatureName = AnaParameters[4].trim();
 
-
-			/* Edit Analysis Name and Description inside Analysis */	 
-//			objAnalysisPage.CreateAndDeleteAnalysis(AnalysisName,AnalysisDescription,StudyName);
-			objAnalysisPage.CreateAndDeleteAnalysis("Analysis Delete", "Analysis Delete Description with greater than 60 letter text", "Galleon");
-			onSuccessMeassage("Analysis is Created and Deleted");
+			/* Select a Numerical value in Analysis and Verify the summary statistics headers */	
+//			objAnalysisPage.VerifyNumericalValueAnalysis(AnalysisName,AnalysisDescription,StudyName,EntityName,FeatureName);
+			objAnalysisPage.VerifyNumericalValueAnalysis("Numerical Value Analysis", "Numerical Value Analysis", "Eagle Study A","Subject","body_mass_index");
+			onSuccessMeassage("Numerical Value is successfully veririfed");
 		}
-		catch(Exception | AssertionError ex)
+		catch(Throwable ex)
 		{
-			objAnalysisPage.captureScreenshot("AnalysisCreateandDeleteFail");
-			onFailureMeassage(ex.getMessage(),"AnalysisCreateandDeleteFail","AnalysisCreateandDeleteFail");
+			objAnalysisPage.captureScreenshot("NumericalValueVerificationFail");
+			onFailureMeassage(ex.getMessage(),"NumericalValueVerificationFail","NumericalValueVerificationFail");
 		}
 	}	
+
 	
-	
-	
-	
-	
-	
-//
-//	@Test(priority = 3, description = "Create Comparison with Control and Case and Verify")
-//	public void CreateComparisonWithContolandCase_Test() throws Throwable {
-//		try {
+	@Test(priority = 6, description = "Verify a Categotical Value in Analysis")
+	public void VerifyCategoticalValueAnalysis_Test() throws Throwable {
+		try {
 //
 //			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
 //
 //			System.out.println(functionName);
 //			String value = this.getConfiguration().get(functionName);
 //			String[] AnaParameters =value.split(",");
-//			String ComName = AnaParameters[0].trim()+dtText;
-//			String ControlSetName = AnaParameters[1].trim();
-//			String CaseSetName = AnaParameters[2].trim();
-//			String entity = AnaParameters[3].trim();
-//			String searchTextInControl = AnaParameters[4].trim();
-//			String searchTextInCase = AnaParameters[5].trim();
-//
-//			/* Creates an Comparison with control and Case and Verify */	
-//			objAnalysisPage.createComparisonWithControlandCase(ComName,ControlSetName,CaseSetName,entity, searchTextInControl,searchTextInCase);
-//			//			objAnalysisPage.createComparisonWithControlandCase("Comparison Control and Case 1", "Control Set", "Case Set","Disease", "kera","buy");
-//			onSuccessMeassage("Comparison is Created Successfully with Control and Case Card");
-//		}
-//		catch(Throwable ex)
-//		{
-//			objAnalysisPage.captureScreenshot("createComparisonWithControlandCaseSetFail");
-//			onFailureMeassage(ex.getMessage(),"createComparisonWithControlandCaseSetFail","createComparisonWithControlandCaseSetFail");
-//		}
-//	}	
-//
+//			String AnalysisName = AnaParameters[0].trim()+dtText;
+//			String AnalysisDescription = AnaParameters[1].trim();
+//			String StudyName = AnaParameters[2].trim();
+//			String EntityName = AnaParameters[3].trim()+dtText;
+//			String FeatureName = AnaParameters[4].trim();
+
+			/* Select a Numerical value in Analysis and Verify the summary statistics headers */	
+//			objAnalysisPage.VerifyNumericalValueAnalysis(AnalysisName,AnalysisDescription,StudyName,EntityName, FeatureName);
+			objAnalysisPage.VerifyCategoricalValueAnalysis("Categorical Value Analysis", "Categorical Value Analysis", "Eagle Study A","Subject","disease");
+			onSuccessMeassage("Categorical Value is successfully veririfed");
+		}
+		catch(Throwable ex)
+		{
+			objAnalysisPage.captureScreenshot("CategoricalValueVerificationFail");
+			onFailureMeassage(ex.getMessage(),"CategoricalValueVerificationFail","CategoricalValueVerificationFail");
+		}
+	}	
+	
+	
 //	@Test(priority = 4, description = "Create Comparison with Control & Case and Run Comparison")
 //	public void createComparisonWithControlandCaseRunComparison_Test() throws Throwable {
 //		try {

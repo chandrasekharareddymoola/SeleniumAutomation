@@ -1,8 +1,12 @@
 package com.eagle.pages;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
 import java.awt.AWTException;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FileUtils;
@@ -15,6 +19,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import com.aventstack.extentreports.Status;
 import com.eagle.Reports.ExtentTestManager;
 
@@ -79,7 +86,7 @@ public class AnalysisPage extends BasePage{
 
 	@FindBy(xpath = "(//button[@type='button']//*[text()='Cancel'])")
 	public WebElement CancelButtonAnalysisCreate;
-	
+
 	@FindBy(xpath = "(//button[@type='button']//*[text()='Cancel'])[2]")
 	public WebElement CancelButtonInConfirmationBox;
 
@@ -91,9 +98,12 @@ public class AnalysisPage extends BasePage{
 
 	@FindBy(xpath = "//button[text()='Analysis created successfully']")
 	public WebElement analysisCreatedMessage;
-	
+
 	@FindBy(xpath = "//button[text()='Analysis details updated']")
 	public WebElement analysisupdateMessage;
+
+	@FindBy(xpath = "//button[text()='Analysis description updated']")
+	public WebElement analysisdescriptionupdateMessage;
 
 	@FindBy(xpath = "//button//span[contains(text(),'Save')]")
 	public WebElement saveButton;	
@@ -109,10 +119,10 @@ public class AnalysisPage extends BasePage{
 
 	@FindBy(xpath = "//button//span[contains(text(),'View')]")
 	public WebElement ViewButton;
-	
+
 	@FindBy(xpath = "//button//span[contains(text(),'Edit')]")
 	public WebElement EditButton;
-	
+
 	@FindBy(xpath = "//button//span[contains(text(),'Delete')]")
 	public WebElement DeleteButton;
 
@@ -121,16 +131,89 @@ public class AnalysisPage extends BasePage{
 
 	@FindBy(xpath = "//*[@data-icon-name='Cancel']")
 	public WebElement dialogBoxClose;
-	
+
 	@FindBy(xpath = "//div[@role='heading' and text()='Delete Analysis?']")
 	public WebElement DeleteConfirmationMessage;
 
 	@FindBy(xpath = "//p[text()='All data associated with this Analysis will be removed.']")
 	public WebElement WariningMessageforDelete;
+
+	@FindBy(xpath = "//*[@class='ms-List' and @role='presentation']")
+	public WebElement AnalysisList;
+
+	@FindBy(xpath = "//button[@type='button']//*[text()='More']")
+	public WebElement AnalysisDescMoreButton;
+
+	@FindBy(xpath = "//div[@role='heading' and text()='Analysis description']")
+	public WebElement AnalysisDescriptionDialogBoxHeader;
+
+	@FindBy(xpath = "//textarea[contains(@id,'TextField')]")
+	public WebElement AnalysisLongDescTextbox;
+
+	@FindBy(xpath = "//span[contains(text(),'Done')]")
+	public WebElement DoneButton;
+
+	@FindBy(xpath = "//span[text()='Analysis description']//parent::div//input[@type='text']")
+	public WebElement AnalysisDescriptionInPage;
+
+	@FindBy(xpath = "//*[text()='Resource shared successfully']")
+	public WebElement ShareSuccess;	
+
+	@FindBy(xpath = "//i[@data-icon-name='Down']")
+	public WebElement DownButtonInAnalysisHeader;	
+
+	@FindBy(xpath = "//*[text()='Analysis description']")
+	public WebElement AnalysisDescriptionTextInPage;	
+
+	@FindBy(xpath = "//*[@data-icon-name='CircleAdditionSolid']")
+	public WebElement clickCircle;
+
+	@FindBy(xpath = "//*[text()='Visualise Data']")
+	public WebElement visualizeData;
+
+	@FindBy(xpath = "//div[contains(@class,'NumericalSummary')]//div//span[text()='SUMMARY']")
+	public WebElement summaryText;
+
+	@FindBy(xpath = "(//div[contains(@class,'NumericalSummary')]//li)//span[1]")
+	public List<WebElement> summaryListHeaders;
+
+	@FindBy(xpath = "(//div[contains(@class,'NumericalSummary')])//span[text()='RANGE']")
+	public WebElement Rangetext;
+
+	@FindBy(xpath = "(//div[contains(@class,'NumericalSummary')])//span[contains(text(),'Minimum value')]")
+	public WebElement MinimumValueText;
+
+	@FindBy(xpath = "(//div[contains(@class,'NumericalSummary')])//span[contains(text(),'Maximum value')]")
+	public WebElement MaximumValueText;
+
+	@FindBy(xpath = "//*[@id='edit_min']")
+	public WebElement EditMin;
+
+	@FindBy(xpath = "//*[@id='edit_min']")
+	public WebElement EditMax;
+
+	@FindBy(xpath = "//span[text()='Cancel']")
+	public WebElement CancelButton;
+
+	@FindBy(xpath = "//span[text()='Add to my selection']")
+	public WebElement AddToMySelectionButton;
+
+	@FindBy(xpath = "//i[@data-icon-name='ChevronLeft']")
+	public WebElement BackButtonInCatagory;
 	
+	@FindBy(xpath = "//div[contains(@class,'CategoricalSummary')]//li//span[text()='ALL']")
+	public WebElement CategoryAllButton;
 	
+	@FindBy(xpath = "(//div[contains(@class,'CategoricalSummary')]//li//div[contains(@class,'CategoricalSummary')])//span")
+	public List <WebElement> CategoryList;
 	
-	
+
+
+
+
+
+
+
 
 
 
@@ -205,13 +288,7 @@ public class AnalysisPage extends BasePage{
 	@FindBy(xpath = "//i[@data-icon-name='Share']")
 	public WebElement share;	
 
-	@FindBy(xpath = "//*[@class='ms-List' and @role='presentation']")
-	public WebElement AnalysisList;
 
-
-
-	@FindBy(xpath = "//*[text()='Resource shared successfully']")
-	public WebElement ShareSuccess;	
 
 
 	//Methods
@@ -252,7 +329,7 @@ public class AnalysisPage extends BasePage{
 		WebElement SN = driver.findElement(By.xpath("//*[@role='listbox']//*[@data-automationid='splitbuttonprimary']//span[text()='"+StudyName+"']"));	
 		BasePage.click(SN);
 	}   
-	
+
 	//Click Save to create Analysis
 	public void clickSave() throws InterruptedException, AWTException{
 		BasePage.click(saveButton);
@@ -267,7 +344,7 @@ public class AnalysisPage extends BasePage{
 	//Create an Analysis
 	public void createAnalysis(String AnalysisName, String AnalysisDescription, String StudyName) throws Exception{
 		try {
-			this.clickAnalysisIcon();
+			this.clickAnalysisIcon(); 
 			this.ClickAddAnalysis(); 
 
 			BasePage.verifyPage("Name", AnalysisNameCreate);
@@ -300,6 +377,32 @@ public class AnalysisPage extends BasePage{
 			BasePage.click(field);
 			field.sendKeys(Keys.CONTROL + "a");		
 			field.sendKeys(Keys.DELETE);
+		}
+		catch(Throwable ex) {
+			throw ex;
+		}
+	}	
+
+	//Zoom in browser
+	public void ZoomIn(int times) throws Throwable{
+		try {		
+			Actions zoomIn = new Actions(driver);
+			for(int i=0; i<times ; i++) {
+				zoomIn.sendKeys(Keys.CONTROL, Keys.ADD).perform();
+			}
+		}
+		catch(Throwable ex) {
+			throw ex;
+		}
+	}	
+
+	//Zoom out browser
+	public void ZoomOut(int times) throws Throwable{
+		try {		
+			Actions zoomout = new Actions(driver);
+			for(int i=0; i<times ; i++) {
+				zoomout.sendKeys(Keys.CONTROL, Keys.SUBTRACT).perform();
+			}
 		}
 		catch(Throwable ex) {
 			throw ex;
@@ -390,7 +493,7 @@ public class AnalysisPage extends BasePage{
 		}	    	
 		catch(Exception ex) {}
 	}	
-	
+
 	//Click View button in action
 	public void clickView() throws InterruptedException, AWTException{
 		BasePage.click(ViewButton);
@@ -400,7 +503,7 @@ public class AnalysisPage extends BasePage{
 	public void clickEdit() throws InterruptedException, AWTException{
 		BasePage.click(EditButton);
 	}  
-	
+
 	//Click Delete button in action
 	public void clickDelete() throws InterruptedException, AWTException{
 		BasePage.click(DeleteButton);
@@ -410,7 +513,7 @@ public class AnalysisPage extends BasePage{
 	public void EditAnalysis(String AnalysisName, String AnalysisDescription, String StudyName) throws Throwable{
 		try {	
 			this.clickEdit();
-			
+
 			this.removeTextInField(AnalysisNameText);
 			this.SetNameForAnalysis(AnalysisName);	
 			ExtentTestManager.getTest().log(Status.PASS,"Analysis name is updated to '"+AnalysisName+"'");
@@ -434,20 +537,20 @@ public class AnalysisPage extends BasePage{
 
 			this.clickAnalysisIcon();
 			this.selectItemFortheList(AnalysisNameinital);
-			
+
 			this.EditAnalysis(AnalysisName, AnalysisDescription, StudyName);
 			this.clickCancel();
 			BasePage.waitforAnElement(CancelConfirmationMessage);
 			BasePage.waitforAnElement(WariningMessageforCancel);
 			ExtentTestManager.getTest().log(Status.PASS,"Warning message is seen after cancel");
 			BasePage.click(CancelButtonInConfirmationBox);
-			
+
 			BasePage.click(dialogBoxClose);
 			BasePage.waitforAnElement(CancelConfirmationMessage);
 			BasePage.waitforAnElement(WariningMessageforCancel);
 			ExtentTestManager.getTest().log(Status.PASS,"Warning message is seen after dialog box");
 			BasePage.click(CancelButtonInConfirmationBox);
-			
+
 			this.clickSave();
 			BasePage.waitforAnElement(analysisupdateMessage);
 			ExtentTestManager.getTest().log(Status.PASS, "'"+AnalysisName+"'" +  " - Analysis is updated");
@@ -456,7 +559,183 @@ public class AnalysisPage extends BasePage{
 			throw ex;
 		}
 	}	
-	
+
+	//Create and Edit Analysis From Page
+	public void AnalysisNameAndDescEditInPage(String AnalysisNameinital, String AnalysisDescriptioninital, String StudyName,String AnalysisName, String AnalysisDescriptionSmall, String AnalysisDescription) throws Throwable{
+		try {
+			createAnalysis(AnalysisNameinital,AnalysisDescriptioninital,StudyName);
+
+			this.clickAnalysisIcon();
+			this.selectItemFortheList(AnalysisNameinital);
+			this.clickView();
+
+			WebElement anlaysisHeader = driver.findElement(By.xpath("//*[@type='text' and @value='"+AnalysisNameinital+"']"));
+
+			BasePage.waitforAnElement(anlaysisHeader);
+			this.removeTextInField(anlaysisHeader);
+			anlaysisHeader.sendKeys(AnalysisName);
+
+			Thread.sleep(5000);
+
+			BasePage.click(DownButtonInAnalysisHeader);
+
+			BasePage.click(AnalysisDescMoreButton);
+			BasePage.waitforAnElement(AnalysisDescriptionDialogBoxHeader);
+			this.removeTextInField(AnalysisLongDescTextbox);
+			AnalysisLongDescTextbox.sendKeys(AnalysisDescriptionSmall);
+			BasePage.click(AnalysisCreationCancel);
+
+			BasePage.click(AnalysisDescMoreButton);
+			BasePage.waitforAnElement(AnalysisDescriptionDialogBoxHeader);
+			this.removeTextInField(AnalysisLongDescTextbox);
+			AnalysisLongDescTextbox.sendKeys(AnalysisDescriptionSmall);
+			BasePage.click(DoneButton);
+			BasePage.waitforAnElement(analysisdescriptionupdateMessage);
+
+			Thread.sleep(5000);
+
+			BasePage.click(AnalysisDescriptionInPage);
+			this.removeTextInField(AnalysisDescriptionInPage);
+			BasePage.click(AnalysisDescriptionInPage);
+			AnalysisDescriptionInPage.sendKeys(AnalysisDescription);	
+			BasePage.click(AnalysisDescriptionTextInPage);
+			BasePage.waitforAnElement(analysisdescriptionupdateMessage);
+
+			Thread.sleep(5000);
+
+			ExtentTestManager.getTest().log(Status.PASS, "'"+AnalysisNameinital+"'" +  " - Analysis is updated to " + AnalysisName);
+		}
+		catch(Exception ex) {
+			throw ex;
+		}
+	}
+
+	//Verify a numerical feature in an analysis
+	public void VerifyNumericalValueAnalysis(String AnalysisName, String AnalysisDescription, String StudyName,String EntityValue, String NumericalFeatureValue) throws Throwable{
+		try {
+			createAnalysis(AnalysisName,AnalysisDescription,StudyName);
+
+			this.clickAnalysisIcon();
+			this.selectItemFortheList(AnalysisName);
+			this.clickView();
+
+			BasePage.click(clickCircle);
+			BasePage.click(visualizeData);
+
+			WebElement entityselect = driver.findElement(By.xpath("//*[text()='"+EntityValue+"']"));
+			BasePage.click(entityselect);
+
+			this.ZoomOut(3);
+
+			WebElement featureSelect = driver.findElement(By.xpath("//*[text()='"+NumericalFeatureValue+"']//preceding-sibling::input"));
+			BasePage.click(featureSelect);
+
+			WebElement html = driver.findElement(By.tagName("html"));
+			html.sendKeys(Keys.CONTROL, Keys.SUBTRACT);
+			html.sendKeys(Keys.CONTROL, Keys.SUBTRACT);
+			html.sendKeys(Keys.CONTROL, Keys.SUBTRACT);
+
+			this.ZoomOut(3);
+
+			WebElement summaryListButton = driver.findElement(By.xpath("//*[text()='"+NumericalFeatureValue+"']//parent::li//i[@data-icon-name='ChevronRight']"));
+			BasePage.click(summaryListButton);
+
+			this.ZoomOut(3);
+
+			BasePage.waitforAnElement(summaryText);
+
+			int sizeOfElements = summaryListHeaders.size();
+			ArrayList<String> listOfNames = new ArrayList<String>();
+			for (int i=1; i<=sizeOfElements;i++) 
+			{
+				WebElement Listname = driver.findElement(By.xpath("(//div[contains(@class,'NumericalSummary')]//li)["+i+"]//span[1]"));
+				String name = Listname.getText();
+				listOfNames.add(name);
+			}
+			
+			System.out.println(listOfNames);
+
+			BasePage.waitforAnElement(Rangetext);
+			assertEquals(Rangetext.getText(),"RANGE");
+			BasePage.waitforAnElement(MinimumValueText);
+			assertTrue(MinimumValueText.getText().contains("Minimum value"));
+			BasePage.waitforAnElement(MaximumValueText);
+			assertTrue(MaximumValueText.getText().contains("Maximum value"));
+			BasePage.waitforAnElement(EditMin);
+			BasePage.waitforAnElement(EditMax);
+			BasePage.waitforAnElement(CancelButton);
+			BasePage.waitforAnElement(AddToMySelectionButton);	
+			BasePage.waitforAnElement(BackButtonInCatagory);
+			
+			BasePage.click(BackButtonInCatagory);
+
+			WebElement featureminimizeclose = driver.findElement(By.xpath("//*[text()='"+NumericalFeatureValue+"']//preceding::button//i[@data-icon-name='BackToWindow']"));
+			BasePage.click(featureminimizeclose);
+		}
+		catch(Exception | AssertionError ex) {
+			throw ex;
+		}
+	}
+
+	//Verify a numerical feature in an analysis
+	public void VerifyCategoricalValueAnalysis(String AnalysisName, String AnalysisDescription, String StudyName,String EntityValue, String CategoricalFeatureValue) throws Throwable{
+		try {
+			createAnalysis(AnalysisName,AnalysisDescription,StudyName);
+
+			this.clickAnalysisIcon();
+			this.selectItemFortheList(AnalysisName);
+			this.clickView();
+
+			BasePage.click(clickCircle);
+			BasePage.click(visualizeData);
+
+			WebElement entityselect = driver.findElement(By.xpath("//*[text()='"+EntityValue+"']"));
+			BasePage.click(entityselect);
+
+			this.ZoomOut(3);
+
+			WebElement featureSelect = driver.findElement(By.xpath("//*[text()='"+CategoricalFeatureValue+"']//preceding-sibling::input"));
+			BasePage.click(featureSelect);
+
+			WebElement html = driver.findElement(By.tagName("html"));
+			html.sendKeys(Keys.CONTROL, Keys.SUBTRACT);
+			html.sendKeys(Keys.CONTROL, Keys.SUBTRACT);
+			html.sendKeys(Keys.CONTROL, Keys.SUBTRACT);
+
+			this.ZoomOut(3);
+
+			WebElement CategoryListButton = driver.findElement(By.xpath("//*[text()='"+CategoricalFeatureValue+"']//parent::li//i[@data-icon-name='ChevronRight']"));
+			BasePage.click(CategoryListButton);
+			
+			assertEquals(CategoryAllButton.getText(),"ALL");
+
+			this.ZoomOut(3);
+						
+			int sizeOfElements = CategoryList.size();
+			ArrayList<String> listOfNames = new ArrayList<String>();
+			for (int i=1; i<=sizeOfElements;i++) 
+			{
+				WebElement Listname = driver.findElement(By.xpath("(//div[contains(@class,'CategoricalSummary')]//li//div[contains(@class,'CategoricalSummary')]//span)["+i+"]"));
+				String name = Listname.getText();
+				listOfNames.add(name);
+			}
+			
+			System.out.println(listOfNames);
+			
+			BasePage.waitforAnElement(CancelButton);
+			BasePage.waitforAnElement(AddToMySelectionButton);	
+			BasePage.waitforAnElement(BackButtonInCatagory);
+			
+			BasePage.click(BackButtonInCatagory);
+
+			WebElement featureminimizeclose = driver.findElement(By.xpath("//*[text()='"+CategoricalFeatureValue+"']//preceding::button//i[@data-icon-name='BackToWindow']"));
+			BasePage.click(featureminimizeclose);
+		}
+		catch(Exception | AssertionError ex) {
+			throw ex;
+		}
+	}
+
 	//Delete a created Analysis
 	public void DeleteAnalysis(String AnalysisName) throws Exception {
 		this.clickAnalysisIcon();	 
@@ -467,7 +746,7 @@ public class AnalysisPage extends BasePage{
 		BasePage.click(DeleteButton);	
 		ExtentTestManager.getTest().log(Status.PASS,AnalysisName +  " Analysis is deleted");
 	}
-		
+
 
 	//Create and Delete Analysis From list
 	public void CreateAndDeleteAnalysis(String AnalysisName, String AnalysisDescription, String StudyName) throws Throwable{
@@ -476,7 +755,7 @@ public class AnalysisPage extends BasePage{
 
 			this.clickAnalysisIcon();
 			this.selectItemFortheList(AnalysisName);
-			
+
 			this.DeleteAnalysis(AnalysisName);
 		}
 		catch(Exception ex) {

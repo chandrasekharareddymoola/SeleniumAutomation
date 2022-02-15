@@ -15,15 +15,14 @@
           <include name="afterClass"/>
         </methods>
       </class> <!-- com.eagle.TestCases.LogoutTest -->
-      <class name="com.eagle.TestCases.SetTest">
+      <class name="com.eagle.TestCases.AnalysisTest">
         <methods>
           <include name="launchApplication"/>
-          <include name="RemoveItemsfromSet_Test"/>
           <include name="closeApplication"/>
           <include name="beforeClass"/>
-          <include name="SortColumnSet_Test"/>
+          <include name="VerifyNumericalValueAnalysis_Test"/>
         </methods>
-      </class> <!-- com.eagle.TestCases.SetTest -->
+      </class> <!-- com.eagle.TestCases.AnalysisTest -->
     </classes>
   </test> <!-- Smoke Test cases(failed) -->
 </suite> <!-- Failed suite [SmokeTestingSuite] -->
