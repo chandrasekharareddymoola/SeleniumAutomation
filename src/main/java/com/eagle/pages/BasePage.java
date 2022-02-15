@@ -31,10 +31,10 @@ public class BasePage{
 		BasePage.passWord = emailPass;		
 	}
 
-	//Enter Username and Password
+	//Enter User name and Password
 	public static void enterUserPass(WebElement user, WebElement pass) throws InterruptedException, AWTException {		
 		click(user);	
-		user.sendKeys(userName);					//enters only username - case where only mail ID is required
+		user.sendKeys(userName);					//enters only user name - case where only mail ID is required
 		Thread.sleep(1000);
 		try {
 			if(pass.isDisplayed()) {
