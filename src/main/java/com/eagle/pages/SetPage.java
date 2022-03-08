@@ -280,6 +280,7 @@ public class SetPage extends BasePage{
 
 	public SetPage() throws InterruptedException, AWTException{ 		 
 		PageFactory.initElements(driver, this); 
+		driver.navigate().refresh();
 		BasePage.click(setIcon);
 		action.moveToElement(TermsOfUse).perform();
 	}
@@ -305,7 +306,7 @@ public class SetPage extends BasePage{
 	public void waitForSet() throws Throwable{	
 		try {  
 			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-			
+
 			Date dt = new Date();
 			DateFormat dtFrmt = new SimpleDateFormat("_HHmmss");
 			String dtText = dtFrmt.format(dt);
@@ -522,7 +523,7 @@ public class SetPage extends BasePage{
 		Thread.sleep(3000);
 	}
 
-	//Change the Primary column
+	//Modify Primary column alone
 	public void GridPrimaryColumnAlone(String PrimaryColumn) throws Throwable { 
 		try {	
 			this.GridSettings();
@@ -533,6 +534,32 @@ public class SetPage extends BasePage{
 			throw ex;
 		}
 	}
+
+	//Modify the secondary column
+	public void GridSecondaryColumnAlone(String SecondaryColumn) throws Throwable { 
+		try {	
+			this.GridSettings();
+			this.GridSecondaryColumn(SecondaryColumn);
+			BasePage.click(Apply);
+		}
+		catch (Exception | AssertionError ex) {
+			throw ex;
+		}
+	}
+
+	//Modify the primary and secondary column
+	public void GridPrimaryAndSecondaryColumnAlone(String PrimaryColumn, String SecondaryColumn) throws Throwable { 
+		try {	
+			this.GridSettings();
+			this.GridPrimaryColumn(PrimaryColumn);
+			this.GridSecondaryColumn(SecondaryColumn);
+			BasePage.click(Apply);
+		}
+		catch (Exception | AssertionError ex) {
+			throw ex;
+		}
+	}
+
 
 	//Select Items from List
 	public void selectItems(List<String> myAlist) throws Throwable{  
@@ -586,7 +613,7 @@ public class SetPage extends BasePage{
 			WebElement opn = this.openSet(SetToCreate);
 			BasePage.click(opn);
 			this.expandSet();
-			this.GridPrimaryColumnAlone("EFO ID");
+			this.GridPrimaryAndSecondaryColumnAlone("EFO ID", "Datasource Name");
 			Thread.sleep(2000);
 			this.editSet();	  
 			String NoOfRecordsInitial = ItemCountInExpand.getText();

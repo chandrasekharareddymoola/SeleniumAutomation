@@ -118,6 +118,7 @@ public class analaysisTest {
 		WebElement Categorylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[contains(@class,'CategoricalSummary')]//li//div[contains(@class,'CategoricalSummary')])//span")));
 		List <WebElement> CategoryListelements =  webdriver.findElements(By.xpath("(//div[contains(@class,'CategoricalSummary')]//li//div[contains(@class,'CategoricalSummary')])//span"));
 		int sizeOfElements = CategoryListelements.size();
+		
 		for (int i=1; i<=sizeOfElements;i++) 
 		{
 			WebElement Listname = webdriver.findElement(By.xpath("(//div[contains(@class,'CategoricalSummary')]//li//div[contains(@class,'CategoricalSummary')]//span)["+i+"]"));

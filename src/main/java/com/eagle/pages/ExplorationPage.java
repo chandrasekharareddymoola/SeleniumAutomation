@@ -327,6 +327,7 @@ public class ExplorationPage extends BasePage{
 
 	public ExplorationPage() throws AWTException, InterruptedException{ 	
 		PageFactory.initElements(driver, this); 
+		driver.navigate().refresh();
 		BasePage.click(explorationIcon);
 		action.moveToElement(TermsOfUse).perform();
 	}
@@ -519,7 +520,7 @@ public class ExplorationPage extends BasePage{
 			throw ex;
 		}
 	}
-	
+
 	// Wait for Save changes to be displayed after an action as there will be a load time
 	public void waitForSaveChanges() throws Throwable{
 
@@ -728,6 +729,31 @@ public class ExplorationPage extends BasePage{
 		}
 	}
 
+	//Modify the secondary column
+	public void GridSecondaryColumnAlone(String SecondaryColumn) throws Throwable { 
+		try {	
+			this.GridSettings();
+			this.GridSecondaryColumn(SecondaryColumn);
+			BasePage.click(Apply);
+		}
+		catch (Exception | AssertionError ex) {
+			throw ex;
+		}
+	}
+
+	//Modify the primary and secondary column
+	public void GridPrimaryAndSecondaryColumnAlone(String PrimaryColumn, String SecondaryColumn) throws Throwable { 
+		try {	
+			this.GridSettings();
+			this.GridPrimaryColumn(PrimaryColumn);
+			this.GridSecondaryColumn(SecondaryColumn);
+			BasePage.click(Apply);
+		}
+		catch (Exception | AssertionError ex) {
+			throw ex;
+		}
+	}
+
 	//Compare if Value 2 is greater than Value 1
 	public void DecreaseCompareTwovalues(String Value1, String Value2) throws InterruptedException, AWTException {	    
 		if(Integer.parseInt(Value2)<Integer.parseInt(Value1)){
@@ -747,7 +773,7 @@ public class ExplorationPage extends BasePage{
 		WebElement opn = this.openExploration(ExplorationToCreate);
 		BasePage.click(opn);
 		this.expandExploration();
-		this.GridPrimaryColumnAlone("Name");
+		this.GridPrimaryAndSecondaryColumnAlone("Name","RNA ID");
 		Thread.sleep(5000);
 		this.editCard();	
 		String NoOfRecordsInitial = ItemCountInExpand.getText();
@@ -775,10 +801,10 @@ public class ExplorationPage extends BasePage{
 	}
 
 	//File upload from explorer (Do not use if until absolutely necessary -> simulates keyboard key press)
-//	public void addItemsFromFile(String filePath) throws AWTException, InterruptedException {	    
-//		BasePage.click(addItemsFromAFile);
-//		this.FileUploadFormExplorer(filePath);
-//	}
+	//	public void addItemsFromFile(String filePath) throws AWTException, InterruptedException {	    
+	//		BasePage.click(addItemsFromAFile);
+	//		this.FileUploadFormExplorer(filePath);
+	//	}
 
 	//Click add items in expanded view
 	public void addItemsExpand() throws AWTException, InterruptedException{	    
@@ -1087,24 +1113,24 @@ public class ExplorationPage extends BasePage{
 	}	
 
 	//File upload from explorer using key actions (Do not use - use only as last resort as when system goes to sleep this doesn't work)
-//	public void FileUploadFormExplorer(String FileLocation) throws AWTException, InterruptedException{	    
-//		StringSelection ss = new StringSelection(FileLocation);
-//		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-//
-//		//imitate mouse events like ENTER, CTRL+C, CTRL+V
-//		Robot robot = new Robot();
-//		robot.delay(250);
-//		robot.keyPress(KeyEvent.VK_ENTER);
-//		robot.keyRelease(KeyEvent.VK_ENTER);
-//		robot.keyPress(KeyEvent.VK_CONTROL);
-//		robot.keyPress(KeyEvent.VK_V);
-//		robot.keyRelease(KeyEvent.VK_V);
-//		robot.keyRelease(KeyEvent.VK_CONTROL);
-//		robot.keyPress(KeyEvent.VK_ENTER);
-//		robot.delay(90);
-//		robot.keyRelease(KeyEvent.VK_ENTER);
-//		Thread.sleep(5000);
-//	}	
+	//	public void FileUploadFormExplorer(String FileLocation) throws AWTException, InterruptedException{	    
+	//		StringSelection ss = new StringSelection(FileLocation);
+	//		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+	//
+	//		//imitate mouse events like ENTER, CTRL+C, CTRL+V
+	//		Robot robot = new Robot();
+	//		robot.delay(250);
+	//		robot.keyPress(KeyEvent.VK_ENTER);
+	//		robot.keyRelease(KeyEvent.VK_ENTER);
+	//		robot.keyPress(KeyEvent.VK_CONTROL);
+	//		robot.keyPress(KeyEvent.VK_V);
+	//		robot.keyRelease(KeyEvent.VK_V);
+	//		robot.keyRelease(KeyEvent.VK_CONTROL);
+	//		robot.keyPress(KeyEvent.VK_ENTER);
+	//		robot.delay(90);
+	//		robot.keyRelease(KeyEvent.VK_ENTER);
+	//		Thread.sleep(5000);
+	//	}	
 
 	//Add from file in expanded view (Returns the list of items)
 	public List<String> addFromFile(String CategoryName, String Filelocation, String FileName) throws AWTException, InterruptedException, AssertionError {	    
@@ -1623,7 +1649,7 @@ public class ExplorationPage extends BasePage{
 			ExtentTestManager.getTest().log(Status.FAIL, "Not able to click element");
 		}
 	}
-	
+
 	//Create an exploration with 2 relation cards
 	public void createRelationCardMulti(String ExplorationToCreate, String EntitytoSelect, String ItemtoSearch, String RelationCardType, String RelationCardType2, String NumberOfItemsToSelect) throws Throwable { 
 		try {
@@ -1955,7 +1981,7 @@ public class ExplorationPage extends BasePage{
 			throw r;
 		}
 	}
-	
+
 	//Create an exploration and apply one filter
 	public void FilterExploration(String ExplorationName, String entityToSelect, String textToSearchInExploration, String Attribute, String FilterType, String textToFilter) throws Throwable { 
 		this.createExploration(ExplorationName, entityToSelect, textToSearchInExploration);
@@ -1964,7 +1990,7 @@ public class ExplorationPage extends BasePage{
 		this.verifyAfterFilter(Attribute, FilterType, textToFilter);
 		ExtentTestManager.getTest().log(Status.PASS, "Applied filter is verified");
 	}
-	
+
 	//Create an exploration and apply one filter
 	public void FilterExplorationMulti(String ExplorationName, String entityToSelect, String textToSearchInExploration, String Attribute1, String FilterType1, String textToFilter1, String Attribute2, String FilterType2, String textToFilter2) throws Throwable { 
 		this.createExploration(ExplorationName, entityToSelect, textToSearchInExploration);

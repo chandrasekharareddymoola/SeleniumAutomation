@@ -20,7 +20,6 @@ import com.eagle.ConfigUtils.ReadObject;
 
 public class ExtentManager {
 
-		
 	private static String EnvName = null;
 	
 	static Date dt = new Date();
@@ -40,6 +39,7 @@ public class ExtentManager {
 		return extent;
 	}
 	
+	@BeforeClass
 	public void EnvName() throws IOException {
 	ReadObject object = new ReadObject();
 	Properties configObject = object.getObjectRepositoty();	     

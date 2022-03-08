@@ -44,8 +44,8 @@ public class LogoutTest extends BaseTest{
 		ExtentTestManager.getTest().addScreenCaptureFromPath(System.getProperty("user.dir") + "./Resources/ErrorScreenshots/"+screenShotName+".png");			
 	}
 	
-	@AfterClass
-	public void afterClass()  {	
-		closeBroswer();
-	}
+//	@AfterClass
+//	public void afterClass()  {	
+//		closeBroswer();
+//	}
 }

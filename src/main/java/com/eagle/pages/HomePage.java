@@ -301,6 +301,7 @@ public class HomePage extends BasePage{
 			BasePage.click(saveSearch);
 			BasePage.click(saveButton);  
 			ExtentTestManager.getTest().log(Status.PASS, "Search is saved");
+			Thread.sleep(5000);
 		}
 		catch(Exception |AssertionError ex) 	{
 			throw ex;

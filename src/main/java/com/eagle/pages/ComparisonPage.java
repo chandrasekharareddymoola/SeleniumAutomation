@@ -361,6 +361,7 @@ public class ComparisonPage extends BasePage{
 
 	public ComparisonPage() throws AWTException, InterruptedException{ 	
 		PageFactory.initElements(driver, this); 
+		driver.navigate().refresh();
 		BasePage.click(ComparisonIcon);
 		action.moveToElement(TermsOfUse).perform();
 	}
@@ -1073,7 +1074,7 @@ public class ComparisonPage extends BasePage{
 		WebElement opn = this.openComparison(ComparisonToCreate);
 		BasePage.click(opn);
 		this.expandComparison();
-		this.GridPrimaryColumnAlone("End");
+		this.GridPrimaryAndSecondaryColumnAlone("End","Datasource Name");
 		Thread.sleep(5000);
 		this.editCard();	
 		String NoOfRecordsInitial = ItemCountInExpand.getText();
@@ -1823,10 +1824,32 @@ public class ComparisonPage extends BasePage{
 			this.GridPrimaryColumn(PrimaryColumn);
 			BasePage.click(Apply);
 		}
-		catch (Exception ex) {
+		catch (Exception | AssertionError ex) {
 			throw ex;
 		}
-		catch (AssertionError ex) {
+	}
+
+	//Modify the secondary column
+	public void GridSecondaryColumnAlone(String SecondaryColumn) throws Throwable { 
+		try {	
+			this.GridSettings();
+			this.GridSecondaryColumn(SecondaryColumn);
+			BasePage.click(Apply);
+		}
+		catch (Exception | AssertionError ex) {
+			throw ex;
+		}
+	}
+
+	//Modify the primary and secondary column
+	public void GridPrimaryAndSecondaryColumnAlone(String PrimaryColumn, String SecondaryColumn) throws Throwable { 
+		try {	
+			this.GridSettings();
+			this.GridPrimaryColumn(PrimaryColumn);
+			this.GridSecondaryColumn(SecondaryColumn);
+			BasePage.click(Apply);
+		}
+		catch (Exception | AssertionError ex) {
 			throw ex;
 		}
 	}
