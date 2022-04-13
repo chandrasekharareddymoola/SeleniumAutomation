@@ -2,9 +2,15 @@ package com.eagle.pages;
 
 import static org.testng.Assert.assertEquals;
 import java.awt.AWTException;
+import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,9 +19,10 @@ import org.testng.Assert;
 
 import com.aventstack.extentreports.Status;
 import com.eagle.Reports.ExtentTestManager;
+import com.eagle.TestCases.BaseTest;
 
 
-public class BasePage{
+public class BasePage extends BaseTest{
 
 	public static WebDriver driver;
 	public static String userName;
@@ -111,6 +118,24 @@ public class BasePage{
 		WebDriverWait wait = new WebDriverWait(driver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(Element));	
 	}
+	
+	//Method to capture screenshot
+		public String screenshotOnPass(String screenShotName) throws IOException
+		{
+			TakesScreenshot ts = (TakesScreenshot)driver;
+			File source = ts.getScreenshotAs(OutputType.FILE);
+			//			String dest = "./Resources/PassedScreenshots/"+screenShotName+".png";
+			//			String dest = "C:\\Users\\"+SharePointUserName+"\\Eagle Genomics\\Quality Assurance - Documents\\Test screenshots\\PassedScreenshots\\"+screenShotName+".png";
+			//			String dest = "C:\\Users\\"+SharePointUserName+"\\Eagle Genomics\\Quality Assurance - Documents\\Test screenshots\\PassedScreenshots"+dtTime+"\\"+screenShotName+".png";
+			String dest = "./Resources/TestReport"+dtTime+"/PassedScreenshots"+dtTime+"/"+screenShotName+".png";
+			File destination = new File(dest);
+			try {
+				FileUtils.copyFile(source, destination);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return dest;
+		}
 	
 	//Compare a text and an attribute value of an element
 	public static void CompareAttributeText(String attribute, String s, WebElement Element) throws InterruptedException, AWTException, AssertionError { 

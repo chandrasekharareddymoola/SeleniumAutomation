@@ -8,7 +8,7 @@
 		<classes>
 			<class name="com.eagle.TestCases.LoginTest" />
 			<class name="com.eagle.TestCases.AnalysisTest" />
-			<class name="com.eagle.TestCases.LogoutTest" />
+			<class name="com.eagle.TestCases.LogoutTest" />			
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->

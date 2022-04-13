@@ -8,9 +8,9 @@ import java.util.Random;
 public class TestRun {
 
 	public static void main(String[] args) {
-		for(int j=0; j<10;j++) {
+		for(int j=0; j<20;j++) {
 			int MinE = 0;
-			int MaxE = 3;
+			int MaxE = 6;
 			int RandomE = (MinE) + (int)(Math.random()*( MaxE - MinE + 1));
 			System.out.println(RandomE);
 		}

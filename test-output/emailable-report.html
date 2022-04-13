@@ -9,20 +9,66 @@
 <table>
 <tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
 <tr><th colspan="8">SmokeTestingSuite</th></tr>
-<tr><td><a href="#t0">Smoke Test cases</a></td><td class="num">3</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">108,766</td><td></td><td></td></tr>
+<tr><td><a href="#t0">Smoke Test cases</a></td><td class="num">0</td><td class="num attn">2</td><td class="num">0</td><td class="num attn">1</td><td class="num">2,937</td><td></td><td></td></tr>
 </table>
-<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">SmokeTestingSuite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Smoke Test cases &#8212; failed (configuration methods)</th></tr><tr class="failedeven"><td rowspan="1">com.eagle.TestCases.LoginTest</td><td><a href="#m0">closeApplication</a></td><td rowspan="1">1646725218686</td><td rowspan="1">731</td></tr><tr><th colspan="4">Smoke Test cases &#8212; passed</th></tr><tr class="passedeven"><td rowspan="1">com.eagle.TestCases.AnalysisTest</td><td><a href="#m1">VerifySelectingFeaturesInAnalysis_Test</a></td><td rowspan="1">1646725165958</td><td rowspan="1">47067</td></tr><tr class="passedodd"><td rowspan="1">com.eagle.TestCases.LoginTest</td><td><a href="#m2">VerifyLoginPage_Test</a></td><td rowspan="1">1646725118033</td><td rowspan="1">47899</td></tr><tr class="passedeven"><td rowspan="1">com.eagle.TestCases.LogoutTest</td><td><a href="#m3">VerifyLogout_Test</a></td><td rowspan="1">1646725213032</td><td rowspan="1">5199</td></tr></tbody>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">SmokeTestingSuite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Smoke Test cases &#8212; failed (configuration methods)</th></tr><tr class="failedeven"><td rowspan="1">com.eagle.TestCases.LoginTest</td><td><a href="#m0">launchApplication</a></td><td rowspan="1">1646735544911</td><td rowspan="1">2648</td></tr><tr class="failedodd"><td rowspan="1">com.eagle.TestCases.LogoutTest</td><td><a href="#m1">beforeClass</a></td><td rowspan="1">1646735547827</td><td rowspan="1">4</td></tr><tr><th colspan="4">Smoke Test cases &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">com.eagle.TestCases.AnalysisTest</td><td><a href="#m2">VerifySelectingFeaturesInAnalysis_Test</a></td><td rowspan="1">1646735547821</td><td rowspan="1">3</td></tr><tr><th colspan="4">Smoke Test cases &#8212; skipped (configuration methods)</th></tr><tr class="skippedeven"><td rowspan="2">com.eagle.TestCases.LoginTest</td><td><a href="#m3">beforeClass</a></td><td rowspan="1">1646735547601</td><td rowspan="1">-1646735547601</td></tr><tr class="skippedeven"><td><a href="#m4">closeApplication</a></td><td rowspan="1">1646735548166</td><td rowspan="1">-1646735548166</td></tr><tr><th colspan="4">Smoke Test cases &#8212; skipped</th></tr><tr class="skippedeven"><td rowspan="1">com.eagle.TestCases.LoginTest</td><td><a href="#m5">VerifyLoginPage_Test</a></td><td rowspan="1">1646735547634</td><td rowspan="1">0</td></tr><tr class="skippedodd"><td rowspan="1">com.eagle.TestCases.LogoutTest</td><td><a href="#m6">VerifyLogout_Test</a></td><td rowspan="1">1646735547833</td><td rowspan="1">0</td></tr></tbody>
 </table>
-<h2>Smoke Test cases</h2><h3 id="m0">com.eagle.TestCases.LoginTest#closeApplication</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.io.FileNotFoundException: \data_scientist\Resources\TestReport\html.pdf (The system cannot find the path specified)
-	at java.base/java.io.FileOutputStream.open0(Native Method)
-	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:291)
-	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:234)
-	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:123)
-	at com.eagle.TestCases.BaseTest.generatePDFFromHTML(BaseTest.java:119)
-	at com.eagle.TestCases.BaseTest.closeApplication(BaseTest.java:94)
-... Removed 19 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m1">com.eagle.TestCases.AnalysisTest#VerifySelectingFeaturesInAnalysis_Test</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m2">com.eagle.TestCases.LoginTest#VerifyLoginPage_Test</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m3">com.eagle.TestCases.LogoutTest#VerifyLogout_Test</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h2>Smoke Test cases</h2><h3 id="m0">com.eagle.TestCases.LoginTest#launchApplication</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.openqa.selenium.WebDriverException: unknown error: cannot determine loading status
+from disconnected: received Inspector.detached event
+  (Session info: chrome=98.0.4758.102)
+Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:17:03&apos;
+System info: host: &apos;MUGUNTH-DESKTOP&apos;, ip: &apos;172.17.200.17&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;15.0.2&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 98.0.4758.102, chrome: {chromedriverVersion: 98.0.4758.102 (273bf7ac8c90..., userDataDir: C:\Users\MUGUNT~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:64196}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: dc8301d2a28dd7304140b623d9c14e07
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+	at org.openqa.selenium.remote.RemoteWebDriver.get(RemoteWebDriver.java:277)
+	at com.eagle.TestCases.BaseTest.launchApplication(BaseTest.java:73)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 30 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m1">com.eagle.TestCases.LogoutTest#beforeClass</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.interactions.Actions.&lt;init&gt;(Actions.java:65)
+	at com.eagle.pages.HomePage.&lt;init&gt;(HomePage.java:143)
+	at com.eagle.TestCases.LogoutTest.beforeClass(LogoutTest.java:19)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m2">com.eagle.TestCases.AnalysisTest#VerifySelectingFeaturesInAnalysis_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException: Cannot invoke &quot;org.openqa.selenium.TakesScreenshot.getScreenshotAs(org.openqa.selenium.OutputType)&quot; because &quot;ts&quot; is null
+	at com.eagle.pages.AnalysisPage.captureScreenshot(AnalysisPage.java:1858)
+	at com.eagle.TestCases.AnalysisTest.VerifySelectingFeaturesInAnalysis_Test(AnalysisTest.java:273)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 27 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m3">com.eagle.TestCases.LoginTest#beforeClass</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m4">com.eagle.TestCases.LoginTest#closeApplication</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m5">com.eagle.TestCases.LoginTest#VerifyLoginPage_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.openqa.selenium.WebDriverException: unknown error: cannot determine loading status
+from disconnected: received Inspector.detached event
+  (Session info: chrome=98.0.4758.102)
+Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:17:03&apos;
+System info: host: &apos;MUGUNTH-DESKTOP&apos;, ip: &apos;172.17.200.17&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;15.0.2&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 98.0.4758.102, chrome: {chromedriverVersion: 98.0.4758.102 (273bf7ac8c90..., userDataDir: C:\Users\MUGUNT~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:64196}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: dc8301d2a28dd7304140b623d9c14e07
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+	at org.openqa.selenium.remote.RemoteWebDriver.get(RemoteWebDriver.java:277)
+	at com.eagle.TestCases.BaseTest.launchApplication(BaseTest.java:73)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 30 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m6">com.eagle.TestCases.LogoutTest#VerifyLogout_Test</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:208)
+	at org.openqa.selenium.interactions.Actions.&lt;init&gt;(Actions.java:65)
+	at com.eagle.pages.HomePage.&lt;init&gt;(HomePage.java:143)
+	at com.eagle.TestCases.LogoutTest.beforeClass(LogoutTest.java:19)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 25 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
 </body>
 </html>

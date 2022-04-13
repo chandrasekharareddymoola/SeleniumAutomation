@@ -25,7 +25,7 @@ public class BaseTest {
 
 	private static WebDriver webdriver;
 	protected static BasePage basePage;
-	private static String dtTime;
+	public static String dtTime;
 	private static LinkedHashMap<String, String> keywordValues = new LinkedHashMap<String, String>();
 
 	public WebDriver getDriver() {
