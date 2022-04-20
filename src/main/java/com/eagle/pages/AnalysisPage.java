@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -190,12 +191,14 @@ public class AnalysisPage extends BasePage{
 	@FindBy(xpath = "//*[@data-icon-name='BarChart4' and @role='presentation']")
 	public WebElement visualizeDataIcon;
 
-
 	@FindBy(xpath = "//div[contains(@class,'NumericalSummary')]//div//span[text()='SUMMARY']")
 	public WebElement summaryText;
 
 	@FindBy(xpath = "(//div[contains(@class,'NumericalSummary')]//li)//span[1]")
 	public List<WebElement> summaryListHeaders;
+
+	@FindBy(xpath = "//div[contains(@class,'NumericalSummary')]//span[1]")
+	public List<WebElement> summaryListHeadersInPlot;
 
 	@FindBy(xpath = "(//div[contains(@class,'NumericalSummary')])//span[text()='RANGE']")
 	public WebElement Rangetext;
@@ -429,7 +432,8 @@ public class AnalysisPage extends BasePage{
 	@FindBy(xpath = "//*[text()='Terms of Use']")
 	public WebElement TermsOfUse;
 
-
+	@FindBy(xpath = "//*[contains(@class,'NodeTitle') and text()='GRAPH']")
+	public WebElement GraphHeader;
 
 
 
@@ -1084,17 +1088,20 @@ public class AnalysisPage extends BasePage{
 			this.removeTextInField(anlaysisHeader);
 			anlaysisHeader.sendKeys(AnalysisName);	
 
-			Actions action = new Actions(driver);
-			action.moveToElement(analysisPageHeader,200,0).click().build().perform();
+			//			Actions action = new Actions(driver);
+			//			action.moveToElement(analysisPageHeader,200,0).click().build().perform();
 
+			BasePage.click(GraphHeader);
 			BasePage.waitforAnElement(analysisupdateMessage);
 
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 
 			ExtentTestManager.getTest().log(Status.PASS,"Analysis name is updated from " +AnalysisNameinital + " to " +AnalysisName);
 			screenShotForPass("Analysis name is updated from page","AnalysisNameUpdated");
 
 			BasePage.click(DownButtonInAnalysisHeader);
+
+			Thread.sleep(2000);
 
 			BasePage.click(AnalysisDescMoreButton);
 			BasePage.waitforAnElement(AnalysisDescriptionDialogBoxHeader);
@@ -1105,6 +1112,8 @@ public class AnalysisPage extends BasePage{
 			ExtentTestManager.getTest().log(Status.PASS,"Analysis Description is updated from '" +AnalysisDescriptioninital + "' to '" +AnalysisDescriptionSmall+ "'");
 			screenShotForPass("Analysis Description is not updated becuase changes are cancelled","AnalysisDescriptionCancel");
 
+			Thread.sleep(2000);
+			
 			BasePage.click(AnalysisDescMoreButton);
 			BasePage.waitforAnElement(AnalysisDescriptionDialogBoxHeader);
 			this.removeTextInField(AnalysisLongDescTextbox);
@@ -2040,18 +2049,18 @@ public class AnalysisPage extends BasePage{
 	public int GetHeaderY(String HeadetText, String YAxisLabel) throws Throwable {
 		int h=0;
 		int k=0;
-		
+
 		try	{
 			String headerText = PlotHeader.getText();
 			assertEquals(headerText, HeadetText);
 			h++;
-			
+
 			String yaxisLabel = YaxisLabel.getText();
 			assertEquals(yaxisLabel, YAxisLabel);
 			h++;
-			
+
 			if(h==2) {
-			k=1;
+				k=1;
 			}
 		}
 		catch(AssertionError ex) {
@@ -2063,7 +2072,7 @@ public class AnalysisPage extends BasePage{
 	public int GetHeaderX3andY3(String HeadetText, String XAxisLabel,String X2AxisLabel,String X3AxisLabel,String YAxisLabel,String Y2AxisLabel,String Y3AxisLabel) throws Throwable {
 		int h=0;
 		int k=0;
-		
+
 		try	{
 			String headerText = PlotHeader.getText();
 			assertEquals(headerText, HeadetText);
@@ -2092,9 +2101,9 @@ public class AnalysisPage extends BasePage{
 			String y3axisLabel = Y3axisLabel.getText();
 			assertEquals(y3axisLabel, Y3AxisLabel);
 			h++;
-			
+
 			if(h==7) {
-			k=1;
+				k=1;
 			}
 		}
 		catch(AssertionError ex) {
@@ -3203,69 +3212,110 @@ public class AnalysisPage extends BasePage{
 
 			SelectingValuesForPlotNewWithEntityNames(Integer.parseInt(NoOfCategoricalValuesRequired), Integer.parseInt(NoOfNumericalValuesRequired));			
 
-			BasePage.click(mySelectionScreenOpen);
-			BasePage.click(GetDataButton); //Click get button
-			BasePage.click(mySelectionScreenClose); //Close my selection button
 
-			BasePage.click(dataframeListViewButton);
-			BasePage.click(dataframeNumericalFeaturestab);
+			try {
+				mySelectionScreenClose.isDisplayed();
+			}
 
-			int TotalNumberOfEntries = valuesInDataframeInListview.size();
-			System.out.println(TotalNumberOfEntries);
+			catch(Exception ex){
+				System.out.println("My Selection Screen is open");	
+			}
 
-			int RandomNumber = RandomValueGenerator(0,(TotalNumberOfEntries-1));
-			System.out.println(RandomNumber);
-			WebElement NumericalFeatureselected = valuesInDataframeInListview.get(RandomNumber);
+			finally {
+				BasePage.click(mySelectionScreenOpen);
+				BasePage.click(GetDataButton); //Click get button
+				BasePage.click(mySelectionScreenClose); //Close my selection button
 
-			String NameOfFeature = valuesInDataframeInListview.get(RandomNumber).getAttribute("id");
-			System.out.println(NameOfFeature);
+				BasePage.click(dataframeListViewButton);
+				BasePage.click(dataframeNumericalFeaturestab);
 
-			ExtentTestManager.getTest().log(Status.PASS,NameOfFeature + " is selected from the dataframe");
+				int TotalNumberOfEntries = valuesInDataframeInListview.size();
+				System.out.println(TotalNumberOfEntries);
 
-			BasePage.click(Dataframe);
+				int RandomNumber = RandomValueGenerator(0,(TotalNumberOfEntries-1));
+				System.out.println(RandomNumber);
+				WebElement NumericalFeatureselected = valuesInDataframeInListview.get(RandomNumber);
 
-			createPlot();
+				String NameOfFeature = valuesInDataframeInListview.get(RandomNumber).getAttribute("id");
+				System.out.println(NameOfFeature);
 
-			BasePage.click(Dataframe);
+				ExtentTestManager.getTest().log(Status.PASS,NameOfFeature + " is selected from the dataframe");
 
-			String NameofFeatureCleansed = delimiterAndTitleCaseConversion(NameOfFeature);
-			System.out.println(NameofFeatureCleansed);
+				BasePage.click(Dataframe);
 
-			DragAndDropBlankNew(NumericalFeatureselected);  
-			BasePage.click(Dataframe);					
+				createPlot();
 
-			Thread.sleep(2000);
-			
-			int total_match_expected = 4;
+				BasePage.click(Dataframe);
 
-			SelectPlotType("Histogram");
-			Thread.sleep(2000);
-			screenShotForPass(AnalysisName + " - Histogram plot", "HistogramPlot");
-			int h = GetHeaderXandY("Histogram of "+NameofFeatureCleansed,NameofFeatureCleansed,"Frequency");  
-			ExtentTestManager.getTest().log(Status.PASS, "Labels in Histogram are verified");
+				String NameofFeatureCleansed = delimiterAndTitleCaseConversion(NameOfFeature);
+				System.out.println(NameofFeatureCleansed);
 
-			SelectPlotType("Boxplot");
-			Thread.sleep(2000);
-			screenShotForPass(AnalysisName + " - Boxplot plot", "Boxplot");
-			int b = GetHeaderY("Boxplot of "+NameofFeatureCleansed,"Frequency");   
-			ExtentTestManager.getTest().log(Status.PASS, "Labels in Boxplot are verified");
+				DragAndDropBlankNew(NumericalFeatureselected);  
+				BasePage.click(Dataframe);					
 
-			SelectPlotType("KDE");
-			Thread.sleep(2000);
-			screenShotForPass(AnalysisName + " - KDE plot", "KDEPlot");
-			int k = GetHeaderXandY("KDE of "+NameofFeatureCleansed,NameofFeatureCleansed,"Frequency");
-			ExtentTestManager.getTest().log(Status.PASS, "Labels in KDE are verified");
+				Thread.sleep(2000);
 
-			SelectPlotType("Violin");
-			Thread.sleep(3000);
-			screenShotForPass(AnalysisName + " - Violin plot", "ViolinPlot");
-			int v = GetHeaderY("Violin of "+NameofFeatureCleansed,"Frequency"); 
-			ExtentTestManager.getTest().log(Status.PASS, "Labels in Violin are verified");
-			
-			assertEquals(h+b+k+v, total_match_expected);
+				int total_match_expected = 4;
+
+				SelectPlotType("Histogram");
+				Thread.sleep(2000);
+				screenShotForPass(AnalysisName + " - Histogram plot", "HistogramPlot");
+				int h = GetHeaderXandY("Histogram of "+NameofFeatureCleansed,NameofFeatureCleansed,"Frequency");  
+				ExtentTestManager.getTest().log(Status.PASS, "Labels in Histogram are verified");
+				SummaryStatisticsVerificationInPlot();
+
+				SelectPlotType("Boxplot");
+				Thread.sleep(2000);
+				screenShotForPass(AnalysisName + " - Boxplot plot", "Boxplot");
+				int b = GetHeaderY("Boxplot of "+NameofFeatureCleansed,"Frequency");   
+				ExtentTestManager.getTest().log(Status.PASS, "Labels in Boxplot are verified");
+				SummaryStatisticsVerificationInPlot();
+
+				SelectPlotType("KDE");
+				Thread.sleep(2000);
+				screenShotForPass(AnalysisName + " - KDE plot", "KDEPlot");
+				int k = GetHeaderXandY("KDE of "+NameofFeatureCleansed,NameofFeatureCleansed,"Frequency");
+				ExtentTestManager.getTest().log(Status.PASS, "Labels in KDE are verified");
+				SummaryStatisticsVerificationInPlot();
+
+				SelectPlotType("Violin");
+				Thread.sleep(3000);
+				screenShotForPass(AnalysisName + " - Violin plot", "ViolinPlot");
+				int v = GetHeaderY("Violin of "+NameofFeatureCleansed,"Frequency"); 
+				ExtentTestManager.getTest().log(Status.PASS, "Labels in Violin are verified");
+				SummaryStatisticsVerificationInPlot();
+
+				assertEquals(h+b+k+v, total_match_expected);
+			}
 		}
 
 		catch(Exception | AssertionError ex) {
+			throw ex;
+		}
+	}
+
+
+
+
+
+	public void SummaryStatisticsVerificationInPlot() throws Throwable {
+		try {
+			int sizeOfElements = summaryListHeadersInPlot.size();
+			ArrayList<String> listOfNames = new ArrayList<String>();
+			for (int i=1; i<=sizeOfElements;i++) 
+			{
+				WebElement Listname = driver.findElement(By.xpath("(//div[contains(@class,'NumericalSummary')]//span[1])["+i+"]"));
+				String name = Listname.getText();
+				listOfNames.add(name);
+			}
+
+			ArrayList<String> listOfNamesExpected = new ArrayList<String>();
+			listOfNamesExpected.addAll(Arrays.asList("Count", "Mean", "Standard deviation", "Variance", "25th percentile","75th percentile","Interquartile range","Median","Mode","Skewness","Kurtosis","Minimum","Maximum")); 
+			assertEquals(listOfNames, listOfNamesExpected);
+
+			ExtentTestManager.getTest().log(Status.PASS, "Summary Statistics contains the lables - "+ listOfNames);
+		}
+		catch(Exception ex) {
 			throw ex;
 		}
 	}
@@ -3389,57 +3439,67 @@ public class AnalysisPage extends BasePage{
 
 			SelectingValuesForPlotNewWithEntityNames(Integer.parseInt(NoOfCategoricalValuesRequired), Integer.parseInt(NoOfNumericalValuesRequired));			
 
-			BasePage.click(mySelectionScreenOpen);
-			BasePage.click(GetDataButton); //Click get button
-			BasePage.click(mySelectionScreenClose); //Close my selection button
+			try {
+				mySelectionScreenClose.isDisplayed();
+			}
 
-			BasePage.click(dataframeListViewButton);
-			BasePage.click(dataframeCategoricalFeaturestab);
+			catch(Exception ex){
+				System.out.println("My Selection Screen is open");	
+			}
 
-			int TotalNumberOfEntries = valuesInDataframeInListview.size();
-			System.out.println(TotalNumberOfEntries);
+			finally {
+				BasePage.click(mySelectionScreenOpen);
+				BasePage.click(GetDataButton); //Click get button
+				BasePage.click(mySelectionScreenClose); //Close my selection button
 
-			int RandomNumber = RandomValueGenerator(0,(TotalNumberOfEntries-1));
-			System.out.println(RandomNumber);
-			WebElement CategoricalFeatureSelected = valuesInDataframeInListview.get(RandomNumber);
-			String NameOfFeature = valuesInDataframeInListview.get(RandomNumber).getAttribute("id");
-			System.out.println(NameOfFeature);
+				BasePage.click(dataframeListViewButton);
+				BasePage.click(dataframeCategoricalFeaturestab);
 
-			BasePage.click(Dataframe);
+				int TotalNumberOfEntries = valuesInDataframeInListview.size();
+				System.out.println(TotalNumberOfEntries);
 
-			createPlot();
+				int RandomNumber = RandomValueGenerator(0,(TotalNumberOfEntries-1));
+				System.out.println(RandomNumber);
+				WebElement CategoricalFeatureSelected = valuesInDataframeInListview.get(RandomNumber);
+				String NameOfFeature = valuesInDataframeInListview.get(RandomNumber).getAttribute("id");
+				System.out.println(NameOfFeature);
 
-			BasePage.click(Dataframe);
+				BasePage.click(Dataframe);
 
-			String NameofFeatureCleansed = delimiterAndTitleCaseConversion(NameOfFeature);
-			System.out.println(NameofFeatureCleansed);
+				createPlot();
 
-			DragAndDropBlankNew(CategoricalFeatureSelected);  
-			BasePage.click(Dataframe);					
+				BasePage.click(Dataframe);
 
-			Thread.sleep(2000);
+				String NameofFeatureCleansed = delimiterAndTitleCaseConversion(NameOfFeature);
+				System.out.println(NameofFeatureCleansed);
 
-			int total_match_expected = 3;
+				DragAndDropBlankNew(CategoricalFeatureSelected);  
+				BasePage.click(Dataframe);					
 
-			SelectPlotType("Bar Chart");
-			Thread.sleep(2000);
-			screenShotForPass(AnalysisName + " - Bar Chart", "Bar Chart Plot");
-			int b = GetHeaderXandY("Bar Chart of "+NameofFeatureCleansed,NameofFeatureCleansed,"Frequency"); 
-			ExtentTestManager.getTest().log(Status.PASS, "Labels in Bar Chart are verified");
+				Thread.sleep(2000);
 
-			SelectPlotType("Treemap");
-			Thread.sleep(2000);
-			screenShotForPass(AnalysisName + " - Treemap", "Treemap");
-			int t = GetHeader("Treemap of "+NameofFeatureCleansed);  
-			ExtentTestManager.getTest().log(Status.PASS, "Labels in Treemap are verified");
+				int total_match_expected = 3;
 
-			SelectPlotType("Pareto");
-			Thread.sleep(2000);
-			screenShotForPass(AnalysisName + " - Pareto", "Pareto");
-			int p = GetHeaderXandY("Pareto of "+NameofFeatureCleansed,NameofFeatureCleansed,"Frequency");
-			ExtentTestManager.getTest().log(Status.PASS, "Labels in Pareto are verified");
+				SelectPlotType("Bar Chart");
+				Thread.sleep(2000);
+				screenShotForPass(AnalysisName + " - Bar Chart", "Bar Chart Plot");
+				int b = GetHeaderXandY("Bar Chart of "+NameofFeatureCleansed,NameofFeatureCleansed,"Frequency"); 
+				ExtentTestManager.getTest().log(Status.PASS, "Labels in Bar Chart are verified");
 
-			assertEquals(b+t+p, total_match_expected);
+				SelectPlotType("Treemap");
+				Thread.sleep(2000);
+				screenShotForPass(AnalysisName + " - Treemap", "Treemap");
+				int t = GetHeader("Treemap of "+NameofFeatureCleansed);  
+				ExtentTestManager.getTest().log(Status.PASS, "Labels in Treemap are verified");
+
+				SelectPlotType("Pareto");
+				Thread.sleep(2000);
+				screenShotForPass(AnalysisName + " - Pareto", "Pareto");
+				int p = GetHeaderXandY("Pareto of "+NameofFeatureCleansed,NameofFeatureCleansed,"Frequency");
+				ExtentTestManager.getTest().log(Status.PASS, "Labels in Pareto are verified");
+
+				assertEquals(b+t+p, total_match_expected);
+			}
 		}
 
 		catch(Exception | AssertionError ex) {
@@ -3658,85 +3718,95 @@ public class AnalysisPage extends BasePage{
 
 			SelectingValuesForPlotNewWithEntityNames(Integer.parseInt(NoOfCategoricalValuesRequired), Integer.parseInt(NoOfNumericalValuesRequired));			
 
-			BasePage.click(mySelectionScreenOpen);
-			BasePage.click(GetDataButton); //Click get button
-			BasePage.click(mySelectionScreenClose); //Close my selection button
+			try {
+				mySelectionScreenClose.isDisplayed();
+			}
 
-			BasePage.click(dataframeListViewButton);
+			catch(Exception ex){
+				System.out.println("My Selection Screen is open");	
+			}
 
-			BasePage.click(dataframeCategoricalFeaturestab);
-			int TotalNumberOfEntriesCat = valuesInDataframeInListview.size();
-			System.out.println(TotalNumberOfEntriesCat);
+			finally {
+				BasePage.click(mySelectionScreenOpen);
+				BasePage.click(GetDataButton); //Click get button
+				BasePage.click(mySelectionScreenClose); //Close my selection button
 
-			int RandomNumberCat = RandomValueGenerator(0,(TotalNumberOfEntriesCat-1));
-			System.out.println(RandomNumberCat);
-			WebElement CategoricalFeatureSelected = valuesInDataframeInListview.get(RandomNumberCat);
-			String NameOfFeatureCat = valuesInDataframeInListview.get(RandomNumberCat).getAttribute("id");
-			System.out.println(NameOfFeatureCat);
+				BasePage.click(dataframeListViewButton);
 
-			//Selecting a random numerical value from List View
+				BasePage.click(dataframeCategoricalFeaturestab);
+				int TotalNumberOfEntriesCat = valuesInDataframeInListview.size();
+				System.out.println(TotalNumberOfEntriesCat);
 
-			BasePage.click(dataframeNumericalFeaturestab);
-			int TotalNumberOfEntriesNum = valuesInDataframeInListview.size();
-			System.out.println(TotalNumberOfEntriesNum);
+				int RandomNumberCat = RandomValueGenerator(0,(TotalNumberOfEntriesCat-1));
+				System.out.println(RandomNumberCat);
+				WebElement CategoricalFeatureSelected = valuesInDataframeInListview.get(RandomNumberCat);
+				String NameOfFeatureCat = valuesInDataframeInListview.get(RandomNumberCat).getAttribute("id");
+				System.out.println(NameOfFeatureCat);
 
-			int RandomNumberNum = RandomValueGenerator(0,(TotalNumberOfEntriesNum-1));
-			System.out.println(RandomNumberCat);
-			WebElement NumericalFeatureSelected = valuesInDataframeInListview.get(RandomNumberNum);
-			String NameOfFeatureNum = valuesInDataframeInListview.get(RandomNumberNum).getAttribute("id");
-			System.out.println(NameOfFeatureNum);
+				//Selecting a random numerical value from List View
 
-			BasePage.click(Dataframe);
+				BasePage.click(dataframeNumericalFeaturestab);
+				int TotalNumberOfEntriesNum = valuesInDataframeInListview.size();
+				System.out.println(TotalNumberOfEntriesNum);
 
-			createPlot();
+				int RandomNumberNum = RandomValueGenerator(0,(TotalNumberOfEntriesNum-1));
+				System.out.println(RandomNumberCat);
+				WebElement NumericalFeatureSelected = valuesInDataframeInListview.get(RandomNumberNum);
+				String NameOfFeatureNum = valuesInDataframeInListview.get(RandomNumberNum).getAttribute("id");
+				System.out.println(NameOfFeatureNum);
 
-			BasePage.click(Dataframe);
+				BasePage.click(Dataframe);
 
-			BasePage.click(dataframeAllFeaturestab);
+				createPlot();
 
-			WebElement CategoricalFeatureSelectedFromAll = driver.findElement(By.xpath("//span[@id='"+NameOfFeatureCat+"']"));
-			WebElement NumericalFeatureSelectedFromAll = driver.findElement(By.xpath("//span[@id='"+NameOfFeatureNum+"']"));
+				BasePage.click(Dataframe);
 
-			DragAndDropBlankNew(CategoricalFeatureSelectedFromAll); 
-			DragAndDropValuePresentNew(NumericalFeatureSelectedFromAll);
+				BasePage.click(dataframeAllFeaturestab);
 
-			BasePage.click(Dataframe);			
+				WebElement CategoricalFeatureSelectedFromAll = driver.findElement(By.xpath("//span[@id='"+NameOfFeatureCat+"']"));
+				WebElement NumericalFeatureSelectedFromAll = driver.findElement(By.xpath("//span[@id='"+NameOfFeatureNum+"']"));
 
-			String NameofCatFeatureCleansed = delimiterAndTitleCaseConversion(NameOfFeatureCat);
-			System.out.println(NameofCatFeatureCleansed);
+				DragAndDropBlankNew(CategoricalFeatureSelectedFromAll); 
+				DragAndDropValuePresentNew(NumericalFeatureSelectedFromAll);
 
-			String NameofNumFeatureCleansed = delimiterAndTitleCaseConversion(NameOfFeatureNum);
-			System.out.println(NameofNumFeatureCleansed);
+				BasePage.click(Dataframe);			
 
-			Thread.sleep(2000);
-			
-			int total_match_expected = 4;
+				String NameofCatFeatureCleansed = delimiterAndTitleCaseConversion(NameOfFeatureCat);
+				System.out.println(NameofCatFeatureCleansed);
 
-			SelectPlotType("Overlayed Histogram");
-			Thread.sleep(2000);
-			screenShotForPass(AnalysisName + " - Overlayed Histogram", "Overlayed Histogram");
-			int oh = GetHeaderXandY("Overlayed Histogram of "+NameofCatFeatureCleansed+", "+NameofNumFeatureCleansed,NameofNumFeatureCleansed,"Frequency"); 
-			ExtentTestManager.getTest().log(Status.PASS, "Labels in Overlayed Histogram are verified");
+				String NameofNumFeatureCleansed = delimiterAndTitleCaseConversion(NameOfFeatureNum);
+				System.out.println(NameofNumFeatureCleansed);
 
-			SelectPlotType("Side by side Box Plots");
-			Thread.sleep(2000);
-			screenShotForPass(AnalysisName + " - Side by side Box Plots", "Side by side Box Plots");
-			int sb = GetHeaderXandY("Side By Side Box Plots of "+NameofCatFeatureCleansed+", "+NameofNumFeatureCleansed,NameofCatFeatureCleansed, NameofNumFeatureCleansed);  
-			ExtentTestManager.getTest().log(Status.PASS, "Labels in Side By side Box plots are verified");
+				Thread.sleep(2000);
 
-			SelectPlotType("Overlayed KDE");
-			Thread.sleep(2000);
-			screenShotForPass(AnalysisName + " - Overlayed KDE", "Overlayed KDE");
-			int ok = GetHeaderXandY("Overlayed KDE of "+NameofCatFeatureCleansed+", "+NameofNumFeatureCleansed,NameofNumFeatureCleansed,"Density"); 
-			ExtentTestManager.getTest().log(Status.PASS, "Labels in Overlayed KDE are verified");
+				int total_match_expected = 4;
 
-			SelectPlotType("Side by side Violin");
-			Thread.sleep(2000);
-			screenShotForPass(AnalysisName + " - Side by side Violin", "Side by side Violin");
-			int sv = GetHeaderXandY("Side By Side Violin of "+NameofCatFeatureCleansed+", "+NameofNumFeatureCleansed,NameofCatFeatureCleansed,NameofNumFeatureCleansed); 
-			ExtentTestManager.getTest().log(Status.PASS, "Labels in Side by side Violin are verified");
-			
-			assertEquals(oh+sb+ok+sv, total_match_expected);
+				SelectPlotType("Overlayed Histogram");
+				Thread.sleep(2000);
+				screenShotForPass(AnalysisName + " - Overlayed Histogram", "Overlayed Histogram");
+				int oh = GetHeaderXandY("Overlayed Histogram of "+NameofCatFeatureCleansed+", "+NameofNumFeatureCleansed,NameofNumFeatureCleansed,"Frequency"); 
+				ExtentTestManager.getTest().log(Status.PASS, "Labels in Overlayed Histogram are verified");
+
+				SelectPlotType("Side by side Box Plots");
+				Thread.sleep(2000);
+				screenShotForPass(AnalysisName + " - Side by side Box Plots", "Side by side Box Plots");
+				int sb = GetHeaderXandY("Side By Side Box Plots of "+NameofCatFeatureCleansed+", "+NameofNumFeatureCleansed,NameofCatFeatureCleansed, NameofNumFeatureCleansed);  
+				ExtentTestManager.getTest().log(Status.PASS, "Labels in Side By side Box plots are verified");
+
+				SelectPlotType("Overlayed KDE");
+				Thread.sleep(2000);
+				screenShotForPass(AnalysisName + " - Overlayed KDE", "Overlayed KDE");
+				int ok = GetHeaderXandY("Overlayed KDE of "+NameofCatFeatureCleansed+", "+NameofNumFeatureCleansed,NameofNumFeatureCleansed,"Density"); 
+				ExtentTestManager.getTest().log(Status.PASS, "Labels in Overlayed KDE are verified");
+
+				SelectPlotType("Side by side Violin");
+				Thread.sleep(2000);
+				screenShotForPass(AnalysisName + " - Side by side Violin", "Side by side Violin");
+				int sv = GetHeaderXandY("Side By Side Violin of "+NameofCatFeatureCleansed+", "+NameofNumFeatureCleansed,NameofCatFeatureCleansed,NameofNumFeatureCleansed); 
+				ExtentTestManager.getTest().log(Status.PASS, "Labels in Side by side Violin are verified");
+
+				assertEquals(oh+sb+ok+sv, total_match_expected);
+			}
 		}
 		catch(Exception | AssertionError ex) {
 			throw ex;
@@ -3754,65 +3824,75 @@ public class AnalysisPage extends BasePage{
 
 			SelectingValuesForPlotNewWithEntityNames(Integer.parseInt(NoOfCategoricalValuesRequired), Integer.parseInt(NoOfNumericalValuesRequired));			
 
-			BasePage.click(mySelectionScreenOpen);
-			BasePage.click(GetDataButton); //Click get button
-			BasePage.click(mySelectionScreenClose); //Close my selection button
-
-			BasePage.click(dataframeListViewButton);
-
-			BasePage.click(dataframeNumericalFeaturestab);
-			int TotalNumberOfEntriesNum = valuesInDataframeInListview.size();
-			System.out.println(TotalNumberOfEntriesNum);
-
-			//1st numerical value selection
-			int RandomNumberNum1 = RandomValueGenerator(0,(TotalNumberOfEntriesNum-1));
-			System.out.println(RandomNumberNum1);
-
-			WebElement NumericalFeatureSelected1 = valuesInDataframeInListview.get(RandomNumberNum1);
-			String NameOfFeatureNum1 = valuesInDataframeInListview.get(RandomNumberNum1).getAttribute("id");
-			System.out.println(NameOfFeatureNum1);
-
-
-			int RandomNumberNum2;
-			do {
-				RandomNumberNum2 = RandomValueGenerator(0,(TotalNumberOfEntriesNum-1));
+			try {
+				mySelectionScreenClose.isDisplayed();
 			}
-			while(RandomNumberNum2==RandomNumberNum1);
-			System.out.println(RandomNumberNum2);
 
-			//2nd numerical value selection
-			WebElement NumericalFeatureSelected2 = valuesInDataframeInListview.get(RandomNumberNum2);
-			String NameOfFeatureNum2 = valuesInDataframeInListview.get(RandomNumberNum2).getAttribute("id");
-			System.out.println(NameOfFeatureNum2);
+			catch(Exception ex){
+				System.out.println("My Selection Screen is open");	
+			}
 
-			BasePage.click(Dataframe);
+			finally {
+				BasePage.click(mySelectionScreenOpen);
+				BasePage.click(GetDataButton); //Click get button
+				BasePage.click(mySelectionScreenClose); //Close my selection button
 
-			createPlot();
+				BasePage.click(dataframeListViewButton);
 
-			BasePage.click(Dataframe);
+				BasePage.click(dataframeNumericalFeaturestab);
+				int TotalNumberOfEntriesNum = valuesInDataframeInListview.size();
+				System.out.println(TotalNumberOfEntriesNum);
 
-			DragAndDropBlankNew(NumericalFeatureSelected1); 
-			DragAndDropValuePresentNew(NumericalFeatureSelected2);
+				//1st numerical value selection
+				int RandomNumberNum1 = RandomValueGenerator(0,(TotalNumberOfEntriesNum-1));
+				System.out.println(RandomNumberNum1);
 
-			BasePage.click(Dataframe);			
+				WebElement NumericalFeatureSelected1 = valuesInDataframeInListview.get(RandomNumberNum1);
+				String NameOfFeatureNum1 = valuesInDataframeInListview.get(RandomNumberNum1).getAttribute("id");
+				System.out.println(NameOfFeatureNum1);
 
-			String NameofNumFeatureCleansed1 = delimiterAndTitleCaseConversion(NameOfFeatureNum1);
-			System.out.println(NameofNumFeatureCleansed1);
 
-			String NameofNumFeatureCleansed2 = delimiterAndTitleCaseConversion(NameOfFeatureNum2);
-			System.out.println(NameofNumFeatureCleansed2);
+				int RandomNumberNum2;
+				do {
+					RandomNumberNum2 = RandomValueGenerator(0,(TotalNumberOfEntriesNum-1));
+				}
+				while(RandomNumberNum2==RandomNumberNum1);
+				System.out.println(RandomNumberNum2);
 
-			Thread.sleep(2000);
+				//2nd numerical value selection
+				WebElement NumericalFeatureSelected2 = valuesInDataframeInListview.get(RandomNumberNum2);
+				String NameOfFeatureNum2 = valuesInDataframeInListview.get(RandomNumberNum2).getAttribute("id");
+				System.out.println(NameOfFeatureNum2);
 
-			int total_match_expected = 1;
-			
-			SelectPlotType("Scatter plot");
-			Thread.sleep(2000);
-			screenShotForPass(AnalysisName + " - Scatter Plot", "Scatter Plot");
-			int s = GetHeaderXandY("Scatter Plot of "+NameofNumFeatureCleansed1+", "+NameofNumFeatureCleansed2,NameofNumFeatureCleansed1,"Subject Number"); 
-			ExtentTestManager.getTest().log(Status.PASS, "Labels in Scatter Plot are verified");
-			
-			assertEquals(s, total_match_expected);
+				BasePage.click(Dataframe);
+
+				createPlot();
+
+				BasePage.click(Dataframe);
+
+				DragAndDropBlankNew(NumericalFeatureSelected1); 
+				DragAndDropValuePresentNew(NumericalFeatureSelected2);
+
+				BasePage.click(Dataframe);			
+
+				String NameofNumFeatureCleansed1 = delimiterAndTitleCaseConversion(NameOfFeatureNum1);
+				System.out.println(NameofNumFeatureCleansed1);
+
+				String NameofNumFeatureCleansed2 = delimiterAndTitleCaseConversion(NameOfFeatureNum2);
+				System.out.println(NameofNumFeatureCleansed2);
+
+				Thread.sleep(2000);
+
+				int total_match_expected = 1;
+
+				SelectPlotType("Scatter plot");
+				Thread.sleep(2000);
+				screenShotForPass(AnalysisName + " - Scatter Plot", "Scatter Plot");
+				int s = GetHeaderXandY("Scatter Plot of "+NameofNumFeatureCleansed1+", "+NameofNumFeatureCleansed2,NameofNumFeatureCleansed1,"Subject Number"); 
+				ExtentTestManager.getTest().log(Status.PASS, "Labels in Scatter Plot are verified");
+
+				assertEquals(s, total_match_expected);
+			}
 		}
 		catch(Exception | AssertionError ex) {
 			throw ex;
@@ -3924,77 +4004,87 @@ public class AnalysisPage extends BasePage{
 
 			SelectingValuesForPlotNewWithEntityNames(Integer.parseInt(NoOfCategoricalValuesRequired), Integer.parseInt(NoOfNumericalValuesRequired));			
 
-			BasePage.click(mySelectionScreenOpen);
-			BasePage.click(GetDataButton); //Click get button
-			BasePage.click(mySelectionScreenClose); //Close my selection button
-
-			BasePage.click(dataframeListViewButton);
-
-			BasePage.click(dataframeCategoricalFeaturestab);
-			int TotalNumberOfEntriesCat = valuesInDataframeInListview.size();
-			System.out.println(TotalNumberOfEntriesCat);
-
-			//1st Categorical value selection
-			int RandomNumberCat1 = RandomValueGenerator(0,(TotalNumberOfEntriesCat-1));
-			System.out.println(RandomNumberCat1);
-
-			WebElement CategoricalFeatureSelected1 = valuesInDataframeInListview.get(RandomNumberCat1);
-			String NameOfFeatureCat1 = valuesInDataframeInListview.get(RandomNumberCat1).getAttribute("id");
-			System.out.println(NameOfFeatureCat1);
-
-
-			int RandomNumberCat2;
-			do {
-				RandomNumberCat2 = RandomValueGenerator(0,(TotalNumberOfEntriesCat-1));
+			try {
+				mySelectionScreenClose.isDisplayed();
 			}
-			while(RandomNumberCat2==RandomNumberCat1);
-			System.out.println(RandomNumberCat2);
 
-			//2nd Categorical value selection
-			WebElement CategoricalFeatureSelected2 = valuesInDataframeInListview.get(RandomNumberCat2);
-			String NameOfFeatureCat2 = valuesInDataframeInListview.get(RandomNumberCat2).getAttribute("id");
-			System.out.println(NameOfFeatureCat2);
+			catch(Exception ex){
+				System.out.println("My Selection Screen is open");	
+			}
 
-			BasePage.click(Dataframe);
+			finally {
+				BasePage.click(mySelectionScreenOpen);
+				BasePage.click(GetDataButton); //Click get button
+				BasePage.click(mySelectionScreenClose); //Close my selection button
 
-			createPlot();
+				BasePage.click(dataframeListViewButton);
 
-			BasePage.click(Dataframe);	
+				BasePage.click(dataframeCategoricalFeaturestab);
+				int TotalNumberOfEntriesCat = valuesInDataframeInListview.size();
+				System.out.println(TotalNumberOfEntriesCat);
 
-			DragAndDropBlankNew(CategoricalFeatureSelected1); 
-			DragAndDropValuePresentNew(CategoricalFeatureSelected2);
+				//1st Categorical value selection
+				int RandomNumberCat1 = RandomValueGenerator(0,(TotalNumberOfEntriesCat-1));
+				System.out.println(RandomNumberCat1);
 
-			BasePage.click(Dataframe);			
+				WebElement CategoricalFeatureSelected1 = valuesInDataframeInListview.get(RandomNumberCat1);
+				String NameOfFeatureCat1 = valuesInDataframeInListview.get(RandomNumberCat1).getAttribute("id");
+				System.out.println(NameOfFeatureCat1);
 
-			String NameofCatFeatureCleansed1 = delimiterAndTitleCaseConversion(NameOfFeatureCat1);
-			System.out.println(NameofCatFeatureCleansed1);
 
-			String NameofCatFeatureCleansed2 = delimiterAndTitleCaseConversion(NameOfFeatureCat2);
-			System.out.println(NameofCatFeatureCleansed2);			
+				int RandomNumberCat2;
+				do {
+					RandomNumberCat2 = RandomValueGenerator(0,(TotalNumberOfEntriesCat-1));
+				}
+				while(RandomNumberCat2==RandomNumberCat1);
+				System.out.println(RandomNumberCat2);
 
-			Thread.sleep(2000);
+				//2nd Categorical value selection
+				WebElement CategoricalFeatureSelected2 = valuesInDataframeInListview.get(RandomNumberCat2);
+				String NameOfFeatureCat2 = valuesInDataframeInListview.get(RandomNumberCat2).getAttribute("id");
+				System.out.println(NameOfFeatureCat2);
 
-			int total_match_count = 3;
+				BasePage.click(Dataframe);
 
-			SelectPlotType("Treemap");
-			Thread.sleep(2000);
-			screenShotForPass(AnalysisName + " - Treemap", "Treemap");
-			int t = GetHeader("Treemap of "+NameofCatFeatureCleansed1+", "+NameofCatFeatureCleansed2); 
-			ExtentTestManager.getTest().log(Status.PASS, "Labels in Treemap are verified");
+				createPlot();
 
-			SelectPlotType("Contingency table");
-			Thread.sleep(2000);
-			screenShotForPass(AnalysisName + " - Contingency Table", "Contingency Table");
-			int c = GetHeader("Contingency Table of "+NameofCatFeatureCleansed1+", "+NameofCatFeatureCleansed2);  
-			ExtentTestManager.getTest().log(Status.PASS, "Labels in Contigency table are verified");
+				BasePage.click(Dataframe);	
 
-			SelectPlotType("Stacked Bar chart");
-			Thread.sleep(2000);
-			screenShotForPass(AnalysisName + " - Stacked Bar chart", "Stacked Bar chart");
-			int s = GetHeaderXandY("Stacked Bar Chart of "+NameofCatFeatureCleansed1+", "+NameofCatFeatureCleansed2,NameofCatFeatureCleansed1,"Frequency"); 
-			ExtentTestManager.getTest().log(Status.PASS, "Labels in Stacked Bar Chart are verified");
+				DragAndDropBlankNew(CategoricalFeatureSelected1); 
+				DragAndDropValuePresentNew(CategoricalFeatureSelected2);
 
-			assertEquals(t+c+s, total_match_count);
+				BasePage.click(Dataframe);			
+
+				String NameofCatFeatureCleansed1 = delimiterAndTitleCaseConversion(NameOfFeatureCat1);
+				System.out.println(NameofCatFeatureCleansed1);
+
+				String NameofCatFeatureCleansed2 = delimiterAndTitleCaseConversion(NameOfFeatureCat2);
+				System.out.println(NameofCatFeatureCleansed2);			
+
+				Thread.sleep(2000);
+
+				int total_match_count = 3;
+
+				SelectPlotType("Treemap");
+				Thread.sleep(2000);
+				screenShotForPass(AnalysisName + " - Treemap", "Treemap");
+				int t = GetHeader("Treemap of "+NameofCatFeatureCleansed1+", "+NameofCatFeatureCleansed2); 
+				ExtentTestManager.getTest().log(Status.PASS, "Labels in Treemap are verified");
+
+				SelectPlotType("Contingency table");
+				Thread.sleep(2000);
+				screenShotForPass(AnalysisName + " - Contingency Table", "Contingency Table");
+				int c = GetHeader("Contingency Table of "+NameofCatFeatureCleansed1+", "+NameofCatFeatureCleansed2);  
+				ExtentTestManager.getTest().log(Status.PASS, "Labels in Contigency table are verified");
+
+				SelectPlotType("Stacked Bar chart");
+				Thread.sleep(2000);
+				screenShotForPass(AnalysisName + " - Stacked Bar chart", "Stacked Bar chart");
+				int s = GetHeaderXandY("Stacked Bar Chart of "+NameofCatFeatureCleansed1+", "+NameofCatFeatureCleansed2,NameofCatFeatureCleansed1,"Frequency"); 
+				ExtentTestManager.getTest().log(Status.PASS, "Labels in Stacked Bar Chart are verified");
+
+				assertEquals(t+c+s, total_match_count);
+			}
 		}
 		catch(Exception | AssertionError ex) {
 			throw ex;
@@ -4055,87 +4145,97 @@ public class AnalysisPage extends BasePage{
 
 			SelectingValuesForPlotNewWithEntityNames(Integer.parseInt(NoOfCategoricalValuesRequired), Integer.parseInt(NoOfNumericalValuesRequired));			
 
-			BasePage.click(mySelectionScreenOpen);
-			BasePage.click(GetDataButton); //Click get button
-			BasePage.click(mySelectionScreenClose); //Close my selection button
-
-			BasePage.click(dataframeListViewButton);
-
-			BasePage.click(dataframeNumericalFeaturestab);
-			int TotalNumberOfEntriesNum = valuesInDataframeInListview.size();
-			System.out.println(TotalNumberOfEntriesNum);
-
-			//1st numerical value selection
-			int RandomNumberNum1 = RandomValueGenerator(0,(TotalNumberOfEntriesNum-1));
-			System.out.println(RandomNumberNum1);
-
-			WebElement NumericalFeatureSelected1 = valuesInDataframeInListview.get(RandomNumberNum1);
-			String NameOfFeatureNum1 = valuesInDataframeInListview.get(RandomNumberNum1).getAttribute("id");
-			System.out.println(NameOfFeatureNum1);
-
-			int RandomNumberNum2;
-			do {
-				RandomNumberNum2 = RandomValueGenerator(0,(TotalNumberOfEntriesNum-1));
+			try {
+				mySelectionScreenClose.isDisplayed();
 			}
-			while(RandomNumberNum2==RandomNumberNum1);
-			System.out.println(RandomNumberNum2);
 
-			//2nd numerical value selection
-			WebElement NumericalFeatureSelected2 = valuesInDataframeInListview.get(RandomNumberNum2);
-			String NameOfFeatureNum2 = valuesInDataframeInListview.get(RandomNumberNum2).getAttribute("id");
-			System.out.println(NameOfFeatureNum2);
+			catch(Exception ex){
+				System.out.println("My Selection Screen is open");	
+			}
 
-			//Categorical value selection
-			BasePage.click(dataframeCategoricalFeaturestab);
+			finally {
+				BasePage.click(mySelectionScreenOpen);
+				BasePage.click(GetDataButton); //Click get button
+				BasePage.click(mySelectionScreenClose); //Close my selection button
 
-			int TotalNumberOfEntriesCat = valuesInDataframeInListview.size();
-			System.out.println(TotalNumberOfEntriesCat);
+				BasePage.click(dataframeListViewButton);
 
-			int RandomNumberCat = RandomValueGenerator(0,(TotalNumberOfEntriesCat-1));
-			System.out.println(RandomNumberCat);
+				BasePage.click(dataframeNumericalFeaturestab);
+				int TotalNumberOfEntriesNum = valuesInDataframeInListview.size();
+				System.out.println(TotalNumberOfEntriesNum);
 
-			WebElement CategoricalFeatureSelected = valuesInDataframeInListview.get(RandomNumberCat);
-			String NameOfFeatureCat = valuesInDataframeInListview.get(RandomNumberCat).getAttribute("id");
-			System.out.println(NameOfFeatureCat);
+				//1st numerical value selection
+				int RandomNumberNum1 = RandomValueGenerator(0,(TotalNumberOfEntriesNum-1));
+				System.out.println(RandomNumberNum1);
 
-			BasePage.click(Dataframe);
+				WebElement NumericalFeatureSelected1 = valuesInDataframeInListview.get(RandomNumberNum1);
+				String NameOfFeatureNum1 = valuesInDataframeInListview.get(RandomNumberNum1).getAttribute("id");
+				System.out.println(NameOfFeatureNum1);
 
-			createPlot();
+				int RandomNumberNum2;
+				do {
+					RandomNumberNum2 = RandomValueGenerator(0,(TotalNumberOfEntriesNum-1));
+				}
+				while(RandomNumberNum2==RandomNumberNum1);
+				System.out.println(RandomNumberNum2);
 
-			BasePage.click(Dataframe);
+				//2nd numerical value selection
+				WebElement NumericalFeatureSelected2 = valuesInDataframeInListview.get(RandomNumberNum2);
+				String NameOfFeatureNum2 = valuesInDataframeInListview.get(RandomNumberNum2).getAttribute("id");
+				System.out.println(NameOfFeatureNum2);
 
-			Thread.sleep(2000);
-			
-			int total_match_count = 1;
+				//Categorical value selection
+				BasePage.click(dataframeCategoricalFeaturestab);
 
-			String NameofNumFeatureCleansed1 = delimiterAndTitleCaseConversion(NameOfFeatureNum1);
-			System.out.println(NameofNumFeatureCleansed1);
+				int TotalNumberOfEntriesCat = valuesInDataframeInListview.size();
+				System.out.println(TotalNumberOfEntriesCat);
 
-			String NameofNumFeatureCleansed2 = delimiterAndTitleCaseConversion(NameOfFeatureNum2);
-			System.out.println(NameofNumFeatureCleansed2);	
+				int RandomNumberCat = RandomValueGenerator(0,(TotalNumberOfEntriesCat-1));
+				System.out.println(RandomNumberCat);
 
-			String NameofCatFeatureCleansed1 = delimiterAndTitleCaseConversion(NameOfFeatureCat);
-			System.out.println(NameofCatFeatureCleansed1);	
+				WebElement CategoricalFeatureSelected = valuesInDataframeInListview.get(RandomNumberCat);
+				String NameOfFeatureCat = valuesInDataframeInListview.get(RandomNumberCat).getAttribute("id");
+				System.out.println(NameOfFeatureCat);
 
-			BasePage.click(dataframeAllFeaturestab);
+				BasePage.click(Dataframe);
 
-			WebElement CategoricalFeatureSelectedFromAll = driver.findElement(By.xpath("//span[@id='"+NameOfFeatureCat+"']"));
-			WebElement NumericalFeatureSelectedFromAll1 = driver.findElement(By.xpath("//span[@id='"+NameOfFeatureNum1+"']"));
-			WebElement NumericalFeatureSelectedFromAll2 = driver.findElement(By.xpath("//span[@id='"+NameOfFeatureNum2+"']"));
+				createPlot();
 
-			DragAndDropBlankNew(NumericalFeatureSelectedFromAll1);
-			DragAndDropValuePresentNew(NumericalFeatureSelectedFromAll2);
-			DragAndDropValuePresentNew(CategoricalFeatureSelectedFromAll);
+				BasePage.click(Dataframe);
 
-			BasePage.click(Dataframe);			
+				Thread.sleep(2000);
 
-			SelectPlotType("Coloured scatter plot");
-			Thread.sleep(3000);
-			screenShotForPass(AnalysisName + " - Coloured scatter plot", "Coloured scatter plot");
-			int c = GetHeaderXandY("Coloured Scatter Plot of "+NameofNumFeatureCleansed1+", "+NameofNumFeatureCleansed2+", "+NameofCatFeatureCleansed1, NameofNumFeatureCleansed1, NameofNumFeatureCleansed2);  
-			ExtentTestManager.getTest().log(Status.PASS, "Labels in Coloured scatter plot are verified");
-			
-			assertEquals(c, total_match_count);
+				int total_match_count = 1;
+
+				String NameofNumFeatureCleansed1 = delimiterAndTitleCaseConversion(NameOfFeatureNum1);
+				System.out.println(NameofNumFeatureCleansed1);
+
+				String NameofNumFeatureCleansed2 = delimiterAndTitleCaseConversion(NameOfFeatureNum2);
+				System.out.println(NameofNumFeatureCleansed2);	
+
+				String NameofCatFeatureCleansed1 = delimiterAndTitleCaseConversion(NameOfFeatureCat);
+				System.out.println(NameofCatFeatureCleansed1);	
+
+				BasePage.click(dataframeAllFeaturestab);
+
+				WebElement CategoricalFeatureSelectedFromAll = driver.findElement(By.xpath("//span[@id='"+NameOfFeatureCat+"']"));
+				WebElement NumericalFeatureSelectedFromAll1 = driver.findElement(By.xpath("//span[@id='"+NameOfFeatureNum1+"']"));
+				WebElement NumericalFeatureSelectedFromAll2 = driver.findElement(By.xpath("//span[@id='"+NameOfFeatureNum2+"']"));
+
+				DragAndDropBlankNew(NumericalFeatureSelectedFromAll1);
+				DragAndDropValuePresentNew(NumericalFeatureSelectedFromAll2);
+				DragAndDropValuePresentNew(CategoricalFeatureSelectedFromAll);
+
+				BasePage.click(Dataframe);			
+
+				SelectPlotType("Coloured scatter plot");
+				Thread.sleep(3000);
+				screenShotForPass(AnalysisName + " - Coloured scatter plot", "Coloured scatter plot");
+				int c = GetHeaderXandY("Coloured Scatter Plot of "+NameofNumFeatureCleansed1+", "+NameofNumFeatureCleansed2+", "+NameofCatFeatureCleansed1, NameofNumFeatureCleansed1, NameofNumFeatureCleansed2);  
+				ExtentTestManager.getTest().log(Status.PASS, "Labels in Coloured scatter plot are verified");
+
+				assertEquals(c, total_match_count);
+			}
 		}
 		catch(Exception | AssertionError ex) {
 			throw ex;
@@ -4196,81 +4296,91 @@ public class AnalysisPage extends BasePage{
 
 			SelectingValuesForPlotNewWithEntityNames(Integer.parseInt(NoOfCategoricalValuesRequired), Integer.parseInt(NoOfNumericalValuesRequired));			
 
-			BasePage.click(mySelectionScreenOpen);
-			BasePage.click(GetDataButton); //Click get button
-			BasePage.click(mySelectionScreenClose); //Close my selection button
-
-			BasePage.click(dataframeListViewButton);
-
-			BasePage.click(dataframeNumericalFeaturestab);
-			int TotalNumberOfEntriesNum = valuesInDataframeInListview.size();
-			System.out.println(TotalNumberOfEntriesNum);
-
-			//1st numerical value selection
-			int RandomNumberNum1 = RandomValueGenerator(0,(TotalNumberOfEntriesNum-1));
-			System.out.println(RandomNumberNum1);
-
-			WebElement NumericalFeatureSelected1 = valuesInDataframeInListview.get(RandomNumberNum1);
-			String NameOfFeatureNum1 = valuesInDataframeInListview.get(RandomNumberNum1).getAttribute("id");
-			System.out.println(NameOfFeatureNum1);
-
-
-			int RandomNumberNum2;
-			do {
-				RandomNumberNum2 = RandomValueGenerator(0,(TotalNumberOfEntriesNum-1));
+			try {
+				mySelectionScreenClose.isDisplayed();
 			}
-			while(RandomNumberNum2==RandomNumberNum1);
-			System.out.println(RandomNumberNum2);
 
-			//2nd numerical value selection
-			WebElement NumericalFeatureSelected2 = valuesInDataframeInListview.get(RandomNumberNum2);
-			String NameOfFeatureNum2 = valuesInDataframeInListview.get(RandomNumberNum2).getAttribute("id");
-			System.out.println(NameOfFeatureNum2);
-
-			int RandomNumberNum3;
-			do {
-				RandomNumberNum3 = RandomValueGenerator(0,(TotalNumberOfEntriesNum-1));
+			catch(Exception ex){
+				System.out.println("My Selection Screen is open");	
 			}
-			while(RandomNumberNum3==RandomNumberNum1 || RandomNumberNum3==RandomNumberNum2);
-			System.out.println(RandomNumberNum3);
 
-			//3rd numerical value selection
-			WebElement NumericalFeatureSelected3 = valuesInDataframeInListview.get(RandomNumberNum3);
-			String NameOfFeatureNum3 = valuesInDataframeInListview.get(RandomNumberNum3).getAttribute("id");
-			System.out.println(NameOfFeatureNum3);
+			finally {
+				BasePage.click(mySelectionScreenOpen);
+				BasePage.click(GetDataButton); //Click get button
+				BasePage.click(mySelectionScreenClose); //Close my selection button
 
-			BasePage.click(Dataframe);
+				BasePage.click(dataframeListViewButton);
 
-			createPlot();
+				BasePage.click(dataframeNumericalFeaturestab);
+				int TotalNumberOfEntriesNum = valuesInDataframeInListview.size();
+				System.out.println(TotalNumberOfEntriesNum);
 
-			BasePage.click(Dataframe);
+				//1st numerical value selection
+				int RandomNumberNum1 = RandomValueGenerator(0,(TotalNumberOfEntriesNum-1));
+				System.out.println(RandomNumberNum1);
 
-			DragAndDropBlankNew(NumericalFeatureSelected1); 
-			DragAndDropValuePresentNew(NumericalFeatureSelected2);
-			DragAndDropValuePresentNew(NumericalFeatureSelected3);
+				WebElement NumericalFeatureSelected1 = valuesInDataframeInListview.get(RandomNumberNum1);
+				String NameOfFeatureNum1 = valuesInDataframeInListview.get(RandomNumberNum1).getAttribute("id");
+				System.out.println(NameOfFeatureNum1);
 
-			BasePage.click(Dataframe);			
 
-			String NameofNumFeatureCleansed1 = delimiterAndTitleCaseConversion(NameOfFeatureNum1);
-			System.out.println(NameofNumFeatureCleansed1);
+				int RandomNumberNum2;
+				do {
+					RandomNumberNum2 = RandomValueGenerator(0,(TotalNumberOfEntriesNum-1));
+				}
+				while(RandomNumberNum2==RandomNumberNum1);
+				System.out.println(RandomNumberNum2);
 
-			String NameofNumFeatureCleansed2 = delimiterAndTitleCaseConversion(NameOfFeatureNum2);
-			System.out.println(NameofNumFeatureCleansed2);
+				//2nd numerical value selection
+				WebElement NumericalFeatureSelected2 = valuesInDataframeInListview.get(RandomNumberNum2);
+				String NameOfFeatureNum2 = valuesInDataframeInListview.get(RandomNumberNum2).getAttribute("id");
+				System.out.println(NameOfFeatureNum2);
 
-			String NameofNumFeatureCleansed3 = delimiterAndTitleCaseConversion(NameOfFeatureNum3);
-			System.out.println(NameofNumFeatureCleansed3);
+				int RandomNumberNum3;
+				do {
+					RandomNumberNum3 = RandomValueGenerator(0,(TotalNumberOfEntriesNum-1));
+				}
+				while(RandomNumberNum3==RandomNumberNum1 || RandomNumberNum3==RandomNumberNum2);
+				System.out.println(RandomNumberNum3);
 
-			Thread.sleep(2000);		
-			
-			int total_match_count = 1;
+				//3rd numerical value selection
+				WebElement NumericalFeatureSelected3 = valuesInDataframeInListview.get(RandomNumberNum3);
+				String NameOfFeatureNum3 = valuesInDataframeInListview.get(RandomNumberNum3).getAttribute("id");
+				System.out.println(NameOfFeatureNum3);
 
-			SelectPlotType("Scatter Plot Matrix");
-			Thread.sleep(3000);
-			screenShotForPass(AnalysisName + " - Scatter Plot Matrix", "Scatter Plot Matrix");
-			int s = GetHeaderX3andY3("Scatter Plot Matrix of "+NameofNumFeatureCleansed1+", "+NameofNumFeatureCleansed2+", "+NameofNumFeatureCleansed3,NameofNumFeatureCleansed1,NameofNumFeatureCleansed2,NameofNumFeatureCleansed3,NameofNumFeatureCleansed1,NameofNumFeatureCleansed2,NameofNumFeatureCleansed3);  
-			ExtentTestManager.getTest().log(Status.PASS, "Labels in Scatter Plot Matrix are verified");
-			
-			assertEquals(s, total_match_count);
+				BasePage.click(Dataframe);
+
+				createPlot();
+
+				BasePage.click(Dataframe);
+
+				DragAndDropBlankNew(NumericalFeatureSelected1); 
+				DragAndDropValuePresentNew(NumericalFeatureSelected2);
+				DragAndDropValuePresentNew(NumericalFeatureSelected3);
+
+				BasePage.click(Dataframe);			
+
+				String NameofNumFeatureCleansed1 = delimiterAndTitleCaseConversion(NameOfFeatureNum1);
+				System.out.println(NameofNumFeatureCleansed1);
+
+				String NameofNumFeatureCleansed2 = delimiterAndTitleCaseConversion(NameOfFeatureNum2);
+				System.out.println(NameofNumFeatureCleansed2);
+
+				String NameofNumFeatureCleansed3 = delimiterAndTitleCaseConversion(NameOfFeatureNum3);
+				System.out.println(NameofNumFeatureCleansed3);
+
+				Thread.sleep(2000);		
+
+				int total_match_count = 1;
+
+				SelectPlotType("Scatter Plot Matrix");
+				Thread.sleep(3000);
+				screenShotForPass(AnalysisName + " - Scatter Plot Matrix", "Scatter Plot Matrix");
+				int s = GetHeaderX3andY3("Scatter Plot Matrix of "+NameofNumFeatureCleansed1+", "+NameofNumFeatureCleansed2+", "+NameofNumFeatureCleansed3,NameofNumFeatureCleansed1,NameofNumFeatureCleansed2,NameofNumFeatureCleansed3,NameofNumFeatureCleansed1,NameofNumFeatureCleansed2,NameofNumFeatureCleansed3);  
+				ExtentTestManager.getTest().log(Status.PASS, "Labels in Scatter Plot Matrix are verified");
+
+				assertEquals(s, total_match_count);
+			}
 		}
 		catch(Exception | AssertionError ex) {
 			throw ex;
@@ -4333,105 +4443,115 @@ public class AnalysisPage extends BasePage{
 
 			SelectingValuesForPlotNewWithEntityNames(Integer.parseInt(NoOfCategoricalValuesRequired), Integer.parseInt(NoOfNumericalValuesRequired));			
 
-			BasePage.click(mySelectionScreenOpen);
-			BasePage.click(GetDataButton); //Click get button
-			BasePage.click(mySelectionScreenClose); //Close my selection button
-
-			BasePage.click(dataframeListViewButton);
-
-			BasePage.click(dataframeNumericalFeaturestab);
-			int TotalNumberOfEntriesNum = valuesInDataframeInListview.size();
-			System.out.println(TotalNumberOfEntriesNum);
-
-			//1st numerical value selection
-			int RandomNumberNum1 = RandomValueGenerator(0,(TotalNumberOfEntriesNum-1));
-			System.out.println(RandomNumberNum1);
-
-			WebElement NumericalFeatureSelected1 = valuesInDataframeInListview.get(RandomNumberNum1);
-			String NameOfFeatureNum1 = valuesInDataframeInListview.get(RandomNumberNum1).getAttribute("id");
-			System.out.println(NameOfFeatureNum1);
-
-
-			int RandomNumberNum2;
-			do {
-				RandomNumberNum2 = RandomValueGenerator(0,(TotalNumberOfEntriesNum-1));
+			try {
+				mySelectionScreenClose.isDisplayed();
 			}
-			while(RandomNumberNum2==RandomNumberNum1);
-			System.out.println(RandomNumberNum2);
 
-			//2nd numerical value selection
-			WebElement NumericalFeatureSelected2 = valuesInDataframeInListview.get(RandomNumberNum2);
-			String NameOfFeatureNum2 = valuesInDataframeInListview.get(RandomNumberNum2).getAttribute("id");
-			System.out.println(NameOfFeatureNum2);
-
-			int RandomNumberNum3;
-			do {
-				RandomNumberNum3 = RandomValueGenerator(0,(TotalNumberOfEntriesNum-1));
+			catch(Exception ex){
+				System.out.println("My Selection Screen is open");	
 			}
-			while(RandomNumberNum3==RandomNumberNum1 || RandomNumberNum3==RandomNumberNum2);
-			System.out.println(RandomNumberNum3);
 
-			//3rd numerical value selection
-			WebElement NumericalFeatureSelected3 = valuesInDataframeInListview.get(RandomNumberNum3);
-			String NameOfFeatureNum3 = valuesInDataframeInListview.get(RandomNumberNum3).getAttribute("id");
-			System.out.println(NameOfFeatureNum3);
+			finally {
+				BasePage.click(mySelectionScreenOpen);
+				BasePage.click(GetDataButton); //Click get button
+				BasePage.click(mySelectionScreenClose); //Close my selection button
 
-			//Categorical value selection
-			BasePage.click(dataframeCategoricalFeaturestab);
+				BasePage.click(dataframeListViewButton);
 
-			int TotalNumberOfEntriesCat = valuesInDataframeInListview.size();
-			System.out.println(TotalNumberOfEntriesCat);
+				BasePage.click(dataframeNumericalFeaturestab);
+				int TotalNumberOfEntriesNum = valuesInDataframeInListview.size();
+				System.out.println(TotalNumberOfEntriesNum);
 
-			int RandomNumberCat = RandomValueGenerator(0,(TotalNumberOfEntriesCat-1));
-			System.out.println(RandomNumberCat);
+				//1st numerical value selection
+				int RandomNumberNum1 = RandomValueGenerator(0,(TotalNumberOfEntriesNum-1));
+				System.out.println(RandomNumberNum1);
 
-			WebElement CategoricalFeatureSelected = valuesInDataframeInListview.get(RandomNumberCat);
-			String NameOfFeatureCat = valuesInDataframeInListview.get(RandomNumberCat).getAttribute("id");
-			System.out.println(NameOfFeatureCat);
+				WebElement NumericalFeatureSelected1 = valuesInDataframeInListview.get(RandomNumberNum1);
+				String NameOfFeatureNum1 = valuesInDataframeInListview.get(RandomNumberNum1).getAttribute("id");
+				System.out.println(NameOfFeatureNum1);
 
-			BasePage.click(Dataframe);
 
-			createPlot();
+				int RandomNumberNum2;
+				do {
+					RandomNumberNum2 = RandomValueGenerator(0,(TotalNumberOfEntriesNum-1));
+				}
+				while(RandomNumberNum2==RandomNumberNum1);
+				System.out.println(RandomNumberNum2);
 
-			BasePage.click(Dataframe);
+				//2nd numerical value selection
+				WebElement NumericalFeatureSelected2 = valuesInDataframeInListview.get(RandomNumberNum2);
+				String NameOfFeatureNum2 = valuesInDataframeInListview.get(RandomNumberNum2).getAttribute("id");
+				System.out.println(NameOfFeatureNum2);
 
-			BasePage.click(dataframeAllFeaturestab);
+				int RandomNumberNum3;
+				do {
+					RandomNumberNum3 = RandomValueGenerator(0,(TotalNumberOfEntriesNum-1));
+				}
+				while(RandomNumberNum3==RandomNumberNum1 || RandomNumberNum3==RandomNumberNum2);
+				System.out.println(RandomNumberNum3);
 
-			WebElement CategoricalFeatureSelectedFromAll = driver.findElement(By.xpath("//span[@id='"+NameOfFeatureCat+"']"));
-			WebElement NumericalFeatureSelectedFromAll1 = driver.findElement(By.xpath("//span[@id='"+NameOfFeatureNum1+"']"));
-			WebElement NumericalFeatureSelectedFromAll2 = driver.findElement(By.xpath("//span[@id='"+NameOfFeatureNum2+"']"));
-			WebElement NumericalFeatureSelectedFromAll3 = driver.findElement(By.xpath("//span[@id='"+NameOfFeatureNum3+"']"));
+				//3rd numerical value selection
+				WebElement NumericalFeatureSelected3 = valuesInDataframeInListview.get(RandomNumberNum3);
+				String NameOfFeatureNum3 = valuesInDataframeInListview.get(RandomNumberNum3).getAttribute("id");
+				System.out.println(NameOfFeatureNum3);
 
-			DragAndDropBlankNew(NumericalFeatureSelectedFromAll1);
-			DragAndDropValuePresentNew(NumericalFeatureSelectedFromAll2);
-			DragAndDropValuePresentNew(NumericalFeatureSelectedFromAll3);
-			DragAndDropValuePresentNew(CategoricalFeatureSelectedFromAll);
+				//Categorical value selection
+				BasePage.click(dataframeCategoricalFeaturestab);
 
-			BasePage.click(Dataframe);			
+				int TotalNumberOfEntriesCat = valuesInDataframeInListview.size();
+				System.out.println(TotalNumberOfEntriesCat);
 
-			String NameofNumFeatureCleansed1 = delimiterAndTitleCaseConversion(NameOfFeatureNum1);
-			System.out.println(NameofNumFeatureCleansed1);
+				int RandomNumberCat = RandomValueGenerator(0,(TotalNumberOfEntriesCat-1));
+				System.out.println(RandomNumberCat);
 
-			String NameofNumFeatureCleansed2 = delimiterAndTitleCaseConversion(NameOfFeatureNum2);
-			System.out.println(NameofNumFeatureCleansed2);
+				WebElement CategoricalFeatureSelected = valuesInDataframeInListview.get(RandomNumberCat);
+				String NameOfFeatureCat = valuesInDataframeInListview.get(RandomNumberCat).getAttribute("id");
+				System.out.println(NameOfFeatureCat);
 
-			String NameofNumFeatureCleansed3 = delimiterAndTitleCaseConversion(NameOfFeatureNum3);
-			System.out.println(NameofNumFeatureCleansed3);
+				BasePage.click(Dataframe);
 
-			String NameofCatFeatureCleansed = delimiterAndTitleCaseConversion(NameOfFeatureCat);
-			System.out.println(NameofCatFeatureCleansed);
+				createPlot();
 
-			Thread.sleep(2000);
+				BasePage.click(Dataframe);
 
-			int total_match_count = 1;
-			
-			SelectPlotType("Coloured Marginal plot");
-			Thread.sleep(2000);
-			screenShotForPass(AnalysisName + " - Coloured Marginal plot", "Coloured Marginal plot");
-			int c = GetHeaderX3andY3("Coloured Marginal Plot of "+NameofNumFeatureCleansed1+", "+NameofNumFeatureCleansed2+", "+NameofNumFeatureCleansed3+", "+NameofCatFeatureCleansed,NameofNumFeatureCleansed1,NameofNumFeatureCleansed2,NameofNumFeatureCleansed3,NameofNumFeatureCleansed1,NameofNumFeatureCleansed2,NameofNumFeatureCleansed3);
-			ExtentTestManager.getTest().log(Status.PASS, "Labels in Coloured Marginal Plot are verified");
-		
-			assertEquals(c, total_match_count);
+				BasePage.click(dataframeAllFeaturestab);
+
+				WebElement CategoricalFeatureSelectedFromAll = driver.findElement(By.xpath("//span[@id='"+NameOfFeatureCat+"']"));
+				WebElement NumericalFeatureSelectedFromAll1 = driver.findElement(By.xpath("//span[@id='"+NameOfFeatureNum1+"']"));
+				WebElement NumericalFeatureSelectedFromAll2 = driver.findElement(By.xpath("//span[@id='"+NameOfFeatureNum2+"']"));
+				WebElement NumericalFeatureSelectedFromAll3 = driver.findElement(By.xpath("//span[@id='"+NameOfFeatureNum3+"']"));
+
+				DragAndDropBlankNew(NumericalFeatureSelectedFromAll1);
+				DragAndDropValuePresentNew(NumericalFeatureSelectedFromAll2);
+				DragAndDropValuePresentNew(NumericalFeatureSelectedFromAll3);
+				DragAndDropValuePresentNew(CategoricalFeatureSelectedFromAll);
+
+				BasePage.click(Dataframe);			
+
+				String NameofNumFeatureCleansed1 = delimiterAndTitleCaseConversion(NameOfFeatureNum1);
+				System.out.println(NameofNumFeatureCleansed1);
+
+				String NameofNumFeatureCleansed2 = delimiterAndTitleCaseConversion(NameOfFeatureNum2);
+				System.out.println(NameofNumFeatureCleansed2);
+
+				String NameofNumFeatureCleansed3 = delimiterAndTitleCaseConversion(NameOfFeatureNum3);
+				System.out.println(NameofNumFeatureCleansed3);
+
+				String NameofCatFeatureCleansed = delimiterAndTitleCaseConversion(NameOfFeatureCat);
+				System.out.println(NameofCatFeatureCleansed);
+
+				Thread.sleep(2000);
+
+				int total_match_count = 1;
+
+				SelectPlotType("Coloured Marginal plot");
+				Thread.sleep(2000);
+				screenShotForPass(AnalysisName + " - Coloured Marginal plot", "Coloured Marginal plot");
+				int c = GetHeaderX3andY3("Coloured Marginal Plot of "+NameofNumFeatureCleansed1+", "+NameofNumFeatureCleansed2+", "+NameofNumFeatureCleansed3+", "+NameofCatFeatureCleansed,NameofNumFeatureCleansed1,NameofNumFeatureCleansed2,NameofNumFeatureCleansed3,NameofNumFeatureCleansed1,NameofNumFeatureCleansed2,NameofNumFeatureCleansed3);
+				ExtentTestManager.getTest().log(Status.PASS, "Labels in Coloured Marginal Plot are verified");
+
+				assertEquals(c, total_match_count);
+			}
 		}
 		catch(Exception | AssertionError ex) {
 			throw ex;
