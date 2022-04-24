@@ -50,10 +50,17 @@ public class LoginPage extends BasePage{
 	@FindBy(name = "//*[text()='Error while initializing catalog']")
 	public WebElement catalogInitializeError;
 
-	@FindBy(xpath = "//*[@class='logo' and @alt='Microsoft']")
-	public WebElement microSoftLogo;
+//	@FindBy(xpath = "//*[@class='logo' and @alt='Microsoft']")
+//	public WebElement microSoftLogo;
+	
+	
+	@FindBy(xpath = "//*[@class='banner-logo']")
+	public WebElement eagleLogo;
 
-	@FindBy(xpath = "//*[text()='Use a verification code from my mobile app']")
+//	@FindBy(xpath = "//*[text()='Use a verification code from my mobile app']")
+//	public WebElement verificationCode;
+	
+	@FindBy(xpath = "//*[text()='Use a verification code']")
 	public WebElement verificationCode;
 
 	@FindBy(xpath = "//input[@aria-label='Code']")
@@ -104,7 +111,7 @@ public class LoginPage extends BasePage{
 			WebDriverWait wait = new WebDriverWait(driver, 10);
 			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-			BasePage.CompareAttributeText("alt","Microsoft",microSoftLogo);
+//			BasePage.CompareAttributeText("alt","Microsoft",microSoftLogo);
 			wait.until(ExpectedConditions.visibilityOf(MicrosoftPassText));
 			BasePage.click(MicrosoftPass);
 			MicrosoftPass.sendKeys(emailPass);									//feed in only password as email ID has already been given
@@ -187,8 +194,10 @@ public class LoginPage extends BasePage{
 			catch(Exception sct) {
 				this.setCredentials();
 				this.clickLogin();
-				wait.until(ExpectedConditions.visibilityOf(microSoftLogo));
-				if(microSoftLogo.isDisplayed()) {			
+//				wait.until(ExpectedConditions.visibilityOf(microSoftLogo));
+				wait.until(ExpectedConditions.visibilityOf(eagleLogo));
+//				if(microSoftLogo.isDisplayed()) {	
+				if(eagleLogo.isDisplayed()) {	
 					try {
 						this.MicrosoftLogin();
 						this.CodeVerification();

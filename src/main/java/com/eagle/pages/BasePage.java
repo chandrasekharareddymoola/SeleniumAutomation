@@ -84,10 +84,10 @@ public class BasePage extends BaseTest{
 	public static void scrollIntoView(WebElement element) {
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-		wait.until(ExpectedConditions.visibilityOf(element));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollTo(document.body.scrollHeight,0)");
 		js.executeScript("arguments[0].scrollIntoView(true);", element);
+		wait.until(ExpectedConditions.visibilityOf(element));
 	}
 
 	//Scroll to top

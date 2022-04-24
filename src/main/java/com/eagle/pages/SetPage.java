@@ -573,12 +573,13 @@ public class SetPage extends BasePage{
 							{
 								scrollIntoView(element);
 							}
-							String textFromGrid = element.getText();	    				
+							String textFromGrid = element.getText();
 							if(item.equals(textFromGrid))
 							{
 								WebElement checkBox = element.findElement(By.tagName("i"));
 								checkBox.click();	
 								scrollIntoView(FirstRowintableExpand);
+								System.out.println(element);
 							}
 						}
 					}
@@ -621,7 +622,8 @@ public class SetPage extends BasePage{
 			myAlist.add(removeItem1);
 			myAlist.add(removeItem2);
 			myAlist.add(removeItem3);
-			this.selectItems(myAlist);	  
+			this.selectItems(myAlist);
+			BasePage.scrollToTop();
 			this.removeItems();	 
 			this.waitForEditAndDelete();
 			ExtentTestManager.getTest().log(Status.PASS, "Set - Items removed successfully");
@@ -739,6 +741,7 @@ public class SetPage extends BasePage{
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
 			this.verifyAfterAdd(setItems);
+			BasePage.scrollToTop();
 			BasePage.verifyPage(setToCreate,setNameInExpand); //verifying the set name
 			ExtentTestManager.getTest().log(Status.PASS, "Set - Set added in expand");
 		}
@@ -797,6 +800,7 @@ public class SetPage extends BasePage{
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
 			this.verifyAfterAdd(CatalogItems);
+			BasePage.scrollToTop();
 			BasePage.verifyPage(setToCreate,setNameInExpand); //verifying the set name
 			ExtentTestManager.getTest().log(Status.PASS, "Set - Added from catalog and count increase verified");
 		}
@@ -898,6 +902,7 @@ public class SetPage extends BasePage{
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);		
 			this.verifyAfterAdd(FileItems);
+			BasePage.scrollToTop();
 			BasePage.verifyPage(setToCreate,setNameInExpand); //verifying the set name
 			ExtentTestManager.getTest().log(Status.PASS, "Set - Added from file in expand");
 		}
@@ -1096,7 +1101,9 @@ public class SetPage extends BasePage{
 					try {
 						int NoOfRows = RowsintableExpand.size();
 						for(int i=1 ; i<= NoOfRows ;i++) {
-							WebElement tableRows = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"]")));
+//							WebElement tableRows = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"]")));
+							WebElement tableRows = driver.findElement(By.xpath("(//*[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"]"));
+							scrollIntoView(tableRows);
 							String valuesInRows = tableRows.getText().toLowerCase();
 							String SearchInSetLowerCase = SearchInSet.toLowerCase();				
 							boolean  comp = valuesInRows.contains(SearchInSetLowerCase);
@@ -1202,7 +1209,10 @@ public class SetPage extends BasePage{
 								{
 									for(int j=1 ; j<= NoOfColumns ;j++) 
 									{
-										WebElement tableRows = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("((//*[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"]/child::div)["+j+"]")));
+//										WebElement tableRows = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("((//*[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"]/child::div)["+j+"]")));
+										WebElement tableRows = driver.findElement(By.xpath("((//*[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"]/child::div)["+j+"]"));
+										scrollIntoView(tableRows);
+										
 										String valuesInRows = tableRows.getText().toLowerCase();
 										String ItemsLowerCase = item.toLowerCase();		
 										boolean  comp = valuesInRows.equals(ItemsLowerCase);

@@ -180,7 +180,8 @@ public class ComparisonTest extends BaseTest{
 			System.out.println(functionName);
 			String value = this.getConfiguration().get(functionName);
 			String[] ComParameters =value.split(",");
-			String ComName = ComParameters[0].trim();
+			String ComName = ComParameters[0].trim()+dtText;
+			System.out.println(ComName);
 			String entity = ComParameters[1].trim();
 			String CaseSetName = ComParameters[2].trim();
 			String searchTextInCase = ComParameters[3].trim();
@@ -229,100 +230,100 @@ public class ComparisonTest extends BaseTest{
 		}
 	}
 
-	@Test(priority = 7, description = "Delete Card in Comparison Expand")
-	public void DeleteCardInComparisonExpand_Test() throws Throwable  {
-		try {
-
-			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
-
-			System.out.println(functionName);
-			String value = this.getConfiguration().get(functionName);
-			String[] ComParameters =value.split(",");
-			String ComName = ComParameters[0].trim()+dtText;
-			String ControlSetName = ComParameters[1].trim();
-			String entity = ComParameters[2].trim();
-			String searchTextInControl = ComParameters[3].trim();
-
-			/* Delete Set from Expanded Set */
-			objComparisonPage.DeleteExploraionInExpand(ComName, ControlSetName,entity,searchTextInControl);
-			//			objComparisonPage.DeleteExploraionInExpand("DComparison2", "Control Set","Disease", "kera");
-			onSuccessMeassage("Delete Card from Expanded Comparison");
+		@Test(priority = 7, description = "Delete Card in Comparison Expand")
+		public void DeleteCardInComparisonExpand_Test() throws Throwable  {
+			try {
+	
+				String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+	
+				System.out.println(functionName);
+				String value = this.getConfiguration().get(functionName);
+				String[] ComParameters =value.split(",");
+				String ComName = ComParameters[0].trim()+dtText;
+				String ControlSetName = ComParameters[1].trim();
+				String entity = ComParameters[2].trim();
+				String searchTextInControl = ComParameters[3].trim();
+	
+				/* Delete Set from Expanded Set */
+				objComparisonPage.DeleteExploraionInExpand(ComName, ControlSetName,entity,searchTextInControl);
+				//			objComparisonPage.DeleteExploraionInExpand("DComparison2", "Control Set","Disease", "kera");
+				onSuccessMeassage("Delete Card from Expanded Comparison");
+			}
+			catch(Exception ex)
+			{
+				objComparisonPage.captureScreenshot("DeleteComparisonInExpandFail");
+				onFailureMeassage(ex.getMessage(),"DeleteComparisonInExpandFail","DeleteComparisonInExpandFail");
+			}
+			catch(AssertionError ex)
+			{
+				objComparisonPage.captureScreenshot("DeleteComparisonInExpandFail");
+				onFailureMeassage(ex.getMessage(),"DeleteComparisonInExpandFail","DeleteComparisonInExpandFail");
+			}		
 		}
-		catch(Exception ex)
-		{
-			objComparisonPage.captureScreenshot("DeleteComparisonInExpandFail");
-			onFailureMeassage(ex.getMessage(),"DeleteComparisonInExpandFail","DeleteComparisonInExpandFail");
+	
+		@Test(priority = 8, description = "Delete The first Card in Comparison")
+		public void DeleteComparisonFirstCard_Test() throws Throwable  {
+			try {
+	
+				String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+	
+				System.out.println(functionName);
+				String value = this.getConfiguration().get(functionName);
+				String[] ComParameters =value.split(",");
+				String ComName = ComParameters[0].trim()+dtText;
+				String ControlSetName = ComParameters[1].trim();
+				String entity = ComParameters[2].trim();
+				String searchTextInControl = ComParameters[3].trim();
+	
+				/* Delete The first Card (control) in Comparison */
+				objComparisonPage.deleteComparisonInFirstCard(ComName,ControlSetName,entity,searchTextInControl);
+				//			objComparisonPage.deleteComparisonInFirstCard("DComparison1Card", "Control Set", "Disease", "kera");
+				onSuccessMeassage("Deleted The first Card in Comparison Successfully");
+			}
+			catch(Exception ex)
+			{
+				objComparisonPage.captureScreenshot("ComparisonFirstCardDeleteFail");
+				onFailureMeassage(ex.getMessage(),"ComparisonFirstCardDeleteFail","ComparisonFirstCardDeleteFail");
+			}
+			catch(AssertionError ex)
+			{
+				objComparisonPage.captureScreenshot("ComparisonFirstCardDeleteFail");
+				onFailureMeassage(ex.getMessage(),"ComparisonFirstCardDeleteFail","ComparisonFirstCardDeleteFail");
+			}
 		}
-		catch(AssertionError ex)
-		{
-			objComparisonPage.captureScreenshot("DeleteComparisonInExpandFail");
-			onFailureMeassage(ex.getMessage(),"DeleteComparisonInExpandFail","DeleteComparisonInExpandFail");
-		}		
-	}
-
-	@Test(priority = 8, description = "Delete The first Card in Comparison")
-	public void DeleteComparisonFirstCard_Test() throws Throwable  {
-		try {
-
-			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
-
-			System.out.println(functionName);
-			String value = this.getConfiguration().get(functionName);
-			String[] ComParameters =value.split(",");
-			String ComName = ComParameters[0].trim()+dtText;
-			String ControlSetName = ComParameters[1].trim();
-			String entity = ComParameters[2].trim();
-			String searchTextInControl = ComParameters[3].trim();
-
-			/* Delete The first Card (control) in Comparison */
-			objComparisonPage.deleteComparisonInFirstCard(ComName,ControlSetName,entity,searchTextInControl);
-			//			objComparisonPage.deleteComparisonInFirstCard("DComparison1Card", "Control Set", "Disease", "kera");
-			onSuccessMeassage("Deleted The first Card in Comparison Successfully");
+	
+		@Test(priority = 9, description = "Delete The Second Card in Comparison")
+		public void DeleteComparisonSecondCard_Test() throws Throwable  {
+			try {
+	
+				String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+	
+				System.out.println(functionName);
+				String value = this.getConfiguration().get(functionName);
+				String[] ComParameters =value.split(",");
+				String ComName = ComParameters[0].trim()+dtText;
+				String ControlSetName = ComParameters[1].trim();
+				String CaseSetName = ComParameters[2].trim();
+				String entity = ComParameters[3].trim();
+				String searchTextInControl = ComParameters[4].trim();
+				String searchTextInCase = ComParameters[5].trim();
+	
+				/* Delete The Second Card (case) in Comparison */
+				objComparisonPage.deleteComparisonInLaterCard(ComName,ControlSetName,CaseSetName,entity,searchTextInControl,searchTextInCase);
+				//			objComparisonPage.deleteComparisonInLaterCard("DComparison2Card", "Control Card","Case Card" ,"Disease", "kera","lor");
+				onSuccessMeassage("Deleted The first Card in Comparison Successfully");
+			}
+			catch(Exception ex)
+			{
+				objComparisonPage.captureScreenshot("ComparisonSecondCardDeleteFail");
+				onFailureMeassage(ex.getMessage(),"ComparisonSecondCardDeleteFail","ComparisonSecondCardDeleteFail");
+			}
+			catch(AssertionError ex)
+			{
+				objComparisonPage.captureScreenshot("ComparisonSecondCardDeleteFail");
+				onFailureMeassage(ex.getMessage(),"ComparisonSecondCardDeleteFail","ComparisonSecondCardDeleteFail");
+			}
 		}
-		catch(Exception ex)
-		{
-			objComparisonPage.captureScreenshot("ComparisonFirstCardDeleteFail");
-			onFailureMeassage(ex.getMessage(),"ComparisonFirstCardDeleteFail","ComparisonFirstCardDeleteFail");
-		}
-		catch(AssertionError ex)
-		{
-			objComparisonPage.captureScreenshot("ComparisonFirstCardDeleteFail");
-			onFailureMeassage(ex.getMessage(),"ComparisonFirstCardDeleteFail","ComparisonFirstCardDeleteFail");
-		}
-	}
-
-	@Test(priority = 9, description = "Delete The Second Card in Comparison")
-	public void DeleteComparisonSecondCard_Test() throws Throwable  {
-		try {
-
-			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
-
-			System.out.println(functionName);
-			String value = this.getConfiguration().get(functionName);
-			String[] ComParameters =value.split(",");
-			String ComName = ComParameters[0].trim()+dtText;
-			String ControlSetName = ComParameters[1].trim();
-			String CaseSetName = ComParameters[2].trim();
-			String entity = ComParameters[3].trim();
-			String searchTextInControl = ComParameters[4].trim();
-			String searchTextInCase = ComParameters[5].trim();
-
-			/* Delete The Second Card (case) in Comparison */
-			objComparisonPage.deleteComparisonInLaterCard(ComName,ControlSetName,CaseSetName,entity,searchTextInControl,searchTextInCase);
-			//			objComparisonPage.deleteComparisonInLaterCard("DComparison2Card", "Control Card","Case Card" ,"Disease", "kera","lor");
-			onSuccessMeassage("Deleted The first Card in Comparison Successfully");
-		}
-		catch(Exception ex)
-		{
-			objComparisonPage.captureScreenshot("ComparisonSecondCardDeleteFail");
-			onFailureMeassage(ex.getMessage(),"ComparisonSecondCardDeleteFail","ComparisonSecondCardDeleteFail");
-		}
-		catch(AssertionError ex)
-		{
-			objComparisonPage.captureScreenshot("ComparisonSecondCardDeleteFail");
-			onFailureMeassage(ex.getMessage(),"ComparisonSecondCardDeleteFail","ComparisonSecondCardDeleteFail");
-		}
-	}
 
 	@Test(priority = 10, description = "Comparison - Expand and add items from Catalog")
 	public void ComparisonExpandAddFromCatalog_Test() throws Throwable  {
@@ -417,169 +418,171 @@ public class ComparisonTest extends BaseTest{
 		}
 	}
 
-	@Test(priority = 13, description = "Comparison - Create with multiple Case Cards")
-	public void ComparisonCreateMultipleCaseCards_Test() throws Throwable  {
-		try {
-
-			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
-
-			System.out.println(functionName);
-			String value = this.getConfiguration().get(functionName);
-			String[] ComParameters = value.split(",");
-			String ComName = ComParameters[0].trim()+dtText;
-			String ControlSetName = ComParameters[1].trim();
-			String entity = ComParameters[2].trim();
-			String searchTextInControl = ComParameters[3].trim();
-			String NoOfCaseCardstocreate = ComParameters[4].trim();
-
-			/* Comparison - Create with multiple Cards */		
-			objComparisonPage.createComparisonWithControlandMultipleCase(ComName, ControlSetName,entity, searchTextInControl, Integer.parseInt(NoOfCaseCardstocreate));
-			//			objComparisonPage.createComparisonWithControlandMultipleCase("CompRela 2", "Control Set",  "Disease", "kera", 2);
-			onSuccessMeassage("Comparison Created and added with multiple Case Cards Successfully");
+		@Test(priority = 13, description = "Comparison - Create with multiple Case Cards")
+		public void ComparisonCreateMultipleCaseCards_Test() throws Throwable  {
+			try {
+	
+				String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+	
+				System.out.println(functionName);
+				String value = this.getConfiguration().get(functionName);
+				String[] ComParameters = value.split(",");
+				String ComName = ComParameters[0].trim()+dtText;
+				String ControlSetName = ComParameters[1].trim();
+				String entity = ComParameters[2].trim();
+				String searchTextInControl = ComParameters[3].trim();
+				String NoOfCaseCardstocreate = ComParameters[4].trim();
+	
+				/* Comparison - Create with multiple Cards */		
+				objComparisonPage.createComparisonWithControlandMultipleCase(ComName, ControlSetName,entity, searchTextInControl, Integer.parseInt(NoOfCaseCardstocreate));
+				//			objComparisonPage.createComparisonWithControlandMultipleCase("CompRela 2", "Control Set",  "Disease", "kera", 2);
+				onSuccessMeassage("Comparison Created and added with multiple Case Cards Successfully");
+			}
+			catch(Exception | AssertionError ex)
+			{
+				objComparisonPage.captureScreenshot("ComparisonAdd2RelationFail");
+				onFailureMeassage(ex.getMessage(),"ComparisonAdd2RelationFail","ComparisonAdd2RelationFail");
+			}
 		}
-		catch(Exception | AssertionError ex)
-		{
-			objComparisonPage.captureScreenshot("ComparisonAdd2RelationFail");
-			onFailureMeassage(ex.getMessage(),"ComparisonAdd2RelationFail","ComparisonAdd2RelationFail");
+	
+		@Test(priority = 14, description = "Comparison - Create with multiple Case Cards and Run Comparison")
+		public void ComparisonCreateMultipleCaseCardsRunComparison_Test() throws Throwable  {
+			try {
+	
+				String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+	
+				System.out.println(functionName);
+				String value = this.getConfiguration().get(functionName);
+				String[] ComParameters = value.split(",");
+				String ComName = ComParameters[0].trim()+dtText;
+				String ControlSetName = ComParameters[1].trim();
+				String entity = ComParameters[2].trim();
+				String searchTextInControl = ComParameters[3].trim();
+				String NoOfCaseCardstocreate = ComParameters[4].trim();
+	
+				/* Comparison - Create with multiple Cards with Run Comparison */
+				objComparisonPage.createComparisonWithControlandMultipleCaseRunComparison(ComName, ControlSetName,entity,searchTextInControl,Integer.parseInt(NoOfCaseCardstocreate));
+				//			objComparisonPage.createComparisonWithControlandMultipleCaseRunComparison("CompRela 3", "Control Set",  "Disease", "kera", 3);
+				onSuccessMeassage("Comparison Created and added with multiple Case Cards Run comparison Successfully");
+			}
+			catch(Exception | AssertionError ex)
+			{
+				objComparisonPage.captureScreenshot("ComparisonAdd2RelationFail");
+				onFailureMeassage(ex.getMessage(),"ComparisonAdd2RelationFail","ComparisonAdd2RelationFail");
+			}
 		}
-	}
-
-	@Test(priority = 14, description = "Comparison - Create with multiple Case Cards and Run Comparison")
-	public void ComparisonCreateMultipleCaseCardsRunComparison_Test() throws Throwable  {
-		try {
-
-			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
-
-			System.out.println(functionName);
-			String value = this.getConfiguration().get(functionName);
-			String[] ComParameters = value.split(",");
-			String ComName = ComParameters[0].trim()+dtText;
-			String ControlSetName = ComParameters[1].trim();
-			String entity = ComParameters[2].trim();
-			String searchTextInControl = ComParameters[3].trim();
-			String NoOfCaseCardstocreate = ComParameters[4].trim();
-
-			/* Comparison - Create with multiple Cards with Run Comparison */
-			objComparisonPage.createComparisonWithControlandMultipleCaseRunComparison(ComName, ControlSetName,entity,searchTextInControl,Integer.parseInt(NoOfCaseCardstocreate));
-			//			objComparisonPage.createComparisonWithControlandMultipleCaseRunComparison("CompRela 3", "Control Set",  "Disease", "kera", 3);
-			onSuccessMeassage("Comparison Created and added with multiple Case Cards Run comparison Successfully");
+	
+		@Test(priority = 15, description = "Create And Delete An Comparison")
+		public void CreateAndDeleteComparison_Test() throws Throwable  {
+			try {
+	
+				String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+	
+				System.out.println(functionName);
+				String value = this.getConfiguration().get(functionName);
+				String[] ComParameters =value.split(",");
+				String ComName = ComParameters[0].trim()+dtText;
+				String ControlSetName = ComParameters[1].trim();
+				String entity = ComParameters[2].trim();
+				String searchTextInControl = ComParameters[3].trim();
+	
+				/* Create And Delete An Comparison */ 
+				objComparisonPage.createAndDeleteComparison(ComName,ControlSetName,entity,searchTextInControl);
+				//			objComparisonPage.createAndDeleteComparison("Delete Com1", "Control Set", "Disease","kera");
+				onSuccessMeassage("Created And Deleted An Comparison Successfully");
+			}
+			catch(Exception ex)
+			{
+				objComparisonPage.captureScreenshot("CreateAndDeleteComparisonFail");
+				onFailureMeassage(ex.getMessage(),"CreateAndDeleteComparisonFail","CreateAndDeleteComparisonFail");
+			}
+			catch(AssertionError ex)
+			{
+				objComparisonPage.captureScreenshot("CreateAndDeleteComparisonFail");
+				onFailureMeassage(ex.getMessage(),"CreateAndDeleteComparisonFail","CreateAndDeleteComparisonFail");
+			}
 		}
-		catch(Exception | AssertionError ex)
-		{
-			objComparisonPage.captureScreenshot("ComparisonAdd2RelationFail");
-			onFailureMeassage(ex.getMessage(),"ComparisonAdd2RelationFail","ComparisonAdd2RelationFail");
+	
+		@Test(priority = 16, description = "Create And Share An Comparison")
+		public void CreateAndShareComparison_Test() throws Throwable  {
+			try {
+	
+				String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+	
+				System.out.println(functionName);
+				String value = this.getConfiguration().get(functionName);
+				String[] ComParameters =value.split(",");
+				String ComName = ComParameters[0].trim()+dtText;
+				String ControlSetName = ComParameters[1].trim();
+				String entity = ComParameters[2].trim();
+				String searchTextInControl = ComParameters[3].trim();
+				String mailIDtoShareto = ComParameters[4].trim();
+	
+				/* Create And Share An Comparison */ 
+				objComparisonPage.createAndShareComparison(ComName, ControlSetName,entity,searchTextInControl,mailIDtoShareto);
+				//			objComparisonPage.createAndShareComparison("Share Com1", "Control Set","Disease","kera","mugunth.raman@eaglegenomics.com");
+				onSuccessMeassage("Created And Shared An Comparison Successfully");
+			}
+			catch(Exception ex)
+			{
+				objComparisonPage.captureScreenshot("CreateAndShareComparisonFail");
+				onFailureMeassage(ex.getMessage(),"CreateAndShareComparisonFail","CreateAndShareComparisonFail");
+			}
+			catch(AssertionError ex)
+			{
+				objComparisonPage.captureScreenshot("CreateAndShareComparisonFail");
+				onFailureMeassage(ex.getMessage(),"CreateAndShareComparisonFail","CreateAndShareComparisonFail");
+			}
 		}
-	}
-
-	@Test(priority = 15, description = "Create And Delete An Comparison")
-	public void CreateAndDeleteComparison_Test() throws Throwable  {
-		try {
-
-			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
-
-			System.out.println(functionName);
-			String value = this.getConfiguration().get(functionName);
-			String[] ComParameters =value.split(",");
-			String ComName = ComParameters[0].trim()+dtText;
-			String ControlSetName = ComParameters[1].trim();
-			String entity = ComParameters[2].trim();
-			String searchTextInControl = ComParameters[3].trim();
-
-			/* Create And Delete An Comparison */ 
-			objComparisonPage.createAndDeleteComparison(ComName,ControlSetName,entity,searchTextInControl);
-			//			objComparisonPage.createAndDeleteComparison("Delete Com1", "Control Set", "Disease","kera");
-			onSuccessMeassage("Created And Deleted An Comparison Successfully");
-		}
-		catch(Exception ex)
-		{
-			objComparisonPage.captureScreenshot("CreateAndDeleteComparisonFail");
-			onFailureMeassage(ex.getMessage(),"CreateAndDeleteComparisonFail","CreateAndDeleteComparisonFail");
-		}
-		catch(AssertionError ex)
-		{
-			objComparisonPage.captureScreenshot("CreateAndDeleteComparisonFail");
-			onFailureMeassage(ex.getMessage(),"CreateAndDeleteComparisonFail","CreateAndDeleteComparisonFail");
-		}
-	}
-
-	@Test(priority = 16, description = "Create And Share An Comparison")
-	public void CreateAndShareComparison_Test() throws Throwable  {
-		try {
-
-			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
-
-			System.out.println(functionName);
-			String value = this.getConfiguration().get(functionName);
-			String[] ComParameters =value.split(",");
-			String ComName = ComParameters[0].trim()+dtText;
-			String ControlSetName = ComParameters[1].trim();
-			String entity = ComParameters[2].trim();
-			String searchTextInControl = ComParameters[3].trim();
-			String mailIDtoShareto = ComParameters[4].trim();
-
-			/* Create And Share An Comparison */ 
-			objComparisonPage.createAndShareComparison(ComName, ControlSetName,entity,searchTextInControl,mailIDtoShareto);
-			//			objComparisonPage.createAndShareComparison("Share Com1", "Control Set","Disease","kera","mugunth.raman@eaglegenomics.com");
-			onSuccessMeassage("Created And Shared An Comparison Successfully");
-		}
-		catch(Exception ex)
-		{
-			objComparisonPage.captureScreenshot("CreateAndShareComparisonFail");
-			onFailureMeassage(ex.getMessage(),"CreateAndShareComparisonFail","CreateAndShareComparisonFail");
-		}
-		catch(AssertionError ex)
-		{
-			objComparisonPage.captureScreenshot("CreateAndShareComparisonFail");
-			onFailureMeassage(ex.getMessage(),"CreateAndShareComparisonFail","CreateAndShareComparisonFail");
-		}
-	}
-
-	@Test(priority = 17, description = "Delete A Comparison")
-	public void DeleteComparison_Test() throws Throwable  {
-		try {
-
-			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
-
-			System.out.println(functionName);
-			String value = this.getConfiguration().get(functionName);
-			String[] ComParameters =value.split(",");
-			String ComName = ComParameters[0].trim();
-
-			/* Delete A Comparison */
-			objComparisonPage.DeleteComparison(ComName);
-			//			objComparisonPage.DeleteComparison("search Comparison");
-			onSuccessMeassage("Deleted A Comparison Successfully");
-		}
-		catch(Exception | AssertionError ex)
-		{
-			objComparisonPage.captureScreenshot("DeleteComparisonFail");
-			onFailureMeassage(ex.getMessage(),"DeleteComparisonFail","DeleteComparisonFail");
-		}
-	}
-
-	@Test(priority = 18, description = "Sharing A Comparison")
-	public void ShareComparison_Test() throws Throwable  {
-		try {
-
-			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
-
-			System.out.println(functionName);
-			String value = this.getConfiguration().get(functionName);
-			String[] ComParameters =value.split(",");
-			String ComName = ComParameters[0].trim();
-			String mailIDtoShareto = ComParameters[1].trim();
-
-			/* Share A Comparison */
-			objComparisonPage.ShareComparison(ComName,mailIDtoShareto);
-			//			objComparisonPage.ShareComparison("ComAddfromFile 1","mugunth.raman@eaglegenomics.com");
-			onSuccessMeassage("Shared A Comparison Successfully");
-		}
-		catch(Exception | AssertionError ex)
-		{
-			objComparisonPage.captureScreenshot("ShareComparisonFail");
-			onFailureMeassage(ex.getMessage(),"ShareComparisonFail","ShareComparisonFail");
-		}
-	}
+	
+		//Not needed
+	//	@Test(priority = 17, description = "Delete A Comparison")
+	//	public void DeleteComparison_Test() throws Throwable  {
+	//		try {
+	//
+	//			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+	//
+	//			System.out.println(functionName);
+	//			String value = this.getConfiguration().get(functionName);
+	//			String[] ComParameters =value.split(",");
+	//			String ComName = ComParameters[0].trim();
+	//
+	//			/* Delete A Comparison */
+	//			objComparisonPage.DeleteComparison(ComName);
+	//			//			objComparisonPage.DeleteComparison("search Comparison");
+	//			onSuccessMeassage("Deleted A Comparison Successfully");
+	//		}
+	//		catch(Exception | AssertionError ex)
+	//		{
+	//			objComparisonPage.captureScreenshot("DeleteComparisonFail");
+	//			onFailureMeassage(ex.getMessage(),"DeleteComparisonFail","DeleteComparisonFail");
+	//		}
+	//	}
+	
+		//Not needed
+	//	@Test(priority = 18, description = "Sharing A Comparison")
+	//	public void ShareComparison_Test() throws Throwable  {
+	//		try {
+	//
+	//			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+	//
+	//			System.out.println(functionName);
+	//			String value = this.getConfiguration().get(functionName);
+	//			String[] ComParameters =value.split(",");
+	//			String ComName = ComParameters[0].trim();
+	//			String mailIDtoShareto = ComParameters[1].trim();
+	//
+	//			/* Share A Comparison */
+	//			objComparisonPage.ShareComparison(ComName,mailIDtoShareto);
+	//			//			objComparisonPage.ShareComparison("ComAddfromFile 1","mugunth.raman@eaglegenomics.com");
+	//			onSuccessMeassage("Shared A Comparison Successfully");
+	//		}
+	//		catch(Exception | AssertionError ex)
+	//		{
+	//			objComparisonPage.captureScreenshot("ShareComparisonFail");
+	//			onFailureMeassage(ex.getMessage(),"ShareComparisonFail","ShareComparisonFail");
+	//		}
+	//	}
 
 	@Test(priority = 19, description = "Remove items from Comparison Expand")
 	public void RemoveItemsfromComparison_Test() throws Throwable  {
@@ -615,89 +618,89 @@ public class ComparisonTest extends BaseTest{
 		}
 	}
 
-	@Test(priority = 20, description = "Interchange Control and Case sets in the Comparison")
-	public void ChangeControlAndCase_Test() throws Throwable {
-		try {
-
-			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
-
-			System.out.println(functionName);
-			String value = this.getConfiguration().get(functionName);
-			String[] ComParameters =value.split(",");
-			String ComName = ComParameters[0].trim()+dtText;
-			String ControlSetName = ComParameters[1].trim();
-			String CaseSetName = ComParameters[2].trim();
-			String entity = ComParameters[3].trim();
-			String searchTextInControl = ComParameters[4].trim();
-			String searchTextInCase = ComParameters[5].trim();
-
-			/* Changes the Control and Case in Comparison */	
-			objComparisonPage.ChangeControlAndCase(ComName, ControlSetName,CaseSetName ,entity,searchTextInControl,searchTextInCase);
-			//			objComparisonPage.ChangeControlAndCase("Control and Case Change", "Control Set ","Case Set" ,"Disease", "kera", "dol");
-			onSuccessMeassage("Comparison is Created Successfully with Control Card");
+		@Test(priority = 20, description = "Interchange Control and Case sets in the Comparison")
+		public void ChangeControlAndCase_Test() throws Throwable {
+			try {
+	
+				String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+	
+				System.out.println(functionName);
+				String value = this.getConfiguration().get(functionName);
+				String[] ComParameters =value.split(",");
+				String ComName = ComParameters[0].trim()+dtText;
+				String ControlSetName = ComParameters[1].trim();
+				String CaseSetName = ComParameters[2].trim();
+				String entity = ComParameters[3].trim();
+				String searchTextInControl = ComParameters[4].trim();
+				String searchTextInCase = ComParameters[5].trim();
+	
+				/* Changes the Control and Case in Comparison */	
+				objComparisonPage.ChangeControlAndCase(ComName, ControlSetName,CaseSetName ,entity,searchTextInControl,searchTextInCase);
+				//			objComparisonPage.ChangeControlAndCase("Control and Case Change", "Control Set ","Case Set" ,"Disease", "kera", "dol");
+				onSuccessMeassage("Comparison is Created Successfully with Control Card");
+			}
+			catch(Throwable ex)
+			{
+				objComparisonPage.captureScreenshot("changeControlAndCaseFail");
+				onFailureMeassage(ex.getMessage(),"changeControlAndCaseFail","changeControlAndCaseFail");
+			}
 		}
-		catch(Throwable ex)
-		{
-			objComparisonPage.captureScreenshot("changeControlAndCaseFail");
-			onFailureMeassage(ex.getMessage(),"changeControlAndCaseFail","changeControlAndCaseFail");
+	
+		@Test(priority = 21, description = "Sorting a column in a Comparison")
+		public void SortColumnComparison_Test() throws Throwable  {
+			try {
+	
+				String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+	
+				System.out.println(functionName);
+				String value = this.getConfiguration().get(functionName);
+				String[] ComParameters =value.split(",");
+				String ComName = ComParameters[0].trim()+dtText;
+				String ControlSetName = ComParameters[1].trim();
+				String entity = ComParameters[2].trim();
+				String searchText = ComParameters[3].trim();
+				String sortColumn = ComParameters[4].trim();
+	
+				/* Sorting column in a Exploration */
+				objComparisonPage.SortColumnInComparison(ComName,ControlSetName ,entity,searchText,sortColumn);
+				//			objComparisonPage.SortColumnInComparison("SortComparison","ControlSet" , "Disease", "Kera", "EFO Name");
+				onSuccessMeassage("Column in Comparison Sorted Successfully");
+			}
+			catch(Exception | AssertionError ex)
+			{
+				objComparisonPage.captureScreenshot("SortColumnComparisonFail");
+				onFailureMeassage(ex.getMessage(),"SortColumnComparisonFail","SortColumnComparisonFail");
+			}
 		}
-	}
-
-	@Test(priority = 21, description = "Sorting a column in a Comparison")
-	public void SortColumnComparison_Test() throws Throwable  {
-		try {
-
-			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
-
-			System.out.println(functionName);
-			String value = this.getConfiguration().get(functionName);
-			String[] ComParameters =value.split(",");
-			String ComName = ComParameters[0].trim()+dtText;
-			String ControlSetName = ComParameters[1].trim();
-			String entity = ComParameters[2].trim();
-			String searchText = ComParameters[3].trim();
-			String sortColumn = ComParameters[4].trim();
-
-			/* Sorting column in a Exploration */
-			objComparisonPage.SortColumnInComparison(ComName,ControlSetName ,entity,searchText,sortColumn);
-			//			objComparisonPage.SortColumnInComparison("SortComparison","ControlSet" , "Disease", "Kera", "EFO Name");
-			onSuccessMeassage("Column in Comparison Sorted Successfully");
+	
+		@Test(priority = 22, description = "Filtering a Comparison with one filter")
+		public void FilterComparison_Test() throws Throwable  {
+			try {
+	
+				String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+	
+				System.out.println(functionName);
+				String value = this.getConfiguration().get(functionName);
+				String[] ComParameters =value.split(",");
+				String ComName = ComParameters[0].trim()+dtText;
+				String ControlSetName = ComParameters[1].trim();
+				String entity = ComParameters[2].trim();
+				String searchText = ComParameters[3].trim();
+				String filterAttribute1 = ComParameters[4].trim();
+				String filterType1 = ComParameters[5].trim();
+				String filterValue1 = ComParameters[6].trim();
+	
+				/* Filtering in a Comparison */
+				objComparisonPage.FilterComparison(ComName, ControlSetName, entity,searchText,filterAttribute1,filterType1,filterValue1);
+				//			objComparisonPage.FilterComparison("Filter Comparison1", "Control Set", "Disease","kera", "EFO Name","contains","vul");
+				onSuccessMeassage("Filtering done in Exploration Successfully for 1 filter");
+			}
+			catch(Throwable ex)
+			{
+				objComparisonPage.captureScreenshot("FilterComaprisonFail");
+				onFailureMeassage(ex.getMessage(),"FilterExplorationFail","FilterExplorationFail");
+			}
 		}
-		catch(Exception | AssertionError ex)
-		{
-			objComparisonPage.captureScreenshot("SortColumnComparisonFail");
-			onFailureMeassage(ex.getMessage(),"SortColumnComparisonFail","SortColumnComparisonFail");
-		}
-	}
-
-	@Test(priority = 22, description = "Filtering a Comparison with one filter")
-	public void FilterComparison_Test() throws Throwable  {
-		try {
-
-			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
-
-			System.out.println(functionName);
-			String value = this.getConfiguration().get(functionName);
-			String[] ComParameters =value.split(",");
-			String ComName = ComParameters[0].trim()+dtText;
-			String ControlSetName = ComParameters[1].trim();
-			String entity = ComParameters[2].trim();
-			String searchText = ComParameters[3].trim();
-			String filterAttribute1 = ComParameters[4].trim();
-			String filterType1 = ComParameters[5].trim();
-			String filterValue1 = ComParameters[6].trim();
-
-			/* Filtering in a Comparison */
-			objComparisonPage.FilterComparison(ComName, ControlSetName, entity,searchText,filterAttribute1,filterType1,filterValue1);
-			//			objComparisonPage.FilterComparison("Filter Comparison1", "Control Set", "Disease","kera", "EFO Name","contains","vul");
-			onSuccessMeassage("Filtering done in Exploration Successfully for 1 filter");
-		}
-		catch(Throwable ex)
-		{
-			objComparisonPage.captureScreenshot("FilterComaprisonFail");
-			onFailureMeassage(ex.getMessage(),"FilterExplorationFail","FilterExplorationFail");
-		}
-	}
 
 	@Test(priority = 23, description = "Filtering a Comparison with 2 filters")
 	public void FilterMultiComparison_Test() throws Throwable  {

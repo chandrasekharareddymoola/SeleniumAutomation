@@ -1082,7 +1082,8 @@ public class ComparisonPage extends BasePage{
 		myAlist.add(removeItem1);
 		myAlist.add(removeItem2);
 		myAlist.add(removeItem3);
-		this.selectItems(myAlist);	  
+		this.selectItems(myAlist);	
+		BasePage.scrollToTop();
 		this.removeItems();	 
 		this.waitForEditAndDelete();
 		ExtentTestManager.getTest().log(Status.PASS, "Comparison - Items removed successfully");
@@ -1236,6 +1237,7 @@ public class ComparisonPage extends BasePage{
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
 			objSetPage.verifyAfterAdd(setItems);
+			BasePage.scrollToTop();
 			ExtentTestManager.getTest().log(Status.PASS, "Comparison - Set added in expand");
 		}
 		catch(Exception ex) {
@@ -1323,7 +1325,9 @@ public class ComparisonPage extends BasePage{
 								{
 									for(int j=1 ; j<= NoOfColumns ;j++) 
 									{
-										WebElement tableRows = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("((//*[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"]/child::div)["+j+"]")));
+//										WebElement tableRows = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("((//*[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"]/child::div)["+j+"]")));
+										WebElement tableRows = driver.findElement(By.xpath("((//*[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"]/child::div)["+j+"]"));
+										scrollIntoView(tableRows);
 										String valuesInRows = tableRows.getText().toLowerCase();
 										String ItemsLowerCase = item.toLowerCase();		
 										boolean  comp = valuesInRows.equals(ItemsLowerCase);
@@ -1389,6 +1393,7 @@ public class ComparisonPage extends BasePage{
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
 			BasePage.verifyPage(ControlSetName,ComparisonNameInExpand);
 			this.verifyAfterAdd(CatalogItems);
+			BasePage.scrollToTop();
 			ExtentTestManager.getTest().log(Status.PASS, "Comparison - Items added from Catalog in expand");
 		}
 		catch(Exception | AssertionError ex) {
@@ -1485,6 +1490,7 @@ public class ComparisonPage extends BasePage{
 			String NoOfRecordsFinal = ItemCountInExpand.getText();
 			this.CompareTwovalues(NoOfRecordsInitial,NoOfRecordsFinal);
 			this.verifyAfterAdd(FileItems);
+			BasePage.scrollToTop();
 			ExtentTestManager.getTest().log(Status.PASS, "Comparison - Items added from File in expand");
 		}
 		catch (Exception ExpandAddFromFileFail) {
@@ -1650,7 +1656,10 @@ public class ComparisonPage extends BasePage{
 					try {
 						int NoOfRows = RowsintableExpand.size();
 						for(int i=1 ; i<= NoOfRows ;i++) {
-							WebElement tableRows = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"]")));
+//							WebElement tableRows = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"]")));
+							WebElement tableRows = driver.findElement(By.xpath("(//*[@class='TableRowDefault__bodyRow___1_m1h'])["+i+"]"));
+							scrollIntoView(tableRows);
+							
 							String valuesInRows = tableRows.getText().toLowerCase();
 							String SearchInSetLowerCase = SearchInComparison.toLowerCase();				
 							boolean  comp = valuesInRows.contains(SearchInSetLowerCase);

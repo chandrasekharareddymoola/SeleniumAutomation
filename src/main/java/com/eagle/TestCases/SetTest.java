@@ -25,16 +25,8 @@ public class SetTest extends BaseTest{
 	@BeforeClass
 	public void beforeClass() throws InterruptedException, IOException, AWTException  {	
 		objSetPage = new SetPage();	
-		//		objLogin = new LoginPage();
-		//		objLogin.loginTo();
 	}
 
-	//	public void main() throws InterruptedException, IOException  {	
-	//		objSetPage = new SetPage();	
-	//		objLogin = new LoginPage();
-	//		objLogin.loginTo();
-	//		objSetPage.RemoveItemsfromSet("Remove Item Set","Disease","Kera");
-	//	}
 
 	@Test(priority = 0, description = "Create Set")
 	public void CreateSet_Test() throws Throwable {
@@ -440,57 +432,59 @@ public class SetTest extends BaseTest{
 		}
 	}
 
-	@Test(priority = 13, description = "Deleting A Set")
-	public void DeleteSet_Test() throws InterruptedException, IOException  {
-		try {
+	//Not needed
+	//	@Test(priority = 13, description = "Deleting A Set")
+	//	public void DeleteSet_Test() throws InterruptedException, IOException  {
+	//		try {
+	//
+	//			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+	//
+	//			System.out.println(functionName);
+	//			String value = this.getConfiguration().get(functionName);
+	//			String[] setParameters =value.split(",");
+	//			String setNameToDelete = setParameters[0].trim();
+	//
+	//			/* Delete An Existing Set */
+	//			objSetPage.DeleteSet(setNameToDelete);
+	//			//			objSetPage.DeleteSet("Create Set1");
+	//			onSuccessMeassage("Deleted A Set Successfully");
+	//		}
+	//		catch(Exception ex)
+	//		{
+	//			objSetPage.captureScreenshot("DeleteSetFail");
+	//			onFailureMeassage(ex.getMessage(),"DeleteSetFail","DeleteSetFail");
+	//		}
+	//		catch(AssertionError ex)
+	//		{
+	//			objSetPage.captureScreenshot("DeleteSetFail");
+	//			onFailureMeassage(ex.getMessage(),"DeleteSetFail","DeleteSetFail");
+	//		}
+	//	}
 
-			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
-
-			System.out.println(functionName);
-			String value = this.getConfiguration().get(functionName);
-			String[] setParameters =value.split(",");
-			String setNameToDelete = setParameters[0].trim();
-
-			/* Delete An Existing Set */
-			objSetPage.DeleteSet(setNameToDelete);
-			//			objSetPage.DeleteSet("Create Set1");
-			onSuccessMeassage("Deleted A Set Successfully");
-		}
-		catch(Exception ex)
-		{
-			objSetPage.captureScreenshot("DeleteSetFail");
-			onFailureMeassage(ex.getMessage(),"DeleteSetFail","DeleteSetFail");
-		}
-		catch(AssertionError ex)
-		{
-			objSetPage.captureScreenshot("DeleteSetFail");
-			onFailureMeassage(ex.getMessage(),"DeleteSetFail","DeleteSetFail");
-		}
-	}
-
-	@Test(priority = 14, description = "Sharing A Set")
-	public void ShareSet_Test() throws Throwable  {
-		try {
-
-			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
-
-			System.out.println(functionName);
-			String value = this.getConfiguration().get(functionName);
-			String[] setParameters =value.split(",");
-			String setNameToShare = setParameters[0].trim();
-			String mailIDtoShare = setParameters[1].trim();
-
-			/* Sharing An Existing Set */
-			objSetPage.ShareSet(setNameToShare,mailIDtoShare);
-			//			objSetPage.ShareSet("GridSet","mugunth.raman@eaglegenomics.com");
-			onSuccessMeassage("Shared A Set Successfully");
-		}
-		catch(Exception | AssertionError ex)
-		{
-			objSetPage.captureScreenshot("ShareSetFail");
-			onFailureMeassage(ex.getMessage(),"ShareSetFail","ShareSetFail");
-		}
-	}
+	//Not needed
+	//	@Test(priority = 14, description = "Sharing A Set")
+	//	public void ShareSet_Test() throws Throwable  {
+	//		try {
+	//
+	//			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+	//
+	//			System.out.println(functionName);
+	//			String value = this.getConfiguration().get(functionName);
+	//			String[] setParameters =value.split(",");
+	//			String setNameToShare = setParameters[0].trim();
+	//			String mailIDtoShare = setParameters[1].trim();
+	//
+	//			/* Sharing An Existing Set */
+	//			objSetPage.ShareSet(setNameToShare,mailIDtoShare);
+	//			//			objSetPage.ShareSet("GridSet","mugunth.raman@eaglegenomics.com");
+	//			onSuccessMeassage("Shared A Set Successfully");
+	//		}
+	//		catch(Exception | AssertionError ex)
+	//		{
+	//			objSetPage.captureScreenshot("ShareSetFail");
+	//			onFailureMeassage(ex.getMessage(),"ShareSetFail","ShareSetFail");
+	//		}
+	//	}
 
 	@Test(priority = 15, description = "Sorting a column in a Set")
 	public void SortColumnSet_Test() throws Throwable  {

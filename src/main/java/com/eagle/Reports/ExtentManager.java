@@ -17,8 +17,9 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.ChartLocation;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.eagle.ConfigUtils.ReadObject;
+import com.eagle.pages.BasePage;
 
-public class ExtentManager {
+public class ExtentManager extends BasePage{
 
 	private static String EnvName = null;
 	
@@ -27,9 +28,9 @@ public class ExtentManager {
 	static String dtText = dtFrmt.format(dt);
 
 	private static ExtentReports extent;
-	private static String reportFileName = "Test-Automaton-Report"+"("+EnvName+")"+dtText+".html";
+	private static String reportFileName = "Test-Automaton-Report"+"("+EnvName+")"+dtTime+".html";
 	private static String fileSeperator = System.getProperty("file.separator");
-	private static String reportFilepath = "./Resources" +fileSeperator+ "TestReport";
+	private static String reportFilepath = "./Resources" +fileSeperator+ "TestReport"+dtTime;
 	private static String reportFileLocation =  reportFilepath +fileSeperator+ reportFileName;
 
 	@BeforeClass

@@ -65,9 +65,11 @@ public class InvestigationTest extends BaseTest {
 		try {
 			 /* To view the Investigation */
 			functionName = new Object(){}.getClass().getEnclosingMethod().getName();		
-			value = this.getConfiguration().get(functionName);			
+			value = this.getConfiguration().get(functionName);		
+			invParameters =value.split(",");
 //			investigationName = invParameters[0].trim() + this.getDateTime();
-			investigationName = invParameters[0].trim();
+			investigationName = invParameters[0].trim()+dtText;
+			System.out.println(investigationName);
 			
 			objInvestigationPage.viewInvestigation(investigationName);
 			onSuccessMeassage("Investigation is successfully opened");

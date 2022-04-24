@@ -698,6 +698,7 @@ public class AnalysisPage extends BasePage{
 			ExtentTestManager.getTest().log(Status.PASS,StudyNameSelected +  " - is correct in Graph canvas title");
 
 			mySelectionScreenOpen.click();
+			Thread.sleep(2000);
 			String StudyNameInSelection = StudyNameInMySelection.getText();
 			assertEquals(StudyNameInSelection, StudyNameSelected);
 			ExtentTestManager.getTest().log(Status.PASS,StudyNameSelected +  " - is correct in Graph My Selection");

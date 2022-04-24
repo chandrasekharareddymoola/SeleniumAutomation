@@ -494,62 +494,64 @@ public class ExplorationTest extends BaseTest{
 		}
 	}
 
-	@Test(priority = 15, description = "Delete An Exploration")
-	public void DeleteExploration_Test() throws Throwable  {
-		try {
+	//Not needed
+//	@Test(priority = 15, description = "Delete An Exploration")
+//	public void DeleteExploration_Test() throws Throwable  {
+//		try {
+//
+//			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+//
+//			System.out.println(functionName);
+//			String value = this.getConfiguration().get(functionName);
+//			String[] expParameters =value.split(",");
+//			String ExpName = expParameters[0].trim();
+//
+//			/* Delete An Exploration */
+//			objExplorationPage.DeleteExploration(ExpName);
+//			//			objExplorationPage.DeleteExploration("ExpAddFromSet");
+//			onSuccessMeassage("Deleted An Exploration Successfully");
+//		}
+//		catch(Exception ex)
+//		{
+//			objExplorationPage.captureScreenshot("DeleteExplorationFail");
+//			onFailureMeassage(ex.getMessage(),"DeleteExplorationFail","DeleteExplorationFail");
+//		}
+//		catch(AssertionError ex)
+//		{
+//			objExplorationPage.captureScreenshot("DeleteExplorationFail");
+//			onFailureMeassage(ex.getMessage(),"DeleteExplorationFail","DeleteExplorationFail");
+//		}
+//	}
 
-			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
-
-			System.out.println(functionName);
-			String value = this.getConfiguration().get(functionName);
-			String[] expParameters =value.split(",");
-			String ExpName = expParameters[0].trim();
-
-			/* Delete An Exploration */
-			objExplorationPage.DeleteExploration(ExpName);
-			//			objExplorationPage.DeleteExploration("ExpAddFromSet");
-			onSuccessMeassage("Deleted An Exploration Successfully");
-		}
-		catch(Exception ex)
-		{
-			objExplorationPage.captureScreenshot("DeleteExplorationFail");
-			onFailureMeassage(ex.getMessage(),"DeleteExplorationFail","DeleteExplorationFail");
-		}
-		catch(AssertionError ex)
-		{
-			objExplorationPage.captureScreenshot("DeleteExplorationFail");
-			onFailureMeassage(ex.getMessage(),"DeleteExplorationFail","DeleteExplorationFail");
-		}
-	}
-
-	@Test(priority = 16, description = "Sharing An Exploration")
-	public void ShareExploration_Test() throws Throwable  {
-		try {
-
-			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
-
-			System.out.println(functionName);
-			String value = this.getConfiguration().get(functionName);
-			String[] expParameters =value.split(",");
-			String ExpName = expParameters[0].trim();
-			String mailIDtoShareto = expParameters[1].trim();
-
-			/* Share An Exploration */
-			objExplorationPage.ShareExploration(ExpName,mailIDtoShareto);
-			//			objExplorationPage.ShareExploration("ExSearch 1","mugunth.raman@eaglegenomics.com");
-			onSuccessMeassage("Shared An Exploration Successfully");
-		}
-		catch(Exception ex)
-		{
-			objExplorationPage.captureScreenshot("ShareExplorationFail");
-			onFailureMeassage(ex.getMessage(),"ShareExplorationFail","ShareExplorationFail");
-		}
-		catch(AssertionError ex)
-		{
-			objExplorationPage.captureScreenshot("ShareExplorationFail");
-			onFailureMeassage(ex.getMessage(),"ShareExplorationFail","ShareExplorationFail");
-		}
-	}
+	//Not needed
+//	@Test(priority = 16, description = "Sharing An Exploration")
+//	public void ShareExploration_Test() throws Throwable  {
+//		try {
+//
+//			String functionName = new Object(){}.getClass().getEnclosingMethod().getName();
+//
+//			System.out.println(functionName);
+//			String value = this.getConfiguration().get(functionName);
+//			String[] expParameters =value.split(",");
+//			String ExpName = expParameters[0].trim();
+//			String mailIDtoShareto = expParameters[1].trim();
+//
+//			/* Share An Exploration */
+//			objExplorationPage.ShareExploration(ExpName,mailIDtoShareto);
+//			//			objExplorationPage.ShareExploration("ExSearch 1","mugunth.raman@eaglegenomics.com");
+//			onSuccessMeassage("Shared An Exploration Successfully");
+//		}
+//		catch(Exception ex)
+//		{
+//			objExplorationPage.captureScreenshot("ShareExplorationFail");
+//			onFailureMeassage(ex.getMessage(),"ShareExplorationFail","ShareExplorationFail");
+//		}
+//		catch(AssertionError ex)
+//		{
+//			objExplorationPage.captureScreenshot("ShareExplorationFail");
+//			onFailureMeassage(ex.getMessage(),"ShareExplorationFail","ShareExplorationFail");
+//		}
+//	}
 
 	@Test(priority = 17, description = "Remove items from Exploration Expand")
 	public void RemoveItemsfromExploration_Test() throws Throwable  {
