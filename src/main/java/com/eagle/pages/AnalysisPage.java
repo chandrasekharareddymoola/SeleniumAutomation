@@ -2013,7 +2013,7 @@ public class AnalysisPage extends BasePage{
 			assertEquals(headerText, HeadetText);
 			h++;
 		}
-		catch(AssertionError ex) {
+		catch(Throwable ex) {
 			ExtentTestManager.getTest().log(Status.FAIL, "There is some problem with the label -" + ex);
 		}
 		return h;
@@ -2041,7 +2041,7 @@ public class AnalysisPage extends BasePage{
 				k=1;
 			}
 		}
-		catch(AssertionError ex) {
+		catch(Throwable ex) {
 			ExtentTestManager.getTest().log(Status.FAIL, "There is some problem with the label -" + ex);
 		}
 		return k;
@@ -2064,7 +2064,7 @@ public class AnalysisPage extends BasePage{
 				k=1;
 			}
 		}
-		catch(AssertionError ex) {
+		catch(Throwable ex) {
 			ExtentTestManager.getTest().log(Status.FAIL, "There is some problem with the label -" + ex);
 		}
 		return k;
@@ -2107,7 +2107,7 @@ public class AnalysisPage extends BasePage{
 				k=1;
 			}
 		}
-		catch(AssertionError ex) {
+		catch(Throwable ex) {
 			ExtentTestManager.getTest().log(Status.FAIL, "There is some problem with the label -" + ex);
 		}
 		return k;
@@ -3889,7 +3889,7 @@ public class AnalysisPage extends BasePage{
 				SelectPlotType("Scatter plot");
 				Thread.sleep(2000);
 				screenShotForPass(AnalysisName + " - Scatter Plot", "Scatter Plot");
-				int s = GetHeaderXandY("Scatter Plot of "+NameofNumFeatureCleansed1+", "+NameofNumFeatureCleansed2,NameofNumFeatureCleansed1,"Subject Number"); 
+				int s = GetHeaderXandY("Scatter Plot of "+NameofNumFeatureCleansed1+", "+NameofNumFeatureCleansed2,NameofNumFeatureCleansed1,NameofNumFeatureCleansed2); 
 				ExtentTestManager.getTest().log(Status.PASS, "Labels in Scatter Plot are verified");
 
 				assertEquals(s, total_match_expected);
@@ -4548,7 +4548,7 @@ public class AnalysisPage extends BasePage{
 				SelectPlotType("Coloured Marginal plot");
 				Thread.sleep(2000);
 				screenShotForPass(AnalysisName + " - Coloured Marginal plot", "Coloured Marginal plot");
-				int c = GetHeaderX3andY3("Coloured Marginal Plot of "+NameofNumFeatureCleansed1+", "+NameofNumFeatureCleansed2+", "+NameofNumFeatureCleansed3+", "+NameofCatFeatureCleansed,NameofNumFeatureCleansed1,NameofNumFeatureCleansed2,NameofNumFeatureCleansed3,NameofNumFeatureCleansed1,NameofNumFeatureCleansed2,NameofNumFeatureCleansed3);
+				int c = GetHeaderX3andY3("Coloured Marginal Plot of "+NameofNumFeatureCleansed1+", "+NameofNumFeatureCleansed2+", "+NameofNumFeatureCleansed3+", "+NameofCatFeatureCleansed,NameofNumFeatureCleansed3,NameofNumFeatureCleansed2,NameofNumFeatureCleansed1,NameofNumFeatureCleansed3,NameofNumFeatureCleansed2,NameofNumFeatureCleansed1);
 				ExtentTestManager.getTest().log(Status.PASS, "Labels in Coloured Marginal Plot are verified");
 
 				assertEquals(c, total_match_count);
