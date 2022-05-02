@@ -7,11 +7,6 @@
 	<test name="Smoke Test cases" preserve-order="true">
 		<classes>
 			<class name="com.eagle.TestCases.LoginTest" />
-			<class name="com.eagle.TestCases.HomeTest" />
-			<class name="com.eagle.TestCases.SetTest" />
-			<class name="com.eagle.TestCases.ExplorationTest" />
-			<class name="com.eagle.TestCases.ComparisonTest" />
-			<class name="com.eagle.TestCases.InvestigationTest" />
 			<class name="com.eagle.TestCases.AnalysisTest" />
 			<class name="com.eagle.TestCases.LogoutTest" />
 		</classes>
