@@ -2066,7 +2066,7 @@ public class AnalysisPage extends BasePage{
 				k=1;
 			}
 		}
-		catch(AssertionError ex) {
+		catch(Throwable ex) {
 			ExtentTestManager.getTest().log(Status.FAIL, "There is some problem with the label -" + ex);
 		}
 		return k;
