@@ -1,57 +1,463 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="2" total="5" passed="3" failed="0" skipped="0">
+<testng-results ignored="7" total="99" passed="92" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2022-04-26T17:43:12 IST" name="SmokeTestingSuite" finished-at="2022-04-26T17:50:47 IST" duration-ms="455727">
+  <suite started-at="2022-05-02T14:43:54 IST" name="SmokeTestingSuite" finished-at="2022-05-02T16:36:30 IST" duration-ms="6756083">
     <groups>
     </groups>
-    <test started-at="2022-04-26T17:43:12 IST" name="Smoke Test cases" finished-at="2022-04-26T17:50:47 IST" duration-ms="455727">
+    <test started-at="2022-05-02T14:43:54 IST" name="Smoke Test cases" finished-at="2022-05-02T16:36:30 IST" duration-ms="6756083">
       <class name="com.eagle.TestCases.LoginTest">
-        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.LoginTest@550dbc7a]" started-at="2022-04-26T17:43:12 IST" name="launchApplication" finished-at="2022-04-26T17:43:19 IST" duration-ms="7138" status="PASS">
+        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.LoginTest@e350b40]" started-at="2022-05-02T14:43:54 IST" name="launchApplication" finished-at="2022-05-02T14:44:02 IST" duration-ms="8836" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchApplication -->
-        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.LoginTest@550dbc7a]" started-at="2022-04-26T17:43:19 IST" name="beforeClass" finished-at="2022-04-26T17:43:19 IST" duration-ms="38" status="PASS">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.LoginTest@e350b40]" started-at="2022-05-02T14:44:02 IST" name="beforeClass" finished-at="2022-05-02T14:44:02 IST" duration-ms="44" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeClass -->
-        <test-method signature="VerifyLoginPage_Test()[pri:0, instance:com.eagle.TestCases.LoginTest@550dbc7a]" started-at="2022-04-26T17:43:19 IST" name="VerifyLoginPage_Test" description="Login with valid credentials" finished-at="2022-04-26T17:47:40 IST" duration-ms="261065" status="PASS">
+        <test-method signature="VerifyLoginPage_Test()[pri:0, instance:com.eagle.TestCases.LoginTest@e350b40]" started-at="2022-05-02T14:44:02 IST" name="VerifyLoginPage_Test" description="Login with valid credentials" finished-at="2022-05-02T14:44:54 IST" duration-ms="51274" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- VerifyLoginPage_Test -->
-        <test-method is-config="true" signature="closeApplication()[pri:0, instance:com.eagle.TestCases.LoginTest@550dbc7a]" started-at="2022-04-26T17:50:48 IST" name="closeApplication" finished-at="2022-04-26T17:50:48 IST" duration-ms="681" status="PASS">
+        <test-method is-config="true" signature="closeApplication()[pri:0, instance:com.eagle.TestCases.LoginTest@e350b40]" started-at="2022-05-02T16:36:30 IST" name="closeApplication" finished-at="2022-05-02T16:36:31 IST" duration-ms="867" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeApplication -->
       </class> <!-- com.eagle.TestCases.LoginTest -->
-      <class name="com.eagle.TestCases.AnalysisTest">
-        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.AnalysisTest@2d52216b]" started-at="2022-04-26T17:47:40 IST" name="launchApplication" finished-at="2022-04-26T17:47:40 IST" duration-ms="0" status="PASS">
+      <class name="com.eagle.TestCases.SetTest">
+        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.SetTest@470734c3]" started-at="2022-05-02T14:45:34 IST" name="launchApplication" finished-at="2022-05-02T14:45:34 IST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchApplication -->
-        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.AnalysisTest@2d52216b]" started-at="2022-04-26T17:47:40 IST" name="beforeClass" finished-at="2022-04-26T17:47:43 IST" duration-ms="2629" status="PASS">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.SetTest@470734c3]" started-at="2022-05-02T14:45:34 IST" name="beforeClass" finished-at="2022-05-02T14:45:42 IST" duration-ms="7804" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeClass -->
-        <test-method signature="AnalysisNameAndDescEditInPage_Test()[pri:3, instance:com.eagle.TestCases.AnalysisTest@2d52216b]" started-at="2022-04-26T17:47:43 IST" name="AnalysisNameAndDescEditInPage_Test" description="Edit Analysis Name and Description from Analysis Page" finished-at="2022-04-26T17:50:42 IST" duration-ms="179383" status="PASS">
+        <test-method signature="CreateSet_Test()[pri:0, instance:com.eagle.TestCases.SetTest@470734c3]" started-at="2022-05-02T14:45:42 IST" name="CreateSet_Test" description="Create Set" finished-at="2022-05-02T14:46:52 IST" duration-ms="69913" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CreateSet_Test -->
+        <test-method signature="ViewSet_Test()[pri:1, instance:com.eagle.TestCases.SetTest@470734c3]" started-at="2022-05-02T14:46:52 IST" name="ViewSet_Test" description="View Set" finished-at="2022-05-02T14:46:55 IST" duration-ms="3594" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ViewSet_Test -->
+        <test-method signature="CreateSetFromFile_Test()[pri:2, instance:com.eagle.TestCases.SetTest@470734c3]" started-at="2022-05-02T14:46:55 IST" name="CreateSetFromFile_Test" description="Create Set From File" finished-at="2022-05-02T14:47:17 IST" duration-ms="21793" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CreateSetFromFile_Test -->
+        <test-method signature="CreateSetFromSet_Test()[pri:3, instance:com.eagle.TestCases.SetTest@470734c3]" started-at="2022-05-02T14:47:17 IST" name="CreateSetFromSet_Test" description="Create Set From Another Set" finished-at="2022-05-02T14:47:53 IST" duration-ms="36252" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CreateSetFromSet_Test -->
+        <test-method signature="SearchInSetExpand_Test()[pri:4, instance:com.eagle.TestCases.SetTest@470734c3]" started-at="2022-05-02T14:47:53 IST" name="SearchInSetExpand_Test" description="Search A Text In Set Expand" finished-at="2022-05-02T14:48:48 IST" duration-ms="55153" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- SearchInSetExpand_Test -->
+        <test-method signature="SetExpandAddFromCatalog_Test()[pri:5, instance:com.eagle.TestCases.SetTest@470734c3]" started-at="2022-05-02T14:48:48 IST" name="SetExpandAddFromCatalog_Test" description="Set - Expand and add items from Catalog" finished-at="2022-05-02T14:52:35 IST" duration-ms="226500" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- SetExpandAddFromCatalog_Test -->
+        <test-method signature="SetExpandAddFromSet_Test()[pri:6, instance:com.eagle.TestCases.SetTest@470734c3]" started-at="2022-05-02T14:52:35 IST" name="SetExpandAddFromSet_Test" description="Set - Expand and add items from Set" finished-at="2022-05-02T14:59:36 IST" duration-ms="420716" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- SetExpandAddFromSet_Test -->
+        <test-method signature="SetExpandAddFromFile_Test()[pri:7, instance:com.eagle.TestCases.SetTest@470734c3]" started-at="2022-05-02T14:59:36 IST" name="SetExpandAddFromFile_Test" description="Set - Expand and add items from File" finished-at="2022-05-02T15:01:12 IST" duration-ms="95955" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- SetExpandAddFromFile_Test -->
+        <test-method signature="DeleteCardInSetExpand_Test()[pri:8, instance:com.eagle.TestCases.SetTest@470734c3]" started-at="2022-05-02T15:01:12 IST" name="DeleteCardInSetExpand_Test" description="Delete Card in Set Expand" finished-at="2022-05-02T15:01:32 IST" duration-ms="20653" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- DeleteCardInSetExpand_Test -->
+        <test-method signature="RemoveItemsfromSet_Test()[pri:9, instance:com.eagle.TestCases.SetTest@470734c3]" started-at="2022-05-02T15:01:32 IST" name="RemoveItemsfromSet_Test" description="Remove items from Set Expand" finished-at="2022-05-02T15:02:21 IST" duration-ms="48780" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- RemoveItemsfromSet_Test -->
+        <test-method signature="GridChangesInSet_Test()[pri:10, instance:com.eagle.TestCases.SetTest@470734c3]" started-at="2022-05-02T15:02:21 IST" name="GridChangesInSet_Test" description="Modify Grid Settings in Set Expand" finished-at="2022-05-02T15:02:47 IST" duration-ms="25444" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- GridChangesInSet_Test -->
+        <test-method signature="CreateAndDeleteSet_Test()[pri:11, instance:com.eagle.TestCases.SetTest@470734c3]" started-at="2022-05-02T15:02:47 IST" name="CreateAndDeleteSet_Test" description="Create And Delete A Set" finished-at="2022-05-02T15:03:13 IST" duration-ms="26705" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CreateAndDeleteSet_Test -->
+        <test-method signature="CreateAndShareSet_Test()[pri:12, instance:com.eagle.TestCases.SetTest@470734c3]" started-at="2022-05-02T15:03:13 IST" name="CreateAndShareSet_Test" description="Create And Share A Set" finished-at="2022-05-02T15:03:58 IST" duration-ms="44625" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CreateAndShareSet_Test -->
+        <test-method signature="SortColumnSet_Test()[pri:15, instance:com.eagle.TestCases.SetTest@470734c3]" started-at="2022-05-02T15:03:58 IST" name="SortColumnSet_Test" description="Sorting a column in a Set" finished-at="2022-05-02T15:05:00 IST" duration-ms="62598" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- SortColumnSet_Test -->
+        <test-method signature="FilterSet_Test()[pri:16, instance:com.eagle.TestCases.SetTest@470734c3]" started-at="2022-05-02T15:05:00 IST" name="FilterSet_Test" description="Filtering a set with one filter" finished-at="2022-05-02T15:06:05 IST" duration-ms="64431" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- FilterSet_Test -->
+        <test-method signature="FilterMultiSet_Test()[pri:17, instance:com.eagle.TestCases.SetTest@470734c3]" started-at="2022-05-02T15:06:05 IST" name="FilterMultiSet_Test" description="Filtering a set with 2 filters" finished-at="2022-05-02T15:07:43 IST" duration-ms="97740" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- FilterMultiSet_Test -->
+      </class> <!-- com.eagle.TestCases.SetTest -->
+      <class name="com.eagle.TestCases.AnalysisTest">
+        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.AnalysisTest@25ce9dc4]" started-at="2022-05-02T16:33:01 IST" name="launchApplication" finished-at="2022-05-02T16:33:01 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- launchApplication -->
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.AnalysisTest@25ce9dc4]" started-at="2022-05-02T16:33:01 IST" name="beforeClass" finished-at="2022-05-02T16:33:04 IST" duration-ms="2769" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method signature="CreateAnalysis_Test()[pri:0, instance:com.eagle.TestCases.AnalysisTest@25ce9dc4]" started-at="2022-05-02T16:33:04 IST" name="CreateAnalysis_Test" description="Create Analysis" finished-at="2022-05-02T16:33:18 IST" duration-ms="13818" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CreateAnalysis_Test -->
+        <test-method signature="CreateAnalysisMandatoryCheck_Test()[pri:1, instance:com.eagle.TestCases.AnalysisTest@25ce9dc4]" started-at="2022-05-02T16:33:18 IST" name="CreateAnalysisMandatoryCheck_Test" description="Check mandatory fields before create Analysis" finished-at="2022-05-02T16:33:24 IST" duration-ms="6221" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CreateAnalysisMandatoryCheck_Test -->
+        <test-method signature="AnalysisNameAndDescEditInList_Test()[pri:2, instance:com.eagle.TestCases.AnalysisTest@25ce9dc4]" started-at="2022-05-02T16:33:24 IST" name="AnalysisNameAndDescEditInList_Test" description="Edit Analysis Name and Description from Analysis List" finished-at="2022-05-02T16:33:43 IST" duration-ms="19698" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- AnalysisNameAndDescEditInList_Test -->
+        <test-method signature="AnalysisNameAndDescEditInPage_Test()[pri:3, instance:com.eagle.TestCases.AnalysisTest@25ce9dc4]" started-at="2022-05-02T16:33:43 IST" name="AnalysisNameAndDescEditInPage_Test" description="Edit Analysis Name and Description from Analysis Page" finished-at="2022-05-02T16:35:16 IST" duration-ms="92303" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- AnalysisNameAndDescEditInPage_Test -->
+        <test-method signature="CreateAndDeleteAnalysis_Test()[pri:4, instance:com.eagle.TestCases.AnalysisTest@25ce9dc4]" started-at="2022-05-02T16:35:16 IST" name="CreateAndDeleteAnalysis_Test" description="Create and Delete Analysis" finished-at="2022-05-02T16:35:30 IST" duration-ms="14749" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CreateAndDeleteAnalysis_Test -->
+        <test-method signature="VerifyGraphCanvas_Test()[pri:5, instance:com.eagle.TestCases.AnalysisTest@25ce9dc4]" started-at="2022-05-02T16:35:30 IST" name="VerifyGraphCanvas_Test" description="Verifying the graph canvas" finished-at="2022-05-02T16:35:45 IST" duration-ms="15001" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- VerifyGraphCanvas_Test -->
+        <test-method signature="VerifyResizingOfGraph_Test()[pri:6, instance:com.eagle.TestCases.AnalysisTest@25ce9dc4]" started-at="2022-05-02T16:35:45 IST" name="VerifyResizingOfGraph_Test" description="Verifying resizing of graph canvas" finished-at="2022-05-02T16:36:05 IST" duration-ms="19374" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- VerifyResizingOfGraph_Test -->
+        <test-method signature="EntitiesAndFeatureSelectionVerificationInGraph_Test()[pri:7, instance:com.eagle.TestCases.AnalysisTest@25ce9dc4]" started-at="2022-05-02T16:36:05 IST" name="EntitiesAndFeatureSelectionVerificationInGraph_Test" description="Verify Graph - entities and features selection and verifying the same in My Selection and Dataframe" finished-at="2022-05-02T16:36:07 IST" duration-ms="2479" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- EntitiesAndFeatureSelectionVerificationInGraph_Test -->
+        <test-method signature="PlotWithOneNumericalFeature_Test()[pri:8, instance:com.eagle.TestCases.AnalysisTest@25ce9dc4]" started-at="2022-05-02T16:36:07 IST" name="PlotWithOneNumericalFeature_Test" description="Verify Graph with one numeric value" finished-at="2022-05-02T16:36:10 IST" duration-ms="2466" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- PlotWithOneNumericalFeature_Test -->
+        <test-method signature="PlotWithOneCategoricalFeature_Test()[pri:9, instance:com.eagle.TestCases.AnalysisTest@25ce9dc4]" started-at="2022-05-02T16:36:10 IST" name="PlotWithOneCategoricalFeature_Test" description="Verify Graph with one categorical value" finished-at="2022-05-02T16:36:12 IST" duration-ms="2470" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- PlotWithOneCategoricalFeature_Test -->
+        <test-method signature="PlotWithOneCategoricalandOneNumericalFeature_Test()[pri:10, instance:com.eagle.TestCases.AnalysisTest@25ce9dc4]" started-at="2022-05-02T16:36:12 IST" name="PlotWithOneCategoricalandOneNumericalFeature_Test" description="Verify Graph with one categorical and one numerical value" finished-at="2022-05-02T16:36:15 IST" duration-ms="2398" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- PlotWithOneCategoricalandOneNumericalFeature_Test -->
+        <test-method signature="PlotWithTwoNumericalFeature_Test()[pri:11, instance:com.eagle.TestCases.AnalysisTest@25ce9dc4]" started-at="2022-05-02T16:36:15 IST" name="PlotWithTwoNumericalFeature_Test" description="Verify Graph with two numerical values" finished-at="2022-05-02T16:36:17 IST" duration-ms="2487" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- PlotWithTwoNumericalFeature_Test -->
+        <test-method signature="PlotWithTwoCategoricalFeature_Test()[pri:12, instance:com.eagle.TestCases.AnalysisTest@25ce9dc4]" started-at="2022-05-02T16:36:17 IST" name="PlotWithTwoCategoricalFeature_Test" description="Verify Graph with two categorical values" finished-at="2022-05-02T16:36:20 IST" duration-ms="2437" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- PlotWithTwoCategoricalFeature_Test -->
+        <test-method signature="PlotWithTwoNumericalandOneCategoricalFeatures_Test()[pri:13, instance:com.eagle.TestCases.AnalysisTest@25ce9dc4]" started-at="2022-05-02T16:36:20 IST" name="PlotWithTwoNumericalandOneCategoricalFeatures_Test" description="Verify Graph with two categorical and one numerical values" finished-at="2022-05-02T16:36:22 IST" duration-ms="2543" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- PlotWithTwoNumericalandOneCategoricalFeatures_Test -->
+        <test-method signature="PlotWithThreeNumericalFeatures_Test()[pri:14, instance:com.eagle.TestCases.AnalysisTest@25ce9dc4]" started-at="2022-05-02T16:36:22 IST" name="PlotWithThreeNumericalFeatures_Test" description="Verify Graph with three numerical values" finished-at="2022-05-02T16:36:25 IST" duration-ms="2478" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- PlotWithThreeNumericalFeatures_Test -->
+        <test-method signature="PlotWithThreeNumericalandOneCategoricalFeatures_Test()[pri:15, instance:com.eagle.TestCases.AnalysisTest@25ce9dc4]" started-at="2022-05-02T16:36:25 IST" name="PlotWithThreeNumericalandOneCategoricalFeatures_Test" description="Verify Graph with three numerical and one Categorical values" finished-at="2022-05-02T16:36:27 IST" duration-ms="2469" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- PlotWithThreeNumericalandOneCategoricalFeatures_Test -->
       </class> <!-- com.eagle.TestCases.AnalysisTest -->
       <class name="com.eagle.TestCases.LogoutTest">
-        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.LogoutTest@242b836]" started-at="2022-04-26T17:50:42 IST" name="launchApplication" finished-at="2022-04-26T17:50:42 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.LogoutTest@74ea2410]" started-at="2022-05-02T16:36:27 IST" name="launchApplication" finished-at="2022-05-02T16:36:27 IST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchApplication -->
-        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.LogoutTest@242b836]" started-at="2022-04-26T17:50:42 IST" name="beforeClass" finished-at="2022-04-26T17:50:42 IST" duration-ms="9" status="PASS">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.LogoutTest@74ea2410]" started-at="2022-05-02T16:36:27 IST" name="beforeClass" finished-at="2022-05-02T16:36:27 IST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeClass -->
-        <test-method signature="VerifyLogout_Test()[pri:0, instance:com.eagle.TestCases.LogoutTest@242b836]" started-at="2022-04-26T17:50:42 IST" name="VerifyLogout_Test" description="Logout functionality verification" finished-at="2022-04-26T17:50:47 IST" duration-ms="5420" status="PASS">
+        <test-method signature="VerifyLogout_Test()[pri:0, instance:com.eagle.TestCases.LogoutTest@74ea2410]" started-at="2022-05-02T16:36:27 IST" name="VerifyLogout_Test" description="Logout functionality verification" finished-at="2022-05-02T16:36:30 IST" duration-ms="2507" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- VerifyLogout_Test -->
       </class> <!-- com.eagle.TestCases.LogoutTest -->
+      <class name="com.eagle.TestCases.InvestigationTest">
+        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.InvestigationTest@173ed316]" started-at="2022-05-02T16:30:55 IST" name="launchApplication" finished-at="2022-05-02T16:30:55 IST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- launchApplication -->
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.InvestigationTest@173ed316]" started-at="2022-05-02T16:30:55 IST" name="beforeClass" finished-at="2022-05-02T16:30:55 IST" duration-ms="17" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method signature="CreateInvestigation_Test()[pri:0, instance:com.eagle.TestCases.InvestigationTest@173ed316]" started-at="2022-05-02T16:30:55 IST" name="CreateInvestigation_Test" description="Create Investigation" finished-at="2022-05-02T16:30:57 IST" duration-ms="1280" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CreateInvestigation_Test -->
+        <test-method signature="ViewInvestigation_Test()[pri:1, instance:com.eagle.TestCases.InvestigationTest@173ed316]" started-at="2022-05-02T16:30:57 IST" name="ViewInvestigation_Test" description="View Investigation" finished-at="2022-05-02T16:31:07 IST" duration-ms="10203" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ViewInvestigation_Test -->
+        <test-method signature="EditInvestigation_Test()[pri:2, instance:com.eagle.TestCases.InvestigationTest@173ed316]" started-at="2022-05-02T16:31:07 IST" name="EditInvestigation_Test" description="Edit Investigation" finished-at="2022-05-02T16:31:12 IST" duration-ms="4965" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- EditInvestigation_Test -->
+        <test-method signature="LinkSetWithInvestigation_Test()[pri:3, instance:com.eagle.TestCases.InvestigationTest@173ed316]" started-at="2022-05-02T16:31:12 IST" name="LinkSetWithInvestigation_Test" description="Link Set With Investigation" finished-at="2022-05-02T16:31:40 IST" duration-ms="28624" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- LinkSetWithInvestigation_Test -->
+        <test-method signature="LinkExplorationWithInvestigation_Test()[pri:4, instance:com.eagle.TestCases.InvestigationTest@173ed316]" started-at="2022-05-02T16:31:40 IST" name="LinkExplorationWithInvestigation_Test" description="Link Exploration With Investigation" finished-at="2022-05-02T16:32:08 IST" duration-ms="28137" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- LinkExplorationWithInvestigation_Test -->
+        <test-method signature="LinkComparisonWithInvestigation_Test()[pri:5, instance:com.eagle.TestCases.InvestigationTest@173ed316]" started-at="2022-05-02T16:32:08 IST" name="LinkComparisonWithInvestigation_Test" description="Link Comparison With Investigation" finished-at="2022-05-02T16:32:40 IST" duration-ms="31910" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- LinkComparisonWithInvestigation_Test -->
+        <test-method signature="ShareInvestigation_Test()[pri:6, instance:com.eagle.TestCases.InvestigationTest@173ed316]" started-at="2022-05-02T16:32:40 IST" name="ShareInvestigation_Test" description="Share Investigation" finished-at="2022-05-02T16:32:57 IST" duration-ms="16822" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ShareInvestigation_Test -->
+        <test-method signature="DeleteInvestigation_Test()[pri:7, instance:com.eagle.TestCases.InvestigationTest@173ed316]" started-at="2022-05-02T16:32:57 IST" name="DeleteInvestigation_Test" description="Delete Investigation" finished-at="2022-05-02T16:33:01 IST" duration-ms="3738" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- DeleteInvestigation_Test -->
+      </class> <!-- com.eagle.TestCases.InvestigationTest -->
+      <class name="com.eagle.TestCases.HomeTest">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.HomeTest@8f2ef19]" started-at="2022-05-02T14:44:54 IST" name="beforeClass" finished-at="2022-05-02T14:44:54 IST" duration-ms="7" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.HomeTest@8f2ef19]" started-at="2022-05-02T14:44:54 IST" name="launchApplication" finished-at="2022-05-02T14:44:54 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- launchApplication -->
+        <test-method signature="VerifyLogoVisibility_Test()[pri:0, instance:com.eagle.TestCases.HomeTest@8f2ef19]" started-at="2022-05-02T14:44:54 IST" name="VerifyLogoVisibility_Test" description="Check the visibility of Logo" finished-at="2022-05-02T14:44:54 IST" duration-ms="46" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- VerifyLogoVisibility_Test -->
+        <test-method signature="VerifyDashboard_Test()[pri:1, instance:com.eagle.TestCases.HomeTest@8f2ef19]" started-at="2022-05-02T14:44:54 IST" name="VerifyDashboard_Test" description="Check if dashBoard displays all the components" finished-at="2022-05-02T14:44:54 IST" duration-ms="120" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- VerifyDashboard_Test -->
+        <test-method signature="VerifyUserProfile()[pri:2, instance:com.eagle.TestCases.HomeTest@8f2ef19]" started-at="2022-05-02T14:44:54 IST" name="VerifyUserProfile" description="Check for user information in profile" finished-at="2022-05-02T14:44:55 IST" duration-ms="677" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- VerifyUserProfile -->
+        <test-method signature="VerifyCopyRights()[pri:3, instance:com.eagle.TestCases.HomeTest@8f2ef19]" started-at="2022-05-02T14:44:55 IST" name="VerifyCopyRights" description="Check for copyright and other links" finished-at="2022-05-02T14:44:55 IST" duration-ms="67" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- VerifyCopyRights -->
+        <test-method signature="CreateGlobalSearch_Test()[pri:4, instance:com.eagle.TestCases.HomeTest@8f2ef19]" started-at="2022-05-02T14:44:55 IST" name="CreateGlobalSearch_Test" description="Search and Save the Global search" finished-at="2022-05-02T14:45:10 IST" duration-ms="15536" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CreateGlobalSearch_Test -->
+        <test-method signature="VerifySavedSearches_Test()[pri:5, instance:com.eagle.TestCases.HomeTest@8f2ef19]" started-at="2022-05-02T14:45:10 IST" name="VerifySavedSearches_Test" description="Verify Saved Searches" finished-at="2022-05-02T14:45:13 IST" duration-ms="3296" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- VerifySavedSearches_Test -->
+        <test-method signature="VerifyContactHelpDesk_Test()[pri:6, instance:com.eagle.TestCases.HomeTest@8f2ef19]" started-at="2022-05-02T14:45:13 IST" name="VerifyContactHelpDesk_Test" description="Verify Contact help Desk" finished-at="2022-05-02T14:45:16 IST" duration-ms="2683" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- VerifyContactHelpDesk_Test -->
+        <test-method signature="VerifyUserManual_Test()[pri:7, instance:com.eagle.TestCases.HomeTest@8f2ef19]" started-at="2022-05-02T14:45:16 IST" name="VerifyUserManual_Test" description="Verify User Manual" finished-at="2022-05-02T14:45:17 IST" duration-ms="511" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- VerifyUserManual_Test -->
+        <test-method signature="VerifyFAQ_Test()[pri:8, instance:com.eagle.TestCases.HomeTest@8f2ef19]" started-at="2022-05-02T14:45:17 IST" name="VerifyFAQ_Test" description="Verify FAQ" finished-at="2022-05-02T14:45:34 IST" duration-ms="17295" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- VerifyFAQ_Test -->
+      </class> <!-- com.eagle.TestCases.HomeTest -->
+      <class name="com.eagle.TestCases.ComparisonTest">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.ComparisonTest@69e153c5]" started-at="2022-05-02T15:35:37 IST" name="beforeClass" finished-at="2022-05-02T15:35:40 IST" duration-ms="3194" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.ComparisonTest@69e153c5]" started-at="2022-05-02T15:35:37 IST" name="launchApplication" finished-at="2022-05-02T15:35:37 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- launchApplication -->
+        <test-method signature="CreateComparisonWithContol_Test()[pri:0, instance:com.eagle.TestCases.ComparisonTest@69e153c5]" started-at="2022-05-02T15:35:40 IST" name="CreateComparisonWithContol_Test" description="Create Comparison with a control and Verify" finished-at="2022-05-02T15:36:03 IST" duration-ms="23588" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CreateComparisonWithContol_Test -->
+        <test-method signature="CreateComparisonFromSet_Test()[pri:1, instance:com.eagle.TestCases.ComparisonTest@69e153c5]" started-at="2022-05-02T15:36:03 IST" name="CreateComparisonFromSet_Test" description="Create Comparison From Set" finished-at="2022-05-02T15:36:45 IST" duration-ms="41989" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CreateComparisonFromSet_Test -->
+        <test-method signature="CreateComparisonFromFile_Test()[pri:2, instance:com.eagle.TestCases.ComparisonTest@69e153c5]" started-at="2022-05-02T15:36:45 IST" name="CreateComparisonFromFile_Test" description="Create Comparison From File" finished-at="2022-05-02T15:37:11 IST" duration-ms="25261" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CreateComparisonFromFile_Test -->
+        <test-method signature="CreateComparisonWithContolandCase_Test()[pri:3, instance:com.eagle.TestCases.ComparisonTest@69e153c5]" started-at="2022-05-02T15:37:11 IST" name="CreateComparisonWithContolandCase_Test" description="Create Comparison with Control and Case and Verify" finished-at="2022-05-02T15:37:59 IST" duration-ms="48006" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CreateComparisonWithContolandCase_Test -->
+        <test-method signature="createComparisonWithControlandCaseRunComparison_Test()[pri:4, instance:com.eagle.TestCases.ComparisonTest@69e153c5]" started-at="2022-05-02T15:37:59 IST" name="createComparisonWithControlandCaseRunComparison_Test" description="Create Comparison with Control &amp; Case and Run Comparison" finished-at="2022-05-02T15:39:15 IST" duration-ms="75959" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createComparisonWithControlandCaseRunComparison_Test -->
+        <test-method signature="updateComparisonWithCaseCard_Test()[pri:5, instance:com.eagle.TestCases.ComparisonTest@69e153c5]" started-at="2022-05-02T15:39:15 IST" name="updateComparisonWithCaseCard_Test" description="Update an Existing Comparison with a case Card" finished-at="2022-05-02T15:39:54 IST" duration-ms="39181" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateComparisonWithCaseCard_Test -->
+        <test-method signature="SearchInComparisonExpand_Test()[pri:6, instance:com.eagle.TestCases.ComparisonTest@69e153c5]" started-at="2022-05-02T15:39:54 IST" name="SearchInComparisonExpand_Test" description="Search A Text In Comparison Expand" finished-at="2022-05-02T15:40:56 IST" duration-ms="62520" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- SearchInComparisonExpand_Test -->
+        <test-method signature="DeleteCardInComparisonExpand_Test()[pri:7, instance:com.eagle.TestCases.ComparisonTest@69e153c5]" started-at="2022-05-02T15:40:56 IST" name="DeleteCardInComparisonExpand_Test" description="Delete Card in Comparison Expand" finished-at="2022-05-02T15:41:26 IST" duration-ms="29957" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- DeleteCardInComparisonExpand_Test -->
+        <test-method signature="DeleteComparisonFirstCard_Test()[pri:8, instance:com.eagle.TestCases.ComparisonTest@69e153c5]" started-at="2022-05-02T15:41:26 IST" name="DeleteComparisonFirstCard_Test" description="Delete The first Card in Comparison" finished-at="2022-05-02T15:41:52 IST" duration-ms="25552" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- DeleteComparisonFirstCard_Test -->
+        <test-method signature="DeleteComparisonSecondCard_Test()[pri:9, instance:com.eagle.TestCases.ComparisonTest@69e153c5]" started-at="2022-05-02T15:41:52 IST" name="DeleteComparisonSecondCard_Test" description="Delete The Second Card in Comparison" finished-at="2022-05-02T15:42:35 IST" duration-ms="42965" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- DeleteComparisonSecondCard_Test -->
+        <test-method signature="ComparisonExpandAddFromCatalog_Test()[pri:10, instance:com.eagle.TestCases.ComparisonTest@69e153c5]" started-at="2022-05-02T15:42:35 IST" name="ComparisonExpandAddFromCatalog_Test" description="Comparison - Expand and add items from Catalog" finished-at="2022-05-02T16:13:13 IST" duration-ms="1838512" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ComparisonExpandAddFromCatalog_Test -->
+        <test-method signature="ComparisonExpandAddFromSet_Test()[pri:11, instance:com.eagle.TestCases.ComparisonTest@69e153c5]" started-at="2022-05-02T16:13:13 IST" name="ComparisonExpandAddFromSet_Test" description="Comparison - Expand and add items from Set" finished-at="2022-05-02T16:19:21 IST" duration-ms="367470" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ComparisonExpandAddFromSet_Test -->
+        <test-method signature="ComparisonExpandAddFromFile_Test()[pri:12, instance:com.eagle.TestCases.ComparisonTest@69e153c5]" started-at="2022-05-02T16:19:21 IST" name="ComparisonExpandAddFromFile_Test" description="Comparison - Expand and add items from File" finished-at="2022-05-02T16:21:23 IST" duration-ms="122000" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ComparisonExpandAddFromFile_Test -->
+        <test-method signature="ComparisonCreateMultipleCaseCards_Test()[pri:13, instance:com.eagle.TestCases.ComparisonTest@69e153c5]" started-at="2022-05-02T16:21:23 IST" name="ComparisonCreateMultipleCaseCards_Test" description="Comparison - Create with multiple Case Cards" finished-at="2022-05-02T16:22:28 IST" duration-ms="64754" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ComparisonCreateMultipleCaseCards_Test -->
+        <test-method signature="ComparisonCreateMultipleCaseCardsRunComparison_Test()[pri:14, instance:com.eagle.TestCases.ComparisonTest@69e153c5]" started-at="2022-05-02T16:22:28 IST" name="ComparisonCreateMultipleCaseCardsRunComparison_Test" description="Comparison - Create with multiple Case Cards and Run Comparison" finished-at="2022-05-02T16:23:50 IST" duration-ms="82383" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ComparisonCreateMultipleCaseCardsRunComparison_Test -->
+        <test-method signature="CreateAndDeleteComparison_Test()[pri:15, instance:com.eagle.TestCases.ComparisonTest@69e153c5]" started-at="2022-05-02T16:23:50 IST" name="CreateAndDeleteComparison_Test" description="Create And Delete An Comparison" finished-at="2022-05-02T16:24:19 IST" duration-ms="29452" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CreateAndDeleteComparison_Test -->
+        <test-method signature="CreateAndShareComparison_Test()[pri:16, instance:com.eagle.TestCases.ComparisonTest@69e153c5]" started-at="2022-05-02T16:24:19 IST" name="CreateAndShareComparison_Test" description="Create And Share An Comparison" finished-at="2022-05-02T16:25:02 IST" duration-ms="42658" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CreateAndShareComparison_Test -->
+        <test-method signature="RemoveItemsfromComparison_Test()[pri:19, instance:com.eagle.TestCases.ComparisonTest@69e153c5]" started-at="2022-05-02T16:25:02 IST" name="RemoveItemsfromComparison_Test" description="Remove items from Comparison Expand" finished-at="2022-05-02T16:25:50 IST" duration-ms="47739" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- RemoveItemsfromComparison_Test -->
+        <test-method signature="ChangeControlAndCase_Test()[pri:20, instance:com.eagle.TestCases.ComparisonTest@69e153c5]" started-at="2022-05-02T16:25:50 IST" name="ChangeControlAndCase_Test" description="Interchange Control and Case sets in the Comparison" finished-at="2022-05-02T16:26:49 IST" duration-ms="59617" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ChangeControlAndCase_Test -->
+        <test-method signature="SortColumnComparison_Test()[pri:21, instance:com.eagle.TestCases.ComparisonTest@69e153c5]" started-at="2022-05-02T16:26:49 IST" name="SortColumnComparison_Test" description="Sorting a column in a Comparison" finished-at="2022-05-02T16:28:13 IST" duration-ms="83085" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- SortColumnComparison_Test -->
+        <test-method signature="FilterComparison_Test()[pri:22, instance:com.eagle.TestCases.ComparisonTest@69e153c5]" started-at="2022-05-02T16:28:13 IST" name="FilterComparison_Test" description="Filtering a Comparison with one filter" finished-at="2022-05-02T16:29:31 IST" duration-ms="78301" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- FilterComparison_Test -->
+        <test-method signature="FilterMultiComparison_Test()[pri:23, instance:com.eagle.TestCases.ComparisonTest@69e153c5]" started-at="2022-05-02T16:29:31 IST" name="FilterMultiComparison_Test" description="Filtering a Comparison with 2 filters" finished-at="2022-05-02T16:30:55 IST" duration-ms="84410" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- FilterMultiComparison_Test -->
+      </class> <!-- com.eagle.TestCases.ComparisonTest -->
+      <class name="com.eagle.TestCases.ExplorationTest">
+        <test-method is-config="true" signature="launchApplication()[pri:0, instance:com.eagle.TestCases.ExplorationTest@7674f035]" started-at="2022-05-02T15:07:43 IST" name="launchApplication" finished-at="2022-05-02T15:07:43 IST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- launchApplication -->
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.eagle.TestCases.ExplorationTest@7674f035]" started-at="2022-05-02T15:07:43 IST" name="beforeClass" finished-at="2022-05-02T15:07:46 IST" duration-ms="3443" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method signature="CreateExplorationFromSearch_Test()[pri:0, instance:com.eagle.TestCases.ExplorationTest@7674f035]" started-at="2022-05-02T15:07:46 IST" name="CreateExplorationFromSearch_Test" description="Create Exploration From Search" finished-at="2022-05-02T15:08:08 IST" duration-ms="22337" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CreateExplorationFromSearch_Test -->
+        <test-method signature="CreateExplorationFromSetInitally_Test()[pri:1, instance:com.eagle.TestCases.ExplorationTest@7674f035]" started-at="2022-05-02T15:08:08 IST" name="CreateExplorationFromSetInitally_Test" description="Create Exploration From Set Initally" finished-at="2022-05-02T15:09:44 IST" duration-ms="95759" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CreateExplorationFromSetInitally_Test -->
+        <test-method signature="CreateExplorationFromSet_Test()[pri:2, instance:com.eagle.TestCases.ExplorationTest@7674f035]" started-at="2022-05-02T15:09:44 IST" name="CreateExplorationFromSet_Test" description="Create Exploration From Set After clicking From Search" finished-at="2022-05-02T15:10:27 IST" duration-ms="42441" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CreateExplorationFromSet_Test -->
+        <test-method signature="CreateExplorationFromFile_Test()[pri:3, instance:com.eagle.TestCases.ExplorationTest@7674f035]" started-at="2022-05-02T15:10:27 IST" name="CreateExplorationFromFile_Test" description="Create Exploration From File After clicking From Search" finished-at="2022-05-02T15:10:48 IST" duration-ms="21501" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CreateExplorationFromFile_Test -->
+        <test-method signature="SearchInExplorationExpand_Test()[pri:4, instance:com.eagle.TestCases.ExplorationTest@7674f035]" started-at="2022-05-02T15:10:48 IST" name="SearchInExplorationExpand_Test" description="Search A Text In Exploration Expand" finished-at="2022-05-02T15:11:49 IST" duration-ms="60666" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- SearchInExplorationExpand_Test -->
+        <test-method signature="DeleteCardInExplorationExpand_Test()[pri:5, instance:com.eagle.TestCases.ExplorationTest@7674f035]" started-at="2022-05-02T15:11:49 IST" name="DeleteCardInExplorationExpand_Test" description="Delete Card in Exploration Expand" finished-at="2022-05-02T15:12:28 IST" duration-ms="38980" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- DeleteCardInExplorationExpand_Test -->
+        <test-method signature="DeleteExplorationFirstCard_Test()[pri:6, instance:com.eagle.TestCases.ExplorationTest@7674f035]" started-at="2022-05-02T15:12:28 IST" name="DeleteExplorationFirstCard_Test" description="Delete The first Card in Exploration" finished-at="2022-05-02T15:12:50 IST" duration-ms="22053" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- DeleteExplorationFirstCard_Test -->
+        <test-method signature="DeleteExplorationSecondCard_Test()[pri:7, instance:com.eagle.TestCases.ExplorationTest@7674f035]" started-at="2022-05-02T15:12:50 IST" name="DeleteExplorationSecondCard_Test" description="Delete The Second Card in Exploration" finished-at="2022-05-02T15:13:38 IST" duration-ms="48100" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- DeleteExplorationSecondCard_Test -->
+        <test-method signature="ExplorationExpandAddFromCatalog_Test()[pri:8, instance:com.eagle.TestCases.ExplorationTest@7674f035]" started-at="2022-05-02T15:13:38 IST" name="ExplorationExpandAddFromCatalog_Test" description="Exploration - Expand and add items from Catalog" finished-at="2022-05-02T15:19:55 IST" duration-ms="376859" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ExplorationExpandAddFromCatalog_Test -->
+        <test-method signature="ExplorationExpandAddFromSet_Test()[pri:9, instance:com.eagle.TestCases.ExplorationTest@7674f035]" started-at="2022-05-02T15:19:55 IST" name="ExplorationExpandAddFromSet_Test" description="Exploration - Expand and add items from Set" finished-at="2022-05-02T15:25:13 IST" duration-ms="318335" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ExplorationExpandAddFromSet_Test -->
+        <test-method signature="ExplorationExpandAddFromFile_Test()[pri:10, instance:com.eagle.TestCases.ExplorationTest@7674f035]" started-at="2022-05-02T15:25:13 IST" name="ExplorationExpandAddFromFile_Test" description="Exploration - Expand and add items from File" finished-at="2022-05-02T15:27:09 IST" duration-ms="115692" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ExplorationExpandAddFromFile_Test -->
+        <test-method signature="ExplorationCreateARelationCard_Test()[pri:11, instance:com.eagle.TestCases.ExplorationTest@7674f035]" started-at="2022-05-02T15:27:09 IST" name="ExplorationCreateARelationCard_Test" description="Exploration - Create with one additional relation Card" finished-at="2022-05-02T15:27:53 IST" duration-ms="44157" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ExplorationCreateARelationCard_Test -->
+        <test-method signature="ExplorationCreateTwoRelationCard_Test()[pri:12, instance:com.eagle.TestCases.ExplorationTest@7674f035]" started-at="2022-05-02T15:27:53 IST" name="ExplorationCreateTwoRelationCard_Test" description="Exploration - Create with 2 additional relation Card" finished-at="2022-05-02T15:29:45 IST" duration-ms="112235" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ExplorationCreateTwoRelationCard_Test -->
+        <test-method signature="CreateAndDeleteExploration_Test()[pri:13, instance:com.eagle.TestCases.ExplorationTest@7674f035]" started-at="2022-05-02T15:29:45 IST" name="CreateAndDeleteExploration_Test" description="Create And Delete An Exploration" finished-at="2022-05-02T15:30:12 IST" duration-ms="27226" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CreateAndDeleteExploration_Test -->
+        <test-method signature="CreateAndShareExploration_Test()[pri:14, instance:com.eagle.TestCases.ExplorationTest@7674f035]" started-at="2022-05-02T15:30:12 IST" name="CreateAndShareExploration_Test" description="Create And Share An Exploration" finished-at="2022-05-02T15:30:49 IST" duration-ms="36209" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CreateAndShareExploration_Test -->
+        <test-method signature="RemoveItemsfromExploration_Test()[pri:17, instance:com.eagle.TestCases.ExplorationTest@7674f035]" started-at="2022-05-02T15:30:49 IST" name="RemoveItemsfromExploration_Test" description="Remove items from Exploration Expand" finished-at="2022-05-02T15:31:33 IST" duration-ms="43993" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- RemoveItemsfromExploration_Test -->
+        <test-method signature="SortColumnExploration_Test()[pri:18, instance:com.eagle.TestCases.ExplorationTest@7674f035]" started-at="2022-05-02T15:31:33 IST" name="SortColumnExploration_Test" description="Sorting a column in an Exploration" finished-at="2022-05-02T15:32:51 IST" duration-ms="78349" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- SortColumnExploration_Test -->
+        <test-method signature="FilterExploration_Test()[pri:19, instance:com.eagle.TestCases.ExplorationTest@7674f035]" started-at="2022-05-02T15:32:51 IST" name="FilterExploration_Test" description="Filtering an Exploration with one filter" finished-at="2022-05-02T15:34:05 IST" duration-ms="73597" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- FilterExploration_Test -->
+        <test-method signature="FilterMultiExploration_Test()[pri:20, instance:com.eagle.TestCases.ExplorationTest@7674f035]" started-at="2022-05-02T15:34:05 IST" name="FilterMultiExploration_Test" description="Filtering an Exploration with 2 filters" finished-at="2022-05-02T15:35:37 IST" duration-ms="92005" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- FilterMultiExploration_Test -->
+      </class> <!-- com.eagle.TestCases.ExplorationTest -->
     </test> <!-- Smoke Test cases -->
   </suite> <!-- SmokeTestingSuite -->
 </testng-results>
