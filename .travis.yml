@@ -1,2 +1,2 @@
 language: java
-script : testng.xml
+script: mvn verify
